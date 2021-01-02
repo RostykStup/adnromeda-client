@@ -1,0 +1,68 @@
+$closedWidth: 50px;
+
+.side-nav-container {
+  height: 100%;
+  //background-color: #242424;
+  background-color: #ffffff;
+  //color: #f6f2f2;
+  width: $closedWidth;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.open-button-container {
+  width: 100%;
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+
+.open-button-container:hover {
+  cursor: pointer;
+}
+
+.link {
+  //color: #f6f2f2;
+  display: none;
+}
+
+.side-nav-container.opened {
+  width: 200px;
+  z-index: 2; /* Sit on top */
+
+  .link {
+    //color: #f6f2f2;
+    color: #000000;
+    display: block;
+    outline: none;
+  }
+
+  .link:hover{
+    cursor: pointer;
+  }
+}
+
+.side-nav-container.opened + .background {
+  display: block;
+  opacity: .4;
+}
+
+
+
+
+.background {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  //padding-top: 100px; /* Location of the box */
+  background-color: rgba(0, 0, 0); /* Black w/ opacity */
+  opacity: 0;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  //overflow: auto; /* Enable scroll if needed */
+  transition: opacity 1s;
+}
+

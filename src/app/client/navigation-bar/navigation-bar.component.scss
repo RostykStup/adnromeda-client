@@ -1,0 +1,31 @@
+$height: 60px;
+
+.nav-bar{
+  //background-color: #242424;
+  background-color: #ffffff;
+  position: fixed;
+  width: 100%;
+  height: $height;
+  top: 0;
+  left: 0;
+  display: flex;
+  padding-left: 100px;
+  //justify-content: space-around;
+}
+
+.back{
+  height: $height;
+}
+
+.logo{
+  //color: #f6f7f9;
+  color: #242424;
+}
+
+.search-input{
+  background-color: #4f4b4b;
+  color: #f6f2f2;
+  outline: none;
+  padding: 7px;
+  border: none;
+}

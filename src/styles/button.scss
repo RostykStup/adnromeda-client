@@ -1,0 +1,16 @@
+.andro-button{
+
+  //background: none;
+  background-color: #000000;
+  border: 3px solid black;
+  border-radius: 5px;
+  color: #F6F7F9;
+  padding: 7px;
+  transition: all .3s;
+}
+
+.andro-button:hover{
+  cursor: pointer;
+  background: none;
+  color: #160101;
+}

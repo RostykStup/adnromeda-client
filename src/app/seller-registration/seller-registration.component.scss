@@ -1,0 +1,299 @@
+.nav-bar {
+  height: 80px;
+  border-bottom: 2px #e3e3e3 solid;
+  //background-color: #F6F7F9;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  //position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.andro-input {
+  background: none;
+  width: 100%;
+}
+
+.registration-container {
+  background-color: #fff;
+  margin: 10px auto;
+  padding: 30px;
+  width: 80%;
+  height: 85%;
+  //height:100vh;
+}
+
+.progress-bar {
+  height: 50px;
+}
+
+.progress-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40px;
+  box-sizing: content-box;
+
+  padding-bottom: 20px;
+  border-bottom: black 1px solid;
+
+  li {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    div {
+      height: 40px;
+      width: 40px;
+      margin-right: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      border: 1px solid black;
+    }
+
+    div.dot {
+      display: none;
+      background-color: #160101;
+      color: #F6F7F9;
+    }
+  }
+
+  li.completed {
+    div.dot {
+      height: 40px;
+      width: 40px;
+      display: flex;
+    }
+
+    div {
+      display: none;
+    }
+  }
+
+  li.current {
+    div {
+      background-color: #160101;
+      color: #F6F7F9;
+    }
+  }
+}
+
+.registration-form {
+  margin: 0 auto;
+  padding-top: 30px;
+  width: 50%;
+}
+
+.account-case {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.seller-case {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.goods-seller-case {
+  //margin: 0 auto;
+  width: 90%;
+}
+
+
+.andro-button {
+  width: 100%;
+  margin: 30px 0 0 0;
+}
+
+.validation-text {
+  color: #ff0000;
+  font-size: 12px;
+}
+
+.green {
+  color: green;
+}
+
+#country-input {
+  border-radius: 0;
+}
+
+.countries-container {
+  width: 100%;
+  max-height: 150px;
+  overflow: auto;
+  display: none;
+  position: relative;
+}
+
+.country-block {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+
+  .flag-holder {
+    justify-content: center;
+    width: 60px;
+    display: flex;
+
+    img {
+      height: 20px;
+      width: 30px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.country-block:hover {
+  cursor: pointer;
+  background-color: #F6F7F9;
+}
+
+#country-input:focus + .countries-container {
+  display: block;
+  //background-color: #F6F7F9;
+}
+
+#account-country:hover{
+  display: block;
+}
+
+.country-native-name-container {
+  font-size: 13px;
+}
+
+.checkbox-container {
+  margin: 5px 0 5px 0;
+}
+
+.country-name-container {
+  font-size: 9px;
+  color: #857e7e;
+}
+
+#only-seller-country-check-label {
+  font-size: 20px;
+  //line-height: 40px;
+}
+
+.goods-seller-info-container {
+  margin-top: 10px;
+  //border: 1px solid black;
+  height: 250px;
+  overflow: auto;
+  width: 100%;
+  padding: 10px;
+  background-color: #f6f2f2;
+  border-radius: 5px;
+}
+
+.add-country {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 3px solid #000000;
+  //margin: 0;
+  margin-left: 20px;
+  background-color: #000000;
+  color: #F6F7F9;
+  transition: all .5s;
+  outline: none;
+  font-weight: 400;
+  font-size: 25px;
+}
+
+.add-country:hover{
+  cursor: pointer;
+  color: #000000;
+  background-color: #F6F7F9;
+}
+
+#seller-country-input {
+  width: 70%;
+}
+
+#seller-country-input + label {
+  margin: 0;
+}
+
+#seller-country-input:focus + .add-country + .countries-container {
+  display: block;
+}
+
+#seller-country-input + .add-country + .countries-container {
+  position: absolute;
+  display: none;
+  width: 400px;
+  background-color: #fff;
+  //background-color: #F6F7F9;
+}
+#seller-country-input + .add-country + .countries-container:hover {;
+  display: block;
+}
+
+.seller-country-block{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  height: 40px;
+
+  img{
+    height: 30px;
+    width: 50px;
+    //border: 1px solid black;
+  }
+
+  .remove-country{
+    height: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 15px;
+    background: none;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+    transition: all .3s;
+    border: 3px solid black;
+  }
+  .remove-country:hover{
+    cursor: pointer;
+    color: #F6F7F9;
+    background-color: #000000;
+  }
+
+  .seller-country-native-name{
+    //margin-left: 40px;
+    font-size: 20px;
+    width: 200px;
+
+  }
+
+  .seller-country-name{
+    //margin-left: 40px;
+    width: 200px;
+    font-size: 10px;
+    color: #857e7e;
+  }
+}
+
+.visible_block{
+  display: none;
+}
+
+
+
+
+
+
+
+
+

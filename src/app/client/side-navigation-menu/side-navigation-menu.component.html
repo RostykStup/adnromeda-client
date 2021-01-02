@@ -1,0 +1,19 @@
+
+<div class="side-nav-container"
+     [ngClass]="{
+      opened: isOpened
+      }">
+
+  <div (click)="open()" class="open-button-container">
+<!--    <img src="https://img.icons8.com/android/24/ffffff/menu.png"/>-->
+    <img src="https://img.icons8.com/android/24/000000/menu.png"/>
+  </div>
+
+  <div class="link" [routerLink]="'seller-profile'">
+    Мій профіль
+  </div>
+</div>
+
+<div class="background" (click)="close()">
+</div>
+<div class="back"></div>

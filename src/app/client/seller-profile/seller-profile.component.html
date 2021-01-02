@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="navigation-container">
+    <div class="nav-component" [ngClass]="{ chosen_nav: tab === 1}"
+         [routerLink]="'info'"
+         (click)="choseTab(1)">Профіль</div>
+    <div class="nav-component" [ngClass]="{ chosen_nav: tab === 2}"
+         [routerLink]="'settings'"
+         (click)="choseTab(2)">Налаштування</div>
+    <div class="nav-component" [ngClass]="{ chosen_nav: tab === 3}"
+         [routerLink]="'statistics'"
+         (click)="choseTab(3)">Статистика</div>
+  </div>
+  <div class="main-info-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

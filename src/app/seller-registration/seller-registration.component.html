@@ -1,0 +1,164 @@
+<div class="nav-bar">
+  <div class="logo-container elem">
+    <a href="" class="logo">Andromeda</a>
+  </div>
+  <div class="push"></div>
+  <div class="links-container elem">
+    <a href="" class="nav-link">Домога</a>
+    |
+    <a href="" class="nav-link">Вхід</a>
+  </div>
+</div>
+
+<div class="registration-container">
+  <div class="progress-bar">
+    <ul class="progress-list">
+      <li
+        [ngClass]="{
+          'current': (this.mode === 1),
+          'completed': (this.mode > 1)
+          }">
+        <div class="number">1</div>
+        <div class="dot">✔</div>
+        Створення аккаунту
+      </li>
+      <li
+        [ngClass]="{
+          'current': (this.mode === 2),
+          'completed': (this.mode > 2)
+          }">
+        <div class="number">2</div>
+        <div class="dot">✔</div>
+        Основні дані
+      </li>
+      <li [ngClass]="{'current': (this.mode === 3)}">
+        <div class="number">3</div>
+        <div class="dot">✔</div>
+        Налаштування
+      </li>
+    </ul>
+  </div>
+
+  <div class="registration-form" [ngSwitch]="mode">
+    <div *ngSwitchCase="1">
+      <div class="account-case">
+        <div>
+          <label class="andro-label" for="login-input">Електронна пошта</label>
+          <input [(ngModel)]="accountLoginRequest.login" id="login-input" type="text" class="andro-input"
+                 placeholder="Email" (keyup)="validationEmail = true">
+          <span *ngIf="!validationEmail" class="validation-text">Некоректний формат електронної пошти</span>
+          <span *ngIf="existAccount" class="validation-text">Аккаунт з таким email уже існує, якщо ви не реєстрували аккаунту на цю пошту напишіть у підтримку</span>
+        </div>
+        <div>
+          <label class="andro-label" for="password-input">Створіть пароль</label>
+          <input [(ngModel)]="accountLoginRequest.password"
+                 (change)="validationPassword = true"
+                 (keyup)="isPasswordEquals()"
+                 id="password-input"
+                 type="password" class="andro-input"
+                 placeholder="Пароль (6-20 символів)">
+          <span *ngIf="!validationPassword" class="validation-text">Довжина паролю 6-20 символів</span>
+        </div>
+        <div>
+          <label class="andro-label" for="confirm-password-input">Підтвердіть пароль</label>
+          <input [(ngModel)]="confirmationPassword"
+                 (keyup)="isPasswordEquals()"
+                 id="confirm-password-input" type="password" class="andro-input" placeholder="Підтвердіть пароль">
+          <span *ngIf="!validationConfirmPassword" class="validation-text">Паролі не збігаються</span>
+        </div>
+        <!--      <div>-->
+        <!--        <label class="andro-label" for="confirm-code-input">Введіть код</label>-->
+        <!--        <input id="confirm-code-input"type="password" class="andro-input" placeholder="Код підтвердження">-->
+        <!--      </div>-->
+        <div>
+          <button class="andro-button" (click)="accountCreateButtonClick()">Продовжити</button>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="2">
+      <div class="seller-case">
+        <div>
+          <label class="andro-label" for="shopname-input">Введіть назву свого магазину</label>
+          <input [(ngModel)]="sellerDataRequest.shopName" id="shopname-input" type="text" class="andro-input"
+                 placeholder="Назва" (keydown)="validationShopname = true">
+          <span *ngIf="!validationShopname" class="validation-text">Це поле не може бути пустим</span>
+        </div>
+
+        <div>
+          <label class="andro-label" for="taxpayer-input">Індекс платника податків</label>
+          <input [(ngModel)]="sellerDataRequest.taxpayerNumber" id="taxpayer-input" type="text" class="andro-input"
+                 placeholder="ІПП" (keydown)="validationTexpayerNumber = true">
+          <span *ngIf="!validationTexpayerNumber" class="validation-text">ІПП повинен мати 10 символів</span>
+        </div>
+        <div>
+          <label class="andro-label" for="country-input">Країна</label>
+          <input
+            id="country-input" type="text" class="andro-input"
+            placeholder="Введіть свою країну" (keydown)="filterCountry()" [(ngModel)]="countryName"
+            autocomplete="off">
+          <div class="countries-container" id="account-country">
+            <div *ngFor="let country of showCountries" class="country-block" (click)="loadToRequestCountry(country)">
+              <div class="flag-holder"><img src="{{country.flag}}"></div>
+              <div>
+                <div class="country-native-name-container">{{country.nativeName}}</div>
+                <div class="country-name-container">{{country.name}}</div>
+              </div>
+            </div>
+          </div>
+          <span class="validation-text green">Ви не зможете змінити країну після реєстрації</span><br>
+          <span *ngIf="!validateCountryCode"
+                class="validation-text">Будь ласка оберіть країну зі списку</span>
+        </div>
+        <div>
+          <button class="andro-button" (click)="sellerDataButtonClick()">Перейти до налаштувань</button>
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="3">
+      <div class="goods-seller-case">
+        Оберіть країни з яких ви можете здійснювати доставку
+        <br><span class="green validation-text">Ви зможете здійснити ці налаштування у профілі</span>
+        <div class="checkbox-container">
+          <input type="checkbox" id="only-seller-country-check" class="andro-checkbox" (change)="checkBoxClick()">
+          <label class="andro-label" for="only-seller-country-check"
+                 id="only-seller-country-check-label">Я здійснюю доставку лише з моєї країни</label>
+        </div>
+        <div [ngClass]="{
+        visible_block: goodsSellerDataRequest.onlySellerCountryDelivery
+        }">
+          <label class="andro-label" for="seller-country-input">Країна</label>
+          <input
+            id="seller-country-input" type="text" class="andro-input"
+            placeholder="Введіть країну" (keydown)="filterCountry()" [(ngModel)]="countryName"
+            autocomplete="off">
+          <button class="add-country" (click)="addCountryToList(countryName)">+</button>
+          <div class="countries-container">
+            <div *ngFor="let country of showCountries" class="country-block" (click)="loadToSellerContainer(country)">
+              <div class="flag-holder"><img src="{{country.flag}}"></div>
+              <div>
+                <div class="country-native-name-container">{{country.nativeName}}</div>
+                <div class="country-name-container">{{country.name}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="goods-seller-info-container">
+            <div *ngFor="let country of sellerCountries" class="seller-country-block">
+              <div><img src="{{country.flag}}"></div>
+              <div>
+                <div class="seller-country-native-name">{{country.nativeName}}</div>
+                <div class="seller-country-name">{{country.name}}</div>
+              </div>
+              <button class="remove-country" (click)="remove(country)">Видалити</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="andro-button" (click)="goodsSellerButtonClick()">Завершити та перейти у мій профіль</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  <input type="text" class="andro-input">-->
+</div>
+
+

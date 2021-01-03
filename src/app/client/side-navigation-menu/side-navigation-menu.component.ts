@@ -8,16 +8,19 @@ import { Component, OnInit } from '@angular/core';
 export class SideNavigationMenuComponent implements OnInit {
 
   constructor() { }
+  userRole: string | null = '';
 
   isOpened = false;
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('andro_user_role');
   }
 
-  open() {
+  open(): void {
+    this.userRole = localStorage.getItem('andro_user_role');
     this.isOpened = !this.isOpened;
   }
 
-  close() {
+  close(): void {
     this.isOpened = false;
   }
 }

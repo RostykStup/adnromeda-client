@@ -80,21 +80,21 @@
         <div>
           <label class="andro-label" for="shopname-input">Введіть назву свого магазину</label>
           <input [(ngModel)]="sellerDataRequest.shopName" id="shopname-input" type="text" class="andro-input"
-                 placeholder="Назва" (keydown)="validationShopname = true">
+                 placeholder="Назва" (keyup)="validationShopname = true">
           <span *ngIf="!validationShopname" class="validation-text">Це поле не може бути пустим</span>
         </div>
 
         <div>
           <label class="andro-label" for="taxpayer-input">Індекс платника податків</label>
           <input [(ngModel)]="sellerDataRequest.taxpayerNumber" id="taxpayer-input" type="text" class="andro-input"
-                 placeholder="ІПП" (keydown)="validationTexpayerNumber = true">
+                 placeholder="ІПП" (keyup)="validationTexpayerNumber = true">
           <span *ngIf="!validationTexpayerNumber" class="validation-text">ІПП повинен мати 10 символів</span>
         </div>
         <div>
           <label class="andro-label" for="country-input">Країна</label>
           <input
             id="country-input" type="text" class="andro-input"
-            placeholder="Введіть свою країну" (keydown)="filterCountry()" [(ngModel)]="countryName"
+            placeholder="Введіть свою країну" (keyup)="filterCountry()" [(ngModel)]="countryName"
             autocomplete="off">
           <div class="countries-container" id="account-country">
             <div *ngFor="let country of showCountries" class="country-block" (click)="loadToRequestCountry(country)">
@@ -129,7 +129,7 @@
           <label class="andro-label" for="seller-country-input">Країна</label>
           <input
             id="seller-country-input" type="text" class="andro-input"
-            placeholder="Введіть країну" (keydown)="filterCountry()" [(ngModel)]="countryName"
+            placeholder="Введіть країну" (keyup)="filterCountry()" [(ngModel)]="countryName"
             autocomplete="off">
           <button class="add-country" (click)="addCountryToList(countryName)">+</button>
           <div class="countries-container">

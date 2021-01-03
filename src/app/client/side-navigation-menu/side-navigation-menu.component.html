@@ -1,16 +1,23 @@
-
-<div class="side-nav-container"
+<div class="side-nav-container" [ngSwitch]="userRole"
      [ngClass]="{
       opened: isOpened
       }">
 
   <div (click)="open()" class="open-button-container">
-<!--    <img src="https://img.icons8.com/android/24/ffffff/menu.png"/>-->
+    <!--    <img src="https://img.icons8.com/android/24/ffffff/menu.png"/>-->
     <img src="https://img.icons8.com/android/24/000000/menu.png"/>
   </div>
 
-  <div class="link" [routerLink]="'seller-profile'">
-    Мій профіль
+  <div *ngSwitchCase="'ROLE_SELLER'">
+    <div class="link" [routerLink]="'seller-profile'" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/user-male-circle--v1.png"/>
+      </div>
+      <div class="link-title">Профіль</div>
+    </div>
+    <div class="link" [routerLink]="'create-goods-advertisement'" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/add-list--v1.png"/></div>
+      <div class="link-title">Додати товар</div>
+    </div>
   </div>
 </div>
 

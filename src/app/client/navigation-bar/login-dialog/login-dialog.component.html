@@ -1,0 +1,84 @@
+<div class="logo-container">
+  <span class="logo">Andromeda</span>
+</div>
+
+<div class="mode-choose-container">
+  <div (click)="clickModeButton(2)" class="register-button text">
+    <span [ngClass]="{underline: mode == 2}">Реєстрація</span>
+    <div class="line-under-text"></div>
+  </div>
+  <div (click)="clickModeButton(1)" class="login-button text">
+    <span [ngClass]="{underline: mode == 1}">Вхід</span>
+    <div class="line-under-text"></div>
+  </div>
+</div>
+<div class="actions-container" [ngSwitch]="mode">
+  <div *ngSwitchCase="1">
+    <div class="dialog-input-container">
+      <input type="text" class="dialog-input dialog-action andro-input"
+             (keyup)="validationEmail = true"
+             [(ngModel)]="accountLoginRequest.login"
+             placeholder="Email">
+      <span *ngIf="!validationEmail" class="validation-text">Некоректний формат</span>
+    </div>
+
+    <div class="dialog-input-container">
+      <div class="password-input-container">
+        <input [type]="passwordInputType" class="dialog-action andro-input password-input"
+               [(ngModel)]="accountLoginRequest.password"
+               placeholder="Пароль">
+        <div class="password-input-icon-container" (click)="changePasswordInput()">
+          <img [src]="passwordInputTypeIcon"/>
+        </div>
+      </div>
+
+      <span *ngIf="!validationLoginPassword" class="validation-text">Це поле не може бути пустим</span>
+
+    </div>
+    <span *ngIf="!validateAuth" class="validation-text">Невірний логін або пароль спробуйте ще раз</span>
+    <button class="dialog-button dialog-action" (click)="loginButtonClick()">Увійти</button>
+    <button class="dialog-button dialog-action" (click)="loginRostClick()">Увійти rostyk.stup@gmail.com</button>
+  </div>
+  <div *ngSwitchCase="2">
+    <div class="dialog-input-container">
+      <input type="text" class="dialog-input dialog-action andro-input"
+             (keyup)="validationEmail = true"
+             [(ngModel)]="accountLoginRequest.login"
+             placeholder="Email">
+      <span *ngIf="!validationEmail" class="validation-text">Некоректний формат</span>
+      <span *ngIf="existAccount" class="validation-text">Аккаунт з таким email уже існує, якщо ви не
+        реєстрували аккаунту на цю пошту напишіть у підтримку</span>
+    </div>
+    <div class="dialog-input-container">
+      <div class="password-input-container">
+        <input [type]="passwordInputType" class="dialog-action andro-input password-input"
+               (change)="validationPassword = true"
+               [(ngModel)]="accountLoginRequest.password"
+               (keyup)="isPasswordEquals()"
+               placeholder="Пароль">
+        <div class="password-input-icon-container" (click)="changePasswordInput()">
+          <img [src]="passwordInputTypeIcon"/>
+        </div>
+      </div>
+      <span *ngIf="!validationPassword" class="validation-text">Надто короткий пароль</span>
+    </div>
+    <div class="dialog-input-container">
+      <div class="password-input-container">
+        <input [type]="confirmPasswordInputType" class="dialog-action andro-input password-input"
+               [(ngModel)]="confirmationPassword"
+               (keyup)="isPasswordEquals()"
+               placeholder="Підтвердження пароля">
+        <div class="password-input-icon-container" (click)="changeConfirmPasswordInput()">
+          <img [src]="confirmPasswordInputTypeIcon"/>
+        </div>
+      </div>
+      <span *ngIf="!validationConfirmPassword" class="validation-text">Паролі не збігаються</span>
+    </div>
+    <button class="dialog-button dialog-action" (click)="accountRegistrationButtonClick()">Зареєструватись</button>
+  </div>
+
+</div>
+<!--<div>-->
+<!--  <input type="text" placeholder="Email" class="andro-input"><br>-->
+<!--  <input type="text" placeholder="Пароль" class="andro-input">-->
+<!--</div>-->

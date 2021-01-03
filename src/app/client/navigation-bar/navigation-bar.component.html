@@ -2,9 +2,44 @@
   <div class="logo-container elem">
     <a href="" class="logo">Andromeda</a>
   </div>
+  <div class="search-container">
+    <div class="search-input-container">
+      <input type="text" class="search-input" placeholder="Пошук">
+    </div>
+    <div class="search-input-icon-container">
+      <img src="https://img.icons8.com/material/24/ffffff/search--v1.png"/>
+    </div>
+  </div>
+  <div class="profile-container" *ngIf="isLogged">
+    <div class="message-container profile-button-container">
+      <img src="https://img.icons8.com/material-outlined/35/000000/message-group.png"/>
+    </div>
 
-<!--  <div>-->
-<!--    <input type="text" class="search-input">-->
-<!--  </div>-->
+    <div class="notification-container profile-button-container">
+      <img src="https://img.icons8.com/material-outlined/35/000000/appointment-reminders--v1.png"/>
+    </div>
+
+    <div class=" profile-button-container" (click)="openProfileMenu()">
+      <img class="user-container" src="https://img.icons8.com/metro/30/000000/alien.png"/>
+      <span>Мій профіль</span>
+    </div>
+
+    <div class="outside-menu" (click)="isOpenProfileMenu = false"
+         [ngClass]="{opened_user_menu: isOpenProfileMenu}"></div>
+    <div class="user-container-menu" id="user-container-menu" [ngClass]="{opened_user_menu: !isOpenProfileMenu}">
+      <div class="menu-item" [routerLink]="profileLink" (click)="openProfileMenu()">Мій профіль</div>
+      <div class="menu-item" (click)="logOut()">Вийти</div>
+    </div>
+  </div>
+
+  <div class="profile-container" *ngIf="!isLogged">
+    <div class="profile-button-container" (click)="openLoginDialog()">
+      <img class="user-container" src="https://img.icons8.com/metro/30/000000/alien.png"/>
+      <span class="login-button" >Увійти</span>
+    </div>
+  </div>
+  <!--  <div>-->
+  <!--    <input type="text" class="search-input">-->
+  <!--  </div>-->
 </div>
 <div class="back"></div>

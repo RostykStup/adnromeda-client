@@ -9,6 +9,8 @@ $height: 60px;
   top: 0;
   left: 0;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding-left: 100px;
   //justify-content: space-around;
 }
@@ -22,10 +24,130 @@ $height: 60px;
   color: #242424;
 }
 
+.search-container{
+  height: 36px;
+  display: flex;
+  //justify-content: center;
+  align-items: center;
+  //margin-left: 200px;
+}
+
 .search-input{
-  background-color: #4f4b4b;
-  color: #f6f2f2;
   outline: none;
-  padding: 7px;
-  border: none;
+  height: 100%;
+  padding-left: 15px;
+  font-size: 14px;
+  border: 0;
+  width: 100%;
+  //border-radius: 20px 0 0 20px;
+}
+
+.search-input-icon-container{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 40px;
+  //padding: 7px;
+  border: 3px solid black;
+  border-radius: 0 6px 6px 0;
+  //border-radius: 0 20px 20px 0;
+  border-left: 0;
+  cursor: pointer;
+  background-color: #000000;
+}
+
+.search-input-container{
+  height: 100%;
+  border: 3px solid black;
+  border-radius: 6px 0 0 6px;
+  //border-radius: 20px 0 0  20px;
+  border-right: 0;
+  width: 400px;
+}
+
+.profile-container{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  width: 23%;
+  margin-right: 50px;
+}
+
+.user-container{
+  border: 3px solid black;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+
+.user-container-menu {
+  display: block;
+  position: fixed;
+  left: 72%;
+  top: 20px;
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid #e0dede;
+
+  .menu-item{
+    height: 30px;
+    padding-left: 20px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #514e4e;
+  }
+
+  .menu-item:hover{
+    background-color: #f5f2f2;
+    cursor: pointer;
+  }
+}
+
+.user-container-menu.opened_user_menu{
+  display: none;
+}
+
+.profile-button-container{
+  height: 50px;
+  //width: 50px;
+  padding: 10px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  img{
+    //border-radius: 50%;
+    //margin-right: 5px;
+  }
+  display: flex;
+  cursor: pointer;
+  outline: none;
+}
+
+.user-info-container{
+  border-radius: 5px;
+  border: 3px solid black;
+}
+
+.profile-button-container:hover{
+  background-color: #f8f5f5;
+  color: #7a7a7a;
+}
+
+.outside-menu{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top:0;
+  left: 0;
+  display: none;
+}
+
+.login-button{
+  //text-decoration: underline;
+}
+
+.outside-menu.opened_user_menu{
+  display: block;
 }

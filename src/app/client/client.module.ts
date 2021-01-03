@@ -9,14 +9,18 @@ import {SellerProfileComponent} from './seller-profile/seller-profile.component'
 import {SellerInfoComponent} from './seller-profile/seller-info/seller-info.component';
 import {SellerSettingsComponent} from './seller-profile/seller-settings/seller-settings.component';
 import {SellerStatisticsComponent} from './seller-profile/seller-statistics/seller-statistics.component';
+import { CreateAdvertisementComponent } from './create-advertisement/create-advertisement.component';
+import { LoginDialogComponent } from './navigation-bar/login-dialog/login-dialog.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
-  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, SellerProfileComponent],
-  imports: [
-    CommonModule,
-    ClientRoutingModule
-  ]
+  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, SellerProfileComponent, CreateAdvertisementComponent, LoginDialogComponent],
+    imports: [
+        CommonModule,
+        ClientRoutingModule,
+        FormsModule
+    ]
 })
 export class ClientModule {
 }

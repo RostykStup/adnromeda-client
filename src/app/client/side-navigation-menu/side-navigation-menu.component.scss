@@ -24,23 +24,41 @@ $closedWidth: 50px;
 
 .link {
   //color: #f6f2f2;
+  padding-left: 20px;
   display: none;
+  font-size: 15px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+
+.link:hover{
+  cursor: pointer;
+  background-color: #f3eeee;
+}
+
+.link-icon-container{
+  display: flex;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  margin: 0 10px 0 15px;
+}
+
+.link-title{
+  font-size: 15px;
 }
 
 .side-nav-container.opened {
-  width: 200px;
+  width: 250px;
   z-index: 2; /* Sit on top */
 
   .link {
     //color: #f6f2f2;
-    color: #000000;
-    display: block;
+    display: flex;
     outline: none;
   }
 
-  .link:hover{
-    cursor: pointer;
-  }
 }
 
 .side-nav-container.opened + .background {

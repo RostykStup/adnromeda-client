@@ -1,0 +1,114 @@
+.logo{
+  font-size: 30px;
+}
+
+.logo-container{
+  justify-content: center;
+  display: flex;
+}
+
+.mode-choose-container{
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 80%;
+  //justify-content: center;
+  justify-content: space-evenly;
+  .text{
+    //height: 30px;
+    line-height: 40px;
+    width: 40%;
+    cursor: pointer;
+    text-align: center;
+    transition: all .2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .line-under-text{
+      //display: none;
+      border-bottom: 3px solid black;
+      //height: 1px;
+      //width: 10px;
+      height: 1px;
+    }
+
+    .underline + .line-under-text{
+      display: block;
+      width:100%;
+    }
+  }
+
+  margin: 0 auto;
+}
+
+.actions-container{
+  width: 90%;
+  margin: 15px auto;
+}
+
+.dialog-action{
+  width: 100%;
+
+  height: 100%;
+}
+
+.dialog-input-container{
+  margin: 5px 0;
+  height: 40px;
+}
+
+.dialog-button{
+  height: 40px;
+  background: #000000;
+  border: 3px black solid;
+  border-radius: 5px;
+  color: #f6f2f2;
+  transition: all .2s;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.dialog-button:hover{
+  background: #f6f2f2;
+  color: #000000;
+}
+
+
+.validation-text {
+  color: #ff0000;
+  font-size: 12px;
+}
+
+.password-input-icon-container{
+  background-color: #000000;
+}
+
+.password-input-container{
+  display: flex;
+  height: 100%;
+
+}
+
+.password-input{
+  border-radius: 5px 0 0 5px;
+}
+
+.password-input-icon-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 40px;
+  //padding: 7px;
+  border: 3px solid black;
+  border-radius: 0 6px 6px 0;
+  //border-radius: 0 20px 20px 0;
+  border-left: 0;
+  cursor: pointer;
+  background-color: #000000;
+}
+
+

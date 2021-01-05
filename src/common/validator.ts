@@ -17,8 +17,24 @@ export class Validator {
     return text.length <= max;
   }
 
-  public static validateEquals(test1: string, text2: string): boolean{
+  public static validateEquals(test1: string, text2: string): boolean {
     return test1 === text2;
   }
 
+  public static validateNumberForPrice(n: any): boolean {
+    n = Number(n);
+    const isBiggerZero = n > 0.01;
+    const isInteger = (Number(n) == n) && (n % 1 === 0);
+    const isFloat = n === +n && n !== (n | 0);
+    return (isInteger || isFloat) && isBiggerZero;
+  }
+
+  public static validatePriceForTwoDigits(n: any): boolean {
+    const c = n.toString().split('.')[1];
+    if (c === undefined) {
+      return true;
+    } else {
+      return  c.length > 0 && c.length < 3 ;
+    }
+  }
 }

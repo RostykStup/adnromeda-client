@@ -22,7 +22,7 @@
       <span *ngIf="!validationEmail" class="validation-text">Некоректний формат</span>
     </div>
 
-    <div class="dialog-input-container">
+    <div class="dialog-input-container fixed-height">
       <div class="password-input-container">
         <input [type]="passwordInputType" class="dialog-action andro-input password-input"
                [(ngModel)]="accountLoginRequest.password"

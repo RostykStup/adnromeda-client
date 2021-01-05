@@ -70,6 +70,20 @@
   background-color: #292b2d;
 }
 
+
+.andro-select{
+  width: 300px;
+  border-radius: 5px;
+  padding: 5px;
+  border: 2px solid black;
+
+  option{
+    cursor: pointer;
+    transition: all .3s;
+  }
+}
+
+
 //@media screen and (max-width: 500px){
 //  .andro-input{
 //    width: 100%;

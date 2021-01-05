@@ -8,7 +8,7 @@ import {SellerDataRequest} from '../../entity/account/seller/seller-data-request
 import {GoodsSellerDataRequest} from '../../entity/account/seller/goods_seller/goods-seller-data-request';
 import {AccountDataRequest} from '../../entity/account/account-data-request';
 import {CountryService} from '../../service/country/country.service';
-import {RestCountry} from '../../entity/country/RestCountry';
+import {RestCountry} from '../../entity/country/rest-country';
 import {DeliveryService} from '../../service/country/delivery.service';
 import {Router} from '@angular/router';
 

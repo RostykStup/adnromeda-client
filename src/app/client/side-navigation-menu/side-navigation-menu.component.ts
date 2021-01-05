@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-side-navigation-menu',
@@ -7,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavigationMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
+
   userRole: string | null = '';
 
   isOpened = false;
+
   ngOnInit(): void {
     this.userRole = localStorage.getItem('andro_user_role');
   }

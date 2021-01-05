@@ -6,24 +6,20 @@ import {AccountLoginRequest} from '../../entity/account/account-login-request';
 import {AuthenticationResponse} from '../../entity/account/authentication-response';
 import {RestCountry} from '../../entity/country/rest-country';
 import {DeliveryTypeResponse} from '../../entity/country/delivery-type-response';
+import {CurrencyResponse} from '../../entity/country/currency-response';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DeliveryService {
+export class CurrencyService {
   constructor(private httpClient: HttpClient) {
   }
 
-  deliveryUrl = GlobalConstants.API_URL + 'delivery';
+  currencyURL = GlobalConstants.API_URL + 'currency';
 
-  getDeliveriesByCountryCode(code: string): Observable<Array<DeliveryTypeResponse>> {
-    const url = this.deliveryUrl + '/' + code;
-    return this.httpClient.get<Array<DeliveryTypeResponse>>(url);
-  }
-
-  getDeliveriesByAccountCountry(): Observable<Array<DeliveryTypeResponse>> {
-    const url = this.deliveryUrl + '/account';
-    return this.httpClient.get<Array<DeliveryTypeResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  getAll(): Observable<Array<CurrencyResponse>> {
+    const url = this.currencyURL + '/all';
+    return this.httpClient.get<Array<CurrencyResponse>>(url);
   }
 
 }

@@ -1,0 +1,295 @@
+<div class="container">
+  <div class="main-title">
+    Додати товар до магазину
+  </div>
+
+  <div class="creation-block">
+    <!--    <input type="text">-->
+    <span class="block-title">
+      Введіть заголовок*
+    </span>
+    <div class="block-content">
+      <div class="block-element">
+        <input type="text" class="andro-input title-input"
+               [(ngModel)]="advertisement.title"
+               placeholder="Заголовок">
+        <div class="warning-container" *ngIf="!validationTitle">
+          <img [src]="icon"/>
+          <span class="validation-text">Це поле не може бути пустим</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="creation-block">
+    <span class="block-title">
+      Оберіть категорію*
+    </span>
+    <div class="block-content">
+      <div class="block-element">
+        <select class="andro-select" (change)="loadSubcategories()" [(ngModel)]="categoryId">
+          <option value="0" disabled selected>Категорія</option>
+          <option value="{{category.id}}" *ngFor="let category of categories">{{category.title}}</option>
+        </select>
+        <select class="andro-select" [(ngModel)]="subcategoryId">
+          <option value="0" disabled selected> Підкатегорія</option>
+          <option value="{{subcategory.id}}" *ngFor="let subcategory of subcategories">{{subcategory.title}}</option>
+        </select>
+        <div class="warning-container" *ngIf="!validationSubcategory">
+          <img [src]="icon"/>
+          <span class="validation-text">Потрібно обрати підкатегорію</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="creation-block">
+    <div class="block-element price-choose-container-title">
+    <span class="block-title">
+      Як ви будете продавати цей товар?
+    </span>
+      <div class="warning-container" *ngIf="!validationPrice">
+        <img [src]="icon"/>
+        <span class="validation-text">Ви не налаштували ціну</span>
+      </div>
+      <div class="warning-container" *ngIf="!validationEmptyPrice">
+        <img [src]="icon"/>
+        <span class="validation-text">У вас присутні пусті поля</span>
+      </div>
+    </div>
+
+    <div class="price-choose-container">
+      <div class="price-choose-element" [ngClass]="{chosen: priceType === 1}" (click)="changePriceType(1)">Роздріб
+      </div>
+      <div class="price-choose-element" [ngClass]="{chosen: priceType === 2}" (click)="changePriceType(2)">ОПТ</div>
+    </div>
+
+    <div class="block-content" [ngSwitch]="priceType">
+      <div class="block-element" *ngSwitchCase="1">
+        <input type="text" class="andro-input" [(ngModel)]="retailPrice"
+               (keyup)="validateNumber(retailPrice)" placeholder="Ціна за одиницю">
+        <select class="andro-select currency-select" (change)="reloadCurrency()" [(ngModel)]="advertisement.currencyId">
+          <option value="{{currency.id}}" *ngFor="let currency of currencies">
+            {{currency.symbol}}
+          </option>
+        </select>
+        <span *ngIf="!isNumber" class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>
+        <span *ngIf="isNumber && !digit"
+              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrency}}</span>
+      </div>
+
+      <div class="" *ngSwitchCase="2">
+
+        <div class="wholesale-price-info-container">
+          <div class="wh-pr-count-elem title property-title"> Кількість (шт.)
+            <div class="question-body">
+              <img [src]="questionIcon" class="question-icon">
+              <div class="question-container">
+                <div class="question-content price-question-content">
+                  Оптова ціна заповнюється за прикладом:
+                  <table>
+                    <tr><td>1 - 200</td><td>|   20 грн/шт</td></tr>
+                    <tr><td>201 - 1000</td><td>|   19 грн/шт</td></tr>
+                    <tr><td>1001 - </td><td>|   18.50 грн/шт</td></tr>
+                  </table>
+                  Останнє поле 'до' можна залишити пустим
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="wh-pr-price-elem property-title"> Ціна
+            <select class="andro-select currency-select" (change)="reloadCurrency()"
+                    [(ngModel)]="advertisement.currencyId">
+              <option value="{{currency.id}}" *ngFor="let currency of currencies">
+                {{currency.symbol}}
+              </option>
+            </select>
+            <!--            <img />-->
+            <img class="add-icon" (click)="addNewWholesalePrice()"
+                 src="https://img.icons8.com/material/30/000000/plus--v1.png"/>
+          </div>
+        </div>
+
+        <div *ngFor="let price of wholesalePrice.priceUnits" class="wh-pr-container">
+          <div class="wh-pr-holder">
+            <div class="wh-pr-count-elem">
+              <input type="number" min="0" class="andro-input wholesale-price-count-input"
+                     [ngClass]="{red_inp: (!price.isValidSides || !price.isValidWithOthers)}"
+                     [(ngModel)]="price.min"
+                     (change)="validateUnitSides(price)"
+                     placeholder="Від">
+              -
+              <input type="number" class="andro-input wholesale-price-count-input"
+                     [ngClass]="{red_inp: (!price.isValidSides || !isValidNextSide(price))}"
+                     [(ngModel)]="price.max"
+                     (keyup)="validateUnitSides(price)"
+                     min="1"
+                     placeholder="До">
+            </div>
+            <div class="wh-pr-price-elem">
+              <input type="text" class="wholesale-price-input andro-input"
+                     [(ngModel)]="price.price"
+                     (keyup)="validateUnitPrice(price)"
+                     placeholder="Ціна">
+              <div  class="remove-price-holder" [ngClass]="{visible_button:wholesalePrice.priceUnits.length > 1}">
+                <img (click)="removeWholesalePrice(price)"
+                     src="https://img.icons8.com/material-outlined/24/000000/minus-sign.png"/>
+              </div>
+            </div>
+          </div>
+          <div class="allert-wh-pr-container">
+            <img *ngIf="!price.isValidPrice || !price.isValidSides" [src]="icon"/>
+            <span *ngIf="!price.isValidPrice"
+                  class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>
+
+            <span *ngIf="!price.isValidWithOthers && price.isValidPrice"
+                  class="validation-text">Початкове значення повинне бути більше від кількості попереднього</span>
+
+            <span *ngIf="!price.isValidSides && price.isValidPrice && price.isValidWithOthers"
+                  class="validation-text">{{price.min}} ≥ {{price.max === null ? '0' : price.max }}</span>
+
+            <span *ngIf="price.isValid() && !price.isDigit"
+                  class="validation-text green">Буде збережено як: {{price.getTwoDigitPrice()}} {{transitionCurrency}}</span>
+            <!--            <span-->
+            <!--              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrency}}</span>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="creation-block">
+    <span class="block-title">
+      Опишіть свій товар
+    </span>
+    <div class="block-content">
+      <textarea class="description-area" cols="70" rows="20" [(ngModel)]="advertisement.description"></textarea>
+    </div>
+    <div class="block-content top-space ">
+      <div class="block-flex">
+        <span class="block-title ">Додайте характеристики товару</span>
+        <div class="question-body">
+          <img [src]="questionIcon" class="question-icon">
+          <div class="question-container">
+            <div class="question-content property-question-content">
+              Приклад:
+              <table>
+                <tr><td>Колір </td><td>:     білий</td></tr>
+                <tr><td>Потужність </td><td>:     25 W</td></tr>
+                <tr><td>Розмір </td><td>:     XXL</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="warning-container" *ngIf="!validateProperties">
+          <img [src]="icon"/>
+          <span class="validation-text">Деякі характеристики містять пусті пуля</span>
+        </div>
+      </div>
+      <div class="property-title-holder">
+        <div class="property-block property-title">Назва</div>
+        <div class="property-block property-title">Значення</div>
+      </div>
+      <div class="properties-container">
+        <div *ngFor="let property of advertisement.properties" class="property-holder">
+          <div class="property-block">
+            <input type="text" class="andro-input property-input" [(ngModel)]="property.name">
+          </div>
+          <div class="property-block">
+            <input type="text" class="andro-input property-input" [(ngModel)]="property.value">
+          </div>
+          <div class="remove-property-holder" [ngClass]="{visible_button: advertisement.properties.length > 1}">
+            <img (click)="removeProperty(property)"
+                 src="https://img.icons8.com/material-outlined/24/000000/minus-sign.png"/>
+          </div>
+        </div>
+      </div>
+      <div class="add-price-button">
+        <button (click)="addNewProperty()" class="add-property-button">+</button>
+        <!--        <img (click)="addNewProperty()" src="https://img.icons8.com/material/24/000000/plus-2-math&#45;&#45;v1.png"/>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="creation-block">
+    <span class="block-title">
+      Введіть кількість доступних одиниць товару*
+    </span>
+    <div class="block-content">
+      <div class="block-element">
+        <input type="number" class="andro-input" [(ngModel)]="advertisement.count"
+               (keyup)="validateNumber(advertisement.count)" placeholder="Кількість"
+               min="1" value="1">
+        <div class="warning-container" *ngIf="!validateCount">
+          <img [src]="icon">
+          <span class="validation-text">Це поле не може бути пустим чи рівним нулю</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="creation-block">
+    <span class="block-title">
+     Оберіть способи доставки
+    </span>
+    <div class="block-content">
+      <div class="deliveries-container">
+
+
+        <span class="validation-text green">Способи, які доставки доступні у вашій країні</span>
+        <div class="deliveries-block">
+          <div class="checkbox-container">
+            <input type="checkbox" id="default-delivery" class="andro-checkbox" checked disabled>
+            <label class="andro-label" for="default-delivery">За домовленістю <div class="question-body">
+              <img [src]="questionIcon" class="question-icon">
+              <div class="question-container">
+                <div class="question-content delivery-question-content">
+                  Замість вибору методу відправлення користувач буде зв'язаний з вами для обговорення деталей доставки.
+
+                  <p>Дану опцію неможливо відключити</p>
+                </div>
+              </div>
+            </div></label>
+          </div>
+          <div class="checkbox-container" *ngFor="let delivery of deliveryTypes">
+            <input type="checkbox" [id]="delivery.title" class="andro-checkbox">
+            <label class="andro-label" [for]="delivery.title">{{delivery.title}}</label>
+          </div>
+        </div>
+
+        <div class="checkbox-container">
+          <input type="checkbox" id="only-seller-delivery" class="andro-checkbox">
+          <label class="andro-label" for="only-seller-delivery">Доставка лише у межах моєї країни</label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="creation-block">
+     <span class="block-title">
+     Завантажте фото для товару
+    </span>
+    <div class="block-element no-flex">
+      <span class="validation-text green">Перше зображення буде головним </span>
+      <div class="images-container">
+        <input id="image-input" type="file" accept="image/*" (change)="handleUpload($event)">
+        <div *ngFor="let image of images" class="img-cont">
+          <img class="adv-img" src="{{image.src === '' ? defaultImage : image.src }}" (click)="uploadImage()">
+          <div class="overlay" *ngIf="image.src !== ''">
+            <img (click)="deleteImage(image)"
+                 class="delete-img-button" src="https://img.icons8.com/material-outlined/24/ffffff/trash--v1.png"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="creation-block button-block">
+    <button class="andro-button creation-button" (click)="createGoodsAdvertisement()">Додати товар</button>
+  </div>
+
+</div>

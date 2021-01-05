@@ -1,8 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ClientComponent} from './client.component';
-import {SellerProfileComponent} from './seller-profile/seller-profile.component';
-import {CreateAdvertisementComponent} from './create-advertisement/create-advertisement.component';
 
 const routes: Routes = [
   {
@@ -13,7 +11,9 @@ const routes: Routes = [
         }
       },
       {
-        path: 'create-goods-advertisement', component: CreateAdvertisementComponent
+        path: 'seller', loadChildren: () => {
+          return import('./seller/seller.module').then(m => m.SellerModule);
+        }
       }
     ]
   },

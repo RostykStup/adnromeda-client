@@ -43,6 +43,10 @@ export class LoginDialogComponent {
     this.mode = num;
     this.accountLoginRequest = new AccountLoginRequest();
     this.confirmationPassword = '';
+    this.validateAuth = true;
+    this.validationEmail = true;
+    this.validationPassword = true;
+    this.validationLoginPassword = true;
   }
 
   loginButtonClick(): void {

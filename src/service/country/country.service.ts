@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {GlobalConstants} from '../../common/global-constants';
 import {AccountLoginRequest} from '../../entity/account/account-login-request';
 import {AuthenticationResponse} from '../../entity/account/authentication-response';
-import {RestCountry} from '../../entity/country/RestCountry';
+import {RestCountry} from '../../entity/country/rest-country';
 
 @Injectable({
   providedIn: 'root'

@@ -14,6 +14,10 @@ import {WholesalePriceUnitRequest} from '../../../../entity/advertisement/goodsA
 import {PropertyRequest} from '../../../../entity/advertisement/goodsAdvertisement/property-request';
 import {DeliveryTypeResponse} from '../../../../entity/country/delivery-type-response';
 import {DeliveryService} from '../../../../service/country/delivery.service';
+import {WholesaleGoodsAdvertisementRequest} from '../../../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-goods-advertisement-request';
+import {InfoDialogComponent} from '../../dialogs/info-dialog/info-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 
 export class Image {
   src = '';
@@ -31,7 +35,9 @@ export class CreateAdvertisementComponent implements OnInit {
               private categoryService: CategoryService,
               private subcategoryService: SubcategoryService,
               private currencyService: CurrencyService,
-              private deliveryTypeService: DeliveryService) {
+              private deliveryTypeService: DeliveryService,
+              public dialog: MatDialog,
+              private router: Router) {
   }
 
   isNumber = true;
@@ -55,7 +61,7 @@ export class CreateAdvertisementComponent implements OnInit {
   retailPrice = '';
 
   transitionPrice: any;
-  transitionCurrency: any;
+  transitionCurrencyCode: any;
   defaultImage = 'https://748073e22e8db794416a-cc51ef6b37841580002827d4d94d19b6.ssl.cf3.rackcdn.com/not-found.png';
 
   validationTitle = true;
@@ -64,6 +70,7 @@ export class CreateAdvertisementComponent implements OnInit {
   validationEmptyPrice = true;
   validateProperties = true;
   validateCount = true;
+  cantAddPriceAlert = true;
 
 
   ngOnInit(): void {
@@ -87,6 +94,7 @@ export class CreateAdvertisementComponent implements OnInit {
   }
 
   validateNumber(n: any): void {
+    // this.validationPrice = true;
     this.isNumber = Validator.validateNumberForPrice(n);
     this.digit = Validator.validatePriceForTwoDigits(n);
     this.transitionPrice = Number(n).toFixed(2);
@@ -105,16 +113,21 @@ export class CreateAdvertisementComponent implements OnInit {
   reloadCurrency(): void {
     this.currencies.forEach((c) => {
       if (c.id == this.advertisement.currencyId) {
-        this.transitionCurrency = c.code;
+        this.transitionCurrencyCode = c.code;
       }
     });
   }
 
-  addTest(): void {
-  }
-
   addNewWholesalePrice(): void {
-    this.wholesalePrice.priceUnits.push(new WholesalePriceUnitRequest());
+    const p = this.wholesalePrice.priceUnits[this.wholesalePrice.priceUnits.length - 1];
+    if (p.max !== '' && p.min !== '') {
+      const price = new WholesalePriceUnitRequest();
+      price.min = p.max + 1;
+      this.wholesalePrice.priceUnits.push(price);
+      this.cantAddPriceAlert = true;
+    } else {
+      this.cantAddPriceAlert = false;
+    }
   }
 
   removeWholesalePrice(price: WholesalePriceUnitRequest): void {
@@ -129,7 +142,7 @@ export class CreateAdvertisementComponent implements OnInit {
     this.wholesalePrice.priceUnits.forEach((p) => {
       // this.validatePrice(p);
       this.validateUnitPrice(p);
-      this.validateUnitSides(p);
+      this.validateUnitSidesAndValidWithOther(p);
     });
   }
 
@@ -138,6 +151,7 @@ export class CreateAdvertisementComponent implements OnInit {
   }
 
   validateUnitPrice(price: WholesalePriceUnitRequest): void {
+    this.validationPrice = true;
     const index = this.wholesalePrice.priceUnits.indexOf(price, 0);
     if (index > -1) {
       // console.log(Validator.validateNumberForPrice(price.price));
@@ -146,19 +160,22 @@ export class CreateAdvertisementComponent implements OnInit {
     }
   }
 
-  validateUnitSides(price: WholesalePriceUnitRequest): void {
+  validateUnitSidesAndValidWithOther(price: WholesalePriceUnitRequest): void {
     const index = this.wholesalePrice.priceUnits.indexOf(price, 0);
+    this.validationPrice = true;
     if (index > -1) {
-      console.log(price.max);
       if (price.max !== '') {
-        console.log(+index === +(this.wholesalePrice.priceUnits.length - 1));
-
-        if ((+index === +(this.wholesalePrice.priceUnits.length - 1)) && price.max === null) {
-          this.wholesalePrice.priceUnits[index].isValidSides = true;
+        if ((+index === +(this.wholesalePrice.priceUnits.length - 1))) {
+          if (price.max === null) {
+            this.wholesalePrice.priceUnits[index].isValidSides = true;
+          } else {
+            this.wholesalePrice.priceUnits[index].isValidSides = price.min < price.max;
+          }
         } else {
           this.wholesalePrice.priceUnits[index].isValidSides = price.min < price.max;
+          this.wholesalePrice.priceUnits[index + 1].min = price.max + 1;
+          this.validateUnitSidesAndValidWithOther(this.wholesalePrice.priceUnits[index + 1]);
         }
-
       }
       if (index > 0) {
         this.wholesalePrice.priceUnits[index].isValidWithOthers =
@@ -183,7 +200,7 @@ export class CreateAdvertisementComponent implements OnInit {
     return true;
   }
 
-  handleUpload(event): void {
+  handleUpload(event: any): void {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -191,11 +208,12 @@ export class CreateAdvertisementComponent implements OnInit {
       for (let i = 0; i < this.images.length; i++) {
         // console.log);
         if (this.images[i].src === '') {
+          // @ts-ignore
           this.images[i].src = reader.result.toString();
           break;
         }
       }
-
+      event.target.files.clean;
       // this.advertisement.images.push(reader.result.toString());
     };
   }
@@ -229,7 +247,86 @@ export class CreateAdvertisementComponent implements OnInit {
 
   createGoodsAdvertisement(): void {
     if (this.validateAll()) {
+      // if (true) {
+      let saveAdvertisement;
+      this.advertisement.count = Number(this.advertisement.count);
+      this.advertisement.subcategoryId = Number(this.subcategoryId);
 
+      if (this.advertisement.properties.length === 1) {
+        if (this.advertisement.properties[0].value === '') {
+          this.advertisement.properties = null;
+        }
+      }
+
+      this.currencies.forEach((c) => {
+        if (c.code === this.transitionCurrencyCode) {
+          this.advertisement.currencyId = Number(c.id);
+        }
+      });
+
+      this.deliveryTypes.forEach((d) => {
+        if (d.checked) {
+          this.advertisement.deliveryTypes.push(Number(d.id));
+        }
+      });
+
+      if (this.images[0].src !== '') {
+        this.advertisement.mainImage = this.images[0].src;
+        for (let i = 1; i <= 4; i++) {
+          if (this.images[i].src !== '') {
+            this.advertisement.images.push(this.images[i].src);
+          }
+        }
+      }
+
+      const dataOk = {
+        text: 'Товар успішно додано до вашого магазину'
+      };
+
+      if (this.priceType === 1) {
+        saveAdvertisement = new RetailGoodsAdvertisementRequest();
+        saveAdvertisement.loadDataFromGoodsAdvertisementRequest(this.advertisement);
+        saveAdvertisement.price.price = Number(this.retailPrice);
+
+        this.advertisementService.createRetailAdvertisement(saveAdvertisement).subscribe(() => {
+          const dialogRef = this.dialog.open(InfoDialogComponent, {
+            data: dataOk
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            this.router.navigateByUrl('/');
+          });
+        }, error => {
+          alert(error.code);
+        });
+      } else {
+        this.mapWholesalePriceToNumbers();
+        saveAdvertisement = new WholesaleGoodsAdvertisementRequest();
+        saveAdvertisement.loadDataFromGoodsAdvertisementRequest(this.advertisement);
+        saveAdvertisement.price = this.wholesalePrice;
+        this.advertisementService.createWholeSaleAdvertisement(saveAdvertisement).subscribe(() => {
+          const dialogRef = this.dialog.open(InfoDialogComponent, {
+            data: dataOk
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            this.router.navigateByUrl('/');
+          });
+        }, error => {
+          alert(error.code);
+        });
+      }
+      console.log(saveAdvertisement);
+      // this.advertisementService.
+      // console.log('can save');
+    } else {
+      const dataValid = {
+        text: 'Неправильно заповнені поля, перевірте введені дані'
+      };
+
+      const dialogRef = this.dialog.open(InfoDialogComponent, {
+        data: dataValid
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
     }
   }
 
@@ -261,21 +358,22 @@ export class CreateAdvertisementComponent implements OnInit {
       this.validateProperties = (this.advertisement.properties[0].value == '' && this.advertisement.properties[0].name == '') ||
         (this.advertisement.properties[0].value !== '' && this.advertisement.properties[0].name !== '');
     } else {
+      // @ts-ignore
       this.advertisement.properties.forEach((p) => {
         if (p.name == '' || p.value == '') {
           this.validateProperties = false;
         }
       });
     }
-    return true;
+    return this.validationTitle && this.validationPrice && this.validationSubcategory && this.validateProperties && this.validateCount;
   }
 
   validateWholesalePrice(): boolean {
     for (let i = 0; i < this.wholesalePrice.priceUnits.length; i++) {
       let p = this.wholesalePrice.priceUnits[i];
       this.validateUnitPrice(p);
-      this.validateUnitSides(p);
-      if (!(p.isValidWithOthers && p.isValidSides && p.isValidPrice)) {
+      this.validateUnitSidesAndValidWithOther(p);
+      if (!(p.isValidWithOthers && p.isValidSides && p.isValidPrice && (this.wholesalePrice.priceUnits.length >= 2))) {
         return false;
       }
     }
@@ -283,9 +381,28 @@ export class CreateAdvertisementComponent implements OnInit {
   }
 
   trimAllProperties(): void {
+    // @ts-ignore
     this.advertisement.properties.forEach((p) => {
       p.name = p.name.trim();
       p.value = p.value.trim();
     });
   }
+
+  mapWholesalePriceToNumbers(): void {
+    this.wholesalePrice.priceUnits.forEach((p) => {
+      p.min = Number(p.min);
+      p.max = Number(p.max);
+      if (p.max === 0) {
+        p.max = null;
+      } else {
+        p.max = Number(p.max);
+      }
+    });
+  }
+
+  isFirst(price: WholesalePriceUnitRequest): boolean {
+    const index = this.wholesalePrice.priceUnits.indexOf(price, 0);
+    return index === 0;
+  }
+
 }

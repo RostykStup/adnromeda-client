@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {IpService} from '../../../service/country/ip.service';
+import {CountryService} from '../../../service/country/country.service';
 
 @Component({
   selector: 'app-side-navigation-menu',
@@ -7,7 +9,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SideNavigationMenuComponent implements OnInit {
 
-  constructor() {
+  constructor(private ipService: IpService, private countryService: CountryService) {
   }
 
   userRole: string | null = '';
@@ -16,6 +18,10 @@ export class SideNavigationMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('andro_user_role');
+    this.ipService.getCountryCodeByIp().subscribe((r) => {
+      console.log(r.country_code);
+    });
+    console.log('haha');
   }
 
   open(): void {

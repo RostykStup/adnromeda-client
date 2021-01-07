@@ -12,10 +12,11 @@ import {SellerStatisticsComponent} from './seller-profile/seller-statistics/sell
 import { CreateAdvertisementComponent } from './seller/create-advertisement/create-advertisement.component';
 import { LoginDialogComponent } from './navigation-bar/login-dialog/login-dialog.component';
 import {FormsModule} from '@angular/forms';
+import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
 
 
 @NgModule({
-  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, SellerProfileComponent, CreateAdvertisementComponent, LoginDialogComponent],
+  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, SellerProfileComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent],
     imports: [
         CommonModule,
         ClientRoutingModule,

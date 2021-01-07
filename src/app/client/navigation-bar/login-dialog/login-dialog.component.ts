@@ -122,4 +122,18 @@ export class LoginDialogComponent {
       }
     });
   }
+
+  loginUserClick(): void {
+    const accountRequest = new AccountLoginRequest();
+    accountRequest.password = '12345678';
+    accountRequest.login = 'rostyk.stu@gmail.com';
+    this.accountService.login(accountRequest).subscribe((r) => {
+      this.accountService.writeAuthenticationToLocalStorage(r);
+      this.dialogRef.close();
+    }, (error) => {
+      if (error.status === 403) {
+        this.validateAuth = false;
+      }
+    });
+  }
 }

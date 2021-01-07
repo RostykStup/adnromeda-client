@@ -3,7 +3,7 @@ export class DeliveryTypeResponse {
   title: string;
   isInternational: boolean;
   countryCode: string;
-
+  checked = true;
 
   constructor() {
     this.id = -1;

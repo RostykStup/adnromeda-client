@@ -3,7 +3,7 @@ import {PropertyRequest} from './property-request';
 
 export class GoodsAdvertisementRequest extends AdvertisementRequest {
 
-  onlySellerCountry: boolean | any;
+  onlySellerCountry = false;
 
   subcategoryId: number | any;
 
@@ -11,15 +11,16 @@ export class GoodsAdvertisementRequest extends AdvertisementRequest {
 
   count: number | any = '';
 
-  images: Array<string> | any;
+  images = Array<string>();
 
-  properties: Array<PropertyRequest> = [];
+  properties: Array<PropertyRequest> | any;
 
   deliveryTypes: Array<number> | any = [];
 
   constructor() {
     super();
     this.count = null;
+    this.properties = Array<PropertyRequest>();
   }
 
   loadDataFromGoodsAdvertisementRequest(advertisement: GoodsAdvertisementRequest): void {

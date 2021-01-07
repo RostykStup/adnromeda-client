@@ -41,4 +41,18 @@ export class CountryService {
     return countries[1];
   }
 
+  getRestCountryByCountryName(name: string): RestCountry {
+    const restCountry = new RestCountry();
+    // @ts-ignore
+    this.getAllCountries().subscribe(r => {
+      for (const respKey in r) {
+        const country = r[respKey];
+        if (country.name === name) {
+          return country;
+        }
+      }
+    });
+    return restCountry;
+  }
+
 }

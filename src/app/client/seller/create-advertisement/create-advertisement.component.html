@@ -12,6 +12,7 @@
       <div class="block-element">
         <input type="text" class="andro-input title-input"
                [(ngModel)]="advertisement.title"
+               (keyup)="validationTitle = true"
                placeholder="Заголовок">
         <div class="warning-container" *ngIf="!validationTitle">
           <img [src]="icon"/>
@@ -46,7 +47,7 @@
   <div class="creation-block">
     <div class="block-element price-choose-container-title">
     <span class="block-title">
-      Як ви будете продавати цей товар?
+      Як ви будете продавати цей товар?*
     </span>
       <div class="warning-container" *ngIf="!validationPrice">
         <img [src]="icon"/>
@@ -75,7 +76,7 @@
         </select>
         <span *ngIf="!isNumber" class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>
         <span *ngIf="isNumber && !digit"
-              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrency}}</span>
+              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrencyCode}}</span>
       </div>
 
       <div class="" *ngSwitchCase="2">
@@ -88,15 +89,23 @@
                 <div class="question-content price-question-content">
                   Оптова ціна заповнюється за прикладом:
                   <table>
-                    <tr><td>1 - 200</td><td>|   20 грн/шт</td></tr>
-                    <tr><td>201 - 1000</td><td>|   19 грн/шт</td></tr>
-                    <tr><td>1001 - </td><td>|   18.50 грн/шт</td></tr>
+                    <tr>
+                      <td>1 - 200</td>
+                      <td>| 20 грн/шт</td>
+                    </tr>
+                    <tr>
+                      <td>201 - 1000</td>
+                      <td>| 19 грн/шт</td>
+                    </tr>
+                    <tr>
+                      <td>1001 -</td>
+                      <td>| 18.50 грн/шт</td>
+                    </tr>
                   </table>
                   Останнє поле 'до' можна залишити пустим
                 </div>
               </div>
             </div>
-
           </div>
 
           <div class="wh-pr-price-elem property-title"> Ціна
@@ -110,6 +119,15 @@
             <img class="add-icon" (click)="addNewWholesalePrice()"
                  src="https://img.icons8.com/material/30/000000/plus--v1.png"/>
           </div>
+          <div class="warning-container" *ngIf="!(this.wholesalePrice.priceUnits.length >= 2)">
+            <img [src]="icon"/>
+            <span class="validation-text">Потрібно створити мінімум 2 варіанти ціни</span>
+          </div>
+
+          <div class="warning-container" *ngIf="!cantAddPriceAlert">
+            <img [src]="icon"/>
+            <span class="validation-text">Заповніть поля кількості</span>
+          </div>
         </div>
 
         <div *ngFor="let price of wholesalePrice.priceUnits" class="wh-pr-container">
@@ -118,13 +136,15 @@
               <input type="number" min="0" class="andro-input wholesale-price-count-input"
                      [ngClass]="{red_inp: (!price.isValidSides || !price.isValidWithOthers)}"
                      [(ngModel)]="price.min"
-                     (change)="validateUnitSides(price)"
+                     (change)="validateUnitSidesAndValidWithOther(price)"
+                     [disabled]="!isFirst(price)"
+                     min="1"
                      placeholder="Від">
               -
               <input type="number" class="andro-input wholesale-price-count-input"
                      [ngClass]="{red_inp: (!price.isValidSides || !isValidNextSide(price))}"
                      [(ngModel)]="price.max"
-                     (keyup)="validateUnitSides(price)"
+                     (keyup)="validateUnitSidesAndValidWithOther(price)"
                      min="1"
                      placeholder="До">
             </div>
@@ -133,7 +153,7 @@
                      [(ngModel)]="price.price"
                      (keyup)="validateUnitPrice(price)"
                      placeholder="Ціна">
-              <div  class="remove-price-holder" [ngClass]="{visible_button:wholesalePrice.priceUnits.length > 1}">
+              <div class="remove-price-holder" [ngClass]="{visible_button:wholesalePrice.priceUnits.length > 1}">
                 <img (click)="removeWholesalePrice(price)"
                      src="https://img.icons8.com/material-outlined/24/000000/minus-sign.png"/>
               </div>
@@ -151,7 +171,7 @@
                   class="validation-text">{{price.min}} ≥ {{price.max === null ? '0' : price.max }}</span>
 
             <span *ngIf="price.isValid() && !price.isDigit"
-                  class="validation-text green">Буде збережено як: {{price.getTwoDigitPrice()}} {{transitionCurrency}}</span>
+                  class="validation-text green">Буде збережено як: {{price.getTwoDigitPrice()}} {{transitionCurrencyCode}}</span>
             <!--            <span-->
             <!--              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrency}}</span>-->
           </div>
@@ -176,16 +196,25 @@
             <div class="question-content property-question-content">
               Приклад:
               <table>
-                <tr><td>Колір </td><td>:     білий</td></tr>
-                <tr><td>Потужність </td><td>:     25 W</td></tr>
-                <tr><td>Розмір </td><td>:     XXL</td></tr>
+                <tr>
+                  <td>Колір</td>
+                  <td>: білий</td>
+                </tr>
+                <tr>
+                  <td>Потужність</td>
+                  <td>: 25 W</td>
+                </tr>
+                <tr>
+                  <td>Розмір</td>
+                  <td>: XXL</td>
+                </tr>
               </table>
             </div>
           </div>
         </div>
         <div class="warning-container" *ngIf="!validateProperties">
           <img [src]="icon"/>
-          <span class="validation-text">Деякі характеристики містять пусті пуля</span>
+          <span class="validation-text">Деякі характеристики містять пусті поля</span>
         </div>
       </div>
       <div class="property-title-holder">
@@ -195,10 +224,12 @@
       <div class="properties-container">
         <div *ngFor="let property of advertisement.properties" class="property-holder">
           <div class="property-block">
-            <input type="text" class="andro-input property-input" [(ngModel)]="property.name">
+            <input type="text" (keyup)="validateProperties = true" class="andro-input property-input"
+                   [(ngModel)]="property.name">
           </div>
           <div class="property-block">
-            <input type="text" class="andro-input property-input" [(ngModel)]="property.value">
+            <input type="text" (keyup)="validateProperties = true" class="andro-input property-input"
+                   [(ngModel)]="property.value">
           </div>
           <div class="remove-property-holder" [ngClass]="{visible_button: advertisement.properties.length > 1}">
             <img (click)="removeProperty(property)"
@@ -220,7 +251,7 @@
     <div class="block-content">
       <div class="block-element">
         <input type="number" class="andro-input" [(ngModel)]="advertisement.count"
-               (keyup)="validateNumber(advertisement.count)" placeholder="Кількість"
+               (keyup)="validateNumber(advertisement.count); validateCount = true" placeholder="Кількість"
                min="1" value="1">
         <div class="warning-container" *ngIf="!validateCount">
           <img [src]="icon">
@@ -239,29 +270,32 @@
       <div class="deliveries-container">
 
 
-        <span class="validation-text green">Способи, які доставки доступні у вашій країні</span>
+        <span class="validation-text green">Способи доставки, які доступні у вашій країні</span>
         <div class="deliveries-block">
           <div class="checkbox-container">
             <input type="checkbox" id="default-delivery" class="andro-checkbox" checked disabled>
-            <label class="andro-label" for="default-delivery">За домовленістю <div class="question-body">
-              <img [src]="questionIcon" class="question-icon">
-              <div class="question-container">
-                <div class="question-content delivery-question-content">
-                  Замість вибору методу відправлення користувач буде зв'язаний з вами для обговорення деталей доставки.
+            <label class="andro-label" for="default-delivery">За домовленістю
+              <div class="question-body">
+                <img [src]="questionIcon" class="question-icon">
+                <div class="question-container">
+                  <div class="question-content delivery-question-content">
+                    Замість вибору методу відправлення користувач буде зв'язаний з вами для обговорення деталей
+                    доставки.
 
-                  <p>Дану опцію неможливо відключити</p>
+                    <p>Дану опцію неможливо відключити</p>
+                  </div>
                 </div>
               </div>
-            </div></label>
+            </label>
           </div>
           <div class="checkbox-container" *ngFor="let delivery of deliveryTypes">
-            <input type="checkbox" [id]="delivery.title" class="andro-checkbox">
+            <input type="checkbox" [id]="delivery.title" class="andro-checkbox" [(ngModel)]="delivery.checked">
             <label class="andro-label" [for]="delivery.title">{{delivery.title}}</label>
           </div>
         </div>
 
         <div class="checkbox-container">
-          <input type="checkbox" id="only-seller-delivery" class="andro-checkbox">
+          <input type="checkbox" id="only-seller-delivery" class="andro-checkbox" [(ngModel)]="advertisement.onlySellerCountry">
           <label class="andro-label" for="only-seller-delivery">Доставка лише у межах моєї країни</label>
         </div>
 

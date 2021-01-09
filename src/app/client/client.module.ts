@@ -9,19 +9,21 @@ import {SellerProfileComponent} from './seller-profile/seller-profile.component'
 import {SellerInfoComponent} from './seller-profile/seller-info/seller-info.component';
 import {SellerSettingsComponent} from './seller-profile/seller-settings/seller-settings.component';
 import {SellerStatisticsComponent} from './seller-profile/seller-statistics/seller-statistics.component';
-import { CreateAdvertisementComponent } from './seller/create-advertisement/create-advertisement.component';
-import { LoginDialogComponent } from './navigation-bar/login-dialog/login-dialog.component';
+import {CreateAdvertisementComponent} from './seller/create-advertisement/create-advertisement.component';
+import {LoginDialogComponent} from './navigation-bar/login-dialog/login-dialog.component';
 import {FormsModule} from '@angular/forms';
-import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
-
+import {InfoDialogComponent} from './dialogs/info-dialog/info-dialog.component';
+import {SearchComponent} from './search/search.component';
+import {ClickOutsideModule} from 'ng-click-outside';
 
 @NgModule({
-  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, SellerProfileComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent],
-    imports: [
-        CommonModule,
-        ClientRoutingModule,
-        FormsModule
-    ]
+  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, SellerProfileComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent],
+  imports: [
+    CommonModule,
+    ClientRoutingModule,
+    FormsModule,
+    ClickOutsideModule
+  ]
 })
 export class ClientModule {
 }

@@ -22,6 +22,8 @@ export class NavigationBarComponent implements OnInit {
 
   isOpenProfileMenu = false;
 
+  value = '';
+
   ngOnInit(): void {
     this.isLogged = this.accountService.isLogged();
   }
@@ -34,7 +36,9 @@ export class NavigationBarComponent implements OnInit {
     this.isOpenProfileMenu = !this.isOpenProfileMenu;
     this.accountService.logOut();
     this.isLogged = this.accountService.isLogged();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/').then(r => {
+      window.location.reload();
+    });
   }
 
   openLoginDialog(): void {
@@ -47,5 +51,10 @@ export class NavigationBarComponent implements OnInit {
       // this.reloadTable();
       this.isLogged = this.accountService.isLogged();
     });
+  }
+
+  makeSearch(): void {
+
+    this.router.navigateByUrl('client/search?value=' + this.value);
   }
 }

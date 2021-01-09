@@ -7,8 +7,8 @@ import {AuthenticationResponse} from '../../entity/account/authentication-respon
 import {AccountDataRequest} from '../../entity/account/account-data-request';
 import {WholesaleGoodsAdvertisementRequest} from '../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-goods-advertisement-request';
 import {RetailGoodsAdvertisementRequest} from '../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-goods-advertisement-request';
-import {GoodsAdvertisementForSearch} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-for-search';
-import {GoodsAdvertisementSpecification} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-specification';
+import {GoodsAdvertisementForSearchResponse} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-for-search-response';
+import {GoodsAdvertisementSearchRequest} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-search-request';
 
 @Injectable({
   providedIn: 'root'
@@ -39,17 +39,21 @@ export class AdvertisementService {
       {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
-  findAllByFilters(request: GoodsAdvertisementSpecification): Observable<Array<GoodsAdvertisementForSearch>> {
-    const fromCountryCode = request.fromCountryCode === null ? 'fromCountryCode=' + request.fromCountryCode + '&' : '';
+  findAllByFilters(request: GoodsAdvertisementSearchRequest): Observable<any> {
+    const fromCountryCode = request.fromCountryCode !== null ? 'fromCountryCode=' + request.fromCountryCode + '&' : '';
     const image = request.image ? 'image=' + request.image + '&' : '';
     const pageDirection = 'paginationRequest.direction=' + request.paginationRequest.direction + '&';
-    const pageField = request.paginationRequest.field === null ? 'paginationRequest.field=' + request.paginationRequest.field + '&' : '';
+    const pageField = request.paginationRequest.field !== null ? 'paginationRequest.field=' + request.paginationRequest.field + '&' : '';
     const pagePage = 'paginationRequest.page=' + request.paginationRequest.page + '&';
     const pageSize = 'paginationRequest.size=' + request.paginationRequest.size + '&';
-    const rating = request.rating === null ? 'rating=' + request.rating + '&' : '';
-    const title = request.title === null ? 'title=' + request.title : '';
+    const rating = request.rating !== null ? 'rating=' + request.rating + '&' : '';
+    const title = request.title !== null ? 'title=' + request.title : '';
     const url = this.advertisementURL + '/filter?' + fromCountryCode + image + pageDirection + pageField + pagePage + pageSize + rating + title;
-    return this.httpClient.get<Array<GoodsAdvertisementForSearch>>(url);
+    return this.httpClient.get<any>(url);
+  }
+
+  getAdvertisementImagePath(imageName: string | null, sellerId: number): string {
+    return imageName !== null && imageName !== '' ? GlobalConstants.API_URL + 'image/user_' + sellerId + '/advertisements/' + imageName : 'https://sunliberty.com.ua/wp-content/themes/brixel/images/No-Image-Found-400x264.png';
   }
 
 }

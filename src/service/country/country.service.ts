@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {GlobalConstants} from '../../common/global-constants';
 import {AccountLoginRequest} from '../../entity/account/account-login-request';
@@ -10,7 +10,13 @@ import {RestCountry} from '../../entity/country/rest-country';
   providedIn: 'root'
 })
 export class CountryService {
+
+  allCountries = new Array<RestCountry>();
+
   constructor(private httpClient: HttpClient) {
+    this.getAllCountries().subscribe(r => {
+      this.allCountries = r;
+    });
   }
 
   restCountriesUrl = 'https://restcountries.eu/rest/v2/';
@@ -20,39 +26,36 @@ export class CountryService {
     return this.httpClient.get<Array<RestCountry>>(url);
   }
 
-  filterCountriesListByNamePeace(countries: Array<RestCountry>, peace: string): Array<RestCountry> {
+  filterCountriesListByNamePeace(peace: string): Array<RestCountry> {
     const newCountries = Array<RestCountry>();
-    for (let i = 0; i < countries.length; i++) {
-      if (countries[i].nativeName.toLocaleLowerCase().includes(peace.toLocaleLowerCase())) {
-        newCountries.push(countries[i]);
-      } else if (countries[i].name.toLocaleLowerCase().includes(peace.toLocaleLowerCase())) {
-        newCountries.push(countries[i]);
+    for (let i = 0; i < this.allCountries.length; i++) {
+      if (this.allCountries[i].nativeName.toLocaleLowerCase().includes(peace.toLocaleLowerCase())) {
+        newCountries.push(this.allCountries[i]);
+      } else if (this.allCountries[i].name.toLocaleLowerCase().includes(peace.toLocaleLowerCase())) {
+        newCountries.push(this.allCountries[i]);
       }
     }
     return newCountries;
   }
 
-  findRestCountryByCountryName(countries: Array<RestCountry>, name: string): RestCountry {
-    for (let i = 0; i < countries.length; i++) {
-      if (countries[i].nativeName === name) {
-        return countries[i];
-      }
-    }
-    return countries[1];
-  }
-
-  getRestCountryByCountryName(name: string): RestCountry {
-    const restCountry = new RestCountry();
-    // @ts-ignore
-    this.getAllCountries().subscribe(r => {
-      for (const respKey in r) {
-        const country = r[respKey];
-        if (country.name === name) {
-          return country;
-        }
+  getRestCountryByCountryName(name: string | null): Observable<RestCountry> {
+    let restCountry = new BehaviorSubject<RestCountry>(new RestCountry());
+    this.allCountries.forEach((c) => {
+      if (c.name === name) {
+        restCountry = new BehaviorSubject<RestCountry>(c);
       }
     });
-    return restCountry;
+    return restCountry.asObservable();
+  }
+
+  getRestCountryByCountryCode(code: string | null): Observable<RestCountry> {
+    let restCountry = new BehaviorSubject<RestCountry>(new RestCountry());
+    this.allCountries.forEach((c) => {
+      if (c.alpha2Code === code) {
+        restCountry = new BehaviorSubject<RestCountry>(c);
+      }
+    });
+    return restCountry.asObservable();
   }
 
 }

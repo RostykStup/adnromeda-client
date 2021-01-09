@@ -38,13 +38,18 @@ export class AccountService {
   }
 
   isLogged(): boolean {
-    return localStorage.getItem('andro_user_role') !== '';
+    return localStorage.getItem('andro_user_role') !== '' &&
+      localStorage.getItem('andro_user_role') !== null &&
+      localStorage.getItem('andro_user_role') !== undefined;
   }
 
   logOut(): void {
     localStorage.setItem('andro_user_token', '');
-    // localStorage.setItem('andro_user_name', '');
     localStorage.setItem('andro_user_role', '');
+    localStorage.setItem('andro_user_country', '');
+    localStorage.setItem('andro_user_country_code', '');
+    localStorage.setItem('andro_user_currency', '');
+
   }
 
   login(accountLoginRequest: AccountLoginRequest): Observable<AuthenticationResponse> {

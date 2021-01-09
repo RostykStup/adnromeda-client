@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="search-label-container">
+    Результати пошуку для '{{searchValue}}'
+  </div>
+  <div class="content">
+    <div class="filters-container">
+      <div class="price-sides-container">
+        Ціна:
+        <input type="text" placeholder="мін" class="andro-input enter-price-sides min">
+        -
+        <input type="text" placeholder="макс" class="andro-input enter-price-sides max">
+      </div>
+      <!--      <input type="checkbox" [id]="delivery.title" class="andro-checkbox" [(ngModel)]="delivery.checked">-->
+      <!--      <label class="andro-label" [for]="delivery.title">{{delivery.title}}</label>-->
+      <input type="checkbox" class="andro-checkbox" id="only-from-user-country-checkbox">
+      <label class="andro-label" for="only-from-user-country-checkbox">Відправка з моєї країни</label>
+
+      <input type="checkbox" class="andro-checkbox" id="rating-checkbox" [(ngModel)]="searchRequest.rating">
+      <label class="andro-label" for="rating-checkbox">Рейтинг 4.0+</label>
+
+      <input type="checkbox" class="andro-checkbox" id="only-wholesale-checkbox" >
+      <label class="andro-label" for="only-wholesale-checkbox">Лише опт</label>
+
+      <input type="checkbox" class="andro-checkbox" id="only-photo-checkbox" [(ngModel)]="searchRequest.image">
+      <label class="andro-label" for="only-photo-checkbox">Лише з фото</label>
+    </div>
+    <div class="sort-view-container">
+      <div class="sort-container">
+        Сортувати за
+        <div class="sort-elems-container">
+          <div class="sort-elem">Кількість замовлень</div>
+          <div class="sort-elem price-sort-container">Ціна
+            <svg class="price-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                 viewBox="0 0 172 172">
+              <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                 stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                 font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                 style="mix-blend-mode: normal">
+                <path d="M0,172v-172h172v172z" fill="none"></path>
+                <g fill="#000000">
+                  <path
+                    d="M21.5,21.5v14.33333h78.83333v-14.33333zM121.83333,21.5v100.33333h-21.5l28.66667,28.66667l28.66667,-28.66667h-21.5v-100.33333zM21.5,50.16667v14.33333h64.5v-14.33333zM21.5,78.83333v14.33333h50.16667v-14.33333zM21.5,107.5v14.33333h35.83333v-14.33333zM21.5,136.16667v14.33333h21.5v-14.33333z"></path>
+                </g>
+              </g>
+            </svg>
+            <svg class="price-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                 viewBox="0 0 172 172">
+              <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                 stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                 font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                 style="mix-blend-mode: normal">
+                <path d="M0,172v-172h172v172z" fill="none"></path>
+                <g fill="#000000">
+                  <path
+                    d="M14.33333,21.5v14.33333h28.66667v-14.33333zM129,21.5v100.33333h-14.33333l21.5,28.66667l21.5,-28.66667h-14.33333v-100.33333zM14.33333,50.16667v14.33333h43v-14.33333zM14.33333,78.83333v14.33333h57.33333v-14.33333zM14.33333,107.5v14.33333h71.66667v-14.33333zM14.33333,136.16667v14.33333h86v-14.33333z"></path>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="sort-elem">Новинки</div>
+          <div class="sort-elem">Найкраще співпадіння</div>
+        </div>
+      </div>
+      <div class="view-container">
+        Вигляд:
+        <div (click)="changeViewStyle('table')" class="view-icon-container"
+             [ngClass]="{active_view: viewStyle === 'table'}">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+               width="24" height="24"
+               viewBox="0 0 226 226"
+               style=" fill:#000000;">
+            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+               stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+               font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+              <path d="M0,226v-226h226v226z" fill="none"></path>
+              <g fill="#000000">
+                <path
+                  d="M37.66667,18.83333c-10.40542,0 -18.83333,8.42792 -18.83333,18.83333v18.83333v28.25c0,10.29301 8.54033,18.83333 18.83333,18.83333h47.08333c10.29301,0 18.83333,-8.54032 18.83333,-18.83333v-37.66667v-9.41667c0,-10.40542 -8.42792,-18.83333 -18.83333,-18.83333zM141.25,18.83333c-10.40542,0 -18.83333,8.42792 -18.83333,18.83333v18.83333v28.25c0,10.29301 8.54032,18.83333 18.83333,18.83333h47.08333c10.29301,0 18.83333,-8.54032 18.83333,-18.83333v-37.66667v-9.41667c0,-10.40542 -8.42792,-18.83333 -18.83333,-18.83333zM37.66667,56.5h47.08333v28.25h-47.08333zM141.25,56.5h47.08333v28.25h-47.08333zM37.66667,122.41667c-10.40542,0 -18.83333,8.42792 -18.83333,18.83333v18.83333v28.25c0,10.29301 8.54033,18.83333 18.83333,18.83333h47.08333c10.29301,0 18.83333,-8.54032 18.83333,-18.83333v-37.66667v-9.41667c0,-10.40542 -8.42792,-18.83333 -18.83333,-18.83333zM141.25,122.41667c-10.40542,0 -18.83333,8.42792 -18.83333,18.83333v9.41667v9.41667v28.25c0,10.29301 8.54032,18.83333 18.83333,18.83333h47.08333c10.29301,0 18.83333,-8.54032 18.83333,-18.83333v-28.25v-9.41667v-9.41667c0,-10.40542 -8.42792,-18.83333 -18.83333,-18.83333zM37.66667,160.08333h47.08333v28.25h-47.08333zM141.25,160.08333h47.08333v28.25h-47.08333z"></path>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div (click)="changeViewStyle('rows')" class="view-icon-container"
+             [ngClass]="{active_view: viewStyle === 'rows'}">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+               width="24" height="24"
+               viewBox="0 0 226 226"
+               style=" fill:#000000;">
+            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+               stroke-linejoin="miter"
+               stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+               font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+              <path d="M0,226v-226h226v226z" fill="none"></path>
+              <g fill="#000000">
+                <path
+                  d="M28.25,42.375c-7.80102,0 -14.125,6.32398 -14.125,14.125c0,7.80102 6.32398,14.125 14.125,14.125c7.80102,0 14.125,-6.32398 14.125,-14.125c0,-7.80102 -6.32398,-14.125 -14.125,-14.125zM65.91667,47.08333v18.83333h141.25v-18.83333zM28.25,98.875c-7.80102,0 -14.125,6.32398 -14.125,14.125c0,7.80102 6.32398,14.125 14.125,14.125c7.80102,0 14.125,-6.32398 14.125,-14.125c0,-7.80102 -6.32398,-14.125 -14.125,-14.125zM65.91667,103.58333v18.83333h141.25v-18.83333zM28.25,155.375c-7.80102,0 -14.125,6.32398 -14.125,14.125c0,7.80102 6.32398,14.125 14.125,14.125c7.80102,0 14.125,-6.32398 14.125,-14.125c0,-7.80102 -6.32398,-14.125 -14.125,-14.125zM65.91667,160.08333v18.83333h141.25v-18.83333z"></path>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="search-container" [ngSwitch]="viewStyle">
+      <div *ngSwitchCase="'table'" class="table-advertisement-holder">
+        <div *ngFor="let advertisementRow of tableViewAdvertisements" class="table-advertisement-row">
+          <div *ngFor="let advertisement of advertisementRow" class="table-advertisement-container">
+            <div class="table-advertisement-image-container">
+              <img [src]="getAdvertisementImage(advertisement.image, advertisement.sellerId)">
+              <div class="overlay">
+                <div class="add-to-favorites-button-container">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                     width="24" height="24"
+                     viewBox="0 0 172 172"
+                     style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#000000"><path d="M118.25,21.5c-20.7475,0 -32.25,14.97833 -32.25,14.97833c0,0 -11.5025,-14.97833 -32.25,-14.97833c-21.77233,0 -39.41667,17.64433 -39.41667,39.41667c0,29.89217 35.20267,58.85983 45.01383,68.01167c11.30183,10.535 26.65283,24.08 26.65283,24.08c0,0 15.351,-13.545 26.65283,-24.08c9.81117,-9.15183 45.01383,-38.1195 45.01383,-68.01167c0,-21.77233 -17.64433,-39.41667 -39.41667,-39.41667zM106.1455,115.455c-1.2685,1.14667 -2.37217,2.14283 -3.268,2.98133c-5.38217,5.01667 -11.74617,10.7715 -16.8775,15.3725c-5.13133,-4.601 -11.5025,-10.363 -16.8775,-15.3725c-0.903,-0.8385 -2.00667,-1.84183 -3.268,-2.98133c-10.17667,-9.19483 -37.18783,-33.61883 -37.18783,-54.53833c0,-13.83167 11.25167,-25.08333 25.08333,-25.08333c13.0935,0 20.683,9.1375 20.88367,9.374l11.36633,12.126l11.36633,-12.126c0.07167,-0.09317 7.79017,-9.374 20.88367,-9.374c13.83167,0 25.08333,11.25167 25.08333,25.08333c0,20.9195 -27.01117,45.3435 -37.18783,54.53833z"></path></g></g></svg>
+                </div>
+              </div>
+            </div>
+            <div class="table-advertisement-info-container">
+              <div class="table-advertisement-title-container"><a href="">{{advertisement.title}}</a></div>
+              <div class="table-advertisement-price-container">{{advertisement.priceWithUserCurrency}}</div>
+              <div class="table-advertisement-rating-sales-container">
+                <div class="table-advertisement-rating">
+                  ★4.6
+                </div>
+                <div class="table-advertisement-rating" *ngIf="advertisement.rating !== null">
+                  ☆{{advertisement.rating}}
+                </div>
+                <div class=" table-advertisement-sales" *ngIf="advertisement.sold !== null">
+                  Продано: {{advertisement.sold}}
+                </div>
+              </div>
+              <div class="table-advertisement-seller-container">
+                <a href="">{{advertisement.seller}}</a>
+              </div>
+            </div>
+          </div>
+          <!--          {{advert.title}}-->
+        </div>
+      </div>
+      <div *ngSwitchCase="'rows'">
+        rows
+      </div>
+    </div>
+  </div>
+</div>

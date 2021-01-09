@@ -8,6 +8,93 @@
     <img src="https://img.icons8.com/android/24/000000/menu.png"/>
   </div>
 
+
+  <!--    work-->
+  <!--    <div class="link">-->
+  <!--      <div class="link-title">Країна доставки</div>-->
+  <!--    </div>-->
+  <div class="side-nav-item" (click)="openSettingMenu()">
+    <div class="user-settings-info-container" [ngClass]="{opened_settings_menu: isOpenedSettingsMenu}">
+      <img [src]="userCountry.flag" class="delivery-country-flag">
+      /
+      <div>UKR</div>
+      /
+      <div>{{userCurrency.code}}</div>
+      <div class="arrow-holder">
+        <div class="arrow arrow-down" *ngIf="!isOpenedSettingsMenu"></div>
+        <div class="arrow arrow-up" *ngIf="isOpenedSettingsMenu"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="side-nav-item menu-container">
+    <div class=" user-settings-container"
+         [ngClass]="{opened: isOpenedSettingsMenu}">
+      <div class="side-menu-element" (clickOutside)="closeCountryMenu()">
+        Доставка в
+        <div *ngIf="userCountry.name !== ''" class="country-picker">
+          <div class="delivery-country-container" (click)="changeCountryPickMenuStatement()"
+               [ngClass]="{border_picked: isOpenedCountryPickMenu}">
+            <img [src]="userCountry.flag" class="delivery-country-flag">
+            <span class="select-element-title">{{userCountry.nativeName}}</span>
+            <div class="arrow-holder">
+              <div class="arrow arrow-down" *ngIf="!isOpenedCountryPickMenu"></div>
+              <div class="arrow arrow-up" *ngIf="isOpenedCountryPickMenu"></div>
+            </div>
+          </div>
+          <div class="picker-container">
+            <div class="picker-menu" *ngIf="isOpenedCountryPickMenu">
+              <input type="text" placeholder="Пошук" (keyup)="filterCountriesForPicker($event)">
+              <div class="list-container">
+                <div *ngFor="let country of countries" class="list-item" (click)="changeCountry(country)">
+                  <img [src]="country.flag" class="delivery-country-flag item-flag">
+                  <span class="select-element-title">{{country.name}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--          {{userCountry.nativeName}}-->
+        </div>
+      </div>
+      <div class="side-menu-element" *ngIf="false">
+        Мова
+        <div>
+        </div>
+      </div>
+      <div class="side-menu-element" (clickOutside)="closeCurrencyMenu()">
+        Валюта
+        <div *ngIf="userCurrency !== null" class="country-picker">
+          <div class="delivery-country-container" (click)="changeCurrencyPickMenuStatement()"
+               [ngClass]="{border_picked: isOpenedCurrencyPickMenu}">
+            <span class="select-element-title">{{userCurrency.code}} ({{userCurrency.name}})</span>
+            <div class="arrow-holder">
+              <div class="arrow arrow-down" *ngIf="!isOpenedCurrencyPickMenu"></div>
+              <div class="arrow arrow-up" *ngIf="isOpenedCurrencyPickMenu"></div>
+            </div>
+          </div>
+          <div class="picker-container">
+            <div class="picker-menu" *ngIf="isOpenedCurrencyPickMenu">
+              <div class="list-container currency-list-container">
+                <div *ngFor="let currency of currencies" class="list-item" (click)="changeCurrency(currency)">
+                  <span class="select-element-title currency-title">{{currency.code}} ({{currency.name}})</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--          {{userCountry.nativeName}}-->
+        </div>
+      </div>
+
+      <button class="andro-button user-settings-change-button" (click)="changeUserSetting()">Зберегти</button>
+    </div>
+
+  </div>
+
+  <div class="side-nav-divider side-nav-item"></div>
+
+  <div *ngSwitchCase="'ROLE_USER'">
+  </div>
+
   <div *ngSwitchCase="'ROLE_SELLER'">
     <div class="link" [routerLink]="'seller-profile'" (click)="close()">
       <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/user-male-circle--v1.png"/>

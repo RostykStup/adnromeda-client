@@ -104,7 +104,7 @@ export class SellerRegistrationComponent implements OnInit {
     if (this.countryName.trim() === '') {
       this.showCountries = this.countries;
     } else {
-      this.showCountries = this.countryService.filterCountriesListByNamePeace(this.countries, this.countryName);
+      this.showCountries = this.countryService.filterCountriesListByNamePeace(this.countryName);
     }
   }
 
@@ -142,12 +142,13 @@ export class SellerRegistrationComponent implements OnInit {
   }
 
   addCountryToList(countryName: string): void {
-    const country = this.countryService.findRestCountryByCountryName(this.countries, countryName);
-    const index = this.sellerCountries.indexOf(country, 0);
-    if (index === -1) {
-      this.sellerCountries.push(country);
-    }
-    this.countryName = '';
+    this.countryService.getRestCountryByCountryName(countryName).subscribe(country => {
+      const index = this.sellerCountries.indexOf(country, 0);
+      if (index === -1) {
+        this.sellerCountries.push(country);
+      }
+      this.countryName = '';
+    });
   }
 
   remove(country: RestCountry): void {

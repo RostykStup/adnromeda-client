@@ -25,7 +25,9 @@ export class SearchComponent implements OnInit {
 
   viewStyle: 'table' | 'rows' = 'table';
 
-  sortType: 'statistics.creationDate' | null | 'statistics.sold' | 'priceInHryvnia' = null;
+  priceDirection: any = null;
+
+  sortType: 'statistics.creationDate' | null | 'statistics.sold' | 'priceToSort' = null;
 
   advertisements = Array<GoodsAdvertisementForSearchResponse>();
 
@@ -36,7 +38,6 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.searchRequest.paginationRequest.page = 0;
     this.searchRequest.paginationRequest.direction = 'ASC';
-    // this.searchRequest.paginationRequest.field = 'priceInHryvnia';
     this.searchRequest.paginationRequest.size = 60;
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.searchValue = params.value;
@@ -84,17 +85,38 @@ export class SearchComponent implements OnInit {
       currency = 'USD';
     }
     if (advertisement.type === 'goods_wholesale') {
-      return  this.currencyService.exchangeCurrencies(advertisement.currency.code, currency, advertisement.priceMin).toFixed(2)
+      return this.currencyService.exchangeCurrencies('USD', currency, advertisement.priceMin).toFixed(2)
         + ' - '
-        + this.currencyService.exchangeCurrencies(advertisement.currency.code, currency, advertisement.priceMax).toFixed(2)
+        + this.currencyService.exchangeCurrencies('USD', currency, advertisement.priceMax).toFixed(2)
         + ' '
         + currency;
     } else if (advertisement.type === 'goods_retail') {
-      return this.currencyService.exchangeCurrencies(advertisement.currency.code, currency, advertisement.price).toFixed(2)
+      return this.currencyService.exchangeCurrencies('USD', currency, advertisement.price).toFixed(2)
         + ' '
         + currency;
     }
     return ' - ';
   }
 
+  makeRequestWithOtherSortType(sort: 'statistics.creationDate' | null | 'statistics.sold' | 'priceToSort', order: 'ASC' | 'DESC'): void {
+    this.sortType = sort;
+    if (sort === 'priceToSort'){
+      this.priceDirection = order;
+    } else {
+      this.priceDirection = null;
+    }
+    this.searchRequest.paginationRequest.field = sort;
+    this.searchRequest.paginationRequest.direction = order;
+    this.loadAdvertisements();
+  }
+
+  onlyImageClick($event: any): void {
+    this.searchRequest.image = $event.target.checked;
+    this.loadAdvertisements();
+  }
+
+  ratingClick($event: any): void {
+    this.searchRequest.rating = $event.target.checked;
+    this.loadAdvertisements();
+  }
 }

@@ -17,7 +17,5 @@ export class GoodsAdvertisementForSearchResponse {
 
   date = '';
   rating: number | null = null;
-  currency = new CurrencyResponse();
-
 
 }

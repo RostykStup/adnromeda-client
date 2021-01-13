@@ -21,11 +21,13 @@ export class NavigationBarComponent implements OnInit {
   isLogged = false;
 
   isOpenProfileMenu = false;
+  userRole : any;
 
   value = '';
 
   ngOnInit(): void {
     this.isLogged = this.accountService.isLogged();
+    this.userRole = localStorage.getItem('andro_user_role');
   }
 
   openProfileMenu(): void {
@@ -50,11 +52,18 @@ export class NavigationBarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => { //дії пілся закриття вікна
       // this.reloadTable();
       this.isLogged = this.accountService.isLogged();
+      this.userRole = localStorage.getItem('andro_user_role');
     });
   }
 
   makeSearch(): void {
-
     this.router.navigateByUrl('client/search?value=' + this.value);
+  }
+
+  navigateToCart(): void {
+    // [routerLink]="'user/cart'"
+    this.router.navigateByUrl('client/user/cart');
+    // window.open();
+
   }
 }

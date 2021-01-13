@@ -141,9 +141,9 @@ export class LoginDialogComponent {
       this.accountService.writeAuthenticationToLocalStorage(r);
       if (r.userRole === 'ROLE_USER') {
         this.loadUserData();
+        console.log('data loaded');
       }
       this.dialogRef.close();
-      window.location.reload();
     }, (error) => {
       if (error.status === 403) {
         this.validateAuth = false;
@@ -157,6 +157,7 @@ export class LoginDialogComponent {
         localStorage.setItem('andro_user_country', country.name);
         localStorage.setItem('andro_user_country_code', country.alpha2Code);
         localStorage.setItem('andro_user_currency', data.settings.currency.code);
+        window.location.reload();
       });
     });
   }

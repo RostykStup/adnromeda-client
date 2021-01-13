@@ -23,6 +23,12 @@ export class AdvertisementService {
 
   retailAdvertisementURL = GlobalConstants.API_URL + 'retail-goods';
 
+
+  getAdvertisementCount(id: number): Observable<number> {
+    const url = this.advertisementURL + '/count?id=' + id;
+    return this.httpClient.get<number>(url);
+  }
+
   createWholeSaleAdvertisement(request: WholesaleGoodsAdvertisementRequest): Observable<any> {
     const url = this.advertisementURL + '/wholesale';
     return this.httpClient.post(

@@ -17,6 +17,11 @@ const routes: Routes = [
         }
       },
       {
+        path: 'user', loadChildren: () => {
+          return import('./user/user.module').then(m => m.UserModule);
+        }
+      },
+      {
         path: 'search', component: SearchComponent
       }
     ]

@@ -1,0 +1,42 @@
+<!--<div class="logo-container">-->
+<!--  <span class="logo">Andromeda</span>-->
+<!--</div>-->
+<span class="block-title">Вибрати іншу адресу</span>
+<div class="addresses-container">
+  <div class="address-block" *ngFor="let address of addresses">
+    <div class="address-info">
+      <div class="address-recipient">
+        {{address.recipient}}, {{address.phoneNumber}}
+      </div>
+      <div class="address-place-info">
+        <div class="address-info-block">{{address.street}}</div>
+        <div class="address-info-block">{{address.house}}</div>
+        <div class="address-info-block">{{address.city}}, {{address.region}}
+          , {{address.country.englishName}}</div>
+      </div>
+      <div class="edit-label-container" *ngIf="defaultId === address.id">
+        <span class="edit-address-label default-address-label">Адреса за замовчуванням</span>
+      </div>
+    </div>
+    <div class="address-actions">
+      <div>
+        <button class="andro-button choose-button" (click)="closeWithAddress(address)">Вибрати</button>
+      </div>
+      <div class="edit-label-container">
+        <span class="edit-address-label">Редагувати</span>
+      </div>
+      <div class="edit-label-container" *ngIf="defaultId !== address.id">
+        <span class="edit-address-label" (click)="makeAddressDefault(address.id)">Зробити адресою за замовчуванням</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="create-new-button-hover">
+  <button class="andro-button creation-button" (click)="openAddressCreation()">
+    Додати нову адресу
+  </button>
+</div>
+<!--<div class="button-holder">-->
+<!--  <button class="dialog-button" (click)="close(true)">Видалити</button>-->
+<!--  <button class="dialog-button cancel-button" (click)="close(false)">Скасувати</button>-->
+<!--</div>-->

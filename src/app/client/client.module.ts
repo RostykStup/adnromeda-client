@@ -15,9 +15,12 @@ import {FormsModule} from '@angular/forms';
 import {InfoDialogComponent} from './dialogs/info-dialog/info-dialog.component';
 import {SearchComponent} from './search/search.component';
 import {ClickOutsideModule} from 'ng-click-outside';
+import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
+import { ChooseAddressDialogComponent } from './dialogs/choose-address-dialog/choose-address-dialog.component';
+import { CreateAddressDialogComponent } from './dialogs/create-address-dialog/create-address-dialog.component';
 
 @NgModule({
-  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, SellerProfileComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent],
+  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, SellerProfileComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,

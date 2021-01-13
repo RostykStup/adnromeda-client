@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="order-container">
+    <div class="block address-block">
+      <span class="block-title">Адреса доставки</span>
+      <div class="address">
+        <div class="address-container" *ngIf="userAddress">
+          <div class="receiver-info">
+            {{userAddress.recipient}}, {{userAddress.phoneNumber}}
+          </div>
+          <div class="address-place-info">
+            <div class="address-info-block">{{userAddress.street}}</div>
+            <div class="address-info-block">{{userAddress.house}}</div>
+            <div class="address-info-block">{{userAddress.city}}, {{userAddress.region}}
+              , {{userAddress.country.englishName}}</div>
+          </div>
+        </div>
+        <div class="address-actions-container">
+          <span class="address-actions-label" (click)="clickChooseAddress()">Обрати іншу адресу</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="block order-items-block">
+      <div class="order-block-title">
+        <span class="block-title">
+          Склад замовлення
+        </span>
+      </div>
+      <div class="order-items-container">
+        <div class="seller-position" *ngFor="let position of positions">
+          <div class="shop-container">
+            Магазин: {{position.sellerName}}
+          </div>
+          <div class="goods-container" *ngFor="let item of position.items">
+            <div class="goods-image">
+              <img [src]="getImage(item.image,item.sellerId)" alt="">
+            </div>
+            <div class="goods-main">
+              <div class="goods-title">
+                <span>{{item.title}}</span>
+                <div style="font-size: 10px">id: {{item.advertisementId}}</div>
+              </div>
+              <div class="goods-price">
+                <span>$ {{item.price.toFixed(2)}}</span>
+              </div>
+              <div class="goods-delivery">
+                <span class="delivery-text"><span
+                  class="delivery-label">Доставка: </span>{{item.deliveryType.title}}</span>
+                <!--            <i class="fas fa-angle-right"></i>-->
+              </div>
+
+              <div class="goods-description-container">
+                <span class="description-label" (click)="clickAddDescription($event)">+ Коментар до замовлення</span>
+                <input type="text" class="andro-input description-input" placeholder="Напишіть примітку для продавця тут">
+              </div>
+            </div>
+            <div class="goods-actions">
+
+              <div class="count-actions">
+                <button [disabled]="item.count <= 1" class="count-button" (click)="clickMinusCountButton(item)">-
+                </button>
+                <input type="number" class="item-count-input" min="1" [value]="item.count"
+                       (keyup)="inputCartItemCount($event, item)">
+                <button [disabled]="item.count === item.max" (click)="clickPlusCountButton(item)" class="count-button">+
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="make-order-container">
+    <div class="block">
+      <span class="block-title">Сума замовлення</span>
+      <div class="order-price-container">
+        <span class="price-label">До оплати</span>
+        <span class="price-label price-value">${{allPrice.toFixed(2)}}</span>
+      </div>
+
+      <button class="order-button andro-button">Оформити замовлення</button>
+    </div>
+  </div>
+</div>

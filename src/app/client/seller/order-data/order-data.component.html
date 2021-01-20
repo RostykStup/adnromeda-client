@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="order-container">
+    <div class="container-title">
+      Дані про замовлення
+    </div>
+    <div class="order-info-container">
+      <div class="order-main-info-container">
+        <div class="info-container">
+          <span class="main-info-text order-id-label-container">Замовлення №: </span>
+          <span class="main-info-text order-id-container">{{("00000000" + order.id).slice(-9)}}</span>
+        </div>
+        <div class="info-container">
+          <span class="main-info-text order-id-label-container">Статус: </span>
+          <span
+            class="main-info-text order-id-container order-status-container">{{orderService.getUkrOrderStatusValue(order.orderStatus)}}</span>
+        </div>
+      </div>
+
+      <div class="order-items-list-container">
+        <div class="order-item-container">
+          <div class="item-main-info-container">
+            <div class="item-title-container title-row">Товар</div>
+          </div>
+          <div class="item-price-for-one-container  title-row">Ціна за 1 шт</div>
+          <div class="item-count-container  title-row">Кількість</div>
+          <div class="item-price-container  title-row">Сума</div>
+          <div class="item-status-container  title-row">Статус</div>
+          <div class="item-description-container  title-row">Примітка від покупця</div>
+          <div class="item-delivery-container  title-row">Доставка</div>
+        </div>
+        <div class="order-item-container order-item" *ngFor="let item of order.items">
+          <div class="item-main-info-container">
+            <div class="item-image-container cell"><img [src]="getImage(item.image, order.sellerId)"></div>
+            <div class="item-title-container cell">{{item.title}}</div>
+          </div>
+          <div class="item-price-for-one-container cell">$ {{item.price.toFixed(2)}}</div>
+          <div class="item-count-container cell">{{item.count}} шт.</div>
+          <div class="item-price-container cell">$ {{(item.count * item.price).toFixed(2)}}</div>
+          <div class="item-status-container cell">{{orderService.getUkrOrderItemStatusValue(item.status)}}</div>
+          <div class="item-description-container cell">{{item.description}}</div>
+          <div class="item-delivery-container cell">{{item.delivery.title}}</div>
+        </div>
+      </div>
+      <div class="order-items-price">
+        <div class="all-sum-container">
+          <div class="all-sum-label">Загальна сума:</div>
+          <div class="all-sum-label">$ {{order.price.toFixed(2)}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-container">
+    <div class="container-title">
+      Дані про доставку
+    </div>
+    <div class="address-title">Контактна інформація</div>
+    <div class="address-container">
+      <div class="address-block">
+        <div class="address-block-title">Отримувач:</div>
+        <div class="address-block-value">{{order.deliveryDetails.recipient}}</div>
+      </div>
+      <div class="address-block">
+        <div class="address-block-title">Номер телефону:</div>
+        <div class="address-block-value">{{order.deliveryDetails.phoneNumber}}</div>
+      </div>
+      <div class="address-block">
+        <div class="address-block-title">Країна:</div>
+        <div class="address-block-value">{{order.deliveryDetails.countryCode}}</div>
+      </div>
+      <div class="address-block">
+        <div class="address-block-title">Місто/Область:</div>
+        <div class="address-block-value">{{order.deliveryDetails.city}}/{{order.deliveryDetails.region}}</div>
+      </div>
+      <div class="address-block">
+        <div class="address-block-title">Адреса:</div>
+        <div class="address-block-value">{{order.deliveryDetails.street}} {{order.deliveryDetails.house}}</div>
+      </div>
+    </div>
+    <div class="address-title">Доставка</div>
+    <div class="delivery-container">
+      <div class="delivery-block-text" *ngIf="order.orderStatus === 'WAITING_FOR_SENDING'">
+        Ви ще не підтвердили відправлення товару, введіть дані та натисніть 'Підтвердити'
+      </div>
+      <div class="delivery-block-text" *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'">
+        Замовлення у дорозі, чекайте на підтвердження від покупця
+      </div>
+      <div class="delivery-block">
+        <div class="delivery-block-title">Код відстеження:</div>
+        <div class="delivery-block-value">
+          <input class="delivery-input"
+                 [(ngModel)]="shipmentRequest.trackingNumber"
+                 *ngIf="order.orderStatus === 'WAITING_FOR_SENDING'"
+                 type="text" placeholder="Код відстеження">
+          <span *ngIf="!validationTrackingNumber" class="validation-text"> Код відстеження повинен містити мінімум 10 символів</span>
+          {{order.deliveryDetails.trackingNumber}}
+        </div>
+      </div>
+      <div class="delivery-block">
+        <div class="delivery-block-title">Поштова служба:</div>
+        <div class="delivery-block-value">
+          <select class="delivery-input"
+                  [(ngModel)]="shipmentRequest.delivery"
+                  *ngIf="order.orderStatus === 'WAITING_FOR_SENDING'">
+            <option *ngFor="let delivery of deliveries" [value]="delivery.id">{{delivery.title}}</option>
+          </select>
+          {{order.deliveryDetails.shipment}}
+        </div>
+      </div>
+
+      <div class="delivery-block">
+        <div class="delivery-block-title">Примітка від продавця:</div>
+        <div class="delivery-block-value">
+          <input class="delivery-input"
+                 [(ngModel)]="shipmentRequest.sellerMessage"
+                 *ngIf="order.orderStatus === 'WAITING_FOR_SENDING'"
+                 type="text" placeholder="Примітка">
+          <span *ngIf="order.orderStatus !== 'WAITING_FOR_SENDING'">''</span>{{order.deliveryDetails.sellerMessage}}<span *ngIf="order.orderStatus !== 'WAITING_FOR_SENDING'">''</span>
+        </div>
+      </div>
+      <div  *ngIf="order.orderStatus === 'WAITING_FOR_SENDING'" class="delivery-block delivery-button-block">
+        <button class="delivery-button" (click)="clickConfirmSendingButton()">Підтвердити</button>
+      </div>
+    </div>
+  </div>
+</div>

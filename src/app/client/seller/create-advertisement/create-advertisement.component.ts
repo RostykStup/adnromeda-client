@@ -258,12 +258,6 @@ export class CreateAdvertisementComponent implements OnInit {
         }
       }
 
-      this.currencies.forEach((c) => {
-        if (c.code === this.transitionCurrencyCode) {
-          this.advertisement.currencyId = Number(c.id);
-        }
-      });
-
       this.deliveryTypes.forEach((d) => {
         if (d.checked) {
           this.advertisement.deliveryTypes.push(Number(d.id));
@@ -293,7 +287,7 @@ export class CreateAdvertisementComponent implements OnInit {
             data: dataOk
           });
           dialogRef.afterClosed().subscribe(result => {
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/client/seller/advertisements');
           });
         }, error => {
           alert(error.code);
@@ -308,15 +302,12 @@ export class CreateAdvertisementComponent implements OnInit {
             data: dataOk
           });
           dialogRef.afterClosed().subscribe(result => {
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/client/seller/advertisements');
           });
         }, error => {
           alert(error.code);
         });
       }
-      console.log(saveAdvertisement);
-      // this.advertisementService.
-      // console.log('can save');
     } else {
       const dataValid = {
         text: 'Неправильно заповнені поля, перевірте введені дані'

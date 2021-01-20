@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="order-container">
+    <div class="order-main-info-container">
+      <div class="info-container">
+        <span class="main-info-text order-id-label-container">Замовлення №: </span>
+        <span class="main-info-text order-id-container">{{("00000000" + order.id).slice(-9)}}</span>
+      </div>
+      <div class="info-container">
+        <span class="main-info-text order-id-label-container">Статус: </span>
+        <span
+          class="main-info-text order-id-container order-status-container">{{orderService.getUkrOrderStatusValue(order.orderStatus)}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="order-container">
+    <div class="container-title">
+      Дані про доставку
+    </div>
+    <div class="address-title">Контактна інформація</div>
+    <div class="address-container">
+      <div class="address-block">
+        <div class="address-block-title">Отримувач:</div>
+        <div class="address-block-value">{{order.deliveryDetails.recipient}}</div>
+      </div>
+      <div class="address-block">
+        <div class="address-block-title">Номер телефону:</div>
+        <div class="address-block-value">{{order.deliveryDetails.phoneNumber}}</div>
+      </div>
+      <div class="address-block">
+        <div class="address-block-title">Країна:</div>
+        <div class="address-block-value">{{order.deliveryDetails.countryCode}}</div>
+      </div>
+      <div class="address-block">
+        <div class="address-block-title">Місто/Область:</div>
+        <div class="address-block-value">{{order.deliveryDetails.city}}/{{order.deliveryDetails.region}}</div>
+      </div>
+      <div class="address-block">
+        <div class="address-block-title">Адреса:</div>
+        <div class="address-block-value">{{order.deliveryDetails.street}} {{order.deliveryDetails.house}}</div>
+      </div>
+    </div>
+    <div class="address-title">Доставка</div>
+    <div class="delivery-container">
+      <div class="delivery-block-text" *ngIf="order.orderStatus === 'WAITING_FOR_SENDING'">
+        Продавець ще не відправив ваше замовлення
+      </div>
+      <div class="delivery-block-text" *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'">
+        Замовлення у дорозі, чекайте повідомлення з пошти
+      </div>
+      <div class="delivery-block" *ngIf="order.orderStatus !== 'WAITING_FOR_SENDING'">
+        <div class="delivery-block-title">Код відстеження:</div>
+        <div class="delivery-block-value tracking-number">
+          {{order.deliveryDetails.trackingNumber}}
+        </div>
+      </div>
+      <div class="delivery-block" *ngIf="order.orderStatus !== 'WAITING_FOR_SENDING'">
+        <div class="delivery-block-title">Поштова служба:</div>
+        <div class="delivery-block-value shipment-delivery">
+          {{order.deliveryDetails.shipment}}
+        </div>
+      </div>
+      <div class="delivery-block" *ngIf="order.orderStatus !== 'WAITING_FOR_SENDING'">
+        <div class="delivery-block-title">Примітка від продавця:</div>
+        <div class="delivery-block-value">
+          <span *ngIf="order.deliveryDetails.sellerMessage !== null ">''</span>{{order.deliveryDetails.sellerMessage}}<span *ngIf="order.deliveryDetails.sellerMessage !== null ">''</span>
+          <span *ngIf="order.deliveryDetails.sellerMessage === null ">---</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="order-container">
+    <div class="container-title">
+      Склад замовлення
+    </div>
+    <div class="order-info-container">
+      <div class="order-items-list-container">
+        <div class="order-item-container">
+          <div class="item-check-container" *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'">
+              <input type="checkbox" id="select-all-check" class="andro-checkbox" [(ngModel)]="selectAll" (change)="clickSelectAll()" >
+              <label class="andro-label" for="select-all-check" >Всі</label>
+          </div>
+          <div class="item-main-info-container">
+            <div class="item-title-container title-row">Товар</div>
+          </div>
+          <div class="item-price-for-one-container  title-row">Ціна за 1 шт</div>
+          <div class="item-count-container  title-row">Кількість</div>
+          <div class="item-price-container  title-row">Сума</div>
+          <div class="item-status-container  title-row">Статус</div>
+          <div class="item-description-container  title-row">Примітка від покупця</div>
+          <div class="item-delivery-container  title-row">Доставка</div>
+        </div>
+        <div class="order-item-container order-item" *ngFor="let item of order.items">
+          <div class="item-check-container list-item-check-container"  *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'">
+            <input [(ngModel)]="item.checked" type="checkbox"
+                   [id]="'item_' + item.id" class="andro-checkbox"
+                   (change)="checkItem()"
+                   *ngIf="item.status === 'WAITING_FOR_DELIVERY'">
+            <label class="andro-label" [for]="'item_' + item.id"
+                   id="only-seller-country-check-label"></label>
+          </div>
+          <div class="item-main-info-container">
+            <div class="item-image-container cell"><img [src]="getImage(item.image, order.sellerId)"></div>
+            <div class="item-title-container cell">{{item.title}}</div>
+          </div>
+          <div class="item-price-for-one-container cell">$ {{item.price.toFixed(2)}}</div>
+          <div class="item-count-container cell">{{item.count}} шт.</div>
+          <div class="item-price-container cell">$ {{(item.count * item.price).toFixed(2)}}</div>
+          <div class="item-status-container  status-cell ">{{orderService.getUkrOrderItemStatusValue(item.status)}}</div>
+          <div class="item-description-container cell">{{item.description}}</div>
+          <div class="item-delivery-container cell">{{item.delivery.title}}</div>
+        </div>
+      </div>
+      <div class="order-items-price">
+        <div class="all-sum-container">
+          <div class="all-sum-label">Загальна сума:</div>
+          <div class="all-sum-label">$ {{order.price.toFixed(2)}}</div>
+        </div>
+      </div>
+      <div>
+              <div  *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'" class="delivery-block delivery-button-block">
+                <button class="confirm-button" [disabled]="getCheckedNumber() === 0" (click)="confirmDeliveryButtonClick()">Підтвердити отримання</button>
+              </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

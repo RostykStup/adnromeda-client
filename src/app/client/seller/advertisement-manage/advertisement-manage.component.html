@@ -1,0 +1,23 @@
+<div class="container">
+  <!--  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>-->
+  <div class="block">
+    <div class="manage-title">
+      Керування товаром № {{("00000000" + advertisementId).slice(-9)}}
+    </div>
+    <div class="navigation-block">
+      <div class="navigation-item">
+        <input class="manage-mode-radio" type="radio" id="adv-update-input" name="manage-mode" checked>
+        <label class="manage-mode-label left-line" for="adv-update-input" (click)="navigateToEditing()">Редагування</label>
+      </div>
+      <div class="vertical-divider"></div>
+      <div class="navigation-item">
+        <input class="manage-mode-radio" type="radio" id="adv-statistics-input" (click)="navigateToStatistics()" name="manage-mode">
+        <label class="manage-mode-label" for="adv-statistics-input">Статистика</label>
+      </div>
+
+    </div>
+  </div>
+  <div class="content-block">
+    <router-outlet></router-outlet>
+  </div>
+</div>

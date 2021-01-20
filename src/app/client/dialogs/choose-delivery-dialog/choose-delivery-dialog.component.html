@@ -1,0 +1,55 @@
+<div class="deliveries-container">
+  <div class="delivery-row title-row">
+    <div class="radio-column">
+    </div>
+    <div class="title-column title-row-column">Перевізник</div>
+    <div class="internation-column title-row-column">Міжнародний</div>
+  </div>
+  <div class="divider"></div>
+
+  <div *ngFor="let delivery of deliveries" class="delivery-row" (click)="chooseDelivery(delivery)">
+    <div class="radio-column">
+      <label class="andro-radio">
+        <input type="radio" name="delivery" [value]="delivery.id" [checked]="userDelivery.id === delivery.id"
+               (change)="changeCheck($event.target)">
+        <span></span>
+      </label>
+    </div>
+    <div class="title-column column " [ngClass]="{chosen: delivery.id === userDelivery.id}">{{delivery.title}}</div>
+    <div class="internation-column column">
+      <svg *ngIf="delivery.isInternational" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+           width="24" height="24"
+           viewBox="0 0 172 172"
+           style=" fill:#000000;">
+        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+           stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+           font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+          <path d="M0,172v-172h172v172z" fill="none"></path>
+          <g fill="#000000">
+            <path
+              d="M145.43294,37.93294l-80.93294,80.93295l-30.76628,-30.76628l-10.13411,10.13411l40.90039,40.90039l91.06706,-91.06705z"></path>
+          </g>
+        </g>
+      </svg>
+      <svg *ngIf="!delivery.isInternational" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+           width="24" height="24"
+           viewBox="0 0 172 172"
+           style=" fill:#000000;">
+        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+           stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+           font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+          <path d="M0,172v-172h172v172z" fill="none"></path>
+          <g fill="#000000">
+            <path
+              d="M33.73372,23.59961l-10.13411,10.13411l52.26628,52.26628l-52.26628,52.26628l10.13411,10.13411l52.26628,-52.26628l52.26628,52.26628l10.13411,-10.13411l-52.26628,-52.26628l52.26628,-52.26628l-10.13411,-10.13411l-52.26628,52.26628z"></path>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+<div class="create-new-button-container">
+  <button class="andro-button confirm-button" (click)="clickChooseDeliveryButton()">
+    Застосувати
+  </button>
+</div>

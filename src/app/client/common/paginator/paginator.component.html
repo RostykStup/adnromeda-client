@@ -1,0 +1,19 @@
+<div class="container">
+
+  <button class="page-button change-page-arrow" [disabled]="pagination.page <= 0" (click)="minusButtonClick()"><
+  </button>
+
+  <div class="button-block" *ngFor="let page of counter()">
+    <button class="page-button" *ngIf="page !== -1" [ngClass]="{current: page === pagination.page}"
+            (click)="pageButtonClick(page)"
+            [disabled]="pagination.page === page">
+      {{page + 1}}
+    </button>
+    <span *ngIf="page === -1">...</span>
+  </div>
+
+
+  <button class="page-button change-page-arrow" [disabled]="pagination.page >= totalPages-1"
+          (click)="plusButtonClick()">>
+  </button>
+</div>

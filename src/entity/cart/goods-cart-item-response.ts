@@ -12,5 +12,6 @@ export class GoodsCartItemResponse {
   advertisementId = 0;
   max = 0;
   checked = false;
+  description = '';
 
 }

@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="menu-container">
+    <div class="menu-item">
+      <input type="radio" id="all-items-choose" name="items-type" checked>
+      <label (click)="changeListMode(0)" for="all-items-choose">Усі ({{sellerGoodsOrderData.allItems}})</label>
+      <!--      <span class="menu-title" (click)="loadAllOrders()"></span>-->
+    </div>
+    <div class="menu-item">
+      <input type="radio" id="new-items-choose" name="items-type">
+      <label (click)="changeListMode(4)" for="new-items-choose">Нові
+        ({{sellerGoodsOrderData.newItems}})</label>
+      <!--      <span class="menu-title"></span>-->
+    </div>
+    <div class="menu-item">
+      <input type="radio" id="shipment-items-choose" name="items-type">
+      <label (click)="changeListMode(1)" for="shipment-items-choose">Очікують відправлення
+        ({{sellerGoodsOrderData.waitingForSending}})</label>
+      <!--      <span class="menu-title"></span>-->
+    </div>
+    <div class="menu-item">
+      <input type="radio" id="delivery-items-choose" name="items-type">
+      <label (click)="changeListMode(2)" for="delivery-items-choose">Відправлені
+        ({{sellerGoodsOrderData.waitingForDelivery}})</label>
+      <!--      <span class="menu-title"></span>-->
+    </div>
+    <div class="menu-item">
+      <input type="radio" id="closed-items-choose" name="items-type">
+      <label (click)="changeListMode(3)" for="closed-items-choose">Завершені ({{sellerGoodsOrderData.closedOrders}})</label>
+      <!--      <span class="menu-title"></span>-->
+    </div>
+  </div>
+  <div class="orders-container">
+    <div class="list-row title-row">
+      <div class="column-element title-element main-column">Основне</div>
+      <div class="column-element title-element description-column">Додатково</div>
+      <div class="column-element title-element status-column">Статус</div>
+      <div class="column-element title-element actions-column">Дії</div>
+    </div>
+
+    <div class="one-order-container" *ngFor="let order of orders">
+      <div class="order-main-container">
+        <div class="order-main">
+          <div class="order-id-container main-text order-main-title">Замовлення
+            № {{("00000000" + order.id).slice(-9)}}   <span class="link-to-order-page" (click)="navigateToOrderData(order.id)">Детальніше</span></div>
+          <div class="order-date-container main-text order-main-title">Час замолвення: {{order.creationDate}}</div>
+        </div>
+        <div class="view-container" (click)="navigateToOrderData(order.id)" *ngIf="!order.isViewed">
+          Нове замовлення
+        </div>
+        <div class="order-price">
+          <div class="order-main-title price-main-label">Вартість:</div>
+          <div class="order-main-title price-title">${{order.price.toFixed(2)}}</div>
+        </div>
+      </div>
+      <div style="display: flex">
+        <div style="width: 70%">
+          <div class="list-row item-row" *ngFor="let item of order.items">
+            <div class="column-element  main-column item-info-col">
+              <div class="item-image-container">
+                <img class="item-image" [src]="getImage(item.image, order.sellerId)">
+              </div>
+              <div class="title-container">
+                <div class="title">{{item.title}}</div>
+                <div class="title price-text">${{item.price}} X {{item.count}}</div>
+              </div>
+            </div>
+            <div class="column-element  description-column order-item-description">
+              {{orderService.getUkrOrderItemStatusValue(item.status) === 'Отримання підтверджено' ? 'Отримання підтверджено' : ''}}
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; width: 30%">
+          <div class="order-status-column">
+            {{orderService.getUkrOrderStatusValue(order.orderStatus)}}
+          </div>
+          <div class="order-actions-column">
+            <button *ngIf="order.orderStatus === 'WAITING_FOR_SENDING'" class="col-button" (click)="navigateToOrderData(order.id)">Підтвердити відправлення
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="paginator-container">
+      <app-paginator [pagination]="pagination" [totalPages]="totalPages" (pageChange)="loadNewPage($event)"></app-paginator>
+    </div>
+  </div>
+
+</div>

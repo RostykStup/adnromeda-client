@@ -26,4 +26,9 @@ export class DeliveryService {
     return this.httpClient.get<Array<DeliveryTypeResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
+  getDeliveriesByAdvertisementId(id: number): Observable<Array<DeliveryTypeResponse>> {
+    const url = this.deliveryUrl + '/advertisement?id=' + id;
+    return this.httpClient.get<Array<DeliveryTypeResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
 }

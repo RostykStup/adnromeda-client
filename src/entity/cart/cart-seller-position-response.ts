@@ -5,4 +5,5 @@ export class CartSellerPositionResponse{
   sellerId = 0;
   sellerName = '';
   sellerCheck = false;
+  sellerCountry = '';
 }

@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="feedback-block">
+    <div class="block-title">Інформація про замовлення</div>
+    <div>
+      <span class="info-text info-title">Замовлення №:</span>
+      <span class="info-text link-text info-value">{{("00000000" + order.id).slice(-9)}}</span>
+      <span class="info-text info-title">Замовлення завершено:</span>
+      <span class="info-text info-value">{{order.closingDate}}</span>
+      <span class="info-text info-title">Продавець:</span>
+      <span class="info-text link-text info-value">{{order.seller}}</span>
+    </div>
+  </div>
+
+  <div class="feedback-block">
+    <div class="block-title">
+      Залиште відгук про ці товари
+    </div>
+
+    <div class="feedbacks-list">
+      <div class="feedback-item" *ngFor="let container of feedbackContainers">
+        <div class="item-info-container">
+          <div class="img-container inline-container">
+            <img [src]="getImage(container.image, order.sellerId)">
+          </div>
+          <div class="title-rating-container">
+            <div class="title-container">
+            {{container.title}}
+            </div>
+            <div class="item-text">Наскільки точним був опис товару?</div>
+            <div>
+            <app-rating-picker [itemId]="container.feedback.orderItem"
+                               (event)="container.feedback.rating = $event; validationItemsRating = true; container.openText = true">
+            </app-rating-picker>
+            </div>
+          </div>
+          <div class="text-images-container" *ngIf="container.openText">
+            <textarea [(ngModel)]="container.feedback.text"
+                      class="feedback-text-area"
+                      placeholder="Напишіть відгук про товар, це може допомогти іншим покупцям із вибором покупки"></textarea>
+            <input style="display: none" type="file" accept="image/jpeg,jpg,png" [id]="'image_' + container.feedback.orderItem" (change)="handleUpload($event, container.feedback.orderItem)"/>
+            <button class="add-image-button"
+                    [disabled]="container.feedback.images.length >= 5"
+                    (click)="uploadImage(container.feedback.orderItem)">Додати фото</button>
+
+            <span class="add-image-text">Ви можете додати 5 фото до відгуку. Підтримувані формати: jpeg, jpg, png</span>
+
+            <div class="images-container">
+              <div *ngFor="let image of container.feedback.images" class="img-cont">
+                <img class="adv-img" src="{{image}}">
+                <div class="overlay" *ngIf="image !== ''">
+                  <img (click)="deleteImage(image, container.feedback.orderItem)"
+                       class="delete-img-button" src="https://img.icons8.com/material-outlined/24/ffffff/trash--v1.png"/>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="feedback-block">
+    <div class="block-title">
+      Відгук про продавця
+    </div>
+    <div class="seller-feedback-block">
+      <div class="seller-feedback-block-title">
+      Швидкість та якість обслуговування</div>
+      <app-rating-picker [itemId]="-1" (event)="changeSellerServiceRating($event)"></app-rating-picker>
+    </div>
+    <div class="seller-feedback-block">
+      <div class="seller-feedback-block-title">
+        Комунікація з продавцем</div>
+      <app-rating-picker [itemId]="-2" (event)="changeSellerCommunicationRating($event)"></app-rating-picker>
+    </div>
+    <div class="seller-feedback-block area-block">
+      <textarea [(ngModel)]="sellerFeedBack.text" class="feedback-text-area seller-area" placeholder="Напишіть відгук про продавця, це допоможе іншим покупцям не помилитись при прокупці"></textarea>
+    </div>
+
+    <div class="seller-feedback-block button-block">
+      <button class="send-feedback-button" (click)="clickFeedbackButton()">Надіслати відгук</button>
+      <span class="validation-text" *ngIf="!validationItemsRating">Увага! Ви не оцінили усі товари</span>
+      <span class="validation-text" *ngIf="validationItemsRating && !validationSellerRating">Увага! Ви не оцінили продавця</span>
+    </div>
+  </div>
+</div>
+

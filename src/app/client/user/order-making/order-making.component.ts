@@ -10,6 +10,12 @@ import {GoodsCartItemResponse} from '../../../../entity/cart/goods-cart-item-res
 import {GoodsCartItemForCountingPriceRequest} from '../../../../entity/cart/goods-cart-item-for-counting-price-request';
 import {MatDialog} from '@angular/material/dialog';
 import {ChooseAddressDialogComponent} from '../../dialogs/choose-address-dialog/choose-address-dialog.component';
+import {ChooseDeliveryDialogComponent} from '../../dialogs/choose-delivery-dialog/choose-delivery-dialog.component';
+import {DeliveryTypeResponse} from '../../../../entity/country/delivery-type-response';
+import {GoodsOrderRequest} from '../../../../entity/order/goods-order-request';
+import {GoodsOrderItemRequest} from '../../../../entity/order/goods-order-item-request';
+import {OrderService} from '../../../../service/order/order.service';
+import {InfoDialogComponent} from '../../dialogs/info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-order-making',
@@ -23,6 +29,7 @@ export class OrderMakingComponent implements OnInit {
               private cartService: CartService,
               private addressService: AddressService,
               private advertisementService: AdvertisementService,
+              private orderService: OrderService,
               public dialog: MatDialog) {
   }
 
@@ -34,14 +41,6 @@ export class OrderMakingComponent implements OnInit {
   allPrice = 0;
 
   ngOnInit(): void {
-    this.address.city = 'Lviv';
-    this.address.countryCode = 'UA';
-    this.address.phoneNumber = '098 0405703';
-    this.address.recipient = 'Rostyslav Stupnytskiy';
-    this.address.region = 'Lvivska';
-    this.address.street = 'Syhnivka 9';
-    // this.addressService.saveAddress(this.address).subscribe();
-
     this.addressService.getDefaultUserAddress().subscribe((r) => {
       this.userAddress = r;
       this.defaultAddressId = r.id;
@@ -142,19 +141,88 @@ export class OrderMakingComponent implements OnInit {
 
   clickChooseAddress(): void {
     const dialogRef = this.dialog.open(ChooseAddressDialogComponent, {
-      data: {addressId : this.defaultAddressId},
+      data: {addressId: this.defaultAddressId},
       width: '55%',
     });
 
     dialogRef.afterClosed().subscribe(data => {
       if (data !== undefined) {
         this.userAddress = data.address;
-        this.defaultAddressId = data.defaultId;
-      } else {
-        this.addressService.getDefaultUserAddress().subscribe(r => {
-          this.defaultAddressId = r.id;
-        });
+      }
+
+      this.addressService.getDefaultUserAddress().subscribe(r => {
+        this.defaultAddressId = r.id;
+      });
+    });
+  }
+
+
+  openDeliveriesDialog(itemId: number, advertId: number, delivery: DeliveryTypeResponse): void {
+    const dialogRef = this.dialog.open(ChooseDeliveryDialogComponent, {
+      data: {delivery, advertisementId: advertId},
+      // width: '40%',
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data !== undefined) {
+        this.changeItemAddress(itemId, data.delivery);
       }
     });
+  }
+
+  changeItemAddress(itemId: number, delivery: DeliveryTypeResponse): void {
+    this.positions.forEach((p) => {
+      p.items.forEach((i) => {
+        if (i.id === itemId) {
+          i.deliveryType = delivery;
+        }
+      });
+    });
+  }
+
+  makeOrder(): void {
+    const count = this.getItemsCount();
+    console.log(count);
+    let items = 0;
+    this.positions.forEach((p) => {
+      const request = new GoodsOrderRequest();
+      // @ts-ignore
+      request.addressId = this.userAddress.id;
+
+      p.items.forEach((i) => {
+        request.items.push(new GoodsOrderItemRequest(i.count, i.advertisementId, i.deliveryType.id, i.description));
+      });
+      this.orderService.createOrder(request).subscribe(() => {
+        p.items.forEach((i) => {
+          this.cartService.deleteItemFromCart(i.id).subscribe(() => {
+            items++;
+            console.log('items - ' + items + '\t' + 'count - ' + count);
+            if (items === count) {
+              const dialogRef = this.dialog.open(InfoDialogComponent, {
+                data: {text: 'Ваше замовлення успішно оформлено, дякуємо що користуєтесь Andromeda'},
+                // width: '40%',
+              });
+              dialogRef.afterClosed().subscribe((data) => {
+                this.router.navigateByUrl('/client/user/orders');
+              });
+            }
+          });
+        });
+      });
+    });
+
+    // while (items !== count) {
+    //
+    // }
+    // console.log('same');
+  }
+
+  getItemsCount(): number {
+    let c = 0;
+    this.positions.forEach((p) => {
+      p.items.forEach((i) => {
+        c++;
+      });
+    });
+    return c;
   }
 }

@@ -14,8 +14,8 @@ export class AddressService {
 
   addressURL = GlobalConstants.API_URL + 'user-delivery-address';
 
-  saveAddress(request: UserDeliveryAddressRequest): Observable<any> {
-    return this.httpClient.post(this.addressURL, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  saveAddress(request: UserDeliveryAddressRequest): Observable<UserDeliveryAddressResponse> {
+    return this.httpClient.post<UserDeliveryAddressResponse>(this.addressURL, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
   getDefaultUserAddress(): Observable<UserDeliveryAddressResponse> {

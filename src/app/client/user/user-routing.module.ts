@@ -5,6 +5,9 @@ import {CreateAdvertisementComponent} from '../seller/create-advertisement/creat
 import {UserComponent} from './user.component';
 import {CartComponent} from './cart/cart.component';
 import {OrderMakingComponent} from './order-making/order-making.component';
+import {UserOrdersComponent} from './user-orders/user-orders.component';
+import {UserOrderDataComponent} from './user-order-data/user-order-data.component';
+import {OrderFeedbackComponent} from './order-feedback/order-feedback.component';
 
 const routes: Routes = [{
   path: '', component: UserComponent, children: [
@@ -13,6 +16,15 @@ const routes: Routes = [{
     },
     {
       path: 'order', component: OrderMakingComponent
+    },
+    {
+      path: 'orders', component: UserOrdersComponent
+    },
+    {
+      path: 'order-data', component: UserOrderDataComponent
+    },
+    {
+      path: 'feedback', component: OrderFeedbackComponent
     }
   ]
 }];

@@ -93,6 +93,10 @@
   <div class="side-nav-divider side-nav-item"></div>
 
   <div *ngSwitchCase="'ROLE_USER'">
+    <div class="link" [routerLink]="'user/orders'" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/purchase-order--v1.png"/></div>
+      <div class="link-title">Мої замовлення</div>
+    </div>
   </div>
 
   <div *ngSwitchCase="'ROLE_SELLER'">
@@ -104,6 +108,15 @@
     <div class="link" [routerLink]="'seller/create-advertisement'" (click)="close()">
       <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/add-list--v1.png"/></div>
       <div class="link-title">Додати товар</div>
+    </div>
+    <div class="link" [routerLink]="'seller/orders'" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/purchase-order--v1.png"/></div>
+      <div class="link-title">Замовлення</div>
+    </div>
+
+    <div class="link" [routerLink]="'seller/advertisements'" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/package.png"/></div>
+      <div class="link-title">Мої товари</div>
     </div>
   </div>
 </div>

@@ -1,0 +1,63 @@
+
+.deliveries-container{
+
+}
+.delivery-row{
+  display: flex;
+  //justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  //width: 500px;
+  cursor: pointer;
+
+}
+
+.confirm-button{
+  font-size: 16px;
+}
+
+.create-new-button-container{
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+
+.title-row{
+  height: 30px;
+}
+
+.radio-column{
+  width: 50px;
+}
+
+.title-column{
+  width: 150px;
+  text-align: left;
+}
+
+.internation-column{
+  width: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.divider{
+  width: 100%;
+  border-top: 1px solid #e0d6d6;
+}
+
+.title-row-column{
+  font-size: 14px;
+  color: #857e7e;
+  text-align: left;
+}
+
+.column{
+  font-size: 14px;
+}
+
+.chosen{
+  font-weight: 800;
+}

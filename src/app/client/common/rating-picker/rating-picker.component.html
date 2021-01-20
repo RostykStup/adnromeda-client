@@ -1,0 +1,36 @@
+<div class="rating">
+  <!--  <fieldset >-->
+  <input type="radio" [id]="'5id_' + itemId" [name]="'name_'+itemId" value="5"/>
+  <label class="full" [for]="'5id_' + itemId" title="Awesome - 5 stars" (click)="returnRatingValue(5)"></label>
+
+  <input type="radio" [id]="'4.5id_' + itemId" [name]="'name_'+itemId" value="4 and a half"/>
+  <label class="half" [for]="'4.5id_' + itemId" title="Pretty good - 4.5 stars" (click)="returnRatingValue(4.5)"></label>
+
+  <input type="radio" [id]="'4id_' + itemId" [name]="'name_'+itemId" value="4"/>
+  <label class="full" [for]="'4id_' + itemId" title="Pretty good - 4 stars" (click)="returnRatingValue(4)"></label>
+
+  <input type="radio" [id]="'3.5id_' + itemId" [name]="'name_'+itemId" value="3 and a half"/>
+  <label class="half" [for]="'3.5id_' + itemId" title="Pretty good - 4.5 stars" (click)="returnRatingValue(3.5)" ></label>
+
+  <input type="radio" [id]="'3id_' + itemId" [name]="'name_'+itemId" value="3"/>
+  <label class="full" [for]="'3id_' + itemId" title="Meh - 3 stars" (click)="returnRatingValue(3)"></label>
+
+  <input type="radio" [id]="'2.5id_' + itemId" [name]="'name_'+itemId" value="2 and a half"/>
+  <label class="half" [for]="'2.5id_' + itemId" title="Pretty good - 4.5 stars" (click)="returnRatingValue(2.5)"></label>
+
+  <input type="radio" [id]="'2id_' + itemId" [name]="'name_'+itemId" value="2"/>
+  <label class="full" [for]="'2id_' + itemId" title="Kinda bad - 2 stars" (click)="returnRatingValue(2)"></label>
+
+  <input type="radio" [id]="'1.5id_' + itemId" [name]="'name_'+itemId" value="1 and a half"/>
+  <label class="half" [for]="'1.5id_' + itemId" title="Pretty good - 4.5 stars" (click)="returnRatingValue(1.5)"></label>
+
+  <input type="radio" [id]="'1id_' + itemId" [name]="'name_'+itemId" value="1"/>
+  <label class="full" [for]="'1id_' + itemId" title="Sucks big time - 1 star" (click)="returnRatingValue(1)"></label>
+
+  <input type="radio" [id]="'0.5id_' + itemId" [name]="'name_'+itemId" value="0 and a half"/>
+  <label class="half" [for]="'0.5id_' + itemId" title="Pretty good - 4.5 stars" (click)="returnRatingValue(0.5)" ></label>
+
+  <!--  </fieldset>-->
+</div>
+
+

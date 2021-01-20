@@ -3,7 +3,7 @@ import {PropertyResponse} from './property-response';
 import {SubcategoryResponse} from '../../category/subcategory-response';
 import {CurrencyResponse} from '../../country/currency-response';
 
-export class GoodsAdvertisementResponse extends AdvertisementResponse{
+export class GoodsAdvertisementResponse extends AdvertisementResponse {
 
   onlySellerCountry = false;
 
@@ -20,4 +20,5 @@ export class GoodsAdvertisementResponse extends AdvertisementResponse{
   seller = '';
 
   sellerId = 0;
+
 }

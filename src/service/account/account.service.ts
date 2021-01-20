@@ -35,6 +35,7 @@ export class AccountService {
     localStorage.setItem('andro_user_token', authentication.token);
     // localStorage.setItem('andro_user_name', authentication.username);
     localStorage.setItem('andro_user_role', authentication.userRole);
+    localStorage.setItem('andro_user_id', authentication.id.toString());
   }
 
   isLogged(): boolean {

@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {AddressService} from '../../../../service/address/address.service';
 import {UserDeliveryAddressResponse} from '../../../../entity/address/user-delivery-address-response';
 import {Observable} from 'rxjs';
+import {CreateAddressDialogComponent} from '../create-address-dialog/create-address-dialog.component';
 
 @Component({
   selector: 'app-choose-address-dialog',
@@ -15,6 +16,7 @@ export class ChooseAddressDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<ChooseAddressDialogComponent>,
     private addressService: AddressService,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.openActions();
     this.defaultId = data.addressId;
@@ -39,6 +41,21 @@ export class ChooseAddressDialogComponent {
   makeAddressDefault(id: number): void {
     this.addressService.makeAddressDefault(id).subscribe(() => {
       this.defaultId = id;
+    });
+  }
+
+  openAddressCreation(): void {
+    const dialogRef = this.dialog.open(CreateAddressDialogComponent, {
+      width: '55%',
+      panelClass: 'create-address-dialog'
+      // height: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe((newAddress) => {
+      if (newAddress !== undefined) {
+        this.data.address = newAddress;
+        this.dialogRef.close(this.data);
+      }
     });
   }
 }

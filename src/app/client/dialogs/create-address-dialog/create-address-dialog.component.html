@@ -1,1 +1,61 @@
-<p>create-address-dialog works!</p>
+
+  <span class="block-title">Додати нову адресу</span>
+  <div class="addresses-container">
+
+    <div class="creation-block">
+      <div class="creation-block-title">
+        Контактна інформація
+      </div>
+      <div class="block-inputs">
+        <div class="input-block">
+          <input type="text" class="andro-input" placeholder="Отримувач" (keyup)="validateRecipient = true" [(ngModel)]="address.recipient">
+          <span *ngIf="!validateRecipient" class="validation-text">Будь ласка введіть ім'я отримувача</span>
+        </div>
+        <div class="input-block">
+          <input type="text" class="andro-input" placeholder="Номер телефону" (keyup)="validateNumber = true" [(ngModel)]="address.phoneNumber">
+          <span *ngIf="!validateNumber" class="validation-text">Введіть номер телефону</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="creation-block">
+      <div class="creation-block-title">
+        Адреса
+      </div>
+      <div class="block-inputs">
+        <div class="input-block">
+          <input type="text" class="andro-input" placeholder="Вулиця" (keyup)="validateStreet = true" [(ngModel)]="address.street">
+          <span  *ngIf="!validateStreet" class="validation-text">Введіть вулицю</span>
+        </div>
+        <div class="input-block">
+          <input type="text" class="andro-input" placeholder="Дім/Будинок/Квартира" (keyup)="validateHouse = true" [(ngModel)]="address.house">
+          <span  *ngIf="!validateHouse"  class="validation-text">Введіть номер будинку</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="creation-block region-block">
+      <div class="block-inputs">
+        <div class="input-block">
+          <app-country-picker [pickerHeight]="'50px'" [userCountry]="userCountry" (event)="changeCountry($event)"></app-country-picker>
+        </div>
+        <div class="input-block">
+          <input type="text" class="andro-input" placeholder="Область" [(ngModel)]="address.region" (keyup)="validateRegion = true">
+          <span  *ngIf="!validateRegion"  class="validation-text">Введіть область</span>
+        </div>
+        <div class="input-block">
+          <input type="text" class="andro-input" placeholder="Місто" [(ngModel)]="address.city" (keyup)="validateCity = true">
+          <span  *ngIf="!validateCity"  class="validation-text">Введіть місто</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="create-new-button-container">
+    <button class="andro-button creation-button" (click)="creationButtonClick()">
+      Продовжити
+    </button>
+    <button class="andro-button cancel-button" (click)="clickCancelButton()">
+      Скасувати
+    </button>
+  </div>

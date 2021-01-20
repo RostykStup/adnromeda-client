@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+}
+
+
+.button-block {
+  //height: 30px;
+  //width: 30px;
+}
+
+.page-button {
+  height: 30px;
+  width: 30px;
+  font-size: 15px;
+  border-radius: 5px;
+  background: none;
+  //background-color: #F6F7F9;
+  color: black;
+  border: none;
+  //border: 2px solid black;
+  margin: 0 1px;
+  outline: none;
+  cursor: pointer;
+  transition: all .1s;
+  font-weight: 800;
+
+  &:hover {
+    background-color: #1f1e1e;
+    color: #F6F7F9;
+  }
+}
+
+.current {
+  background-color: #000000;
+  color: #F6F7F9;
+}
+
+.change-page-arrow:hover{
+  //background-color: #a2a2a2;
+  //color: black;
+}
+
+.change-page-arrow:disabled{
+  color: #8a8a8a;
+  cursor: not-allowed;
+  &:hover {
+    background: none;
+  }
+}

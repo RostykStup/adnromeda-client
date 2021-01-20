@@ -44,14 +44,14 @@
                 <span>$ {{item.price.toFixed(2)}}</span>
               </div>
               <div class="goods-delivery">
-                <span class="delivery-text"><span
+                <span class="delivery-text" (click)="openDeliveriesDialog(item.id, item.advertisementId, item.deliveryType)"><span
                   class="delivery-label">Доставка: </span>{{item.deliveryType.title}}</span>
                 <!--            <i class="fas fa-angle-right"></i>-->
               </div>
 
               <div class="goods-description-container">
                 <span class="description-label" (click)="clickAddDescription($event)">+ Коментар до замовлення</span>
-                <input type="text" class="andro-input description-input" placeholder="Напишіть примітку для продавця тут">
+                <input type="text" class="andro-input description-input" placeholder="Напишіть примітку для продавця тут" [(ngModel)]="item.description">
               </div>
             </div>
             <div class="goods-actions">
@@ -78,7 +78,7 @@
         <span class="price-label price-value">${{allPrice.toFixed(2)}}</span>
       </div>
 
-      <button class="order-button andro-button">Оформити замовлення</button>
+      <button class="order-button andro-button" (click)="makeOrder()">Оформити замовлення</button>
     </div>
   </div>
 </div>

@@ -68,15 +68,10 @@
     <div class="block-content" [ngSwitch]="priceType">
       <div class="block-element" *ngSwitchCase="1">
         <input type="text" class="andro-input" [(ngModel)]="retailPrice"
-               (keyup)="validateNumber(retailPrice)" placeholder="Ціна за одиницю">
-        <select class="andro-select currency-select" (change)="reloadCurrency()" [(ngModel)]="advertisement.currencyId">
-          <option value="{{currency.id}}" *ngFor="let currency of currencies">
-            {{currency.symbol}}
-          </option>
-        </select>
+               (keyup)="validateNumber(retailPrice)" placeholder="Ціна за одиницю $">
         <span *ngIf="!isNumber" class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>
         <span *ngIf="isNumber && !digit"
-              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrencyCode}}</span>
+              class="validation-text green">Буде збережено як: $ {{transitionPrice}} USD</span>
       </div>
 
       <div class="" *ngSwitchCase="2">
@@ -108,13 +103,7 @@
             </div>
           </div>
 
-          <div class="wh-pr-price-elem property-title"> Ціна
-            <select class="andro-select currency-select" (change)="reloadCurrency()"
-                    [(ngModel)]="advertisement.currencyId">
-              <option value="{{currency.id}}" *ngFor="let currency of currencies">
-                {{currency.symbol}}
-              </option>
-            </select>
+          <div class="wh-pr-price-elem property-title"> Ціна $
             <!--            <img />-->
             <img class="add-icon" (click)="addNewWholesalePrice()"
                  src="https://img.icons8.com/material/30/000000/plus--v1.png"/>
@@ -171,7 +160,7 @@
                   class="validation-text">{{price.min}} ≥ {{price.max === null ? '0' : price.max }}</span>
 
             <span *ngIf="price.isValid() && !price.isDigit"
-                  class="validation-text green">Буде збережено як: {{price.getTwoDigitPrice()}} {{transitionCurrencyCode}}</span>
+                  class="validation-text green">Буде збережено як: {{price.getTwoDigitPrice()}} USD</span>
             <!--            <span-->
             <!--              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrency}}</span>-->
           </div>

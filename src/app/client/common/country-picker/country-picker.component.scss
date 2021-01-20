@@ -1,0 +1,133 @@
+//.country-picker {
+//  width: 200px;
+//}
+
+.delivery-country-container {
+  border-radius: 6px;
+  border: 2px solid #bfbbbb;
+  height: 40px;
+  display: flex;
+  padding: 5px;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.delivery-country-flag {
+  width: 30px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 2px;
+  border: 1px solid #ded8d8;
+}
+
+.select-element-title {
+  font-size: 15px;
+  font-weight: 700;
+  flex-grow: 3;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.arrow-holder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  //border-radius: 3px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+
+  border-top: 5px solid #ded4d4;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+
+  border-bottom: 5px solid #ded4d4;
+}
+
+
+.picker-container {
+  width: 100%;
+  position: relative;
+  padding: 0;
+  z-index: 5;
+  overflow: visible;
+}
+
+.picker-menu {
+  display: block;
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  input {
+    width: 100%;
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 0;
+    border: 2px solid #bfbbbb;
+    border-top: 1px solid #bfbbbb;
+    border-bottom: 1px solid #bfbbbb;
+  }
+
+  input:focus {
+    outline: none;
+  }
+}
+
+.list-container {
+  max-height: 120px;
+  //max-height: 50px;
+  overflow: auto;
+  background-color: #fff;
+
+  border: 2px solid #bfbbbb;
+  border-top: none;
+}
+
+.list-item {
+  padding: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.list-item:hover {
+  cursor: pointer;
+  background-color: #f5efef;
+}
+
+.delivery-country-flag {
+  width: 30px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 2px;
+  border: 1px solid #ded8d8;
+}
+
+.item-flag {
+  width: 25px;
+  height: 17px;
+}
+
+.select-element-title {
+  font-size: 15px;
+  font-weight: 700;
+  flex-grow: 3;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

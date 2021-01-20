@@ -16,6 +16,11 @@ export class CartService {
 
   cartURL = GlobalConstants.API_URL + 'cart';
 
+  addItemToCart(advertisementId: number, deliveryTypeId: number): Observable<any> {
+    const url = this.cartURL + '?id=' + advertisementId + '&deliveryId=' + deliveryTypeId;
+    return this.httpClient.post(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
   getUserCart(): Observable<CartResponse> {
     return this.httpClient.get<CartResponse>(this.cartURL, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }

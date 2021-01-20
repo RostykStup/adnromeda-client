@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="block page-title-block">
+    Ваші товари
+  </div>
+
+  <div class="block-pre-container">
+    <span>Усього товарів: {{totalElems}}</span>
+    <span>Сторінка {{pagination.page+1}} із {{totalPages}}</span>
+  </div>
+  <div class="block">
+    <div class="advertisements-list">
+      <div class="title-item">
+        <div class="title-image-container column-container">
+        </div>
+        <div class="title-info-container column-container">
+          <span class="title-text">Товар</span>
+        </div>
+        <div class="title-count-container column-container ">
+          <span class="title-text title-count-text">Кількість</span>
+        </div>
+        <div class="title-type-container column-container ">
+          <span class="title-text title-type-text">Тип</span>
+        </div>
+        <div class="title-actions-container column-container">
+          <span class="title-text">Дії</span>
+        </div>
+        <!--        $ {{advertisement.price.price}}-->
+      </div>
+      <div class="advertisement-item" *ngFor="let advertisement of advertisements">
+        <div class="item-image-container column-container">
+          <img [src]="getImage(advertisement.mainImage, advertisement.sellerId)">
+        </div>
+        <div class="item-info-container column-container">
+          <span class="item-title-text item-text">{{advertisement.title}}</span>
+          <span class="item-price-text item-text">$ {{getAdvertisementPrice(advertisement)}}</span>
+          <span class="item-subcategory-text item-text">{{advertisement.subcategory.title}}</span>
+        </div>
+        <div class="item-count-container  column-container">
+          <span class="item-text"><span class="count-text">{{advertisement.count}}</span> шт.</span>
+        </div>
+        <div class="item-type-container  column-container">
+          <span class="item-text type-text">{{advertisement.type === 'goods_retail' ? 'Роздріб' : 'Опт'}}</span>
+        </div>
+        <div class="column-container item-actions-container ">
+          <button class="andro-button" (click)="navigateToAdvertisementManage(advertisement.id, advertisement.type)">Керування товаром</button>
+<!--          <button class="andro-button hide-button">Приховати</button>-->
+<!--          <button class="andro-button delete-button">Видалити</button>-->
+        </div>
+        <!--        $ {{advertisement.price.price}}-->
+      </div>
+    </div>
+
+    <div class="paginator-container">
+      <app-paginator [pagination]="pagination" [totalPages]="totalPages"
+                     (pageChange)="loadNewPage($event)"></app-paginator>
+    </div>
+  </div>
+</div>

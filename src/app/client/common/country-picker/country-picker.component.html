@@ -1,0 +1,24 @@
+<div class="side-menu-element">
+  <div class="country-picker" (clickOutside)="closeCountryMenu()">
+    <div class="delivery-country-container" (click)="changeCountryPickMenuStatement()"
+         [ngClass]="{border_picked: isOpenedCountryPickMenu}">
+      <img [src]="userCountry.flag" class="delivery-country-flag">
+      <span class="select-element-title">{{userCountry.nativeName}}</span>
+      <div class="arrow-holder">
+        <div class="arrow arrow-down" *ngIf="!isOpenedCountryPickMenu"></div>
+        <div class="arrow arrow-up" *ngIf="isOpenedCountryPickMenu"></div>
+      </div>
+    </div>
+    <div class="picker-container" >
+      <div class="picker-menu" *ngIf="isOpenedCountryPickMenu">
+        <input type="text" placeholder="Пошук" (keyup)="filterCountriesForPicker($event)">
+        <div class="list-container">
+          <div *ngFor="let country of countries" class="list-item" (click)="outputCountry(country)">
+            <img [src]="country.flag" class="delivery-country-flag item-flag">
+            <span class="select-element-title">{{country.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--          {{userCountry.nativeName}}-->
+  </div>

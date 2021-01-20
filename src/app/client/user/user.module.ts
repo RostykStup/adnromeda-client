@@ -6,14 +6,19 @@ import { UserComponent } from './user.component';
 import { CartComponent } from './cart/cart.component';
 import {FormsModule} from '@angular/forms';
 import { OrderMakingComponent } from './order-making/order-making.component';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { UserOrderDataComponent } from './user-order-data/user-order-data.component';
+import {ClientModule} from '../client.module';
+import { OrderFeedbackComponent } from './order-feedback/order-feedback.component';
 
 
 @NgModule({
-  declarations: [UserComponent, CartComponent, OrderMakingComponent],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    FormsModule
-  ]
+  declarations: [UserComponent, CartComponent, OrderMakingComponent, UserOrdersComponent, UserOrderDataComponent, OrderFeedbackComponent],
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        FormsModule,
+        ClientModule
+    ]
 })
 export class UserModule { }

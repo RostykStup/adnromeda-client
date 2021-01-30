@@ -22,6 +22,11 @@ export class CreateAddressDialogComponent {
   validateCity = true;
   validateStreet = true;
   validateHouse = true;
+  isUpdate = false;
+  addressId = 0;
+
+  address = new UserDeliveryAddressRequest();
+
 
   constructor(
     public dialogRef: MatDialogRef<CreateAddressDialogComponent>,
@@ -29,10 +34,25 @@ export class CreateAddressDialogComponent {
     private countryService: CountryService,
     private ipService: IpService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.loadUserCountry();
-  }
+    if (data !== null && data.address !== undefined) {
+      this.countryService.getRestCountryByCountryName(data.address.country.englishName).subscribe((resp) => {
+        this.userCountry = resp;
+        this.address.countryCode = resp.alpha2Code;
+        this.address.countryCode = data.address.country.countryCode;
+        this.address.street = data.address.street;
+        this.address.house = data.address.house;
+        this.address.region = data.address.region;
+        this.address.city = data.address.city;
+        this.address.recipient = data.address.recipient;
+        this.address.phoneNumber = data.address.phoneNumber;
+        this.addressId = data.address.id;
+        this.isUpdate = true;
+      });
+    } else {
+      this.loadUserCountry();
+    }
 
-  address = new UserDeliveryAddressRequest();
+  }
 
   loadUserCountry(): void {
     let countryName;
@@ -61,9 +81,16 @@ export class CreateAddressDialogComponent {
 
   creationButtonClick(): void {
     if (this.validateAll()) {
-      this.addressService.saveAddress(this.address).subscribe((response) => {
-        this.dialogRef.close(response);
-      });
+      if (this.isUpdate) {
+        this.addressService.updateAddress(this.address, this.addressId).subscribe((response) => {
+          this.dialogRef.close(response);
+        });
+      } else {
+        this.addressService.saveAddress(this.address).subscribe((response) => {
+          this.dialogRef.close(response);
+        });
+      }
+
     }
   }
 

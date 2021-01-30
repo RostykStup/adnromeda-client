@@ -1,0 +1,28 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+.full {
+  //font-size: 14px;
+}
+
+.half:before {
+  content: "\f089";
+  position: absolute;
+}
+
+.full:before {
+  margin-right: 4px;
+  font-size: inherit;
+  content: "\f005";
+  color: #ddd;
+  font-family: FontAwesome, serif;
+  display: inline-block;
+}
+
+.full_filled:before {
+  color: #000000;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+}

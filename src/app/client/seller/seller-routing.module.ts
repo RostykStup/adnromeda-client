@@ -8,12 +8,16 @@ import {AdvertisementsListComponent} from './advertisements-list/advertisements-
 import {AdvertisementManageComponent} from './advertisement-manage/advertisement-manage.component';
 import {AdvertisementUpdatingComponent} from './advertisement-manage/advertisement-updating/advertisement-updating.component';
 import {AdvertisementStatisticsComponent} from './advertisement-manage/advertisement-statistics/advertisement-statistics.component';
+import {SellerProfileComponent} from './seller-profile/seller-profile.component';
 
 const routes: Routes = [
   {
     path: '', component: SellerComponent, children: [
       {
         path: 'create-advertisement', component: CreateAdvertisementComponent
+      },
+      {
+        path: 'profile', component: SellerProfileComponent
       },
       {
         path: 'orders', component: SellerOrdersComponent

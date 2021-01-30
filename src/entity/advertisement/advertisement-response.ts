@@ -8,4 +8,6 @@ export class AdvertisementResponse {
   mainImage: string | any;
 
   type: string | any;
+
+
 }

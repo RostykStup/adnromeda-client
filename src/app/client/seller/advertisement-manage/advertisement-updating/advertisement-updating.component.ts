@@ -13,6 +13,7 @@ import {PropertyRequest} from '../../../../../entity/advertisement/goodsAdvertis
 import {PropertyResponse} from '../../../../../entity/advertisement/goodsAdvertisement/property-response';
 import {DeliveryService} from '../../../../../service/country/delivery.service';
 import {DeliveryTypeResponse} from '../../../../../entity/country/delivery-type-response';
+import {fakeAsync} from '@angular/core/testing';
 
 @Component({
   selector: 'app-advertisement-updating',
@@ -32,8 +33,11 @@ export class AdvertisementUpdatingComponent implements OnInit {
         this.editTitle = this.advertisement.title;
         this.editCount = this.advertisement.count;
         this.editDescription = this.advertisement.description;
+        this.editOnlySeller = this.advertisement.onlySellerCountry;
+        this.viewImage = this.advertisement.mainImage;
         this.rewriteEditProperties();
         this.loadAdvertisementDeliveries();
+        this.loadAllDeliveries();
 
         if (this.advertisement.type === 'goods_retail') {
           // @ts-ignore
@@ -65,6 +69,8 @@ export class AdvertisementUpdatingComponent implements OnInit {
   editDescription = '';
   editProperties = new Array<PropertyRequest>();
   editDeliveries = new Array<number>();
+  editOnlySeller = false;
+
 
   isNumberRetail = true;
   isDigitRetail = true;
@@ -78,6 +84,12 @@ export class AdvertisementUpdatingComponent implements OnInit {
 
   wholesaleUpdate = false;
   descriptionUpdate = false;
+  deliveryUpdate = false;
+
+  cantDeleteMainShow = false;
+  cantImagesMoreShow = false;
+
+  viewImage = '';
 
   ngOnInit(): void {
   }
@@ -312,7 +324,6 @@ export class AdvertisementUpdatingComponent implements OnInit {
     this.trimAllEditProperties();
     if (this.descriptionUpdate) {
       if (this.validateProperties) {
-        console.log('can do request');
         this.advertisementService.changeAdvertisementDescription(this.advertisement.id, this.editDescription).subscribe(() => {
           this.advertisement.description = this.editDescription;
           this.advertisementService.changeAdvertisementProperties(this.advertisement.id, this.editProperties).subscribe(() => {
@@ -380,6 +391,7 @@ export class AdvertisementUpdatingComponent implements OnInit {
   }
 
   loadAdvertisementDeliveries(): void {
+    this.advertisementDeliveries = new Array<DeliveryTypeResponse>();
     this.deliveryService.getDeliveriesByAdvertisementId(this.advertisement.id).subscribe((r) => {
       this.advertisementDeliveries = r;
     });
@@ -391,4 +403,108 @@ export class AdvertisementUpdatingComponent implements OnInit {
     });
   }
 
+  makeDeliveriesChecked(): void {
+    this.allCountryDeliveryList.forEach((dc) => {
+      dc.checked = false;
+      this.advertisementDeliveries.forEach((d) => {
+        if (dc.title === d.title) {
+          dc.checked = true;
+        }
+      });
+      // dc.checked = this.advertisementDeliveries.indexOf(dc) > -1;
+    });
+  }
+
+  clickChangeDeliveries(): void {
+    if (this.deliveryUpdate) {
+      this.editDeliveries = new Array<number>();
+      this.allCountryDeliveryList.forEach((d) => {
+        if (d.checked) {
+          this.editDeliveries.push(d.id);
+        }
+      });
+      this.advertisementService.changeAdvertisementDeliveries(this.advertisement.id, this.editDeliveries).subscribe(() => {
+        this.advertisementDeliveries = new Array<DeliveryTypeResponse>();
+        this.deliveryService.getDeliveriesByAdvertisementId(this.advertisement.id).subscribe((r) => {
+          this.advertisementDeliveries = r;
+          this.advertisementService.changeAdvertisementOnlySellerDelivery(this.advertisement.id, this.editOnlySeller).subscribe(() => {
+            this.advertisement.onlySellerCountry = this.editOnlySeller;
+          });
+          this.deliveryUpdate = !this.deliveryUpdate;
+        });
+      });
+    } else {
+      this.makeDeliveriesChecked();
+      this.editOnlySeller = this.advertisement.onlySellerCountry;
+      this.deliveryUpdate = !this.deliveryUpdate;
+    }
+
+  }
+
+  cancelDeliveryClick(): void {
+    this.editDeliveries = new Array<number>();
+    this.deliveryUpdate = false;
+  }
+
+  handleUpload(event: any): void {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      // @ts-ignore
+      this.advertisementService.addImageToAdvertisement(this.advertisement.id, reader.result.toString()).subscribe((r) => {
+        this.advertisement.images.push(r);
+        this.viewImage = r;
+        event.target.value = '';
+      }, error => {
+        if (this.advertisement.mainImage) {
+          this.advertisement.images.push(error.error.text);
+        } else {
+          this.advertisement.mainImage = error.error.text;
+        }
+        this.viewImage = error.error.text;
+        event.target.value = '';
+      });
+    };
+  }
+
+
+  getImage(image: string | null, sellerId: number): string {
+    return this.advertisementService.getAdvertisementImagePath(image, sellerId);
+  }
+
+  clickAddImageButton(): void {
+    this.cantDeleteMainShow = false;
+    const imageInput = document.getElementById('add-image-input') as HTMLInputElement;
+    if (this.advertisement.images.length < 4) {
+      imageInput.click();
+    } else {
+      this.cantImagesMoreShow = true;
+    }
+  }
+
+
+  deleteImageClick(): void {
+    this.cantImagesMoreShow = false;
+    if (this.viewImage !== this.advertisement.mainImage) {
+      this.advertisementService.deleteGoodsAdvertisementImage(this.advertisement.id, this.viewImage).subscribe(() => {
+        this.advertisement.images.splice(this.advertisement.images.indexOf(this.viewImage), 1);
+        this.viewImage = this.advertisement.mainImage;
+      });
+    } else {
+      this.cantDeleteMainShow = true;
+
+    }
+  }
+
+  clickMainButton(): void {
+    this.cantImagesMoreShow = false;
+    const newMain = this.viewImage;
+    this.advertisementService.makeMainImageToGoodsAdvertisement(this.advertisement.id, newMain).subscribe(() => {
+      this.advertisement.images.splice(this.advertisement.images.indexOf(this.viewImage), 1);
+      this.advertisement.images.push(this.advertisement.mainImage);
+      this.advertisement.mainImage = newMain;
+      this.viewImage = this.advertisement.mainImage;
+    });
+  }
 }

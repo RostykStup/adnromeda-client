@@ -153,7 +153,7 @@ export class LoginDialogComponent {
 
   loadUserData(): void {
     this.userService.loadUserData().subscribe((data) => {
-      this.countryService.getRestCountryByCountryCode(data.settings.countryCode).subscribe((country) => {
+      this.countryService.getRestCountryByCountryCodeInObservable(data.settings.countryCode).subscribe((country) => {
         localStorage.setItem('andro_user_country', country.name);
         localStorage.setItem('andro_user_country_code', country.alpha2Code);
         localStorage.setItem('andro_user_currency', data.settings.currency.code);

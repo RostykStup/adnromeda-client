@@ -57,7 +57,7 @@ export class NavigationBarComponent implements OnInit {
   }
 
   makeSearch(): void {
-    this.router.navigateByUrl('client/search?value=' + this.value);
+    this.router.navigateByUrl('client/search?value=' + this.value + '&page=1');
   }
 
   navigateToCart(): void {

@@ -10,10 +10,11 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { UserOrderDataComponent } from './user-order-data/user-order-data.component';
 import {ClientModule} from '../client.module';
 import { OrderFeedbackComponent } from './order-feedback/order-feedback.component';
+import { AddressesManageComponent } from './addresses-manage/addresses-manage.component';
 
 
 @NgModule({
-  declarations: [UserComponent, CartComponent, OrderMakingComponent, UserOrdersComponent, UserOrderDataComponent, OrderFeedbackComponent],
+  declarations: [UserComponent, CartComponent, OrderMakingComponent, UserOrdersComponent, UserOrderDataComponent, OrderFeedbackComponent, AddressesManageComponent],
     imports: [
         CommonModule,
         UserRoutingModule,

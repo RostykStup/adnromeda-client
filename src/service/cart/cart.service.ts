@@ -6,6 +6,7 @@ import {CartResponse} from '../../entity/cart/cart-response';
 import {GoodsCartItemForCountingPriceRequest} from '../../entity/cart/goods-cart-item-for-counting-price-request';
 import {ChangeGoodsCartItemCountResponse} from '../../entity/cart/change-goods-cart-item-count-response';
 import {CartSellerPositionResponse} from '../../entity/cart/cart-seller-position-response';
+import {GoodsCartItemResponse} from '../../entity/cart/goods-cart-item-response';
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +52,14 @@ export class CartService {
       url = url + '&id=' + id;
     });
     return this.httpClient.get<Array<CartSellerPositionResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  getNewItemForOrder(advertisementId: number, deliveryId: number, count: number | null): Observable<CartSellerPositionResponse> {
+    const url = this.cartURL + '/form-position?advertisementId='
+      + advertisementId
+      + '&deliveryId='
+      + deliveryId
+      + (count !== null ? '&count=' + count : '');
+    return this.httpClient.get<CartSellerPositionResponse>(url);
   }
 }

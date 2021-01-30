@@ -8,6 +8,7 @@ import {OrderMakingComponent} from './order-making/order-making.component';
 import {UserOrdersComponent} from './user-orders/user-orders.component';
 import {UserOrderDataComponent} from './user-order-data/user-order-data.component';
 import {OrderFeedbackComponent} from './order-feedback/order-feedback.component';
+import {AddressesManageComponent} from './addresses-manage/addresses-manage.component';
 
 const routes: Routes = [{
   path: '', component: UserComponent, children: [
@@ -25,6 +26,9 @@ const routes: Routes = [{
     },
     {
       path: 'feedback', component: OrderFeedbackComponent
+    },
+    {
+      path: 'addresses', component: AddressesManageComponent
     }
   ]
 }];

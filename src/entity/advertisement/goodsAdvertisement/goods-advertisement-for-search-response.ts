@@ -13,6 +13,8 @@ export class GoodsAdvertisementForSearchResponse {
   priceMin = 0;
   priceMax = 0;
 
+  isInFavorites = false;
+
   priceWithUserCurrency = '';
 
   date = '';

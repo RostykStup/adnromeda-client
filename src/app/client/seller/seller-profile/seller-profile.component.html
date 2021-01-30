@@ -1,0 +1,67 @@
+<div class="container">
+  <span class="block-title">Мій профіль</span>
+  <div class="profile-block">
+    <div class="seller-avatar-name-container">
+      <div class="avatar-image-container">
+        <img class="avatar-image" [src]="getAvatar()" alt="">
+      </div>
+      <div class="seller-name-container">
+        <span class="seller-name">
+          {{profile.name}}
+        </span>
+      </div>
+    </div>
+    <div class="seller-stat-nums-container">
+      <!--      <div class="stat-gradient-left stat-gradient"></div>-->
+      <div class="seller-numbers-container">
+        <div class="line-container">
+          <input type="checkbox" class="open-line-input">
+          <span class="opening-line-400ms open-line"></span>
+        </div>
+        <div class="seller-numbers-holder">
+          <div class="seller-numbers-section">
+            <div class="seller-numbers-value">{{profile.statistics.advertisements}}</div>
+            <div class="seller-numbers-label">Товарів</div>
+          </div>
+          <div class="seller-numbers-section">
+            <div class="seller-numbers-value">{{profile.statistics.sellerFeedbacks}}</div>
+            <div class="seller-numbers-label">Відгуків про магазин</div>
+          </div>
+          <div class="seller-numbers-section">
+            <div class="seller-numbers-value">{{profile.statistics.orderFeedbacks}}</div>
+            <div class="seller-numbers-label">Відгуків про товари</div>
+          </div>
+          <div class="seller-numbers-section">
+            <div class="seller-numbers-value">{{profile.statistics.orders}}</div>
+            <div class="seller-numbers-label">Замовлень</div>
+          </div>
+        </div>
+        <div class="line-container">
+          <input type="checkbox" class="open-line-input">
+          <span class="opening-line-1000ms open-line"></span>
+        </div>
+      </div>
+      <!--      <div class="stat-gradient-right stat-gradient"></div>-->
+    </div>
+    <div class="seller-ratings-container">
+      <div class="seller-rating-position-container">
+        <span class="seller-rating-position-name seller-rating-position-text">Комунікація з продавцем: </span>
+        <app-rating-view [rating]="profile.statistics.communicationRating" [fontSize]="'15px'"></app-rating-view>
+        <span class="seller-rating-position-value seller-rating-position-text">{{profile.statistics.communicationRating}}</span>
+      </div>
+      <div class="seller-rating-position-container">
+        <span class="seller-rating-position-name seller-rating-position-text">Якість обслуговування: </span>
+        <app-rating-view [rating]="profile.statistics.serviceRating" [fontSize]="'15px'"></app-rating-view>
+        <span class="seller-rating-position-value seller-rating-position-text">{{profile.statistics.serviceRating}}</span>
+      </div>
+      <div class="seller-rating-position-container">
+        <span class="seller-rating-position-name seller-rating-position-text">Якість товарів: </span>
+        <app-rating-view [rating]="profile.statistics.orderRating" [fontSize]="'15px'"></app-rating-view>
+        <span class="seller-rating-position-value seller-rating-position-text">{{profile.statistics.orderRating}}</span>
+      </div>
+
+<!--      <div [innerHTML]="test"></div>-->
+
+    </div>
+  </div>
+</div>

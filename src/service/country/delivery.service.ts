@@ -31,4 +31,12 @@ export class DeliveryService {
     return this.httpClient.get<Array<DeliveryTypeResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
+
+  generateDefaultDeliveryType(): DeliveryTypeResponse {
+    const delivery = new DeliveryTypeResponse();
+    delivery.title = 'За домовленістю';
+    delivery.id = 0;
+    return delivery;
+  }
+
 }

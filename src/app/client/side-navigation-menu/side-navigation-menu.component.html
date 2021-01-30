@@ -93,17 +93,51 @@
   <div class="side-nav-divider side-nav-item"></div>
 
   <div *ngSwitchCase="'ROLE_USER'">
+    <div class="link" [routerLink]="" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/user-male-circle--v1.png"/>
+      </div>
+      <div class="link-title">Мій профіль</div>
+    </div>
+    <div class="link" [routerLink]="" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/alarm.png"/>
+      </div>
+      <div class="link-title">Сповіщення</div>
+    </div>
+    <div class="link" [routerLink]="" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/clock--v1.png"/>
+      </div>
+      <div class="link-title">Останні переглянуті</div>
+    </div>
+    <div class="link" [routerLink]="" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/services.png"/>
+      </div>
+      <div class="link-title">Налаштування</div>
+    </div>
+    <div class="side-nav-divider side-nav-item"></div>
+    <div class="link" [routerLink]="'user/cart'" (click)="close()">
+      <div class="link-icon-container">  <img  src="https://img.icons8.com/material-outlined/24/000000/shopping-cart--v1.png"/></div>
+      <div class="link-title">Корзина</div>
+    </div>
     <div class="link" [routerLink]="'user/orders'" (click)="close()">
       <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/purchase-order--v1.png"/></div>
       <div class="link-title">Мої замовлення</div>
     </div>
+    <div class="link" [routerLink]="" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/bookmark-outline.png"/></div>
+      <div class="link-title">Збережені товари</div>
+    </div>
+    <div class="link" [routerLink]="'user/addresses'" (click)="close()">
+      <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/order-delivered.png"/></div>
+      <div class="link-title">Мої адреси</div>
+    </div>
+    <div class="side-nav-divider side-nav-item"></div>
   </div>
 
   <div *ngSwitchCase="'ROLE_SELLER'">
-    <div class="link" [routerLink]="'seller-profile'" (click)="close()">
+    <div class="link" [routerLink]="'seller/profile'" (click)="close()">
       <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/user-male-circle--v1.png"/>
       </div>
-      <div class="link-title">Профіль</div>
+      <div class="link-title">Профіль магазину</div>
     </div>
     <div class="link" [routerLink]="'seller/create-advertisement'" (click)="close()">
       <div class="link-icon-container"><img src="https://img.icons8.com/material/24/000000/add-list--v1.png"/></div>

@@ -1,5 +1,7 @@
 
-  <span class="block-title">Додати нову адресу</span>
+  <span class="block-title">
+         {{!isUpdate ? 'Додати нову адресу' : 'Редагувати адресу'}}
+  </span>
   <div class="addresses-container">
 
     <div class="creation-block">
@@ -53,7 +55,7 @@
 
   <div class="create-new-button-container">
     <button class="andro-button creation-button" (click)="creationButtonClick()">
-      Продовжити
+     {{!isUpdate ? 'Продовжити' : 'Зберегти'}}
     </button>
     <button class="andro-button cancel-button" (click)="clickCancelButton()">
       Скасувати

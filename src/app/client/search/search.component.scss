@@ -2,9 +2,13 @@
 .search-label-container {
   width: 80%;
   margin: 50px auto 0;
+  padding-left: 10px;
+}
+
+.result-text{
   color: #434040;
   font-size: 13px;
-  padding-left: 10px;
+
 }
 
 .content {
@@ -203,6 +207,10 @@ g.selected{
   align-items: center;
 }
 
+.in_favorites{
+  background-color: #cdff00;
+}
+
 .table-advertisement-image-container:hover .overlay {
   opacity: 1;
 }
@@ -222,6 +230,7 @@ g.selected{
     font-size: 12px;
     line-height: 14px;
     text-decoration: none;
+    cursor: pointer;
   }
   a:hover{
     text-decoration: underline;
@@ -250,5 +259,10 @@ g.selected{
     color: #857e7e;
   }
 
+}
+
+.pagination-container{
+  display: flex;
+  justify-content: center;
 }
 

@@ -14,12 +14,13 @@ import {CurrencyResponse} from '../../entity/country/currency-response';
 export class CurrencyService {
 
   constructor(private httpClient: HttpClient) {
-
+    // console.log('loaded currencies');
+    // this.loadExchange();
   }
 
-  courseEUR = 0;
-  courseUSD = 0;
-  courseRUB = 0;
+  courseEUR = 30;
+  courseUSD = 28;
+  courseRUB = 0.40;
 
   currencyURL = GlobalConstants.API_URL + 'currency';
   privatBankAPIUrl = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5';

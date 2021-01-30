@@ -17,6 +17,7 @@ import {RetailGoodsAdvertisementResponse} from '../../entity/advertisement/goods
 import {RetailPriceRequest} from '../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-price-request';
 import {WholesalePriceRequest} from '../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-price-request';
 import {PropertyRequest} from '../../entity/advertisement/goodsAdvertisement/property-request';
+import {GoodsAdvertisementStatisticsResponse} from '../../entity/advertisement/goodsAdvertisement/GoodsAdvertisementStatisticsResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -64,7 +65,18 @@ export class AdvertisementService {
 
   getSellerGoodsAdvertisementForEditing(id: number): Observable<WholesaleGoodsAdvertisementResponse | RetailGoodsAdvertisementResponse> {
     const url = this.advertisementURL + '/editing?id=' + id;
-    return this.httpClient.get<WholesaleGoodsAdvertisementResponse | RetailGoodsAdvertisementResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<WholesaleGoodsAdvertisementResponse | RetailGoodsAdvertisementResponse>(
+      url,
+      {headers: GlobalConstants.getRequestAuthorizationHeader()}
+    );
+  }
+
+  getSellerGoodsAdvertisementById(id: number): Observable<WholesaleGoodsAdvertisementResponse | RetailGoodsAdvertisementResponse> {
+    const url = this.advertisementURL + '/?id=' + id;
+    return this.httpClient.get<WholesaleGoodsAdvertisementResponse | RetailGoodsAdvertisementResponse>(
+      url,
+      {headers: GlobalConstants.getRequestAuthorizationHeader()}
+    );
   }
 
   findAllByFilters(request: GoodsAdvertisementSearchRequest): Observable<any> {
@@ -104,6 +116,35 @@ export class AdvertisementService {
     return this.httpClient.put(url, properties, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
+  changeAdvertisementDeliveries(id: number, deliveries: Array<number>): Observable<any> {
+    const url = this.advertisementURL + '/change-deliveries?id=' + id;
+    return this.httpClient.put(url, deliveries, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  changeAdvertisementOnlySellerDelivery(id: number, isOnly: boolean): Observable<any> {
+    const url = this.advertisementURL + '/change-sellerDelivery?id=' + id + '&isOnly=' + isOnly;
+    return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  addImageToAdvertisement(id: number, image: string): Observable<string> {
+    const url = this.advertisementURL + '/add-image?id=' + id;
+    return this.httpClient.put<string>(url, image, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  makeMainImageToGoodsAdvertisement(id: number, image: string): Observable<any> {
+    const url = this.advertisementURL + '/main-image?id=' + id + '&image=' + image;
+    return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  deleteGoodsAdvertisementImage(id: number, image: string): Observable<any> {
+    const url = this.advertisementURL + '/delete-image?id=' + id + '&image=' + image;
+    return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  getAdvertisementStatistics(id: number): Observable<GoodsAdvertisementStatisticsResponse> {
+    const url = this.advertisementURL + '/statistics?id=' + id;
+    return this.httpClient.get<GoodsAdvertisementStatisticsResponse>(url);
+  }
 
   changeRetailAdvertisementPrice(request: RetailPriceRequest, id: number): Observable<any> {
     const url = this.retailAdvertisementURL + '/change-price?id=' + id;
@@ -113,5 +154,20 @@ export class AdvertisementService {
   changeWholesaleAdvertisementPrice(request: WholesalePriceRequest, id: number): Observable<any> {
     const url = this.wholesaleAdvertisementURL + '/change-price?id=' + id;
     return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  addToUserFavorites(id: number): Observable<any> {
+    const url = this.advertisementURL + '/add-to-favorites?id=' + id;
+    return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  deleteFromUserFavorites(id: number): Observable<any> {
+    const url = this.advertisementURL + '/remove-from-favorites?id=' + id;
+    return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  isInUserFavorites(id: number): Observable<boolean> {
+    const url = this.advertisementURL + '/is-in-favorites?id=' + id;
+    return this.httpClient.get<boolean>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 }

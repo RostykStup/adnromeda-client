@@ -1,6 +1,12 @@
 <div class="container">
   <div class="search-label-container">
-    Результати пошуку для '{{searchValue}}'
+    <span class="result-text">
+      Результати пошуку для '{{searchValue}}' / знайдено {{totalElements}} результат(ів)
+    </span>
+    <span class="elements-text">
+
+    </span>
+
   </div>
   <div class="content">
     <div class="filters-container">
@@ -15,13 +21,15 @@
       <input type="checkbox" class="andro-checkbox" id="only-from-user-country-checkbox">
       <label class="andro-label" for="only-from-user-country-checkbox">Відправка з моєї країни</label>
 
-      <input type="checkbox" class="andro-checkbox" id="rating-checkbox" (click)="ratingClick($event)">
+      <input type="checkbox" class="andro-checkbox" id="rating-checkbox" [checked]="searchRequest.rating"
+             (click)="ratingClick($event)">
       <label class="andro-label" for="rating-checkbox">Рейтинг 4.0+</label>
 
       <input type="checkbox" class="andro-checkbox" id="only-wholesale-checkbox">
       <label class="andro-label" for="only-wholesale-checkbox">Лише опт</label>
 
-      <input type="checkbox" class="andro-checkbox" id="only-photo-checkbox" (click)="onlyImageClick($event)">
+      <input type="checkbox" class="andro-checkbox" id="only-photo-checkbox" [checked]="searchRequest.image"
+             (click)="onlyImageClick($event)">
       <label class="andro-label" for="only-photo-checkbox">Лише з фото</label>
     </div>
     <div class="sort-view-container">
@@ -32,7 +40,7 @@
                (click)="makeRequestWithOtherSortType('statistics.sold', 'DESC')">Кількість замовлень
           </div>
           <div class="sort-elem price-sort-container" [ngClass]="{selected: sortType === 'priceToSort'}">
-            <span  (click)="makeRequestWithOtherSortType('priceToSort', 'ASC')">Ціна</span>
+            <span (click)="makeRequestWithOtherSortType('priceToSort', 'ASC')">Ціна</span>
             <svg (click)="makeRequestWithOtherSortType('priceToSort', 'DESC')" class="price-icon"
                  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                  style="fill: #ffffff"
@@ -135,7 +143,9 @@
             <div class="table-advertisement-image-container">
               <img [src]="getAdvertisementImage(advertisement.image, advertisement.sellerId)">
               <div class="overlay">
-                <div class="add-to-favorites-button-container">
+                <div (click)="clickAddToFavorites(advertisement)"
+                     [ngClass]="{in_favorites: advertisement.isInFavorites}"
+                     class="add-to-favorites-button-container ">
                   <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                        width="24" height="24"
                        viewBox="0 0 172 172"
@@ -147,7 +157,7 @@
                       <path d="M0,172v-172h172v172z" fill="none"></path>
                       <g fill="#000000">
                         <path
-                          d="M118.25,21.5c-20.7475,0 -32.25,14.97833 -32.25,14.97833c0,0 -11.5025,-14.97833 -32.25,-14.97833c-21.77233,0 -39.41667,17.64433 -39.41667,39.41667c0,29.89217 35.20267,58.85983 45.01383,68.01167c11.30183,10.535 26.65283,24.08 26.65283,24.08c0,0 15.351,-13.545 26.65283,-24.08c9.81117,-9.15183 45.01383,-38.1195 45.01383,-68.01167c0,-21.77233 -17.64433,-39.41667 -39.41667,-39.41667zM106.1455,115.455c-1.2685,1.14667 -2.37217,2.14283 -3.268,2.98133c-5.38217,5.01667 -11.74617,10.7715 -16.8775,15.3725c-5.13133,-4.601 -11.5025,-10.363 -16.8775,-15.3725c-0.903,-0.8385 -2.00667,-1.84183 -3.268,-2.98133c-10.17667,-9.19483 -37.18783,-33.61883 -37.18783,-54.53833c0,-13.83167 11.25167,-25.08333 25.08333,-25.08333c13.0935,0 20.683,9.1375 20.88367,9.374l11.36633,12.126l11.36633,-12.126c0.07167,-0.09317 7.79017,-9.374 20.88367,-9.374c13.83167,0 25.08333,11.25167 25.08333,25.08333c0,20.9195 -27.01117,45.3435 -37.18783,54.53833z"></path>
+                          d="M43.06999,14.33333c-7.85076,0 -14.33333,6.46862 -14.33333,14.31934l-0.06999,129.014l57.33333,-21.5l57.33333,21.5v-10.34407v-118.65593c0,-7.83362 -6.49972,-14.33333 -14.33333,-14.33333zM43.06999,28.66667h85.93001v108.31185l-43,-16.125l-42.986,16.125z"></path>
                       </g>
                     </g>
                   </svg>
@@ -155,16 +165,14 @@
               </div>
             </div>
             <div class="table-advertisement-info-container">
-              <div class="table-advertisement-title-container"><a href="">{{advertisement.title}}</a></div>
+              <div class="table-advertisement-title-container"><a
+                (click)="navigateToAdvertisement(advertisement.id)">{{advertisement.title}}</a></div>
               <div class="table-advertisement-price-container">{{advertisement.priceWithUserCurrency}}</div>
               <div class="table-advertisement-rating-sales-container">
-                <div class="table-advertisement-rating">
-                  ★4.6
-                </div>
                 <div class="table-advertisement-rating" *ngIf="advertisement.rating !== null">
-                  ☆{{advertisement.rating}}
+                  ★{{advertisement.rating}}
                 </div>
-                <div class=" table-advertisement-sales" *ngIf="advertisement.sold !== null">
+                <div class=" table-advertisement-sales" *ngIf="advertisement.sold !== 0">
                   Продано: {{advertisement.sold}}
                 </div>
               </div>
@@ -179,6 +187,12 @@
       <div *ngSwitchCase="'rows'">
         rows
       </div>
+    </div>
+    <div class="pagination-container" *ngIf="totalPages > 1">
+      <app-paginator [pagination]="searchRequest.paginationRequest"
+                     [totalPages]="totalPages"
+                     (pageChange)="changePage($event)"
+      ></app-paginator>
     </div>
   </div>
 </div>

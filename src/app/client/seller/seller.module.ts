@@ -11,10 +11,11 @@ import { AdvertisementsListComponent } from './advertisements-list/advertisement
 import { AdvertisementManageComponent } from './advertisement-manage/advertisement-manage.component';
 import { AdvertisementUpdatingComponent } from './advertisement-manage/advertisement-updating/advertisement-updating.component';
 import { AdvertisementStatisticsComponent } from './advertisement-manage/advertisement-statistics/advertisement-statistics.component';
+import { SellerProfileComponent } from './seller-profile/seller-profile.component';
 
 
 @NgModule({
-  declarations: [SellerComponent, SellerOrdersComponent, OrderDataComponent, AdvertisementsListComponent, AdvertisementManageComponent, AdvertisementUpdatingComponent, AdvertisementStatisticsComponent],
+  declarations: [SellerComponent, SellerOrdersComponent, OrderDataComponent, AdvertisementsListComponent, AdvertisementManageComponent, AdvertisementUpdatingComponent, AdvertisementStatisticsComponent, SellerProfileComponent],
     imports: [
         CommonModule,
         SellerRoutingModule,

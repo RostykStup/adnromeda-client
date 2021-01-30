@@ -52,6 +52,11 @@ export class OrderMakingComponent implements OnInit {
           this.positions = r;
           this.getOrderPrice();
         });
+      } else if (params.advertisementId !== undefined && params.deliveryId !== undefined) {
+        const advertisementId = params.advertisementId;
+        const deliveryId = params.deliveryId;
+        const count = params.count;
+        this.cartService.getNewItemForOrder(advertisementId, deliveryId, count);
       }
     });
   }

@@ -117,7 +117,9 @@
   transition: transform 400ms ease-in-out;
 }
 
-.manage-mode-radio:checked + label:after { transform: scaleX(1); }
+.manage-mode-radio:checked + label:after {
+  transform: scaleX(1);
+}
 
 
 

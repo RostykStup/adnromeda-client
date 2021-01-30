@@ -18,6 +18,16 @@ export class AddressService {
     return this.httpClient.post<UserDeliveryAddressResponse>(this.addressURL, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
+  updateAddress(request: UserDeliveryAddressRequest, id: number): Observable<UserDeliveryAddressResponse> {
+    const url = this.addressURL + '?id=' + id;
+    return this.httpClient.put<UserDeliveryAddressResponse>(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  deleteAddress(id: number): Observable<any> {
+    const url = this.addressURL + '?id=' + id;
+    return this.httpClient.delete(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
   getDefaultUserAddress(): Observable<UserDeliveryAddressResponse> {
     const url = this.addressURL + '/default';
     return this.httpClient.get<UserDeliveryAddressResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});

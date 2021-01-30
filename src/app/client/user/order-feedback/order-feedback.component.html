@@ -37,7 +37,7 @@
             <textarea [(ngModel)]="container.feedback.text"
                       class="feedback-text-area"
                       placeholder="Напишіть відгук про товар, це може допомогти іншим покупцям із вибором покупки"></textarea>
-            <input style="display: none" type="file" accept="image/jpeg,jpg,png" [id]="'image_' + container.feedback.orderItem" (change)="handleUpload($event, container.feedback.orderItem)"/>
+            <input style="display: none" type="file" accept="image/png,image/jpg,image/jpeg" [id]="'image_' + container.feedback.orderItem" (change)="handleUpload($event, container.feedback.orderItem)"/>
             <button class="add-image-button"
                     [disabled]="container.feedback.images.length >= 5"
                     (click)="uploadImage(container.feedback.orderItem)">Додати фото</button>

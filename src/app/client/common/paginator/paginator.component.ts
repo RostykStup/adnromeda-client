@@ -11,6 +11,8 @@ export class PaginatorComponent implements OnInit {
   @Input() pagination = new PaginationRequest();
   @Input() totalPages = 2;
 
+  @Input() scrollTop = true;
+
   @Output() pageChange: EventEmitter<PaginationRequest> = new EventEmitter();
 
   constructor() {
@@ -20,6 +22,7 @@ export class PaginatorComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log('paginator - ' + this.totalPages);
+
   }
 
   counter(): Array<any> {
@@ -67,21 +70,29 @@ export class PaginatorComponent implements OnInit {
   pageButtonClick(page: number): void {
     this.pagination.page = page;
     this.pageChange.emit(this.pagination);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+
+    if (this.scrollTop) {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+
   }
 
   plusButtonClick(): void {
     this.pagination.page = this.pagination.page + 1;
     this.pageChange.emit(this.pagination);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    if (this.scrollTop) {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
   }
 
   minusButtonClick(): void {
     this.pagination.page = this.pagination.page - 1;
     this.pageChange.emit(this.pagination);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    if (this.scrollTop) {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
   }
 }

@@ -20,8 +20,8 @@ $closedWidth: 50px;
 
 .side-nav-divider{
   width: 90%;
-  margin: 5px auto;
-  border-top: 2px solid #d6c6c6;
+  margin: 10px auto;
+  border-top: 2px solid #f5f1f1;
 }
 
 
@@ -137,16 +137,17 @@ $closedWidth: 50px;
 
 .user-settings-info-container{
   border-radius: 6px;
-  border: 2px solid #bfbbbb;
+  border: 2px solid #454343;
   height: 40px;
   display: flex;
   padding: 5px;
+
+  margin: 20px auto 0;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   position: relative;
   width: 85%;
-  margin: 0 auto;
 
   user-select: none;
 }
@@ -290,6 +291,26 @@ $closedWidth: 50px;
   height: 100%; /* Full height */
   //overflow: auto; /* Enable scroll if needed */
   transition: opacity 1s;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 

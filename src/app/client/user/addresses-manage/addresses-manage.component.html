@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="block main-block">
+    <span class="block-title">Ваші адреси доставки</span>
+    <button class="andro-button add-address-button" (click)="addNewAddress()">Додати адресу</button>
+  </div>
+  <div class="block addresses-block">
+    <div class="address-container" *ngFor="let address of addresses">
+      <div class="address-info-block address-recipient-block">
+        <span class="address-recipient-text address-text-block">
+          <img src="https://img.icons8.com/material/24/000000/person-male.png"/>
+          {{address.recipient}}
+        </span>
+        <span class="address-phone-text address-text-block">
+          <img src="https://img.icons8.com/material-outlined/24/000000/phone.png"/>
+          {{address.phoneNumber}}
+        </span>
+      </div>
+      <div class="address-info-block">
+        <span class="addres-info-text address-text-block">
+          <img src="https://img.icons8.com/material/24/000000/address.png"/>
+          {{address.street}} {{address.house}}
+        </span>
+        <span class="addres-info-text address-country-block address-text-block">
+           {{address.city}}, {{address.region}}, {{address.country.englishName}}
+        </span>
+
+      </div>
+      <div class="address-actions">
+        <button class="edit-address-button" (click)="updateDeliveryAddress(address)">Редагувати</button>
+        <button class="delete-address-button" (click)="deleteAddress(address.id)">Видалити</button>
+      </div>
+      <div class="default-address-label">
+        <span class="default-address-text" *ngIf="address.id === defaultAddress.id">Адреса за замовчуванням</span>
+        <span class="make-default-text" *ngIf="address.id !== defaultAddress.id"
+        (click)="makeAddressDefault(address)">Зробити адресою за замовчуванням</span>
+      </div>
+    </div>
+
+  </div>
+</div>

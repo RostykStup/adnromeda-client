@@ -145,7 +145,7 @@
                   [(ngModel)]="editDescription"
                   placeholder="Введіть опис товару"></textarea>
         <div class="description-text" *ngIf="!descriptionUpdate">
-          {{editDescription}}
+          {{editDescription === null || editDescription === '' ? 'Дане оголошення не має опису' : editDescription}}
         </div>
       </div>
       <button class="cancel-title-button cancel-button button" *ngIf="descriptionUpdate"
@@ -166,16 +166,18 @@
 
       <table class="properties-table" *ngIf="!descriptionUpdate">
         <tr *ngFor="let property of advertisement.properties">
-            <td class="show-property-cell">{{property.name}}</td>
-            <td class="show-property-cell">:</td>
-            <td class="show-property-cell">{{property.value}}</td>
+          <td class="show-property-cell">{{property.name}}</td>
+          <td class="show-property-cell">:</td>
+          <td class="show-property-cell">{{property.value}}</td>
         </tr>
       </table>
       <table class="properties-table" *ngIf="descriptionUpdate">
         <tr *ngFor="let property of editProperties">
-          <td class="show-property-cell"><input class="edit-property-input" type="text" [(ngModel)]="property.name"></td>
+          <td class="show-property-cell"><input class="edit-property-input" type="text" [(ngModel)]="property.name">
+          </td>
           <td class="show-property-cell">:</td>
-          <td class="show-property-cell"><input class="edit-property-input" type="text" [(ngModel)]="property.value"></td>
+          <td class="show-property-cell"><input class="edit-property-input" type="text" [(ngModel)]="property.value">
+          </td>
           <td>
             <div class="remove-property-holder" [ngClass]="{visible_button: editProperties.length > 1}">
               <img (click)="removeProperty(property)"
@@ -187,7 +189,9 @@
           <td></td>
           <td></td>
           <td></td>
-          <td><button (click)="addNewProperty()" class="add-property-button">+</button></td>
+          <td>
+            <button (click)="addNewProperty()" class="add-property-button">+</button>
+          </td>
         </tr>
       </table>
       <div class="add-price-button">
@@ -198,14 +202,86 @@
   </div>
 
 
-  <div class="block">
-    <div class="block-title">Даний товар ви доставляєте такими способами:</div>
-    <div>
-      
+  <div class="block delivery-block">
+    <div class="show-deliveries-block deliveries-block" *ngIf="!deliveryUpdate">
+      <div class="block-title delivery-block-title">Даний товар ви доставляєте такими способами:</div>
+      <div class="show-delivery-item">- За домовленістю</div>
+      <div class="show-delivery-item" *ngFor="let delivery of advertisementDeliveries">
+        - {{delivery.title}}
+      </div>
+      <div class="block-title only-seller-container">
+        <div class="block-title delivery-block-title">Умови доставки:</div>
+        <input type="checkbox" id="only-seller-show" class="andro-checkbox" disabled
+               [checked]="this.advertisement.onlySellerCountry">
+        <label class="andro-label" for="only-seller-show"
+               id="only-seller-show-label">Доставка даного товару лише в межах моєї країни</label>
+      </div>
     </div>
+    <div class="edit-deliveries-block deliveries-block" *ngIf="deliveryUpdate">
+      <div class="block-title delivery-block-title">Оберіть спооби доставки для цього товару:</div>
+      <div>
+        <input type="checkbox" id="default-delivery-check" class="andro-checkbox" checked disabled>
+        <label class="andro-label" for="default-delivery-check"
+               id="default-delivery-check-label">За домоленістю</label>
+      </div>
+      <div class="show-delivery-item" *ngFor="let delivery of allCountryDeliveryList">
+        <input type="checkbox" [id]="'del_' + delivery.id" class="andro-checkbox" [(ngModel)]="delivery.checked">
+        <label class="andro-label" [for]="'del_' + delivery.id"
+               id="only-seller-country-check-label">{{delivery.title}}</label>
+      </div>
+      <div class="only-seller-container edit-seller-container">
+        <div class="block-title delivery-block-title">Умови доставки:</div>
+        <input type="checkbox" id="only-seller-delivery-check" class="andro-checkbox" [(ngModel)]="editOnlySeller">
+        <label class="andro-label" for="only-seller-delivery-check"
+               id="only-seller-delivery-label">Я здійснюю доставку цього товару лише з моєї країни</label>
+      </div>
+    </div>
+    <button class="button cancel-button" *ngIf="deliveryUpdate" (click)="cancelDeliveryClick()">Скасувати</button>
+    <button class="button" (click)="clickChangeDeliveries()">{{deliveryUpdate ? 'Зберегти' : 'Змінити'}}</button>
   </div>
 
   <div class="block">
-    <div class="block-title">Фото</div>
+    <div class="block-title images-title">Фото</div>
+    <input type="file" accept="image/png,image/jpg,image/jpeg" id="add-image-input" style="display: none" (change)="handleUpload($event)">
+    <div class="images-container" *ngIf="advertisement.mainImage">
+      <div class="image-container">
+        <div class="view-image-container">
+          <img [src]="getImage(viewImage, advertisement.sellerId)">
+          <div class="view-overlay" *ngIf="viewImage === advertisement.mainImage">
+            <div class="view-overlay-text">Головне зображення</div>
+          </div>
+        </div>
+        <div class="all-images-container">
+          <div (click)="viewImage = advertisement.mainImage;cantImagesMoreShow = false; cantDeleteMainShow = false" class="image-item-holder" [ngClass]="{selected_image: viewImage === advertisement.mainImage}">
+            <img [src]="getImage(advertisement.mainImage, advertisement.sellerId)" alt="">
+          </div>
+          <div (click)="viewImage = image;cantImagesMoreShow = false; cantDeleteMainShow = false" class="image-item-holder" *ngFor="let image of advertisement.images"
+               [ngClass]="{selected_image: viewImage === image}">
+            <img [src]="getImage(image, advertisement.sellerId)" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="image-actions-container">
+        <button class="button add-image-button image-btn" (click)="clickAddImageButton()">
+          Додати зображення
+        </button>
+        <button class="button image-btn" *ngIf="viewImage !== advertisement.mainImage" (click)="clickMainButton()">
+          Зробити головним
+        </button>
+        <button class="button cancel-button image-btn" (click)="deleteImageClick()">
+          Видалити
+        </button>
+        <div>
+          <span *ngIf="cantDeleteMainShow" class="validation-text">Не можна видалити головне зображення</span>
+          <span *ngIf="cantImagesMoreShow" class="validation-text">Не можна додати більше ніж 5 зображень</span>
+        </div>
+      </div>
+    </div>
+    <div class="no-images-title" *ngIf="!advertisement.mainImage">
+      <div class="block-title">Даний товар не має зображень</div>
+      <button class="button add-image-button image-btn" (click)="clickAddImageButton()">
+        Додати зображення
+      </button>
+    </div>
   </div>
 </div>

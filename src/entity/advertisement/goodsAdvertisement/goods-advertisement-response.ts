@@ -21,4 +21,8 @@ export class GoodsAdvertisementResponse extends AdvertisementResponse {
 
   sellerId = 0;
 
+  countryCode = '';
+
+  isInFavorites = false;
+
 }

@@ -31,6 +31,10 @@ export class AccountService {
       ;
   }
 
+  getAvatarImagePath(imageName: string | null, accountId: number): string {
+    return imageName !== null && imageName !== '' ? GlobalConstants.API_URL + 'image/user_' + accountId + '/' + imageName : 'https://vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png';
+  }
+
   writeAuthenticationToLocalStorage(authentication: AuthenticationResponse): void {
     localStorage.setItem('andro_user_token', authentication.token);
     // localStorage.setItem('andro_user_name', authentication.username);
@@ -50,6 +54,7 @@ export class AccountService {
     localStorage.setItem('andro_user_country', '');
     localStorage.setItem('andro_user_country_code', '');
     localStorage.setItem('andro_user_currency', '');
+    localStorage.setItem('andro_user_id', '');
 
   }
 

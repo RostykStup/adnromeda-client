@@ -1,4 +1,8 @@
 <div class="deliveries-container">
+  <div *ngIf="data.userCountry.name">
+    Доставка в {{data.userCountry.name}}
+  </div>
+
   <div class="delivery-row title-row">
     <div class="radio-column">
     </div>

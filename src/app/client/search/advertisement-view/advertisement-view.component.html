@@ -1,0 +1,242 @@
+<div class="main-container" *ngIf="advertisement">
+  <div class="advertisement-block">
+    <div class="seller-info-block">
+      <div class="seller-name-container"><span class="seller-name-title">{{advertisement.seller}}</span></div>
+    </div>
+  </div>
+  <div class="advertisement-block advertisement-container">
+
+    <div class="images-container advertisement-container-elem">
+      <div class="view-image-container">
+        <div class="buttons-over">
+          <div class="previous-button-container step-image-button-container" (click)="clickPreviousImage()">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                 width="60" height="60"
+                 viewBox="0 0 172 172"
+                 style=" fill:#000000;">
+              <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                 stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                 font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                 style="mix-blend-mode: normal">
+                <path d="M0,172v-172h172v172z" fill="none"></path>
+                <g fill="#ffffff">
+                  <path
+                    d="M93.16667,42.49609l-43.50391,43.50391l43.50391,43.5039l10.75,-10.75l-32.75391,-32.7539l32.75391,-32.75391z"></path>
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          <div class="next-button-container step-image-button-container" (click)="clickNextImage()">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                 width="60" height="60"
+                 viewBox="0 0 172 172"
+                 style=" fill:#000000;">
+              <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                 stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                 font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                 style="mix-blend-mode: normal">
+                <path d="M0,172v-172h172v172z" fill="none"></path>
+                <g fill="#ffffff">
+                  <path
+                    d="M71.66667,42.49609l-10.75,10.75l32.7539,32.75391l-32.7539,32.7539l10.75,10.75l43.5039,-43.5039z"></path>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="image-container">
+          <img [src]="getAdvertisementImage(viewImage)">
+        </div>
+      </div>
+      <div class="images-list">
+        <div class="images-list-item" [ngClass]="{selected_image: viewImage === advertisement.mainImage}"
+             (click)="changeViewImage(advertisement.mainImage)">
+          <img [src]="getAdvertisementImage(advertisement.mainImage)">
+        </div>
+        <div class="images-list-item" *ngFor="let image of advertisement.images"
+
+             [ngClass]="{selected_image: viewImage === image}"
+             (click)="changeViewImage(image)">
+          <img [src]="getAdvertisementImage(image)">
+        </div>
+      </div>
+    </div>
+    <div class="info-container advertisement-container-elem">
+      <div class="advertisement-title-container">
+        {{advertisement.title}}
+      </div>
+      <div class="advertisement-statistics-data-container" *ngIf="statics">
+        <div class="rating-container" *ngIf="statics.feedbacks !== 0">
+          <div class="rating-stars">
+            <label class="full" title="Awesome - 1 stars" [ngClass]="{full_filled: statics.rating >= 1}"></label>
+            <label class="full" title="Awesome - 2 stars" [ngClass]="{full_filled: statics.rating >= 2}"></label>
+            <label class="full" title="Awesome - 3 stars" [ngClass]="{full_filled: statics.rating >= 3}"></label>
+            <label class="full" title="Awesome - 4 stars" [ngClass]="{full_filled: statics.rating >= 4}"></label>
+            <label class="full" title="Awesome - 5 stars" [ngClass]="{full_filled: statics.rating >= 4.5}"></label>
+          </div>
+          {{statics.rating}}
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+               width="12" height="12"
+               viewBox="0 0 172 172"
+               style=" fill:#000000;">
+            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+               stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+               font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+              <path d="M0,172v-172h172v172z" fill="none"></path>
+              <g fill="#000000">
+                <path
+                  d="M53.24609,68.08333l-10.75,10.75l43.50391,43.5039l43.5039,-43.5039l-10.75,-10.75l-32.7539,32.7539z"></path>
+              </g>
+            </g>
+          </svg>
+          <div class="overlay-for-hover"></div>
+        </div>
+        <div class="feedbacks-container statistic-container" *ngIf="statics.feedbacks !== 0">
+          {{statics.feedbacks}} відгук(ів)
+        </div>
+        <div class="orders-container statistic-container" *ngIf="statics.orders !== 0">
+          {{statics.orders}} замовлень(ня)
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="price-container">
+        <div class="retail-price-container" *ngIf="advertisement.type === 'goods_retail' && retailPrice !== 0">
+          <div class="retail-price-in-currency">{{retailPrice.toFixed(2)}} {{userCurrency}}</div>
+          <div class="retail-original-price" *ngIf="userCurrency !== 'USD'">(оригінальна ціна
+            $ {{originalRetailPrice.price}})
+          </div>
+        </div>
+        <div class="wholesale-price-container" *ngIf="advertisement.type === 'goods_wholesale' && this.currentWholesalePriceInUserCurrency !== 0">
+          <div class="wholesale-price-price-container">
+            <div class="wholesale-price-in-currency">{{currentWholesalePriceInUserCurrency.toFixed(2)}} {{userCurrency}}</div>
+            <div class="wholesale-original-price" *ngIf="userCurrency !== 'USD'">(оригінальна ціна
+              $ {{currentWholesalePrice.toFixed(2)}})
+            </div>
+          </div>
+          <div class="wholesale-price-mark">
+            Оптова ціна
+          </div>
+          <div class="wholesale-price-list-container">
+            <div class="wholesale-price-list-body">
+              <table>
+                <tr>
+                  <td class="count-divider" colspan="2">К-ть</td>
+                  <td  class="count-divider">Ціна</td>
+                </tr>
+                <tr *ngFor="let price of originalWholesalePrice.priceUnits">
+                  <td class="min-count-cell">{{price.min}}</td>
+                  <td class="count-divider" >+</td>
+
+<!--                  <td class="count-divider" *ngIf="price.max !== null">-</td>-->
+<!--                  <td class="count-divider" *ngIf="price.max === null">+</td>-->
+<!--                  <td class="max-count-cell">{{price.max}}</td>-->
+
+<!--                  <td class="count-label-cell">шт.</td>-->
+                  <td class="count-price-cell">$ {{price.price}} / шт.</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="count-picker-container">
+        <span class="count-picker-title">Кількість:</span>
+        <div class="count-actions">
+          <button [disabled]="pickerCount <= 1" class="count-button" (click)="clickMinusCountButton()">-</button>
+          <input type="number" class="item-count-input" min="1" [(ngModel)]="pickerCount"
+                 (keyup)="inputItemCount($event)">
+          <button [disabled]="pickerCount >= advertisement.count" (click)="clickPlusCountButton()"
+                  class="count-button">+
+          </button>
+          <span class="count-value-text">{{advertisement.count}} шт. в наявності</span>
+        </div>
+      </div>
+
+      <div class="delivery-pick-container">
+        <span class="delivery-text">Доставка:</span>
+        <div class="delivery-picker-text" (click)="openDeliveriesDialog()">
+          В {{userCountry.name}}: {{currentDelivery.title}}
+        </div>
+      </div>
+
+      <div class="actions-container">
+<!--        <button class="action-button buy-button" (click)="buyButtonClick()">Купити</button>-->
+        <button class="action-button cart-button" (click)="addToCartButtonClick()">Додати у корзину</button>
+        <button class="action-button likes-button" *ngIf="statics" (click)="addToLikesButtonClick()">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+               width="17" height="17"
+               viewBox="0 0 172 172"
+               style=" fill:#000000;">
+            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+               stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+               font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+              <path d="M0,172v-172h172v172z" fill="none"></path>
+              <g fill="#000000">
+                <path
+                  d="M118.25,21.5c-20.7475,0 -32.25,14.97833 -32.25,14.97833c0,0 -11.5025,-14.97833 -32.25,-14.97833c-21.77233,0 -39.41667,17.64433 -39.41667,39.41667c0,29.89217 35.20267,58.85983 45.01383,68.01167c11.30183,10.535 26.65283,24.08 26.65283,24.08c0,0 15.351,-13.545 26.65283,-24.08c9.81117,-9.15183 45.01383,-38.1195 45.01383,-68.01167c0,-21.77233 -17.64433,-39.41667 -39.41667,-39.41667zM106.1455,115.455c-1.2685,1.14667 -2.37217,2.14283 -3.268,2.98133c-5.38217,5.01667 -11.74617,10.7715 -16.8775,15.3725c-5.13133,-4.601 -11.5025,-10.363 -16.8775,-15.3725c-0.903,-0.8385 -2.00667,-1.84183 -3.268,-2.98133c-10.17667,-9.19483 -37.18783,-33.61883 -37.18783,-54.53833c0,-13.83167 11.25167,-25.08333 25.08333,-25.08333c13.0935,0 20.683,9.1375 20.88367,9.374l11.36633,12.126l11.36633,-12.126c0.07167,-0.09317 7.79017,-9.374 20.88367,-9.374c13.83167,0 25.08333,11.25167 25.08333,25.08333c0,20.9195 -27.01117,45.3435 -37.18783,54.53833z"></path>
+              </g>
+            </g>
+          </svg>
+          {{statics.likes}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="advertisement-block" *ngIf="statics && advertisement">
+    <div class="pick-desc-feed-mode-container">
+
+      <input  class="pick-desc-feed-radio" type="radio" name="desc-mode" id="pick-description-input" checked>
+      <label for="pick-description-input" (click)="changeAddViewMode(1)">Опис та характеристики</label>
+
+      <input class="pick-desc-feed-radio" type="radio" name="desc-mode" id="pick-feedbacks-input"  >
+      <label for="pick-feedbacks-input" (click)="changeAddViewMode(2)">Відгуки ({{statics.feedbacks}})</label>
+
+    </div>
+    <div class="description-container" *ngIf="addInfoMode === 1">
+      <div class="description-text">{{advertisement.description}}</div>
+
+      <div class="properties-container">
+        <div class="property-item" *ngFor="let property of advertisement.properties">
+          <span class="property-title-text">{{property.name}}:</span>
+          <span class="property-value-text">{{property.value}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="feedbacks-list-container" *ngIf="addInfoMode === 2">
+      <div class="feedback-item" *ngFor="let feedback of feedbacksList">
+        <div class="feedback-user-container">
+          <div class="feedback-user-name">{{feedback.username}}</div>
+          <div class="feedback-user-flag">
+            <img [src]="getUserFlag(feedback.countryCode)">
+          </div>
+        </div>
+        <div class="feedback-content">
+          <div class="rating-stars feedback-stars">
+            <label class="full" title="Awesome - 1 stars" [ngClass]="{full_filled: feedback.rating >= 0.5}"></label>
+            <label class="full" title="Awesome - 2 stars" [ngClass]="{full_filled: feedback.rating >= 1.5}"></label>
+            <label class="full" title="Awesome - 3 stars" [ngClass]="{full_filled: feedback.rating >= 2.5}"></label>
+            <label class="full" title="Awesome - 4 stars" [ngClass]="{full_filled: feedback.rating >= 3.5}"></label>
+            <label class="full" title="Awesome - 5 stars" [ngClass]="{full_filled: feedback.rating >= 4.5}"></label>
+            <span class="feedback-rating">
+              {{feedback.rating}}
+            </span>
+          </div>
+          <span class="feedback-text">{{feedback.text}}</span>
+          <span class="feedback-date">{{feedback.creationDate}}</span>
+          <div class="feedback-images">
+            <img [src]="getFeedbackImage(feedback.userId, image)" alt="" *ngFor="let image of feedback.images">
+          </div>
+        </div>
+
+      </div>
+      <div class="paginator-container" *ngIf="feedbacks.totalPages > 1">
+        <app-paginator [pagination]="feedbackPagination" [totalPages]="feedbacks.totalPages" [scrollTop]="false" (pageChange)="changeFeedbacksPage($event)"></app-paginator>
+
+      </div>
+    </div>
+  </div>
+</div>

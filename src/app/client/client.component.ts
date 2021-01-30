@@ -16,10 +16,10 @@ export class ClientComponent implements OnInit {
               private countryService: CountryService) {
   }
 
-  searchRequest = new GoodsAdvertisementSearchRequest();
+  // searchRequest = new GoodsAdvertisementSearchRequest();
 
   ngOnInit(): void {
-    this.currencyService.loadExchange();
+    // this.currencyService.loadExchange();
     // this.searchRequest.fromCountryCode = 'UA';
     // this.searchRequest.image = true;
     // this.searchRequest.title = 'моб';

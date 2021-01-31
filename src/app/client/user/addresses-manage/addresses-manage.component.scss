@@ -43,6 +43,20 @@
   //grid-template-columns: repeat(,30%);
 }
 
+@media only screen and (max-width:500px) {
+  .addresses-block {
+    flex-direction: column;
+  }
+
+  .address-container {
+    width: 100%;
+  }
+
+  .container{
+    width: 100%;
+  }
+}
+
 .address-recipient-block {
   display: flex;
   flex-direction: column;

@@ -1,7 +1,8 @@
 $closedWidth: 50px;
+$closedHeight: 50px;
 
 .side-nav-container {
-  height: 100%;
+  height: $closedHeight;
   //background-color: #242424;
   background-color: #ffffff;
   //color: #f6f2f2;
@@ -57,6 +58,7 @@ $closedWidth: 50px;
 }
 
 .side-nav-container.opened {
+  height: 100%;
   width: 250px;
   z-index: 2; /* Sit on top */
 

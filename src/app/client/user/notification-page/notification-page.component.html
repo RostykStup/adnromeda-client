@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="block">
+    <div class="block-title main-title">
+      Ваші сповіщення
+    </div>
+
+  </div>
+  <div class="block">
+    <div class="notification-block" *ngFor="let notification of notifications">
+      <div class="notification-type-icon">
+        <img *ngIf="notification.type === 'ORDER_SEND_NOTIFICATION'" src="https://img.icons8.com/material/24/000000/in-transit--v1.png"/>
+      </div>
+      <div class="notification-body">
+        <div class="notification-text" [innerHTML]="notification.text"></div>
+        <div class="notification-new-notification" *ngIf="!notification.isRead">
+          Нове сповіщення
+        </div>
+        <div class="notification-date">{{notification.dateTime}}</div>
+      </div>
+
+    </div>
+    <div class="pagination-container" *ngIf="totalPages > 1">
+      <app-paginator [pagination]="pagination" [totalPages]="totalPages" (pageChange)="changePage($event)"></app-paginator>
+    </div>
+  </div>
+</div>

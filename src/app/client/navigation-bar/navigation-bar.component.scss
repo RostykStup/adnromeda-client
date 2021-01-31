@@ -16,6 +16,8 @@ $height: 60px;
   //justify-content: space-around;
 }
 
+
+
 .back{
   height: $height;
 }
@@ -32,6 +34,7 @@ $height: 60px;
   align-items: center;
   //margin-left: 200px;
 }
+
 
 .search-input{
   outline: none;
@@ -156,4 +159,29 @@ $height: 60px;
 
 .outside-menu.opened_user_menu{
   display: block;
+}
+
+
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .nav-bar {
+    padding-left: 50px;
+    padding-right: 20px;
+  }
+
+  .logo-container {
+    display: none;
+  }
+
+  .search-input-container{
+    width: 100%;
+  }
+
+  .search-container{
+    width: 100%;
+  }
+
+  .profile-container{
+    display: none;
+  }
 }

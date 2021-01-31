@@ -9,6 +9,7 @@ import {UserOrdersComponent} from './user-orders/user-orders.component';
 import {UserOrderDataComponent} from './user-order-data/user-order-data.component';
 import {OrderFeedbackComponent} from './order-feedback/order-feedback.component';
 import {AddressesManageComponent} from './addresses-manage/addresses-manage.component';
+import {NotificationPageComponent} from './notification-page/notification-page.component';
 
 const routes: Routes = [{
   path: '', component: UserComponent, children: [
@@ -29,6 +30,9 @@ const routes: Routes = [{
     },
     {
       path: 'addresses', component: AddressesManageComponent
+    },
+    {
+      path: 'notifications', component: NotificationPageComponent
     }
   ]
 }];

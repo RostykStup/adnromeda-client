@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="block">
+    <div class="main-title">Історія переглядів</div>
+  </div>
+
+  <div class="block">
+    <div class="history-section" *ngFor="let section of history.sections">
+      <div class="section-date-container">
+        <div class="pre-date-line"></div>
+        <div class="date-text">{{section.date}}</div>
+        <div class="date-line"></div>
+      </div>
+      <div class="section-advertisements">
+        <div class="advertisement-item" *ngFor="let advertisement of section.advertisements">
+          <div class="item-image-container column-container">
+            <img [src]="getImage(advertisement.advertisement.mainImage, advertisement.advertisement.sellerId)">
+          </div>
+          <div class="item-info-container column-container">
+            <a class="item-title-text item-text" [href]="'client/advertisement-view?id=' + advertisement.advertisement.id" target="_blank">{{advertisement.advertisement.title}}</a>
+            <!--          <span class="item-title-text item-text"></span>-->
+          </div>
+          <div class="item-type-container  column-container">
+            <a [href]="'client/advertisement-view?id=' + advertisement.advertisement.id" target="_blank" class="item-text type-text">{{advertisement.advertisement.seller}}</a>
+          </div>
+          <div class="column-container item-actions-container ">
+            <div class="view-time-text">Час перегляду: {{advertisement.time}}</div>
+
+<!--            <button class="andro-button" >Видалити зі збережених</button>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pagination-container" *ngIf="history.totalPages > 1">
+      <app-paginator [totalPages]="history.totalPages" [pagination]="pagination" (pageChange)="changePage($event)"></app-paginator>
+    </div>
+  </div>
+</div>

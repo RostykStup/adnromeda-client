@@ -1,13 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {GlobalConstants} from '../../common/global-constants';
-import {AccountLoginRequest} from '../../entity/account/account-login-request';
-import {AuthenticationResponse} from '../../entity/account/authentication-response';
-import {AccountDataRequest} from '../../entity/account/account-data-request';
 import {WholesaleGoodsAdvertisementRequest} from '../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-goods-advertisement-request';
 import {RetailGoodsAdvertisementRequest} from '../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-goods-advertisement-request';
-import {GoodsAdvertisementForSearchResponse} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-for-search-response';
 import {GoodsAdvertisementSearchRequest} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-search-request';
 import {PaginationRequest} from '../../entity/pagination-request';
 import {PaginationResponse} from '../../entity/pagination-response';
@@ -170,4 +166,25 @@ export class AdvertisementService {
     const url = this.advertisementURL + '/is-in-favorites?id=' + id;
     return this.httpClient.get<boolean>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
+
+  getUserFavoritesAdvertisementsPage(pagination: PaginationRequest): Observable<PaginationResponse<GoodsAdvertisementResponse>> {
+    let params = new HttpParams();
+    params = params.append('page', pagination.page.toString());
+    params = params.append('size', pagination.size.toString());
+    const url = this.advertisementURL + '/favorites';
+    return this.httpClient.get<PaginationResponse<GoodsAdvertisementResponse>>(
+      url,
+      {
+        headers: GlobalConstants.getRequestAuthorizationHeader(),
+        params
+      }
+    );
+  }
+
+  setAdvertisementView(id: number): Observable<any> {
+    const url = this.advertisementURL + '/view?id=' + id;
+    return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+
 }

@@ -10,6 +10,8 @@ import {UserOrderDataComponent} from './user-order-data/user-order-data.componen
 import {OrderFeedbackComponent} from './order-feedback/order-feedback.component';
 import {AddressesManageComponent} from './addresses-manage/addresses-manage.component';
 import {NotificationPageComponent} from './notification-page/notification-page.component';
+import {FavoriteAdvertisementsComponent} from './favorite-advertisements/favorite-advertisements.component';
+import {ViewHistoryComponent} from './view-history/view-history.component';
 
 const routes: Routes = [{
   path: '', component: UserComponent, children: [
@@ -33,6 +35,12 @@ const routes: Routes = [{
     },
     {
       path: 'notifications', component: NotificationPageComponent
+    },
+    {
+      path: 'favorites', component: FavoriteAdvertisementsComponent
+    },
+    {
+      path: 'history', component: ViewHistoryComponent
     }
   ]
 }];

@@ -44,5 +44,10 @@ export class SellerProfileComponent implements OnInit {
     });
   }
 
+  logoutButtonClick(): void {
+    this.accountService.logOut();
+    window.open('/client', '_self');
+  }
+
 
 }

@@ -254,9 +254,15 @@ g.selected{
 
 .table-advertisement-seller-container{
   padding-bottom: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   a{
     font-size: 13px;
     color: #857e7e;
+
+
   }
 
 }

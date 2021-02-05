@@ -16,12 +16,14 @@ import {ViewHistoryComponent} from './view-history/view-history.component';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
 
 
 @NgModule({
   declarations: [UserComponent, CartComponent, OrderMakingComponent,
     UserOrdersComponent, UserOrderDataComponent, OrderFeedbackComponent,
-    AddressesManageComponent, NotificationPageComponent, FavoriteAdvertisementsComponent, ViewHistoryComponent],
+    AddressesManageComponent, NotificationPageComponent, FavoriteAdvertisementsComponent, ViewHistoryComponent, UserProfileComponent, SettingsPageComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

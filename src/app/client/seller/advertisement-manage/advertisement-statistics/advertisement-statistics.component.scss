@@ -1,0 +1,42 @@
+.block{
+  width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  margin: 10px 0;
+}
+
+.statistic-element {
+  display: flex;
+  //justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  margin: 10px 0;
+}
+
+.statistic-element-name{
+  font-weight: 300;
+  font-size: 14px;
+  width: 50%;
+}
+
+.statistic-element-value {
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.rating-view-element{
+  display: flex;
+  align-items: center;
+}
+
+.statistic-block-title{
+  font-size: 16px;
+   font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.stat-date-container{
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}

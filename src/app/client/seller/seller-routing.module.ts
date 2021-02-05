@@ -9,6 +9,9 @@ import {AdvertisementManageComponent} from './advertisement-manage/advertisement
 import {AdvertisementUpdatingComponent} from './advertisement-manage/advertisement-updating/advertisement-updating.component';
 import {AdvertisementStatisticsComponent} from './advertisement-manage/advertisement-statistics/advertisement-statistics.component';
 import {SellerProfileComponent} from './seller-profile/seller-profile.component';
+import {SellerNotificationsComponent} from './seller-notifications/seller-notifications.component';
+import {SellerSettingsComponent} from './seller-settings/seller-settings.component';
+import {SellerStatisticsComponent} from './seller-statistics/seller-statistics.component';
 
 const routes: Routes = [
   {
@@ -24,6 +27,15 @@ const routes: Routes = [
       },
       {
         path: 'order-data', component: OrderDataComponent
+      },
+      {
+        path: 'notifications', component: SellerNotificationsComponent
+      },
+      {
+        path: 'settings', component: SellerSettingsComponent
+      },
+      {
+        path: 'statistics', component: SellerStatisticsComponent
       },
       {
         path: 'advertisements', component: AdvertisementsListComponent

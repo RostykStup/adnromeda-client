@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="block">
+    <div class="main-label">
+      Вітаємо у Andromeda - галактиці вигідних покупок
+    </div>
+  </div>
+
+  <div class="block">
+<!--    <div class="categories-title">Рекомендуємо вам категорію '{{mainPage.category.title}}'</div>-->
+    <div class="categories-title">Рекомендуємо вам ці товари</div>
+
+    <div class="recommend-advertisements-holder" *ngIf="mainPage.responses">
+      <div *ngFor="let advertisement of mainPage.responses.data" class="table-advertisement-container">
+        <div class="table-advertisement-image-container">
+          <img [src]="getAdvertisementImage(advertisement.image, advertisement.sellerId)">
+        </div>
+        <div class="table-advertisement-info-container">
+          <div class="table-advertisement-title-container"><a
+            (click)="navigateToAdvertisement(advertisement.id)">{{advertisement.title}}</a></div>
+          <div class="table-advertisement-price-container">{{advertisement.priceWithUserCurrency}}</div>
+          <div class="table-advertisement-rating-sales-container">
+            <div class="table-advertisement-rating" *ngIf="advertisement.rating !== null">
+              ★{{advertisement.rating}}
+            </div>
+            <div class=" table-advertisement-sales" *ngIf="advertisement.sold !== 0">
+              Продано: {{advertisement.sold}}
+            </div>
+          </div>
+          <div class="table-advertisement-seller-container">
+            <a href="">{{advertisement.seller}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="categories-title">Тут ви можете знайти товари на будь який смак</div>
+    <div class="categories-container">
+      <div class="category-holder" *ngFor="let category of categories">{{category.title}}</div>
+    </div>
+  </div>
+</div>

@@ -13,7 +13,9 @@ import {RetailGoodsAdvertisementResponse} from '../../entity/advertisement/goods
 import {RetailPriceRequest} from '../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-price-request';
 import {WholesalePriceRequest} from '../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-price-request';
 import {PropertyRequest} from '../../entity/advertisement/goodsAdvertisement/property-request';
-import {GoodsAdvertisementStatisticsResponse} from '../../entity/advertisement/goodsAdvertisement/GoodsAdvertisementStatisticsResponse';
+import {GoodsAdvertisementStatisticsResponse} from '../../entity/statistics/advertisement/GoodsAdvertisementStatisticsResponse';
+import {GoodsAdvertisementMonthStatisticsResponse} from '../../entity/statistics/advertisement/goods-advertisement-month-statistics-response';
+import {GoodsAdvertisementsForMainPageResponse} from '../../entity/advertisement/goodsAdvertisement/goods-advertisements-for-main-page-response';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +29,18 @@ export class AdvertisementService {
   wholesaleAdvertisementURL = GlobalConstants.API_URL + 'wholesale-goods';
 
   retailAdvertisementURL = GlobalConstants.API_URL + 'retail-goods';
+
+
+  getMainPageAdvertisements(request: PaginationRequest): Observable<GoodsAdvertisementsForMainPageResponse> {
+    const url = this.advertisementURL + '/get-for-main';
+    let params = new HttpParams();
+    params = params.append('page', request.page.toString());
+    params = params.append('size', request.size.toString());
+    return this.httpClient.get<GoodsAdvertisementsForMainPageResponse>(url, {
+      headers: GlobalConstants.getRequestAuthorizationHeader(),
+      params
+    });
+  }
 
 
   getSellerAdvertisementsPage(id: string | null, request: PaginationRequest): Observable<PaginationResponse<GoodsAdvertisementResponse>> {
@@ -140,6 +154,11 @@ export class AdvertisementService {
   getAdvertisementStatistics(id: number): Observable<GoodsAdvertisementStatisticsResponse> {
     const url = this.advertisementURL + '/statistics?id=' + id;
     return this.httpClient.get<GoodsAdvertisementStatisticsResponse>(url);
+  }
+
+  getAdvertisementMonthStatistics(id: number, month: string, year: string): Observable<GoodsAdvertisementMonthStatisticsResponse> {
+    const url = this.advertisementURL + '/month-statistics?id=' + id + '&month=' + month + '&year=' + year;
+    return this.httpClient.get<GoodsAdvertisementMonthStatisticsResponse>(url);
   }
 
   changeRetailAdvertisementPrice(request: RetailPriceRequest, id: number): Observable<any> {

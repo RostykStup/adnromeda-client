@@ -15,6 +15,7 @@ export class AdvertisementManageComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router) {
+    this.isStatistics = window.location.href.includes('statistics');
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.advertisementId = params.advertisementId;
       this.advertisementType = params.advertisementType;
@@ -22,6 +23,7 @@ export class AdvertisementManageComponent implements OnInit {
   }
 
   advertisementId = 0;
+  isStatistics = false;
   // @ts-ignore
   advertisementType: 'goods_retail' | 'goods_wholesale';
 

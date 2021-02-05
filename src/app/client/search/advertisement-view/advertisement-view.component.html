@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="image-container">
-          <img [src]="getAdvertisementImage(viewImage)">
+          <img (click)="openImageDialog(getAdvertisementImage(viewImage))" [src]="getAdvertisementImage(viewImage)">
         </div>
       </div>
       <div class="images-list">
@@ -228,7 +228,9 @@
           <span class="feedback-text">{{feedback.text}}</span>
           <span class="feedback-date">{{feedback.creationDate}}</span>
           <div class="feedback-images">
-            <img [src]="getFeedbackImage(feedback.userId, image)" alt="" *ngFor="let image of feedback.images">
+            <img [src]="getFeedbackImage(feedback.userId, image)"
+                 *ngFor="let image of feedback.images"
+                 (click)="openImageDialog(getFeedbackImage(feedback.userId, image))">
           </div>
         </div>
 

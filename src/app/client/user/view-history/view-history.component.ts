@@ -23,7 +23,7 @@ export class ViewHistoryComponent implements OnInit {
   pagination = new PaginationRequest();
 
   ngOnInit(): void {
-    this.pagination.size = 10;
+    this.pagination.size = 20;
     this.pagination.page = 0;
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.page !== undefined && params.page > 0) {

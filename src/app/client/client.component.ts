@@ -3,6 +3,7 @@ import {AdvertisementService} from '../../service/advertisement/advertisement.se
 import {GoodsAdvertisementSearchRequest} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-search-request';
 import {CurrencyService} from '../../service/country/currency.service';
 import {CountryService} from '../../service/country/country.service';
+import {PaginationRequest} from '../../entity/pagination-request';
 
 @Component({
   selector: 'app-client',

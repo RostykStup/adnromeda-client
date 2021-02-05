@@ -1,0 +1,166 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.block {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  margin: 20px 0;
+}
+
+
+
+.main-label{
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.categories-title {
+  font-weight: 700;
+  font-size: 17px;
+  padding-left: 20px;
+  font-family: 'Raleway', sans-serif;
+}
+
+.category-holder {
+  width: 30%;
+  cursor: pointer;
+  //text-align: center;
+  padding-left: 20px;
+  margin: 5px;
+  font-weight: 800;
+  font-size: 15px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.table-advertisement-container {
+  margin: 7px 5px;
+  width: 19%;
+  border-radius: 10px;
+  //background-color: #432b2b;
+  height: 320px;
+  //border: 1px solid #000000;
+  box-shadow: 0 0 4px 1px #dedcdc;
+}
+
+.table-advertisement-image-container {
+  width: 100%;
+  height: 70%;
+  border-radius: inherit;
+  position: relative;
+
+  img {
+    border-radius: 10px 10px 0 0;
+    width: inherit;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  transition: all .5s;
+}
+
+.add-to-favorites-button-container {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.in_favorites{
+  background-color: #cdff00;
+}
+
+.table-advertisement-image-container:hover .overlay {
+  opacity: 1;
+}
+
+.table-advertisement-info-container {
+  padding: 0 5px 5px;
+  height: 30%;
+}
+
+.table-advertisement-title-container {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  //height: 14px;
+
+  a {
+    font-size: 12px;
+    line-height: 14px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
+}
+
+.table-advertisement-price-container{
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.table-advertisement-rating-sales-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 25%;
+  div {
+    font-size: 12px;
+  }
+}
+
+.table-advertisement-seller-container{
+  padding-bottom: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+
+  a{
+    font-size: 13px;
+    color: #857e7e;
+  }
+
+}
+
+.pagination-container{
+  display: flex;
+  justify-content: center;
+}
+
+.recommend-advertisements-holder{
+  //padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 25px;
+}

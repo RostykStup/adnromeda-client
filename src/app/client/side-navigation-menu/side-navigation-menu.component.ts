@@ -7,6 +7,8 @@ import {CurrencyResponse} from '../../../entity/country/currency-response';
 import {UserService} from '../../../service/account/user/user.service';
 import {UserSettingsRequest} from '../../../entity/account/user/user-settings-request';
 import {AccountService} from '../../../service/account/account.service';
+import {MatDialog} from '@angular/material/dialog';
+import {LoginDialogComponent} from '../navigation-bar/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-side-navigation-menu',
@@ -19,7 +21,8 @@ export class SideNavigationMenuComponent implements OnInit {
               private countryService: CountryService,
               private currencyService: CurrencyService,
               private userService: UserService,
-              private accountService: AccountService) {
+              private accountService: AccountService,
+              public dialog: MatDialog) {
   }
 
 
@@ -63,11 +66,31 @@ export class SideNavigationMenuComponent implements OnInit {
     this.isOpenedSettingsMenu = false;
   }
 
-  close(): void {
+  close(navigateElem: string | null): void {
     this.isOpened = false;
     this.isOpenedCountryPickMenu = false;
     this.isOpenedCurrencyPickMenu = false;
     this.isOpenedSettingsMenu = false;
+
+    if (navigateElem != null) {
+      if (this.accountService.isLogged()) {
+        window.open(navigateElem, '_self');
+      } else {
+        this.openLoginDialog();
+      }
+    }
+  }
+
+  openLoginDialog(): void {
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      width: '400px',
+      data: null
+    });
+
+    dialogRef.afterClosed().subscribe(result => { //дії пілся закриття вікна
+      // this.reloadTable();
+      this.userRole = localStorage.getItem('andro_user_role');
+    });
   }
 
   changeCountryPickMenuStatement(): void {

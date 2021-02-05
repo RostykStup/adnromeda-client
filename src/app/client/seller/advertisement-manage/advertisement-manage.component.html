@@ -6,12 +6,19 @@
     </div>
     <div class="navigation-block">
       <div class="navigation-item">
-        <input class="manage-mode-radio" type="radio" id="adv-update-input" name="manage-mode" checked>
+        <input class="manage-mode-radio"
+               type="radio" id="adv-update-input"
+               name="manage-mode"
+               [checked]="!isStatistics">
         <label class="manage-mode-label left-line" for="adv-update-input" (click)="navigateToEditing()">Редагування</label>
       </div>
       <div class="vertical-divider"></div>
       <div class="navigation-item">
-        <input class="manage-mode-radio" type="radio" id="adv-statistics-input" (click)="navigateToStatistics()" name="manage-mode">
+        <input class="manage-mode-radio"
+               type="radio" id="adv-statistics-input"
+               (click)="navigateToStatistics()"
+               name="manage-mode"
+               [checked]="isStatistics">
         <label class="manage-mode-label" for="adv-statistics-input">Статистика</label>
       </div>
 

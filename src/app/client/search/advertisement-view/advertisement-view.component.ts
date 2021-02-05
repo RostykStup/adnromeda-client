@@ -4,7 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CurrencyService} from '../../../../service/country/currency.service';
 import {RetailGoodsAdvertisementResponse} from '../../../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-goods-advertisement-response';
 import {WholesaleGoodsAdvertisementResponse} from '../../../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-goods-advertisement-response';
-import {GoodsAdvertisementStatisticsResponse} from '../../../../entity/advertisement/goodsAdvertisement/GoodsAdvertisementStatisticsResponse';
+import {GoodsAdvertisementStatisticsResponse} from '../../../../entity/statistics/advertisement/GoodsAdvertisementStatisticsResponse';
 import {CurrencyResponse} from '../../../../entity/country/currency-response';
 import {GoodsCartItemResponse} from '../../../../entity/cart/goods-cart-item-response';
 import {CountryService} from '../../../../service/country/country.service';
@@ -24,6 +24,7 @@ import {ItemAddedToCartDialogComponent} from '../../dialogs/item-added-to-cart-d
 import {AccountService} from '../../../../service/account/account.service';
 import {LoginDialogComponent} from '../../navigation-bar/login-dialog/login-dialog.component';
 import {RetailPriceResponse} from '../../../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-price-response';
+import {ImageDialogComponent} from '../../dialogs/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-advertisement-view',
@@ -300,6 +301,17 @@ export class AdvertisementViewComponent implements OnInit {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       width: '400px',
       data: null
+    });
+    dialogRef.afterClosed().subscribe();
+  }
+
+  openImageDialog(image: string): void {
+    const dialogRef = this.dialog.open(ImageDialogComponent, {
+      // width: '60%',
+      maxWidth: '60%',
+      // maxHeight: '60%',
+      data: image,
+      panelClass: 'image-dialog'
     });
     dialogRef.afterClosed().subscribe();
   }

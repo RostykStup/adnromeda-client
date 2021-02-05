@@ -12,6 +12,8 @@ import {AddressesManageComponent} from './addresses-manage/addresses-manage.comp
 import {NotificationPageComponent} from './notification-page/notification-page.component';
 import {FavoriteAdvertisementsComponent} from './favorite-advertisements/favorite-advertisements.component';
 import {ViewHistoryComponent} from './view-history/view-history.component';
+import {UserProfileComponent} from './user-profile/user-profile.component';
+import {SettingsPageComponent} from './settings-page/settings-page.component';
 
 const routes: Routes = [{
   path: '', component: UserComponent, children: [
@@ -41,6 +43,12 @@ const routes: Routes = [{
     },
     {
       path: 'history', component: ViewHistoryComponent
+    },
+    {
+      path: 'profile', component: UserProfileComponent
+    },
+    {
+      path: 'settings', component: SettingsPageComponent
     }
   ]
 }];

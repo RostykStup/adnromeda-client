@@ -1,0 +1,14 @@
+<p>{{month}}</p>
+
+<select name="" id="" (change)="changeMonth($event)" [(ngModel)]="selectedMonth">
+  <option *ngFor="let m of monthSelectValues"
+          [value]="m"
+          [selected]="endPickerMonth === m">{{getMonthName(m)}}</option>
+</select>
+
+
+<select (change)="changeYear($event)" [(ngModel)]="selectedYear">
+  <option *ngFor="let y of yearSelectValues"
+          [value]="y"
+          [selected]="currentYear === y" (select)="defineSelectedMonthByYear(y)">{{y}}</option>
+</select>

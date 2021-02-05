@@ -6,6 +6,7 @@ import {GlobalConstants} from '../../../common/global-constants';
 import {UserSettingsRequest} from '../../../entity/account/user/user-settings-request';
 import {UserAdvertisementViewsResponse} from '../../../entity/statistics/advertisement-view/user-advertisement-views-response';
 import {PaginationRequest} from '../../../entity/pagination-request';
+import {UserDataRequest} from '../../../entity/account/user/user-data-request';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,17 @@ export class UserService {
     }
 
     return this.httpClient.get<UserAdvertisementViewsResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader(), params});
+  }
+
+
+  changeUserData(request: UserDataRequest): Observable<any> {
+    const url = this.userURL + '/change-data';
+    return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  deleteUserAvatar(): Observable<any> {
+    const url = this.userURL + '/delete-avatar';
+    return this.httpClient.delete(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
 }

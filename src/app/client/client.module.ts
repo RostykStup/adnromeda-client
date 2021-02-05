@@ -21,13 +21,17 @@ import { PaginatorComponent } from './common/paginator/paginator.component';
 import { AdvertisementViewComponent } from './search/advertisement-view/advertisement-view.component';
 import { ItemAddedToCartDialogComponent } from './dialogs/item-added-to-cart-dialog/item-added-to-cart-dialog.component';
 import { RatingViewComponent } from './common/rating-view/rating-view.component';
+import { YearMonthPickerComponent } from './common/year-month-picker/year-month-picker.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import { ImageDialogComponent } from './dialogs/image-dialog/image-dialog.component';
 
 @NgModule({
-  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent],
+  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent, YearMonthPickerComponent, MainPageComponent, ImageDialogComponent],
     exports: [
         RatingPickerComponent,
         PaginatorComponent,
-        RatingViewComponent
+        RatingViewComponent,
+        YearMonthPickerComponent
     ],
   imports: [
     CommonModule,

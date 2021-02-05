@@ -12,6 +12,7 @@ import {GoodsSellerFeedbackRequest} from '../../entity/feedback/goods-seller-fee
 import {GoodsAdvertisementFeedbackRequest} from '../../entity/feedback/goods-advertisement-feedback-request';
 import {PaginationResponse} from '../../entity/pagination-response';
 import {GoodsAdvertisementFeedbackResponse} from '../../entity/feedback/goods-advertisement-feedback-response';
+import {NotificationResponse} from '../../entity/notification/notification-response';
 
 
 @Injectable({
@@ -36,6 +37,16 @@ export class NotificationService {
     params = params.append('page', request.page.toString());
     params = params.append('size', request.size.toString());
     return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader(), params});
+  }
+
+  getNotificationsCount(): Observable<number> {
+    const url = this.notificationURL + '/count';
+    return this.httpClient.get<number>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  getLastNotification(): Observable<NotificationResponse> {
+    const url = this.notificationURL + '/last';
+    return this.httpClient.get<NotificationResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
   makeNotificationRead(id: number): Observable<any> {

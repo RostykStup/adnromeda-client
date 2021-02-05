@@ -1,8 +1,9 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {AccountService} from '../../../service/account/account.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginDialogComponent} from './login-dialog/login-dialog.component';
+import {NotificationService} from '../../../service/notification/notification.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -13,21 +14,38 @@ export class NavigationBarComponent implements OnInit {
 
   constructor(private accountService: AccountService,
               private router: Router,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private activatedRoute: ActivatedRoute,
+              private notificationService: NotificationService) {
   }
 
   profileLink = 'seller-profile';
 
   isLogged = false;
 
+  newNotificationsCount = '';
+
   isOpenProfileMenu = false;
-  userRole : any;
+  userRole: any;
 
   value = '';
 
   ngOnInit(): void {
+    this.makeNewNotificationsCountRequest();
     this.isLogged = this.accountService.isLogged();
     this.userRole = localStorage.getItem('andro_user_role');
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params.value === undefined || params.value === '') {
+        // window.open('/client', '_self');
+      } else {
+        this.value = params.value;
+      }
+    });
+
+
+    // setInterval(() => {
+    //   this.makeNewNotificationsCountRequest();
+    // }, 1000);
   }
 
   openProfileMenu(): void {
@@ -41,6 +59,21 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigateByUrl('/').then(r => {
       window.location.reload();
     });
+  }
+
+  makeNewNotificationsCountRequest(): void {
+    if (this.accountService.isLogged()) {
+      this.notificationService.getNotificationsCount().subscribe((r) => {
+        if (r > 99) {
+          this.newNotificationsCount = '99+';
+        } else if (r === 0) {
+          this.newNotificationsCount = '';
+        } else {
+          this.newNotificationsCount = r.toString();
+        }
+      });
+    }
+
   }
 
   openLoginDialog(): void {
@@ -57,13 +90,27 @@ export class NavigationBarComponent implements OnInit {
   }
 
   makeSearch(): void {
+    this.value = this.value.trim();
+    // if (this.value.length > 0) {
     window.open('client/search?value=' + this.value + '&page=1', '_self');
+    // }
     // this.router.navigateByUrl();
   }
 
   navigateToCart(): void {
     // [routerLink]="'user/cart'"
     this.router.navigateByUrl('client/user/cart');
+    // window.open();
+
+  }
+
+  navigateToNotifications(): void {
+    // [routerLink]="'user/cart'"
+    if (localStorage.getItem('andro_user_role') === 'ROLE_USER') {
+      window.open('client/user/notifications', '_self');
+    } else {
+      window.open('client/seller/notifications', '_self');
+    }
     // window.open();
 
   }

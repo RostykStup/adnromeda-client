@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="block">
+    <div class="main-title">Налаштування магазину</div>
+  </div>
+
+  <div class="block">
+    <div class="settings-block">
+      <div class="settings-block-title-container">
+        <div class="settings-block-title-line left-line"></div>
+        <div class="settings-block-title-text">Основне</div>
+        <div class="settings-block-title-line right-line"></div>
+      </div>
+      <div class="settings-block-content">
+        <div class="avatar-container">
+          <div class="image-container">
+            <img [src]="getAvatar()" alt="">
+          </div>
+
+          <div class="avatar-action-container">
+            <input type="file" accept="image/png, image/jpeg, image/jpg" id="avatar-input" (change)="handleUpload($event)">
+            <button class="andro-button edit-avatar-button" (click)="clickChangeAvatarButton()">Змінити</button>
+            <button class="andro-button delete-button" *ngIf="seller.avatar !== null" (click)="clickDeleteAvatarButton()">Видалити</button>
+          </div>
+        </div>
+        <div class="block-title">Назва магазину</div>
+        <div class="username-container">
+          <input type="text" class="username-input" id="username-input" [value]="seller.shopName" placeholder="назва магазину" disabled>
+          <div class="white-space"></div>
+          <button class="andro-button edit-avatar-button"
+                  (click)="clickUserNameChangeButton()">{{changeUserName ? 'Зберегти' : 'Змінити'}}</button>
+        </div>
+      </div>
+      <div class="settings-block-title-container margin-top-title">
+        <div class="settings-block-title-line left-line"></div>
+        <div class="settings-block-title-text">Сповіщення</div>
+        <div class="settings-block-title-line right-line"></div>
+      </div>
+      <div class="settings-block-content">
+        <div class="notification-checkboxes">
+          <div class="checkbox-container">
+            <input type="checkbox" id="order-send-notification-check" class="andro-checkbox notification-checkbox"
+                   [checked]="seller.settings.sendNewOrderNotifications"
+                   [disabled]="!changeNotificationSettings"
+                   (click)="sendOrderClick($event)"
+            >
+            <label class="andro-label" for="order-send-notification-check"
+                   >Отримувати сповіщення про нові замовлення</label>
+          </div>
+          <div class="checkbox-container">
+            <input type="checkbox" id="order-received-send-notification-check" class="andro-checkbox notification-checkbox"
+                   [checked]="seller.settings.sendOrderReceivedNotifications"
+                   [disabled]="!changeNotificationSettings"
+                   (click)="sendReceivedClick($event)"
+            >
+            <label class="andro-label" for="order-received-send-notification-check"
+                   >Отримувати сповіщення коли покупець підтверджує отримання товару</label>
+          </div>
+        </div>
+        <button class="andro-button edit-notification-button" (click)="clickChangeNotificationSettings()">{{changeNotificationSettings? 'Зберегти' : 'Змінити'}}</button>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

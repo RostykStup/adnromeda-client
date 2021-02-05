@@ -6,4 +6,6 @@ export class GoodsAdvertisementStatisticsResponse {
   orders = 0;
   feedbacks = 0;
   likes = 0;
+
+  creationDate = '';
 }

@@ -161,6 +161,28 @@ $height: 60px;
   display: block;
 }
 
+.notification-container{
+  position: relative;
+  padding: 10px 15px;
+}
+
+.overlay-notifications{
+  position: absolute;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: #888181;
+  //border: 2px solid black;
+  color: #F6F7F9;
+  border-radius: 4px;
+  text-align: center;
+  padding: 3px 5px;
+  height: 19px;
+  //width: 19px;
+
+  bottom: 0;
+  right: 0;
+}
+
 
 @media only screen and (max-width:500px) {
   /* For mobile phones: */

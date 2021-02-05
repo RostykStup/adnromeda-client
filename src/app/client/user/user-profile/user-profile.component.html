@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="block">
+    <div class="main-title">Мій профіль</div>
+  </div>
+
+  <div class="block">
+    <div class="main-info-block">
+      <div class="avatar-container">
+        <img [src]="getAvatar()">
+      </div>
+      <div class="user-name-info">
+        <div class="user-name-text">{{user.username}}</div>
+      </div>
+    </div>
+    <div class="user-statistics-block">
+      <div class="user-stat-item">
+        <div class="user-stat-label">Замовлення:</div>
+        <div class="user-stat-value">{{user.statistics.orders}}</div>
+      </div>
+      <div class="user-stat-item">
+        <div class="user-stat-label">Відгуки про товари:</div>
+        <div class="user-stat-value">{{user.statistics.orderFeedbacks}}</div>
+      </div>
+      <div class="user-stat-item">
+        <div class="user-stat-label">Відгуки про продавців:</div>
+        <div class="user-stat-value">{{user.statistics.sellerFeedbacks}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="block logout-block">
+    <button (click)="logoutButtonClick()" class="logout-button">Вийти</button>
+  </div>
+</div>

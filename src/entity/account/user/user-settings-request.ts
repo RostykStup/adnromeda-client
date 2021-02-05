@@ -1,4 +1,5 @@
 export class UserSettingsRequest {
-  country = '';
-  currency = '';
+  country: string | null = null;
+  currency: string | null = null;
+  getSendOrdersNotifications = false;
 }

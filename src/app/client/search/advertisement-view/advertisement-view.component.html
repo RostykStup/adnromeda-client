@@ -101,44 +101,7 @@
       </div>
       <div class="divider"></div>
       <div class="price-container">
-        <div class="retail-price-container" *ngIf="advertisement.type === 'goods_retail' && retailPrice !== 0">
-          <div class="retail-price-in-currency">{{retailPrice.toFixed(2)}} {{userCurrency}}</div>
-          <div class="retail-original-price" *ngIf="userCurrency !== 'USD'">(оригінальна ціна
-            $ {{originalRetailPrice.price}})
-          </div>
-        </div>
-        <div class="wholesale-price-container" *ngIf="advertisement.type === 'goods_wholesale' && this.currentWholesalePriceInUserCurrency !== 0">
-          <div class="wholesale-price-price-container">
-            <div class="wholesale-price-in-currency">{{currentWholesalePriceInUserCurrency.toFixed(2)}} {{userCurrency}}</div>
-            <div class="wholesale-original-price" *ngIf="userCurrency !== 'USD'">(оригінальна ціна
-              $ {{currentWholesalePrice.toFixed(2)}})
-            </div>
-          </div>
-          <div class="wholesale-price-mark">
-            Оптова ціна
-          </div>
-          <div class="wholesale-price-list-container">
-            <div class="wholesale-price-list-body">
-              <table>
-                <tr>
-                  <td class="count-divider" colspan="2">К-ть</td>
-                  <td  class="count-divider">Ціна</td>
-                </tr>
-                <tr *ngFor="let price of originalWholesalePrice.priceUnits">
-                  <td class="min-count-cell">{{price.min}}</td>
-                  <td class="count-divider" >+</td>
 
-<!--                  <td class="count-divider" *ngIf="price.max !== null">-</td>-->
-<!--                  <td class="count-divider" *ngIf="price.max === null">+</td>-->
-<!--                  <td class="max-count-cell">{{price.max}}</td>-->
-
-<!--                  <td class="count-label-cell">шт.</td>-->
-                  <td class="count-price-cell">$ {{price.price}} / шт.</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="divider"></div>
       <div class="count-picker-container">

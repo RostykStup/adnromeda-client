@@ -2,16 +2,10 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {GlobalConstants} from '../../common/global-constants';
-import {WholesaleGoodsAdvertisementRequest} from '../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-goods-advertisement-request';
-import {RetailGoodsAdvertisementRequest} from '../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-goods-advertisement-request';
 import {GoodsAdvertisementSearchRequest} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-search-request';
 import {PaginationRequest} from '../../entity/pagination-request';
 import {PaginationResponse} from '../../entity/pagination-response';
 import {GoodsAdvertisementResponse} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-response';
-import {WholesaleGoodsAdvertisementResponse} from '../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-goods-advertisement-response';
-import {RetailGoodsAdvertisementResponse} from '../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-goods-advertisement-response';
-import {RetailPriceRequest} from '../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-price-request';
-import {WholesalePriceRequest} from '../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-price-request';
 import {PropertyRequest} from '../../entity/advertisement/goodsAdvertisement/property-request';
 import {GoodsAdvertisementStatisticsResponse} from '../../entity/statistics/advertisement/GoodsAdvertisementStatisticsResponse';
 import {GoodsAdvertisementMonthStatisticsResponse} from '../../entity/statistics/advertisement/goods-advertisement-month-statistics-response';
@@ -49,7 +43,8 @@ export class AdvertisementService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get<PaginationResponse<GoodsAdvertisementResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<PaginationResponse<GoodsAdvertisementResponse>>(url,
+      {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
   getAdvertisementCount(id: number): Observable<number> {
@@ -57,37 +52,6 @@ export class AdvertisementService {
     return this.httpClient.get<number>(url);
   }
 
-  createWholeSaleAdvertisement(request: WholesaleGoodsAdvertisementRequest): Observable<any> {
-    const url = this.advertisementURL + '/wholesale';
-    return this.httpClient.post(
-      url,
-      request,
-      {headers: GlobalConstants.getRequestAuthorizationHeader()});
-  }
-
-  createRetailAdvertisement(request: RetailGoodsAdvertisementRequest): Observable<any> {
-    const url = this.advertisementURL + '/retail';
-    return this.httpClient.post(
-      url,
-      request,
-      {headers: GlobalConstants.getRequestAuthorizationHeader()});
-  }
-
-  getSellerGoodsAdvertisementForEditing(id: number): Observable<WholesaleGoodsAdvertisementResponse | RetailGoodsAdvertisementResponse> {
-    const url = this.advertisementURL + '/editing?id=' + id;
-    return this.httpClient.get<WholesaleGoodsAdvertisementResponse | RetailGoodsAdvertisementResponse>(
-      url,
-      {headers: GlobalConstants.getRequestAuthorizationHeader()}
-    );
-  }
-
-  getSellerGoodsAdvertisementById(id: number): Observable<WholesaleGoodsAdvertisementResponse | RetailGoodsAdvertisementResponse> {
-    const url = this.advertisementURL + '/?id=' + id;
-    return this.httpClient.get<WholesaleGoodsAdvertisementResponse | RetailGoodsAdvertisementResponse>(
-      url,
-      {headers: GlobalConstants.getRequestAuthorizationHeader()}
-    );
-  }
 
   findAllByFilters(request: GoodsAdvertisementSearchRequest): Observable<any> {
     const fromCountryCode = request.fromCountryCode !== null ? 'fromCountryCode=' + request.fromCountryCode + '&' : '';
@@ -98,7 +62,8 @@ export class AdvertisementService {
     const pageSize = 'paginationRequest.size=' + request.paginationRequest.size + '&';
     const rating = request.rating !== null ? 'rating=' + request.rating + '&' : '';
     const title = request.title !== null ? 'title=' + request.title : '';
-    const url = this.advertisementURL + '/filter?' + fromCountryCode + image + pageDirection + pageField + pagePage + pageSize + rating + title;
+    const url = this.advertisementURL + '/filter?' + fromCountryCode
+      + image + pageDirection + pageField + pagePage + pageSize + rating + title;
     return this.httpClient.get<any>(url);
   }
 
@@ -159,16 +124,6 @@ export class AdvertisementService {
   getAdvertisementMonthStatistics(id: number, month: string, year: string): Observable<GoodsAdvertisementMonthStatisticsResponse> {
     const url = this.advertisementURL + '/month-statistics?id=' + id + '&month=' + month + '&year=' + year;
     return this.httpClient.get<GoodsAdvertisementMonthStatisticsResponse>(url);
-  }
-
-  changeRetailAdvertisementPrice(request: RetailPriceRequest, id: number): Observable<any> {
-    const url = this.retailAdvertisementURL + '/change-price?id=' + id;
-    return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
-  }
-
-  changeWholesaleAdvertisementPrice(request: WholesalePriceRequest, id: number): Observable<any> {
-    const url = this.wholesaleAdvertisementURL + '/change-price?id=' + id;
-    return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
   addToUserFavorites(id: number): Observable<any> {

@@ -4,7 +4,6 @@ import {GoodsOrderResponse} from '../../../../entity/order/goods-order-response'
 import {PaginationRequest} from '../../../../entity/pagination-request';
 import {UserGoodsOrderDataResponse} from '../../../../entity/order/user-goods-order-data-response';
 import {GoodsAdvertisementResponse} from '../../../../entity/advertisement/goodsAdvertisement/goods-advertisement-response';
-import {RetailGoodsAdvertisementResponse} from '../../../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-goods-advertisement-response';
 import {Router} from '@angular/router';
 
 @Component({

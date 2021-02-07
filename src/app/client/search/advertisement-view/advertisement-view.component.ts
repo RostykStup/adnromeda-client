@@ -2,19 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {AdvertisementService} from '../../../../service/advertisement/advertisement.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CurrencyService} from '../../../../service/country/currency.service';
-import {RetailGoodsAdvertisementResponse} from '../../../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-goods-advertisement-response';
-import {WholesaleGoodsAdvertisementResponse} from '../../../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-goods-advertisement-response';
 import {GoodsAdvertisementStatisticsResponse} from '../../../../entity/statistics/advertisement/GoodsAdvertisementStatisticsResponse';
-import {CurrencyResponse} from '../../../../entity/country/currency-response';
-import {GoodsCartItemResponse} from '../../../../entity/cart/goods-cart-item-response';
 import {CountryService} from '../../../../service/country/country.service';
-import {markIgnoreDiagnostics} from '@angular/compiler-cli/src/ngtsc/typecheck/src/comments';
 import {DeliveryService} from '../../../../service/country/delivery.service';
 import {DeliveryTypeResponse} from '../../../../entity/country/delivery-type-response';
 import {ChooseDeliveryDialogComponent} from '../../dialogs/choose-delivery-dialog/choose-delivery-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {RestCountry} from '../../../../entity/country/rest-country';
-import {WholesalePriceResponse} from '../../../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-price-response';
 import {PaginationRequest} from '../../../../entity/pagination-request';
 import {FeedbackService} from '../../../../service/feedback/feedback.service';
 import {PaginationResponse} from '../../../../entity/pagination-response';
@@ -23,8 +17,8 @@ import {CartService} from '../../../../service/cart/cart.service';
 import {ItemAddedToCartDialogComponent} from '../../dialogs/item-added-to-cart-dialog/item-added-to-cart-dialog.component';
 import {AccountService} from '../../../../service/account/account.service';
 import {LoginDialogComponent} from '../../navigation-bar/login-dialog/login-dialog.component';
-import {RetailPriceResponse} from '../../../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-price-response';
 import {ImageDialogComponent} from '../../dialogs/image-dialog/image-dialog.component';
+import {GoodsAdvertisementResponse} from '../../../../entity/advertisement/goodsAdvertisement/goods-advertisement-response';
 
 @Component({
   selector: 'app-advertisement-view',
@@ -46,16 +40,9 @@ export class AdvertisementViewComponent implements OnInit {
 
   }
 
-  // @ts-ignore
-  advertisement: RetailGoodsAdvertisementResponse | WholesaleGoodsAdvertisementResponse;
+  advertisement = new GoodsAdvertisementResponse();
   // @ts-ignore
   statics: GoodsAdvertisementStatisticsResponse;
-  originalRetailPrice = new RetailPriceResponse();
-  originalWholesalePrice = new WholesalePriceResponse();
-
-  retailPrice = 0;
-  currentWholesalePriceInUserCurrency = 0;
-  currentWholesalePrice = 0;
 
   userCurrency = '';
   deliveries = new Array<DeliveryTypeResponse>();
@@ -81,25 +68,25 @@ export class AdvertisementViewComponent implements OnInit {
     this.feedbackPagination.direction = 'DESC';
 
     this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.advertisementService.getSellerGoodsAdvertisementById(params.id).subscribe((r) => {
-        this.advertisement = r;
-        this.advertisementService.setAdvertisementView(this.advertisement.id).subscribe();
-
-        this.viewImage = this.advertisement.mainImage;
-        this.advertisementService.getAdvertisementStatistics(this.advertisement.id).subscribe((s) => {
-          this.statics = s;
-        });
-        this.deliverySetup();
-        this.imagesForCarousel.push(this.advertisement.mainImage);
-        this.advertisement.images.forEach((i) => {
-          this.imagesForCarousel.push(i);
-        });
-        setTimeout(() => {
-          this.loadUserCurrencyAndPrice();
-        }, 300);
-
-        this.reloadFeedbacks();
-      });
+      // this.advertisementService.getSellerGoodsAdvertisementById(params.id).subscribe((r) => {
+      //   this.advertisement = r;
+      //   this.advertisementService.setAdvertisementView(this.advertisement.id).subscribe();
+      //
+      //   this.viewImage = this.advertisement.mainImage;
+      //   this.advertisementService.getAdvertisementStatistics(this.advertisement.id).subscribe((s) => {
+      //     this.statics = s;
+      //   });
+      //   this.deliverySetup();
+      //   this.imagesForCarousel.push(this.advertisement.mainImage);
+      //   this.advertisement.images.forEach((i) => {
+      //     this.imagesForCarousel.push(i);
+      //   });
+      //   setTimeout(() => {
+      //     this.loadUserCurrencyAndPrice();
+      //   }, 300);
+      //
+      //   this.reloadFeedbacks();
+      // });
     });
   }
 
@@ -155,7 +142,6 @@ export class AdvertisementViewComponent implements OnInit {
 
   loadWholesalePriceInUserCurrency(): void {
     this.identifyCurrentWholesalePrice();
-    this.currentWholesalePriceInUserCurrency = this.currencyService.exchangeCurrencies('USD', this.userCurrency, this.currentWholesalePrice);
   }
 
   identifyCurrentWholesalePrice(): void {
@@ -166,7 +152,6 @@ export class AdvertisementViewComponent implements OnInit {
         price = p.price;
       }
     }
-    this.currentWholesalePrice = price;
   }
 
 

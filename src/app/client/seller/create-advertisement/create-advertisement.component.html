@@ -45,131 +45,6 @@
   </div>
 
   <div class="creation-block">
-    <div class="block-element price-choose-container-title">
-    <span class="block-title">
-      Як ви будете продавати цей товар?*
-    </span>
-      <div class="warning-container" *ngIf="!validationPrice">
-        <img [src]="icon"/>
-        <span class="validation-text">Ви не налаштували ціну</span>
-      </div>
-      <div class="warning-container" *ngIf="!validationEmptyPrice">
-        <img [src]="icon"/>
-        <span class="validation-text">У вас присутні пусті поля</span>
-      </div>
-    </div>
-
-    <div class="price-choose-container">
-      <div class="price-choose-element" [ngClass]="{chosen: priceType === 1}" (click)="changePriceType(1)">Роздріб
-      </div>
-      <div class="price-choose-element" [ngClass]="{chosen: priceType === 2}" (click)="changePriceType(2)">ОПТ</div>
-    </div>
-
-    <div class="block-content" [ngSwitch]="priceType">
-      <div class="block-element" *ngSwitchCase="1">
-        <input type="text" class="andro-input" [(ngModel)]="retailPrice"
-               (keyup)="validateNumber(retailPrice)" placeholder="Ціна за одиницю $">
-        <span *ngIf="!isNumber" class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>
-        <span *ngIf="isNumber && !digit"
-              class="validation-text green">Буде збережено як: $ {{transitionPrice}} USD</span>
-      </div>
-
-      <div class="" *ngSwitchCase="2">
-
-        <div class="wholesale-price-info-container">
-          <div class="wh-pr-count-elem title property-title"> Кількість (шт.)
-            <div class="question-body">
-              <img [src]="questionIcon" class="question-icon">
-              <div class="question-container">
-                <div class="question-content price-question-content">
-                  Оптова ціна заповнюється за прикладом:
-                  <table>
-                    <tr>
-                      <td>1 - 200</td>
-                      <td>| 20 грн/шт</td>
-                    </tr>
-                    <tr>
-                      <td>201 - 1000</td>
-                      <td>| 19 грн/шт</td>
-                    </tr>
-                    <tr>
-                      <td>1001 -</td>
-                      <td>| 18.50 грн/шт</td>
-                    </tr>
-                  </table>
-                  Останнє поле 'до' можна залишити пустим
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="wh-pr-price-elem property-title"> Ціна $
-            <!--            <img />-->
-            <img class="add-icon" (click)="addNewWholesalePrice()"
-                 src="https://img.icons8.com/material/30/000000/plus--v1.png"/>
-          </div>
-          <div class="warning-container" *ngIf="!(this.wholesalePrice.priceUnits.length >= 2)">
-            <img [src]="icon"/>
-            <span class="validation-text">Потрібно створити мінімум 2 варіанти ціни</span>
-          </div>
-
-          <div class="warning-container" *ngIf="!cantAddPriceAlert">
-            <img [src]="icon"/>
-            <span class="validation-text">Заповніть поля кількості</span>
-          </div>
-        </div>
-
-        <div *ngFor="let price of wholesalePrice.priceUnits" class="wh-pr-container">
-          <div class="wh-pr-holder">
-            <div class="wh-pr-count-elem">
-              <input type="number" min="0" class="andro-input wholesale-price-count-input"
-                     [ngClass]="{red_inp: (!price.isValidSides || !price.isValidWithOthers)}"
-                     [(ngModel)]="price.min"
-                     (change)="validateUnitSidesAndValidWithOther(price)"
-                     [disabled]="!isFirst(price)"
-                     min="1"
-                     placeholder="Від">
-              -
-              <input type="number" class="andro-input wholesale-price-count-input"
-                     [ngClass]="{red_inp: (!price.isValidSides || !isValidNextSide(price))}"
-                     [(ngModel)]="price.max"
-                     (keyup)="validateUnitSidesAndValidWithOther(price)"
-                     min="1"
-                     placeholder="До">
-            </div>
-            <div class="wh-pr-price-elem">
-              <input type="text" class="wholesale-price-input andro-input"
-                     [(ngModel)]="price.price"
-                     (keyup)="validateUnitPrice(price)"
-                     placeholder="Ціна">
-              <div class="remove-price-holder" [ngClass]="{visible_button:wholesalePrice.priceUnits.length > 1}">
-                <img (click)="removeWholesalePrice(price)"
-                     src="https://img.icons8.com/material-outlined/24/000000/minus-sign.png"/>
-              </div>
-            </div>
-          </div>
-          <div class="allert-wh-pr-container">
-            <img *ngIf="!price.isValidPrice || !price.isValidSides" [src]="icon"/>
-            <span *ngIf="!price.isValidPrice"
-                  class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>
-
-            <span *ngIf="!price.isValidWithOthers && price.isValidPrice"
-                  class="validation-text">Початкове значення повинне бути більше від кількості попереднього</span>
-
-            <span *ngIf="!price.isValidSides && price.isValidPrice && price.isValidWithOthers"
-                  class="validation-text">{{price.min}} ≥ {{price.max === null ? '0' : price.max }}</span>
-
-            <span *ngIf="price.isValid() && !price.isDigit"
-                  class="validation-text green">Буде збережено як: {{price.getTwoDigitPrice()}} USD</span>
-            <!--            <span-->
-            <!--              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrency}}</span>-->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="creation-block">
     <span class="block-title">
       Опишіть свій товар
     </span>
@@ -233,23 +108,23 @@
     </div>
   </div>
 
-  <div class="creation-block">
-    <span class="block-title">
-      Введіть кількість доступних одиниць товару*
-    </span>
-    <div class="block-content">
-      <div class="block-element">
-        <input type="number" class="andro-input" [(ngModel)]="advertisement.count"
-               (keyup)="validateNumber(advertisement.count); validateCount = true" placeholder="Кількість"
-               min="1" value="1">
-        <div class="warning-container" *ngIf="!validateCount">
-          <img [src]="icon">
-          <span class="validation-text">Це поле не може бути пустим чи рівним нулю</span>
-        </div>
-
-      </div>
-    </div>
-  </div>
+<!--  <div class="creation-block">-->
+<!--    <span class="block-title">-->
+<!--      Введіть кількість доступних одиниць товару*-->
+<!--    </span>-->
+<!--    <div class="block-content">-->
+<!--      <div class="block-element">-->
+<!--        <input type="number" class="andro-input" [(ngModel)]="advertisement.count"-->
+<!--               (keyup)="validateNumber(advertisement.count); validateCount = true" placeholder="Кількість"-->
+<!--               min="1" value="1">-->
+<!--        <div class="warning-container" *ngIf="!validateCount">-->
+<!--          <img [src]="icon">-->
+<!--          <span class="validation-text">Це поле не може бути пустим чи рівним нулю</span>-->
+<!--        </div>-->
+<!---->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div class="creation-block">
     <span class="block-title">

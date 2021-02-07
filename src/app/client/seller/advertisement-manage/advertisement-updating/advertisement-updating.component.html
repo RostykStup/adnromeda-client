@@ -12,114 +12,114 @@
       <button class="change-title-button button" (click)="titleButtonClick()"></button>
     </div>
   </div>
-  <div class="block">
-    <div class="price-container" [ngSwitch]="advertisement.type">
-      <div *ngSwitchCase="'goods_retail'">
-        <div class="price-container-title">
-          Ціна за 1 шт.
-        </div>
-        <div class="price-container-content">
-          <span class="same-retail-input-text">$</span>
-          <input autocomplete="off" id="retail-price-input" type="text" class=" editable-input retail-price-input"
-                 [(ngModel)]="newRetail.price"
-                 (keyup)="validateNumber(newRetail.price)" placeholder="Ціна за одиницю $" disabled>
-          <span *ngIf="!isNumberRetail" class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>
-          <span *ngIf="isNumberRetail && !isDigitRetail"
-                class="validation-text green">Буде збережено як: $ {{transitionPriceRetail}} USD</span>
-          <div class="white-space"></div>
-          <button class="cancel-retail-price-button cancel-button button" (click)="clickCancelRetailPriceButton()">
-            Скасувати
-          </button>
-          <button class="change-retail-price-button button" (click)="clickChangeRetailPriceButton()"></button>
-        </div>
-      </div>
-      <div *ngSwitchCase="'goods_wholesale'">
-        <div class="price-container-title wholesale-title">
-          Оптова ціна
-        </div>
-        <div class="wholesale-price-container">
-          <div style="flex-grow: 2" *ngIf="wholesaleUpdate">
-            <div class="wholesale-price-info-container">
-              <div class="wh-pr-count-elem title property-title"> Кількість (шт.)
-              </div>
-              <div class="wh-pr-price-elem property-title"> Ціна $
-                <img class="add-icon" (click)="addNewWholesalePrice()"
-                     src="https://img.icons8.com/material/30/000000/plus--v1.png"/>
-              </div>
-              <div class="warning-container" *ngIf="!(newWholesale.priceUnits.length >= 2)">
-                <span class="validation-text">Потрібно створити мінімум 2 варіанти ціни</span>
-              </div>
+<!--  <div class="block">-->
+<!--    <div class="price-container" [ngSwitch]="advertisement.type">-->
+<!--      <div *ngSwitchCase="'goods_retail'">-->
+<!--        <div class="price-container-title">-->
+<!--          Ціна за 1 шт.-->
+<!--        </div>-->
+<!--        <div class="price-container-content">-->
+<!--          <span class="same-retail-input-text">$</span>-->
+<!--          <input autocomplete="off" id="retail-price-input" type="text" class=" editable-input retail-price-input"-->
+<!--                 [(ngModel)]="newRetail.price"-->
+<!--                 (keyup)="validateNumber(newRetail.price)" placeholder="Ціна за одиницю $" disabled>-->
+<!--          <span *ngIf="!isNumberRetail" class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>-->
+<!--          <span *ngIf="isNumberRetail && !isDigitRetail"-->
+<!--                class="validation-text green">Буде збережено як: $ {{transitionPriceRetail}} USD</span>-->
+<!--          <div class="white-space"></div>-->
+<!--          <button class="cancel-retail-price-button cancel-button button" (click)="clickCancelRetailPriceButton()">-->
+<!--            Скасувати-->
+<!--          </button>-->
+<!--          <button class="change-retail-price-button button" (click)="clickChangeRetailPriceButton()"></button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div *ngSwitchCase="'goods_wholesale'">-->
+<!--        <div class="price-container-title wholesale-title">-->
+<!--          Оптова ціна-->
+<!--        </div>-->
+<!--        <div class="wholesale-price-container">-->
+<!--          <div style="flex-grow: 2" *ngIf="wholesaleUpdate">-->
+<!--            <div class="wholesale-price-info-container">-->
+<!--              <div class="wh-pr-count-elem title property-title"> Кількість (шт.)-->
+<!--              </div>-->
+<!--              <div class="wh-pr-price-elem property-title"> Ціна $-->
+<!--                <img class="add-icon" (click)="addNewWholesalePrice()"-->
+<!--                     src="https://img.icons8.com/material/30/000000/plus&#45;&#45;v1.png"/>-->
+<!--              </div>-->
+<!--              <div class="warning-container" *ngIf="!(newWholesale.priceUnits.length >= 2)">-->
+<!--                <span class="validation-text">Потрібно створити мінімум 2 варіанти ціни</span>-->
+<!--              </div>-->
 
-              <div class="warning-container" *ngIf="!cantAddPriceAlert">
-                <span class="validation-text">Заповніть поля кількості</span>
-              </div>
-            </div>
+<!--              <div class="warning-container" *ngIf="!cantAddPriceAlert">-->
+<!--                <span class="validation-text">Заповніть поля кількості</span>-->
+<!--              </div>-->
+<!--            </div>-->
 
-            <div *ngFor="let price of newWholesale.priceUnits" class="wh-pr-container">
-              <div class="wh-pr-holder">
-                <div class="wh-pr-count-elem">
-                  <input type="number" min="0" class="andro-input wholesale-price-count-input"
-                         [ngClass]="{red_inp: (!price.isValidSides || !price.isValidWithOthers)}"
-                         [(ngModel)]="price.min"
-                         (change)="validateUnitSidesAndValidWithOther(price)"
-                         [disabled]="!isFirst(price)"
-                         min="1"
-                         placeholder="Від">
-                  -
-                  <input type="number" class="andro-input wholesale-price-count-input"
-                         [ngClass]="{red_inp: (!price.isValidSides || !isValidNextSide(price))}"
-                         [(ngModel)]="price.max"
-                         (keyup)="validateUnitSidesAndValidWithOther(price)"
-                         min="1"
-                         placeholder="До">
-                </div>
-                <div class="wh-pr-price-elem">
-                  <input type="text" class="wholesale-price-input andro-input"
-                         [(ngModel)]="price.price"
-                         (keyup)="validateUnitPrice(price)"
-                         placeholder="Ціна">
-                  <div class="remove-price-holder" [ngClass]="{visible_button:newWholesale.priceUnits.length > 1}">
-                    <img (click)="removeWholesalePrice(price)"
-                         src="https://img.icons8.com/material-outlined/24/000000/minus-sign.png"/>
-                  </div>
-                </div>
-              </div>
-              <div class="allert-wh-pr-container">
-              <span *ngIf="!price.isValidPrice"
-                    class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>
+<!--            <div *ngFor="let price of newWholesale.priceUnits" class="wh-pr-container">-->
+<!--              <div class="wh-pr-holder">-->
+<!--                <div class="wh-pr-count-elem">-->
+<!--                  <input type="number" min="0" class="andro-input wholesale-price-count-input"-->
+<!--                         [ngClass]="{red_inp: (!price.isValidSides || !price.isValidWithOthers)}"-->
+<!--                         [(ngModel)]="price.min"-->
+<!--                         (change)="validateUnitSidesAndValidWithOther(price)"-->
+<!--                         [disabled]="!isFirst(price)"-->
+<!--                         min="1"-->
+<!--                         placeholder="Від">-->
+<!--                  - -->
+<!--                  <input type="number" class="andro-input wholesale-price-count-input"-->
+<!--                         [ngClass]="{red_inp: (!price.isValidSides || !isValidNextSide(price))}"-->
+<!--                         [(ngModel)]="price.max"-->
+<!--                         (keyup)="validateUnitSidesAndValidWithOther(price)"-->
+<!--                         min="1"-->
+<!--                         placeholder="До">-->
+<!--                </div>-->
+<!--                <div class="wh-pr-price-elem">-->
+<!--                  <input type="text" class="wholesale-price-input andro-input"-->
+<!--                         [(ngModel)]="price.price"-->
+<!--                         (keyup)="validateUnitPrice(price)"-->
+<!--                         placeholder="Ціна">-->
+<!--                  <div class="remove-price-holder" [ngClass]="{visible_button:newWholesale.priceUnits.length > 1}">-->
+<!--                    <img (click)="removeWholesalePrice(price)"-->
+<!--                         src="https://img.icons8.com/material-outlined/24/000000/minus-sign.png"/>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="allert-wh-pr-container">-->
+<!--              <span *ngIf="!price.isValidPrice"-->
+<!--                    class="validation-text">Некоректний формат ціни (Приклад: 0.00)</span>-->
 
-                <span *ngIf="!price.isValidWithOthers && price.isValidPrice"
-                      class="validation-text">Початкове значення повинне бути більше від кількості попереднього</span>
+<!--                <span *ngIf="!price.isValidWithOthers && price.isValidPrice"-->
+<!--                      class="validation-text">Початкове значення повинне бути більше від кількості попереднього</span>-->
 
-                <span *ngIf="!price.isValidSides && price.isValidPrice && price.isValidWithOthers"
-                      class="validation-text">{{price.min}} ≥ {{price.max === null ? '0' : price.max }}</span>
+<!--                <span *ngIf="!price.isValidSides && price.isValidPrice && price.isValidWithOthers"-->
+<!--                      class="validation-text">{{price.min}} ≥ {{price.max === null ? '0' : price.max }}</span>-->
 
-                <span *ngIf="price.isValid() && !price.isDigit"
-                      class="validation-text green">Буде збережено як: {{price.getTwoDigitPrice()}} USD</span>
-                <!--            <span-->
-                <!--              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrency}}</span>-->
-              </div>
-            </div>
-          </div>
-          <div *ngIf="!wholesaleUpdate">
-            <table>
-              <tr *ngFor="let unit of newWholesale.priceUnits">
-                <td class="wholesale-min-count-cell wholesale-cell">{{unit.min}}</td>
-                <td class="divider-cell wholesale-cell" *ngIf="unit.max !== null ">-</td>
-                <td class="divider-cell wholesale-cell" *ngIf="unit.max === null ">+</td>
-                <td class=" wholesale-cell">{{unit.max}}</td>
-                <td class="price-divider-cell wholesale-cell">шт.</td>
-                <td class="wholesale-price-cell wholesale-cell">${{unit.price.toFixed(2)}}</td>
-              </tr>
-            </table>
-          </div>
-          <button class="button cancel-button" (click)="wholeSaleCancelClick()" *ngIf="wholesaleUpdate">Скасувати
-          </button>
-          <button class="button" (click)="wholeSaleUpdateClick()">{{wholesaleUpdate ? 'Зберегти' : 'Змінити'}}</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<!--                <span *ngIf="price.isValid() && !price.isDigit"-->
+<!--                      class="validation-text green">Буде збережено як: {{price.getTwoDigitPrice()}} USD</span>-->
+<!--                &lt;!&ndash;            <span&ndash;&gt;-->
+<!--                &lt;!&ndash;              class="validation-text green">Буде збережено як: {{transitionPrice}} {{transitionCurrency}}</span>&ndash;&gt;-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div *ngIf="!wholesaleUpdate">-->
+<!--            <table>-->
+<!--              <tr *ngFor="let unit of newWholesale.priceUnits">-->
+<!--                <td class="wholesale-min-count-cell wholesale-cell">{{unit.min}}</td>-->
+<!--                <td class="divider-cell wholesale-cell" *ngIf="unit.max !== null ">-</td>-->
+<!--                <td class="divider-cell wholesale-cell" *ngIf="unit.max === null ">+</td>-->
+<!--                <td class=" wholesale-cell">{{unit.max}}</td>-->
+<!--                <td class="price-divider-cell wholesale-cell">шт.</td>-->
+<!--                <td class="wholesale-price-cell wholesale-cell">${{unit.price.toFixed(2)}}</td>-->
+<!--              </tr>-->
+<!--            </table>-->
+<!--          </div>-->
+<!--          <button class="button cancel-button" (click)="wholeSaleCancelClick()" *ngIf="wholesaleUpdate">Скасувати-->
+<!--          </button>-->
+<!--          <button class="button" (click)="wholeSaleUpdateClick()">{{wholesaleUpdate ? 'Зберегти' : 'Змінити'}}</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div class="block">
     <div class="title-label-holder">

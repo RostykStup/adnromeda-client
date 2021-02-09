@@ -14,6 +14,10 @@ import {DeliveryService} from '../../../../service/country/delivery.service';
 import {InfoDialogComponent} from '../../dialogs/info-dialog/info-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import {ParameterRequest} from '../../../../entity/advertisement/goodsAdvertisement/parameter/parameter-request';
+import {ParameterValueRequest} from '../../../../entity/advertisement/goodsAdvertisement/parameter/parameter-value-request';
+import {ConfirmDialogComponent} from '../../dialogs/confirm-dialog/confirm-dialog.component';
+import {ParametersValuesPriceCountRequest} from '../../../../entity/advertisement/goodsAdvertisement/parameter/parameters-values-price-count-request';
 
 export class Image {
   src = '';
@@ -36,9 +40,6 @@ export class CreateAdvertisementComponent implements OnInit {
               private router: Router) {
   }
 
-  isNumber = true;
-  digit = true;
-
   advertisement = new GoodsAdvertisementRequest();
   categories = Array<CategoryResponse>();
   subcategories = Array<SubcategoryResponse>();
@@ -46,6 +47,10 @@ export class CreateAdvertisementComponent implements OnInit {
   deliveryTypes = Array<DeliveryTypeResponse>();
   categoryId = 0;
   subcategoryId = 0;
+
+  parameters = new Array<ParameterRequest>();
+
+  paramsValuesCountPrices = new Array<ParametersValuesPriceCountRequest>();
 
   images = Array<Image>();
 
@@ -138,6 +143,7 @@ export class CreateAdvertisementComponent implements OnInit {
 
       if (this.advertisement.properties.length === 1) {
         if (this.advertisement.properties[0].value === '') {
+          // @ts-ignore
           this.advertisement.properties = null;
         }
       }
@@ -210,4 +216,106 @@ export class CreateAdvertisementComponent implements OnInit {
     });
   }
 
+  enterPriceInput($event: any): void {
+    const price = $event.target.value;
+    if (!Validator.validateNumberForPrice(price) || !Validator.validatePriceForTwoDigits(price)) {
+      $event.target.classList.add('incorrect');
+    } else {
+      $event.target.classList.remove('incorrect');
+    }
+  }
+
+  addParameter(): void {
+    const input = document.getElementById('new-param-title-input') as HTMLInputElement;
+    input.value = input.value.trim();
+    if (input.value.length > 1) {
+      const parameter = new ParameterRequest();
+      parameter.title = input.value;
+      this.parameters.push(parameter);
+      input.value = '';
+    }
+
+  }
+
+  addParameterValue(parameter: ParameterRequest): void {
+    const input = document.getElementById('param-' + parameter.title + '-value-input') as HTMLInputElement;
+    input.value = input.value.trim();
+    if (input.value.length > 0) {
+      const value = new ParameterValueRequest();
+      value.title = input.value;
+      this.parameters[this.parameters.indexOf(parameter)].values.push(value);
+      input.value = '';
+      this.recreateNewParamsValuesCountPricesRequest();
+    }
+  }
+
+
+  deleteParameter(parameter: ParameterRequest): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        text: 'Ви впевнені що хочете видалити параметр?'
+      }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.result) {
+        this.parameters.splice(this.parameters.indexOf(parameter), 1);
+        this.recreateNewParamsValuesCountPricesRequest();
+      }
+    });
+  }
+
+  deleteParameterValue(parameter: ParameterRequest, value: ParameterValueRequest): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        text: 'Ви впевнені що хочете видалити варіант параметру?'
+      }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.result) {
+        parameter.values.splice(parameter.values.indexOf(value), 1);
+        this.recreateNewParamsValuesCountPricesRequest();
+      }
+    });
+  }
+
+
+  recreateNewParamsValuesCountPricesRequest(): void {
+    if (this.parameters.length === 0) {
+      this.paramsValuesCountPrices = new Array<ParametersValuesPriceCountRequest>();
+      return;
+    }
+    let size = 1;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.parameters.length; i++) {
+      size = size * this.parameters[i].values.length;
+    }
+    this.paramsValuesCountPrices = new Array<ParametersValuesPriceCountRequest>();
+
+    const parameterLength = new Array<number>();
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.parameters.length; i++) {
+      parameterLength[i] = this.getParameterLength(i, size, (i === 0 ? 0 : parameterLength[i - 1]));
+    }
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < size; i++) {
+      const param = new ParametersValuesPriceCountRequest();
+      // tslint:disable-next-line:prefer-for-of
+      for (let j = 0; j < this.parameters.length; j++) {
+        const paramValuesIndex = Math.floor(i / parameterLength[j]) % this.parameters[j].values.length;
+        param.valueParam.set(this.parameters[j].title, this.parameters[j].values[paramValuesIndex].title);
+      }
+      this.paramsValuesCountPrices.push(param);
+    }
+
+    console.log(this.paramsValuesCountPrices);
+  }
+
+  getParameterLength(index: number, size: number, previousLength: number): number {
+    if (index === 0) {
+      return size / this.parameters[index].values.length;
+    } else {
+      return previousLength / this.parameters[index].values.length;
+    }
+  }
 }

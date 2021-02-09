@@ -13,6 +13,8 @@ export class GoodsAdvertisementRequest extends AdvertisementRequest {
 
   valuesPriceCounts = new Array<ParametersValuesPriceCountRequest>();
 
+  hasParameters = false;
+
   images = Array<string>();
 
   properties = new Array<PropertyRequest>();

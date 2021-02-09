@@ -46,6 +46,107 @@
 
   <div class="creation-block">
     <span class="block-title">
+      Ціна, кількість та парметри
+    </span>
+    <div class="checkbox-container">
+      <input type="checkbox" id="adv-has-params" class="andro-checkbox" [(ngModel)]="advertisement.hasParameters">
+      <label class="andro-label" for="adv-has-params">Даний товар має параметри для вибору</label>
+    </div>
+    <div class="no-params-price-count-container" [ngClass]="{visible_params_container: !advertisement.hasParameters}">
+      <label class="andro-label">Штук у наявності</label>
+      <input type="number" min="0" class="andro-input" placeholder="Штук у наявності">
+      <div class="price-input-container">
+        <label class="andro-label">Ціна за одиницю $</label>
+        <input type="text" class="andro-input price-input" placeholder="Ціна $" (keyup)="enterPriceInput($event)">
+        <div class="warning-container">
+          <img [src]="icon"/>
+          <span class="validation-text">Формат ціни : 1.00</span>
+        </div>
+      </div>
+    </div>
+    <div class="advertisement-with-params-container"
+         [ngClass]="{visible_params_container: advertisement.hasParameters}">
+      <div class="add-params-text">Додайте параметри та їх варіанти до товару</div>
+      <div class="add-param-container">
+        <input type="text" class="andro-input" placeholder="Назва параметру" id="new-param-title-input">
+        <button class="add-param-button" (click)="addParameter()">Додати</button>
+      </div>
+      <div class="params-container">
+        <div class="param-container" *ngFor="let parameter of parameters">
+          <div class="parameter-title">
+            <span class="parameter-title-text">{{parameter.title}}</span>
+            <button class="delete-param-button" (click)="deleteParameter(parameter)">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="20" height="20"
+                   viewBox="0 0 226 226"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,226v-226h226v226z" fill="none"></path>
+                  <g fill="#ffffff">
+                    <path
+                      d="M53.74121,40.42546l-13.31575,13.31575l59.25879,59.25879l-59.25879,59.25879l13.31575,13.31575l59.25879,-59.25879l59.25879,59.25879l13.31575,-13.31575l-59.25879,-59.25879l59.25879,-59.25879l-13.31575,-13.31575l-59.25879,59.25879z"></path>
+                  </g>
+                </g>
+              </svg>
+            </button>
+          </div>
+          <div class="parameter-values-container">
+            <div class="parameter-value" *ngFor="let value of parameter.values">
+              <span class="parameter-value-title">{{value.title}}</span>
+              <button class="delete-param-button" (click)="deleteParameterValue(parameter, value)">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                     width="15" height="15"
+                     viewBox="0 0 226 226"
+                     style=" fill:#000000;">
+                  <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                     stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                     font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                     style="mix-blend-mode: normal">
+                    <path d="M0,226v-226h226v226z" fill="none"></path>
+                    <g fill="#ffffff">
+                      <path
+                        d="M53.74121,40.42546l-13.31575,13.31575l59.25879,59.25879l-59.25879,59.25879l13.31575,13.31575l59.25879,-59.25879l59.25879,59.25879l13.31575,-13.31575l-59.25879,-59.25879l59.25879,-59.25879l-13.31575,-13.31575l-59.25879,59.25879z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </button>
+            </div>
+            <div class="add-parameter-value-container">
+              <input type="text" [id]="'param-' + parameter.title + '-value-input'" class="andro-input add-param-value-input" placeholder="Варіант параметру">
+              <button class="add-param-button add-param-value-button" (click)="addParameterValue(parameter)">Додати</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="params-title" *ngIf="paramsValuesCountPrices.length > 0">
+        Введіть кількості та ціни для усіх комбінацій параметрів
+      </div>
+      <div class="params-values-count-prices" *ngIf="paramsValuesCountPrices.length > 0">
+        <table>
+          <tr>
+            <td class="param-value-count-price-dot main-dot" *ngFor="let param of parameters">{{param.title}}</td>
+            <td class="param-value-count-price-dot main-dot" >Наявність шт.</td>
+            <td class="param-value-count-price-dot main-dot">Ціна $</td>
+          </tr>
+          <tr class="param-value-count-price-row"  *ngFor="let paramValCountPrice of paramsValuesCountPrices">
+            <td class="param-value-count-price-dot" *ngFor="let param of parameters">
+              {{paramValCountPrice.valueParam.get(param.title)}}
+            </td>
+            <td><input type="number" class="andro-input table-input" min="0" placeholder="Кількість"></td>
+            <td><input type="text"  class="andro-input table-input" placeholder="Ціна $"></td>
+<!--            <td *ngFor="let valueParam of paramValCountPrice.valueParam | keyvalue">{{valueParam.value}}</td>-->
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="creation-block">
+    <span class="block-title">
       Опишіть свій товар
     </span>
     <div class="block-content">
@@ -108,23 +209,23 @@
     </div>
   </div>
 
-<!--  <div class="creation-block">-->
-<!--    <span class="block-title">-->
-<!--      Введіть кількість доступних одиниць товару*-->
-<!--    </span>-->
-<!--    <div class="block-content">-->
-<!--      <div class="block-element">-->
-<!--        <input type="number" class="andro-input" [(ngModel)]="advertisement.count"-->
-<!--               (keyup)="validateNumber(advertisement.count); validateCount = true" placeholder="Кількість"-->
-<!--               min="1" value="1">-->
-<!--        <div class="warning-container" *ngIf="!validateCount">-->
-<!--          <img [src]="icon">-->
-<!--          <span class="validation-text">Це поле не може бути пустим чи рівним нулю</span>-->
-<!--        </div>-->
-<!---->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <!--  <div class="creation-block">-->
+  <!--    <span class="block-title">-->
+  <!--      Введіть кількість доступних одиниць товару*-->
+  <!--    </span>-->
+  <!--    <div class="block-content">-->
+  <!--      <div class="block-element">-->
+  <!--        <input type="number" class="andro-input" [(ngModel)]="advertisement.count"-->
+  <!--               (keyup)="validateNumber(advertisement.count); validateCount = true" placeholder="Кількість"-->
+  <!--               min="1" value="1">-->
+  <!--        <div class="warning-container" *ngIf="!validateCount">-->
+  <!--          <img [src]="icon">-->
+  <!--          <span class="validation-text">Це поле не може бути пустим чи рівним нулю</span>-->
+  <!--        </div>-->
+  <!---->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
 
   <div class="creation-block">
     <span class="block-title">
@@ -159,7 +260,8 @@
         </div>
 
         <div class="checkbox-container">
-          <input type="checkbox" id="only-seller-delivery" class="andro-checkbox" [(ngModel)]="advertisement.onlySellerCountry">
+          <input type="checkbox" id="only-seller-delivery" class="andro-checkbox"
+                 [(ngModel)]="advertisement.onlySellerCountry">
           <label class="andro-label" for="only-seller-delivery">Доставка лише у межах моєї країни</label>
         </div>
 

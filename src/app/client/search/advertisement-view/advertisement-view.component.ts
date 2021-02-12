@@ -68,9 +68,10 @@ export class AdvertisementViewComponent implements OnInit {
     this.feedbackPagination.direction = 'DESC';
 
     this.activatedRoute.queryParams.subscribe((params: Params) => {
+      this.advertisementService.setAdvertisementView(params.id).subscribe();
       // this.advertisementService.getSellerGoodsAdvertisementById(params.id).subscribe((r) => {
       //   this.advertisement = r;
-      //   this.advertisementService.setAdvertisementView(this.advertisement.id).subscribe();
+      //
       //
       //   this.viewImage = this.advertisement.mainImage;
       //   this.advertisementService.getAdvertisementStatistics(this.advertisement.id).subscribe((s) => {

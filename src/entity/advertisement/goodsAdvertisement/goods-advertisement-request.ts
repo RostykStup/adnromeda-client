@@ -11,7 +11,12 @@ export class GoodsAdvertisementRequest extends AdvertisementRequest {
 
   parameters = new Array<ParameterRequest>();
 
-  valuesPriceCounts = new Array<ParametersValuesPriceCountRequest>();
+  // valuesPriceCounts = new Array<ParametersValuesPriceCountRequest>();
+  valuesPriceCounts = new Array<{
+    valueParam: any,
+    price: any,
+    count: any
+  }>();
 
   hasParameters = false;
 

@@ -5,6 +5,7 @@ import {PaginationRequest} from '../../../../entity/pagination-request';
 import {UserGoodsOrderDataResponse} from '../../../../entity/order/user-goods-order-data-response';
 import {GoodsAdvertisementResponse} from '../../../../entity/advertisement/goodsAdvertisement/goods-advertisement-response';
 import {Router} from '@angular/router';
+import {GoodsAdvertisementForSearchResponse} from '../../../../entity/advertisement/goodsAdvertisement/goods-advertisement-for-search-response';
 
 @Component({
   selector: 'app-advertisements-list',
@@ -25,7 +26,7 @@ export class AdvertisementsListComponent implements OnInit {
 
   sellerId = localStorage.getItem('andro_user_id');
 
-  advertisements = new Array<GoodsAdvertisementResponse>();
+  advertisements = new Array<GoodsAdvertisementForSearchResponse>();
 
 
   ngOnInit(): void {
@@ -45,28 +46,10 @@ export class AdvertisementsListComponent implements OnInit {
       this.totalPages = r.totalPages;
       this.advertisements = r.data;
       this.totalElems = r.totalElements;
-
       // this.advertisements = r.data.map((x) => Object.assign(new GoodsAdvertisementResponse(), x));
       // console.log(this.advertisements);
     });
   }
-
-
-  getAdvertisementPrice(advertisement: GoodsAdvertisementResponse): string {
-    // @ts-ignore
-    if (advertisement.price.price !== undefined) {
-      // @ts-ignore
-      return advertisement.price.price + '';
-    } else {
-
-      // @ts-ignore
-      return advertisement.price.priceUnits[advertisement.price.priceUnits.length - 1].price
-        + ' - '
-        // @ts-ignore
-        + advertisement.price.priceUnits[0].price;
-    }
-  }
-
 
   loadNewPage($event: PaginationRequest): void {
     this.pagination = $event;
@@ -80,4 +63,5 @@ export class AdvertisementsListComponent implements OnInit {
       // + type
     );
   }
+
 }

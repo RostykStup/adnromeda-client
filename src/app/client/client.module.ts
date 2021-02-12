@@ -24,14 +24,16 @@ import { RatingViewComponent } from './common/rating-view/rating-view.component'
 import { YearMonthPickerComponent } from './common/year-month-picker/year-month-picker.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ImageDialogComponent } from './dialogs/image-dialog/image-dialog.component';
+import { AdvertisementForSearchRowViewComponent } from './common/advertisement/advertisement-for-search-row-view/advertisement-for-search-row-view.component';
 
 @NgModule({
-  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent, YearMonthPickerComponent, MainPageComponent, ImageDialogComponent],
+  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent, YearMonthPickerComponent, MainPageComponent, ImageDialogComponent, AdvertisementForSearchRowViewComponent],
     exports: [
         RatingPickerComponent,
         PaginatorComponent,
         RatingViewComponent,
-        YearMonthPickerComponent
+        YearMonthPickerComponent,
+        AdvertisementForSearchRowViewComponent
     ],
   imports: [
     CommonModule,

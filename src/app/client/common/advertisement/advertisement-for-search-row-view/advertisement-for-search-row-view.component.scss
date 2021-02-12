@@ -1,0 +1,104 @@
+.advertisement-container {
+  width: 100%;
+  padding: 16px;
+
+  display: flex;
+
+  border-bottom: 1px solid #efe8e8;
+}
+
+.image-container {
+  height: 120px;
+  width: 120px;
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main-info-container {
+  padding: 0 15px;
+  width: 60%;
+
+  //display: flex;
+  //flex-direction: column;
+  //justify-content: space-between;
+}
+
+.advertisement-title-container {
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  a {
+    font-size: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.advertisement-seller {
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  margin-top: 20px;
+
+  a {
+    color: #857e7e;
+    font-size: inherit;
+  }
+}
+
+.price-container {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.rating-sold-container {
+  display: flex;
+  align-items: flex-end;
+
+  font-size: 13px;
+  margin-top: 10px;
+  //height: 30px;
+}
+
+.rating-text {
+  font-size: inherit;
+  color: #857e7e;
+  margin-right: 15px;
+}
+
+.sold-text {
+  color: #857e7e;
+  font-size: inherit;
+}
+
+.advertisement-manage-button{
+  font-size: 15px;
+  font-weight: 800;
+  color: #F6F7F9;
+  background-color: #000000;
+
+  padding: 5px 10px;
+
+  border-radius: 3px;
+  border: 3px solid black;
+  cursor: pointer;
+
+  transition: all .1s;
+
+  &:hover {
+    background-color: #fff;
+    color: black;
+  }
+
+}

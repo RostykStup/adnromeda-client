@@ -123,28 +123,9 @@ export class SearchComponent implements OnInit {
             a.isInFavorites = r;
           });
         }
-        a.priceWithUserCurrency = this.generatePriceWithUserCurrency(a);
+        // a.priceWithUserCurrency = this.generatePriceWithUserCurrency(a);
       });
     });
-  }
-
-  generatePriceWithUserCurrency(advertisement: GoodsAdvertisementForSearchResponse): string {
-    let currency = localStorage.getItem('andro_user_currency');
-    if (currency === null || currency === '') {
-      currency = 'USD';
-    }
-    if (advertisement.type === 'goods_wholesale') {
-      return this.currencyService.exchangeCurrencies('USD', currency, advertisement.priceMin).toFixed(2)
-        + ' - '
-        + this.currencyService.exchangeCurrencies('USD', currency, advertisement.priceMax).toFixed(2)
-        + ' '
-        + currency;
-    } else if (advertisement.type === 'goods_retail') {
-      return this.currencyService.exchangeCurrencies('USD', currency, advertisement.price).toFixed(2)
-        + ' '
-        + currency;
-    }
-    return ' - ';
   }
 
   makeRequestWithOtherSortType(sort: 'statistics.creationDate' | null | 'statistics.sold' | 'priceToSort', order: 'ASC' | 'DESC'): void {

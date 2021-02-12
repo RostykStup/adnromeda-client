@@ -51,6 +51,7 @@ export class CreateAdvertisementComponent implements OnInit {
   parameters = new Array<ParameterRequest>();
 
   paramsValuesCountPrices = new Array<ParametersValuesPriceCountRequest>();
+  noParamsValuesCountPrice = new ParametersValuesPriceCountRequest();
 
   images = Array<Image>();
 
@@ -63,11 +64,7 @@ export class CreateAdvertisementComponent implements OnInit {
 
   validationTitle = true;
   validationSubcategory = true;
-  validationPrice = true;
-  validationEmptyPrice = true;
   validateProperties = true;
-  validateCount = true;
-  cantAddPriceAlert = true;
 
   ngOnInit(): void {
     this.categoryService.getAll().subscribe((r) => {
@@ -96,7 +93,6 @@ export class CreateAdvertisementComponent implements OnInit {
     reader.onload = () => {
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.images.length; i++) {
-        // console.log);
         if (this.images[i].src === '') {
           // @ts-ignore
           this.images[i].src = reader.result.toString();
@@ -163,9 +159,40 @@ export class CreateAdvertisementComponent implements OnInit {
         }
       }
 
+      if (!this.advertisement.hasParameters) {
+        this.advertisement.valuesPriceCounts.push(this.noParamsValuesCountPrice);
+      } else {
+        this.advertisement.parameters = this.parameters;
+        this.paramsValuesCountPrices.forEach((p) => {
+          const jsonObject = {
+            price: p.price,
+            count: p.count,
+            valueParam: {}
+          };
+          p.valueParam.forEach((value, key) => {
+            // @ts-ignore
+            jsonObject.valueParam[key] = value;
+          });
+          this.advertisement.valuesPriceCounts.push(jsonObject);
+        });
+      }
+
+      // console.log((this.advertisement | JSON));
+      console.log(JSON.stringify(this.advertisement));
+
+
       const dataOk = {
         text: 'Товар успішно додано до вашого магазину'
       };
+
+      this.advertisementService.sendGoodsAdvertisementCreateRequest(this.advertisement).subscribe(() => {
+        const dialogRef = this.dialog.open(InfoDialogComponent, {
+          data: dataOk
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          window.open('client/seller/advertisements', '_self');
+        });
+      });
 
     } else {
       const dataValid = {
@@ -186,9 +213,6 @@ export class CreateAdvertisementComponent implements OnInit {
     this.validationTitle = Validator.validateSizeMin(this.advertisement.title.trim(), 1);
     this.validationSubcategory = (this.subcategoryId !== 0);
 
-    this.validationPrice = true;
-    this.validationEmptyPrice = true;
-
     this.trimAllProperties();
     this.validateProperties = true;
     if (this.advertisement.properties.length === 1) {
@@ -204,16 +228,37 @@ export class CreateAdvertisementComponent implements OnInit {
         }
       });
     }
-    return this.validationTitle && this.validationPrice && this.validationSubcategory && this.validateProperties && this.validateCount;
+    return this.validationTitle && this.validationSubcategory && this.validateProperties && this.validateParameters();
+  }
+
+  validateParameters(): boolean {
+    if (this.advertisement.hasParameters) {
+      // @ts-ignore
+      this.paramsValuesCountPrices.forEach((p) => {
+        p.price = Number(p.price);
+        if (isNaN(p.price)) {
+          return false;
+        }
+      });
+      return true;
+      // return false;
+    } else {
+      this.noParamsValuesCountPrice.price = Number(this.noParamsValuesCountPrice.price);
+      return this.noParamsValuesCountPrice.count >= 0 && Validator.validateNumberForPrice(this.noParamsValuesCountPrice.price);
+    }
   }
 
 
   trimAllProperties(): void {
-    // @ts-ignore
-    this.advertisement.properties.forEach((p) => {
-      p.name = p.name.trim();
-      p.value = p.value.trim();
-    });
+    if (this.advertisement.properties !== null) {
+      if (this.advertisement.properties.length > 0) {
+        // @ts-ignore
+        this.advertisement.properties.forEach((p) => {
+          p.name = p.name.trim();
+          p.value = p.value.trim();
+        });
+      }
+    }
   }
 
   enterPriceInput($event: any): void {
@@ -308,7 +353,6 @@ export class CreateAdvertisementComponent implements OnInit {
       this.paramsValuesCountPrices.push(param);
     }
 
-    console.log(this.paramsValuesCountPrices);
   }
 
   getParameterLength(index: number, size: number, previousLength: number): number {

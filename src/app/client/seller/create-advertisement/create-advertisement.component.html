@@ -54,10 +54,10 @@
     </div>
     <div class="no-params-price-count-container" [ngClass]="{visible_params_container: !advertisement.hasParameters}">
       <label class="andro-label">Штук у наявності</label>
-      <input type="number" min="0" class="andro-input" placeholder="Штук у наявності">
+      <input type="number" min="0" class="andro-input" placeholder="Штук у наявності" [(ngModel)]="noParamsValuesCountPrice.count">
       <div class="price-input-container">
-        <label class="andro-label">Ціна за одиницю $</label>
-        <input type="text" class="andro-input price-input" placeholder="Ціна $" (keyup)="enterPriceInput($event)">
+        <label class="andro-label">Ціна за одиницю $ (мінімальна $0.01)</label>
+        <input type="text" class="andro-input price-input" [(ngModel)]="noParamsValuesCountPrice.price" placeholder="Ціна $" (keyup)="enterPriceInput($event)">
         <div class="warning-container">
           <img [src]="icon"/>
           <span class="validation-text">Формат ціни : 1.00</span>
@@ -136,8 +136,8 @@
             <td class="param-value-count-price-dot" *ngFor="let param of parameters">
               {{paramValCountPrice.valueParam.get(param.title)}}
             </td>
-            <td><input type="number" class="andro-input table-input" min="0" placeholder="Кількість"></td>
-            <td><input type="text"  class="andro-input table-input" placeholder="Ціна $"></td>
+            <td><input type="number" class="andro-input table-input" min="0" placeholder="Кількість" [(ngModel)]="paramValCountPrice.count"></td>
+            <td><input type="text"  class="andro-input table-input" placeholder="Ціна $" [(ngModel)]="paramValCountPrice.price"></td>
 <!--            <td *ngFor="let valueParam of paramValCountPrice.valueParam | keyvalue">{{valueParam.value}}</td>-->
           </tr>
         </table>

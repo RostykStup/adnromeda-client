@@ -10,6 +10,8 @@ import {PropertyRequest} from '../../entity/advertisement/goodsAdvertisement/pro
 import {GoodsAdvertisementStatisticsResponse} from '../../entity/statistics/advertisement/GoodsAdvertisementStatisticsResponse';
 import {GoodsAdvertisementMonthStatisticsResponse} from '../../entity/statistics/advertisement/goods-advertisement-month-statistics-response';
 import {GoodsAdvertisementsForMainPageResponse} from '../../entity/advertisement/goodsAdvertisement/goods-advertisements-for-main-page-response';
+import {GoodsAdvertisementRequest} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-request';
+import {GoodsAdvertisementForSearchResponse} from '../../entity/advertisement/goodsAdvertisement/goods-advertisement-for-search-response';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +21,6 @@ export class AdvertisementService {
   }
 
   advertisementURL = GlobalConstants.API_URL + 'advertisement';
-
-  wholesaleAdvertisementURL = GlobalConstants.API_URL + 'wholesale-goods';
-
-  retailAdvertisementURL = GlobalConstants.API_URL + 'retail-goods';
 
 
   getMainPageAdvertisements(request: PaginationRequest): Observable<GoodsAdvertisementsForMainPageResponse> {
@@ -36,14 +34,18 @@ export class AdvertisementService {
     });
   }
 
+  sendGoodsAdvertisementCreateRequest(request: GoodsAdvertisementRequest): Observable<any> {
+    return this.httpClient.post(this.advertisementURL, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
 
-  getSellerAdvertisementsPage(id: string | null, request: PaginationRequest): Observable<PaginationResponse<GoodsAdvertisementResponse>> {
+
+  getSellerAdvertisementsPage(id: string | null, request: PaginationRequest): Observable<PaginationResponse<GoodsAdvertisementForSearchResponse>> {
     const url = this.advertisementURL + '/seller?' + (id !== null ? 'id=' + id : '')
       + '&direction=' + request.direction
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get<PaginationResponse<GoodsAdvertisementResponse>>(url,
+    return this.httpClient.get<PaginationResponse<GoodsAdvertisementForSearchResponse>>(url,
       {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 

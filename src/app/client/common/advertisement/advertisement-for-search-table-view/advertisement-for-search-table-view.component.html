@@ -1,22 +1,15 @@
-<div class="advertisement-container" *ngIf="goodsAdvertisement">
+<div class="advertisement-container">
   <div class="image-container">
     <a [href]="'client/advertisement-view?id=' + goodsAdvertisement.id"  target="_blank">
       <img class="main-image" [src]="getAdvertisementImage()">
     </a>
   </div>
-  <div class="main-info-container">
+  <div class="info-container">
     <div class="advertisement-title-container">
       <a [href]="'client/advertisement-view?id=' + goodsAdvertisement.id" target="_blank">
         {{goodsAdvertisement.title}}
       </a>
     </div>
-    <div class="advertisement-seller" *ngIf="viewType === 'searching'">
-      <a [href]="'client/seller-view?id=' + goodsAdvertisement.sellerId" target="_blank">
-        {{goodsAdvertisement.seller}}
-      </a>
-    </div>
-  </div>
-  <div class="commercial-info-container">
     <div class="price-container" *ngIf="goodsAdvertisement.minPrice !== goodsAdvertisement.maxPrice">
       {{goodsAdvertisement.minPrice.toFixed(2)}} - {{goodsAdvertisement.maxPrice.toFixed(2)}} {{goodsAdvertisement.currencyCode}}
     </div>
@@ -29,10 +22,11 @@
       </div>
       <div class="sold-text" *ngIf="goodsAdvertisement.sold != 0">{{goodsAdvertisement.sold}} продано</div>
     </div>
-    <div class="seller-actions-container" *ngIf="viewType === 'own'">
-      <button class="advertisement-manage-button" (click)="navigateToManage()">Керування товаром</button>
+    <div class="advertisement-seller" *ngIf="viewType === 'searching'">
+      <a [href]="'client/seller-view?id=' + goodsAdvertisement.sellerId" target="_blank">
+        {{goodsAdvertisement.seller}}
+      </a>
     </div>
+
   </div>
-
 </div>
-

@@ -64,8 +64,9 @@ export class AdvertisementService {
     const pageSize = 'paginationRequest.size=' + request.paginationRequest.size + '&';
     const rating = request.rating !== null ? 'rating=' + request.rating + '&' : '';
     const title = request.title !== null ? 'title=' + request.title : '';
+    const currency = '&currencyCode=' + request.currency;
     const url = this.advertisementURL + '/filter?' + fromCountryCode
-      + image + pageDirection + pageField + pagePage + pageSize + rating + title;
+      + image + pageDirection + pageField + pagePage + pageSize + rating + title + currency;
     return this.httpClient.get<any>(url);
   }
 

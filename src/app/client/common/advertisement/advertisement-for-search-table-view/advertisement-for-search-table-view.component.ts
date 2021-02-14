@@ -3,11 +3,11 @@ import {GoodsAdvertisementForSearchResponse} from '../../../../../entity/adverti
 import {AdvertisementService} from '../../../../../service/advertisement/advertisement.service';
 
 @Component({
-  selector: 'app-advertisement-for-search-row-view',
-  templateUrl: './advertisement-for-search-row-view.component.html',
-  styleUrls: ['./advertisement-for-search-row-view.component.scss']
+  selector: 'app-advertisement-for-search-table-view',
+  templateUrl: './advertisement-for-search-table-view.component.html',
+  styleUrls: ['./advertisement-for-search-table-view.component.scss']
 })
-export class AdvertisementForSearchRowViewComponent implements OnInit {
+export class AdvertisementForSearchTableViewComponent implements OnInit {
 
   // @ts-ignore
   @Input() goodsAdvertisement: GoodsAdvertisementForSearchResponse;
@@ -18,9 +18,6 @@ export class AdvertisementForSearchRowViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.goodsAdvertisement.currencyCode === null) {
-      this.goodsAdvertisement.currencyCode = 'USD';
-    }
   }
 
   getAdvertisementImage(): string {
@@ -37,4 +34,5 @@ export class AdvertisementForSearchRowViewComponent implements OnInit {
       // + type
     );
   }
+
 }

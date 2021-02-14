@@ -12,6 +12,8 @@ export class GoodsAdvertisementForSearchResponse {
 
   isInFavorites = false;
 
+  currencyCode = 'USD';
+
   date = '';
   rating: number | null = null;
 

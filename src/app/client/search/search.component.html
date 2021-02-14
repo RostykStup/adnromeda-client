@@ -136,63 +136,53 @@
       </div>
     </div>
     <div class="line"></div>
-    <div class="search-container" [ngSwitch]="viewStyle">
-      <div *ngSwitchCase="'table'" class="table-advertisement-holder">
-        <div *ngFor="let advertisementRow of tableViewAdvertisements" class="table-advertisement-row">
-          <div *ngFor="let advertisement of advertisementRow" class="table-advertisement-container">
-            <div class="table-advertisement-image-container">
-              <img [src]="getAdvertisementImage(advertisement.image, advertisement.sellerId)">
-              <div class="overlay">
-                <div (click)="clickAddToFavorites(advertisement)"
-                     [ngClass]="{in_favorites: advertisement.isInFavorites}"
-                     class="add-to-favorites-button-container ">
-                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                       width="24" height="24"
-                       viewBox="0 0 172 172"
-                       style=" fill:#000000;">
-                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-                       stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-                       font-family="none" font-weight="none" font-size="none" text-anchor="none"
-                       style="mix-blend-mode: normal">
-                      <path d="M0,172v-172h172v172z" fill="none"></path>
-                      <g fill="#000000">
-                        <path
-                          d="M43.06999,14.33333c-7.85076,0 -14.33333,6.46862 -14.33333,14.31934l-0.06999,129.014l57.33333,-21.5l57.33333,21.5v-10.34407v-118.65593c0,-7.83362 -6.49972,-14.33333 -14.33333,-14.33333zM43.06999,28.66667h85.93001v108.31185l-43,-16.125l-42.986,16.125z"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div class="table-advertisement-info-container">
-              <div class="table-advertisement-title-container"><a
-                (click)="navigateToAdvertisement(advertisement.id)">{{advertisement.title}}</a></div>
-              <div class="table-advertisement-price-container">{{advertisement.priceWithUserCurrency}}</div>
-              <div class="table-advertisement-rating-sales-container">
-                <div class="table-advertisement-rating" *ngIf="advertisement.rating !== null">
-                  ★{{advertisement.rating}}
-                </div>
-                <div class=" table-advertisement-sales" *ngIf="advertisement.sold !== 0">
-                  Продано: {{advertisement.sold}}
-                </div>
-              </div>
-              <div class="table-advertisement-seller-container">
-                <a href="">{{advertisement.seller}}</a>
-              </div>
-            </div>
-          </div>
-          <!--          {{advert.title}}-->
-        </div>
-      </div>
-      <div *ngSwitchCase="'rows'">
-        rows
-      </div>
+  </div>
+  <div class="search-container" [ngSwitch]="viewStyle">
+    <div *ngSwitchCase="'table'" class="table-advertisement-holder">
+      <app-advertisement-for-search-table-view
+        *ngFor="let advertisement of advertisements"
+        [viewType]="'searching'"
+        [goodsAdvertisement]="advertisement">
+      </app-advertisement-for-search-table-view>
+      <app-advertisement-for-search-table-view
+        *ngFor="let advertisement of advertisements"
+        [viewType]="'searching'"
+        [goodsAdvertisement]="advertisement">
+      </app-advertisement-for-search-table-view>
+      <app-advertisement-for-search-table-view
+        *ngFor="let advertisement of advertisements"
+        [viewType]="'searching'"
+        [goodsAdvertisement]="advertisement">
+      </app-advertisement-for-search-table-view>
+      <app-advertisement-for-search-table-view
+        *ngFor="let advertisement of advertisements"
+        [viewType]="'searching'"
+        [goodsAdvertisement]="advertisement">
+      </app-advertisement-for-search-table-view>
+      <app-advertisement-for-search-table-view
+        *ngFor="let advertisement of advertisements"
+        [viewType]="'searching'"
+        [goodsAdvertisement]="advertisement">
+      </app-advertisement-for-search-table-view>
+      <app-advertisement-for-search-table-view
+        *ngFor="let advertisement of advertisements"
+        [viewType]="'searching'"
+        [goodsAdvertisement]="advertisement">
+      </app-advertisement-for-search-table-view>
     </div>
-    <div class="pagination-container" *ngIf="totalPages > 1">
-      <app-paginator [pagination]="searchRequest.paginationRequest"
-                     [totalPages]="totalPages"
-                     (pageChange)="changePage($event)"
-      ></app-paginator>
+
+    <div *ngSwitchCase="'rows'" class="row-advertisement-holder">
+      <app-advertisement-for-search-row-view
+        *ngFor="let advertisement of advertisements"
+        [viewType]="'searching'"
+        [goodsAdvertisement]="advertisement">
+      </app-advertisement-for-search-row-view>
     </div>
+  </div>
+  <div class="pagination-container" *ngIf="totalPages > 1">
+    <app-paginator [pagination]="searchRequest.paginationRequest"
+                   [totalPages]="totalPages"
+                   (pageChange)="changePage($event)"
+    ></app-paginator>
   </div>
 </div>

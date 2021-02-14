@@ -46,9 +46,11 @@ export class SearchComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // console.log();
     this.searchRequest.paginationRequest.direction = 'ASC';
     // this.searchRequest.paginationRequest.size = 5;
     this.searchRequest.paginationRequest.size = 60;
+    this.searchRequest.currency = this.currencyService.getUserCurrency();
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.searchValue = params.value;
 
@@ -82,33 +84,14 @@ export class SearchComponent implements OnInit {
         this.searchRequest.rating = true;
       }
 
-
       setTimeout(() => {
         this.loadAdvertisements();
       }, 300);
     });
   }
 
-
   changeViewStyle(style: 'table' | 'rows'): void {
     this.viewStyle = style;
-  }
-
-  makeTableViewAdvertisements(): void {
-    this.tableViewAdvertisements = Array<Array<GoodsAdvertisementForSearchResponse>>();
-    let rowIndex = -1;
-    for (let i = 0; i < this.advertisements.length; i++) {
-      if (i % 5 === 0) {
-        rowIndex++;
-        this.tableViewAdvertisements.push(new Array<GoodsAdvertisementForSearchResponse>());
-      }
-      this.tableViewAdvertisements[rowIndex].push(this.advertisements[i]);
-    }
-  }
-
-
-  getAdvertisementImage(imageName: string | null, sellerId: number): string {
-    return this.advertisementService.getAdvertisementImagePath(imageName, sellerId);
   }
 
   loadAdvertisements(): void {
@@ -116,15 +99,6 @@ export class SearchComponent implements OnInit {
       this.advertisements = r.data;
       this.totalPages = r.totalPages;
       this.totalElements = r.totalElements;
-      this.makeTableViewAdvertisements();
-      this.advertisements.forEach((a) => {
-        if (this.accountService.isLogged()) {
-          this.advertisementService.isInUserFavorites(a.id).subscribe((r) => {
-            a.isInFavorites = r;
-          });
-        }
-        // a.priceWithUserCurrency = this.generatePriceWithUserCurrency(a);
-      });
     });
   }
 
@@ -148,7 +122,7 @@ export class SearchComponent implements OnInit {
       + (this.searchRequest.paginationRequest.field !== null ? '&direction=' + this.searchRequest.paginationRequest.direction : '')
       + (this.searchRequest.rating ? '&rating=true' : '')
       + (this.searchRequest.image ? '&image=true' : '');
-    console.log(url);
+    // console.log(url);
     // this.router.navigateByUrl(url);
     window.open(url, '_self');
     // window.location.reload();
@@ -168,47 +142,8 @@ export class SearchComponent implements OnInit {
     this.makeAndNavigateToOtherSearchRequest();
   }
 
-  navigateToAdvertisement(id: number): void {
-    window.open('client/advertisement-view?id=' + id);
-    // this.router.navigateByUrl();
-  }
-
   changePage($event: PaginationRequest): void {
     this.searchRequest.paginationRequest = $event;
     this.makeAndNavigateToOtherSearchRequest();
-  }
-
-  clickAddToFavorites(advertisement: GoodsAdvertisementForSearchResponse): void {
-    if (advertisement.isInFavorites) {
-      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-        data: {
-          text: 'Видалити зі збережених?'
-        }
-      });
-      dialogRef.afterClosed().subscribe(data => {
-        if (data.result) {
-          this.advertisementService.deleteFromUserFavorites(advertisement.id).subscribe(() => {
-            this.changeAdvertisementIsOnFavorites(advertisement, false);
-          });
-        }
-      });
-    } else {
-      this.advertisementService.addToUserFavorites(advertisement.id).subscribe(() => {
-        const dataValid = {
-          text: 'Успішно додано до збережених'
-        };
-
-        const dialogRef = this.dialog.open(InfoDialogComponent, {
-          data: dataValid
-        });
-        dialogRef.afterClosed().subscribe(result => {
-          this.changeAdvertisementIsOnFavorites(advertisement, true);
-        });
-      });
-    }
-  }
-
-  changeAdvertisementIsOnFavorites(advertisement: GoodsAdvertisementForSearchResponse, state: boolean): void {
-    this.advertisements[this.advertisements.indexOf(advertisement)].isInFavorites = state;
   }
 }

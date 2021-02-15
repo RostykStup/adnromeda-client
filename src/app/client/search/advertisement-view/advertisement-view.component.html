@@ -5,7 +5,6 @@
     </div>
   </div>
   <div class="advertisement-block advertisement-container">
-
     <div class="images-container advertisement-container-elem">
       <div class="view-image-container">
         <div class="buttons-over">
@@ -101,19 +100,40 @@
       </div>
       <div class="divider"></div>
       <div class="price-container">
-
+        <div class="price-text" *ngIf="isParamsChosen">
+          {{chosenPrice.toFixed(2)}} USD
+        </div>
+        <div class="price-text" *ngIf="!isParamsChosen">
+          <div *ngIf="advertisement.minPrice !== advertisement.maxPrice">
+            {{advertisement.minPrice.toFixed(2)}} - {{advertisement.maxPrice.toFixed(2)}} USD
+          </div>
+          <div *ngIf="advertisement.minPrice === advertisement.maxPrice">
+            {{advertisement.minPrice.toFixed(2)}} USD
+          </div>
+        </div>
       </div>
       <div class="divider"></div>
+      <div class="params-pick-container" *ngIf="advertisement.hasParameters">
+        <div class="param-holder" *ngFor="let parameter of advertisement.parameters">
+          <div class="parameter-title">{{parameter.title}}: <span class="parameter-chosen-value-title">{{parameter.chosenValue}}</span></div>
+          <div class="parameter-values-container">
+            <div *ngFor="let value of parameter.values">
+              <input type="radio" [id]="'param-' + parameter.id + '-value-' + value.title" [name]="'param' + parameter.id" class="parameter-value-radio">
+              <label [for]="'param-' + parameter.id + '-value-' + value.title" class="parameter-value-label" (click)="choseParamValue(parameter, value)">{{value.title}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="count-picker-container">
         <span class="count-picker-title">Кількість:</span>
         <div class="count-actions">
           <button [disabled]="pickerCount <= 1" class="count-button" (click)="clickMinusCountButton()">-</button>
           <input type="number" class="item-count-input" min="1" [(ngModel)]="pickerCount"
                  (keyup)="inputItemCount($event)">
-          <button [disabled]="pickerCount >= advertisement.count" (click)="clickPlusCountButton()"
+          <button [disabled]="pickerCount >= chosenCount" (click)="clickPlusCountButton()"
                   class="count-button">+
           </button>
-          <span class="count-value-text">{{advertisement.count}} шт. в наявності</span>
+          <span class="count-value-text">{{chosenCount}} шт. в наявності</span>
         </div>
       </div>
 
@@ -125,8 +145,8 @@
       </div>
 
       <div class="actions-container">
-<!--        <button class="action-button buy-button" (click)="buyButtonClick()">Купити</button>-->
-        <button class="action-button cart-button" (click)="addToCartButtonClick()">Додати у корзину</button>
+        <!--        <button class="action-button buy-button" (click)="buyButtonClick()">Купити</button>-->
+        <button class="action-button cart-button" (click)="addToCartButtonClick()" [disabled]="!isParamsChosen">Додати у корзину</button>
         <button class="action-button likes-button" *ngIf="statics" (click)="addToLikesButtonClick()">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="17" height="17"
@@ -151,10 +171,10 @@
   <div class="advertisement-block" *ngIf="statics && advertisement">
     <div class="pick-desc-feed-mode-container">
 
-      <input  class="pick-desc-feed-radio" type="radio" name="desc-mode" id="pick-description-input" checked>
+      <input class="pick-desc-feed-radio" type="radio" name="desc-mode" id="pick-description-input" checked>
       <label for="pick-description-input" (click)="changeAddViewMode(1)">Опис та характеристики</label>
 
-      <input class="pick-desc-feed-radio" type="radio" name="desc-mode" id="pick-feedbacks-input"  >
+      <input class="pick-desc-feed-radio" type="radio" name="desc-mode" id="pick-feedbacks-input">
       <label for="pick-feedbacks-input" (click)="changeAddViewMode(2)">Відгуки ({{statics.feedbacks}})</label>
 
     </div>
@@ -199,7 +219,8 @@
 
       </div>
       <div class="paginator-container" *ngIf="feedbacks.totalPages > 1">
-        <app-paginator [pagination]="feedbackPagination" [totalPages]="feedbacks.totalPages" [scrollTop]="false" (pageChange)="changeFeedbacksPage($event)"></app-paginator>
+        <app-paginator [pagination]="feedbackPagination" [totalPages]="feedbacks.totalPages" [scrollTop]="false"
+                       (pageChange)="changeFeedbacksPage($event)"></app-paginator>
 
       </div>
     </div>

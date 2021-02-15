@@ -105,7 +105,7 @@ export class AdvertisementUpdatingComponent implements OnInit {
       this.validateCount = this.editCount;
       if (this.validateCount) {
         this.advertisementService.changeAdvertisementCount(this.advertisement.id, this.editCount).subscribe(() => {
-          this.advertisement.count = this.editCount;
+          // this.advertisement.count = this.editCount;
           countInput.disabled = !countInput.disabled;
         });
       }

@@ -117,19 +117,19 @@ export class UserOrdersComponent implements OnInit {
 
   addOrderToCart(order: GoodsOrderResponse): void {
     const num = order.items.length;
-    let c = 0;
-    order.items.forEach((i) => {
-      this.cartService.addItemToCart(i.advertisementId, i.delivery.id).subscribe(() => {
-        c++;
-        if (c === num) {
-          const dialogRef = this.dialog.open(InfoDialogComponent, {
-            data: {
-              text: 'Товари успішно додано до корзини'
-            }
-          });
-          dialogRef.afterClosed().subscribe();
-        }
-      });
-    });
+    // let c = 0;
+    // order.items.forEach((i) => {
+      // this.cartService.addItemToCart(i.advertisementId, i.delivery.id).subscribe(() => {
+      //   c++;
+      //   if (c === num) {
+      //     const dialogRef = this.dialog.open(InfoDialogComponent, {
+      //       data: {
+      //         text: 'Товари успішно додано до корзини'
+      //       }
+      //     });
+      //     dialogRef.afterClosed().subscribe();
+      //   }
+      // });
+    // });
   }
 }

@@ -164,4 +164,8 @@ export class AdvertisementService {
   }
 
 
+  getGoodsAdvertisementById(id: number): Observable<GoodsAdvertisementResponse> {
+    const url = this.advertisementURL + '?id=' + id;
+    return this.httpClient.get<GoodsAdvertisementResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
 }

@@ -19,6 +19,11 @@ import {AccountService} from '../../../../service/account/account.service';
 import {LoginDialogComponent} from '../../navigation-bar/login-dialog/login-dialog.component';
 import {ImageDialogComponent} from '../../dialogs/image-dialog/image-dialog.component';
 import {GoodsAdvertisementResponse} from '../../../../entity/advertisement/goodsAdvertisement/goods-advertisement-response';
+import {ParameterValueResponse} from '../../../../entity/advertisement/goodsAdvertisement/parameter/parameter-value-response';
+import {ParameterResponse} from '../../../../entity/advertisement/goodsAdvertisement/parameter/parameter-response';
+import {ParametersValuesPriceCountResponse} from '../../../../entity/advertisement/goodsAdvertisement/parameter/parameters-values-price-count-response';
+import {migrateLegacyGlobalConfig} from '@angular/cli/utilities/config';
+import {templateJitUrl} from '@angular/compiler';
 
 @Component({
   selector: 'app-advertisement-view',
@@ -49,6 +54,12 @@ export class AdvertisementViewComponent implements OnInit {
   currentDelivery = new DeliveryTypeResponse();
   userCountry = new RestCountry();
 
+  isParamsChosen = false;
+  chosenPrice = 0;
+  chosenCount = 0;
+  chosenParametersValuesPriceCount = new ParametersValuesPriceCountResponse();
+  chosenParamsValuesMap = new Map<string, string>();
+
   feedbackPagination = new PaginationRequest();
 
   feedbacks = new PaginationResponse<GoodsAdvertisementFeedbackResponse>();
@@ -69,25 +80,29 @@ export class AdvertisementViewComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.advertisementService.setAdvertisementView(params.id).subscribe();
-      // this.advertisementService.getSellerGoodsAdvertisementById(params.id).subscribe((r) => {
-      //   this.advertisement = r;
-      //
-      //
-      //   this.viewImage = this.advertisement.mainImage;
-      //   this.advertisementService.getAdvertisementStatistics(this.advertisement.id).subscribe((s) => {
-      //     this.statics = s;
-      //   });
-      //   this.deliverySetup();
-      //   this.imagesForCarousel.push(this.advertisement.mainImage);
-      //   this.advertisement.images.forEach((i) => {
-      //     this.imagesForCarousel.push(i);
-      //   });
-      //   setTimeout(() => {
-      //     this.loadUserCurrencyAndPrice();
-      //   }, 300);
-      //
-      //   this.reloadFeedbacks();
-      // });
+      this.advertisementService.getGoodsAdvertisementById(params.id).subscribe((r) => {
+        this.advertisement = r;
+        // console.log(this.advertisement.valuesPriceCounts);
+        this.viewImage = this.advertisement.mainImage;
+        this.chosenCount = this.advertisement.totalCount;
+        this.advertisementService.getAdvertisementStatistics(this.advertisement.id).subscribe((s) => {
+          this.statics = s;
+        });
+
+        this.deliverySetup();
+        this.imagesForCarousel.push(this.advertisement.mainImage);
+        this.advertisement.images.forEach((i) => {
+          this.imagesForCarousel.push(i);
+        });
+
+        this.reloadFeedbacks();
+
+        if (!this.advertisement.hasParameters) {
+          this.isParamsChosen = true;
+          this.chosenPrice = this.advertisement.valuesPriceCounts[0].price;
+          this.chosenParametersValuesPriceCount = this.advertisement.valuesPriceCounts[0];
+        }
+      });
     });
   }
 
@@ -119,65 +134,21 @@ export class AdvertisementViewComponent implements OnInit {
     this.viewImage = this.imagesForCarousel[index];
   }
 
-  loadUserCurrencyAndPrice(): void {
-    // @ts-ignore
-    this.userCurrency = localStorage.getItem('andro_user_currency') !== null && localStorage.getItem('andro_user_currency') !== ''
-      ? localStorage.getItem('andro_user_currency') : 'USD';
-
-    if (this.advertisement.type === 'goods_retail') {
-      // @ts-ignore
-      this.originalRetailPrice = this.advertisement.price;
-      this.loadRetailPriceInUserCurrency();
-    } else if (this.advertisement.type === 'goods_wholesale') {
-      // @ts-ignore
-      this.originalWholesalePrice = this.advertisement.price;
-      this.loadWholesalePriceInUserCurrency();
-    }
-  }
-
-  loadRetailPriceInUserCurrency(): void {
-    // @ts-ignore
-    this.retailPrice = this.currencyService.exchangeCurrencies('USD', this.userCurrency, this.advertisement.price.price);
-  }
-
-
-  loadWholesalePriceInUserCurrency(): void {
-    this.identifyCurrentWholesalePrice();
-  }
-
-  identifyCurrentWholesalePrice(): void {
-    let price = 0.0;
-    // @ts-ignore
-    for (const p of this.advertisement.price.priceUnits) {
-      if (this.pickerCount >= p.min && (this.pickerCount <= p.max || p.max == null)) {
-        price = p.price;
-      }
-    }
-  }
-
-
   inputItemCount($event: any): void {
     let newCount = +$event.target.value;
     if (newCount === 0) {
       newCount = 1;
-    } else if (newCount > this.advertisement.count) {
-      newCount = this.advertisement.count;
+    } else if (newCount > this.chosenCount) {
+      newCount = this.chosenCount;
     }
     this.pickerCount = newCount;
-    if (this.advertisement.type === 'goods_wholesale') {
-      this.loadWholesalePriceInUserCurrency();
-    }
   }
 
   clickPlusCountButton(): void {
-    if (this.pickerCount >= this.advertisement.count) {
-      this.pickerCount = this.advertisement.count;
+    if (this.pickerCount >= this.chosenCount) {
+      this.pickerCount = this.chosenCount;
     } else {
       this.pickerCount++;
-    }
-
-    if (this.advertisement.type === 'goods_wholesale') {
-      this.loadWholesalePriceInUserCurrency();
     }
   }
 
@@ -186,10 +157,6 @@ export class AdvertisementViewComponent implements OnInit {
       this.pickerCount = 1;
     } else {
       this.pickerCount--;
-    }
-
-    if (this.advertisement.type === 'goods_wholesale') {
-      this.loadWholesalePriceInUserCurrency();
     }
   }
 
@@ -268,12 +235,13 @@ export class AdvertisementViewComponent implements OnInit {
   }
 
   addToLikesButtonClick(): void {
-
+    // console.log(this.advertisement.valuesPriceCounts);
+    // console.log(this.advertisement.parameters);
   }
 
   addToCartButtonClick(): void {
     if (this.accountService.isLogged()) {
-      this.cartService.addItemToCart(this.advertisement.id, this.currentDelivery.id).subscribe(() => {
+      this.cartService.addItemToCart(this.advertisement.id, this.currentDelivery.id, this.chosenParametersValuesPriceCount.id).subscribe(() => {
         const dialogRef = this.dialog.open(ItemAddedToCartDialogComponent, {});
         dialogRef.afterClosed().subscribe(() => {
         });
@@ -300,5 +268,32 @@ export class AdvertisementViewComponent implements OnInit {
       panelClass: 'image-dialog'
     });
     dialogRef.afterClosed().subscribe();
+  }
+
+  choseParamValue(parameter: ParameterResponse, value: ParameterValueResponse): void {
+    const parameterIndex = this.advertisement.parameters.indexOf(parameter);
+    this.advertisement.parameters[parameterIndex].chosenValue = value.title;
+    this.chosenParamsValuesMap.set(parameter.title, value.title);
+
+    if (this.chosenParamsValuesMap.size === this.advertisement.parameters.length) {
+      this.isParamsChosen = true;
+      this.advertisement.valuesPriceCounts.forEach((p) => {
+        let equalsAudit = true;
+        this.chosenParamsValuesMap.forEach((pValue, param) => {
+          // @ts-ignore
+          if (p.values[param] !== pValue) {
+            equalsAudit = false;
+          }
+        });
+        if (equalsAudit) {
+          this.chosenPrice = p.price;
+          this.chosenCount = p.count;
+          this.chosenParametersValuesPriceCount = p;
+          if (this.pickerCount > this.chosenCount) {
+            this.pickerCount = this.chosenCount;
+          }
+        }
+      });
+    }
   }
 }

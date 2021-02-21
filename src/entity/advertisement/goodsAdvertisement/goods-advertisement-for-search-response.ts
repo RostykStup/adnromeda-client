@@ -4,18 +4,15 @@ export class GoodsAdvertisementForSearchResponse {
   id = 0;
   title = '';
   image = '';
-  type = '';
   seller = '';
   sellerId = 0;
   sold: number | null = null;
-
-  price = 0;
-  priceMin = 0;
-  priceMax = 0;
+  minPrice = 0;
+  maxPrice = 0;
 
   isInFavorites = false;
 
-  priceWithUserCurrency = '';
+  currencyCode = 'USD';
 
   date = '';
   rating: number | null = null;

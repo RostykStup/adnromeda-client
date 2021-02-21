@@ -35,7 +35,7 @@ export class SellerRegistrationComponent implements OnInit {
 
   sellerCountries = Array<RestCountry>();
 
-  mode = 1;
+  mode = 2;
 
   countryName = '';
   countryImage = '';
@@ -124,7 +124,8 @@ export class SellerRegistrationComponent implements OnInit {
     if (this.validateSellerData()) {
       this.accountService.updateAccountCountry(this.accountDataRequest).subscribe(() => {
         this.sellerService.updateSellerData(this.sellerDataRequest).subscribe(() => {
-          this.mode = 3;
+          // this.mode = 3;
+          window.open('client/seller/profile', '_self');
         });
       });
     }

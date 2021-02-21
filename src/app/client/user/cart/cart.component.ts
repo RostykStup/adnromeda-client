@@ -31,7 +31,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.getUserCart().subscribe(r => {
-      // console.log(r);
       this.cart = r;
     });
   }
@@ -84,29 +83,30 @@ export class CartComponent implements OnInit {
     this.cart.positions.forEach(p => {
       const index = p.items.indexOf(item, 0);
       if (index > -1) {
-        this.advertisementService.getAdvertisementCount(p.items[index].advertisementId).subscribe((r) => {
-          p.items[index].max = r;
+        this.advertisementService
+          .getAdvertisementParameterCount(item.priceCountResponse.id).subscribe((r) => {
+          p.items[index].priceCountResponse.count = r;
         });
       }
     });
   }
 
   getCartPrice(): void {
-    const items = new Array<GoodsCartItemForCountingPriceRequest>();
     let num = 0;
+    this.allPrice = 0;
     this.cart.positions.forEach(p => {
       p.items.forEach(i => {
         if (i.checked) {
-          items.push(new GoodsCartItemForCountingPriceRequest(i));
           num++;
+          this.allPrice += (i.priceCountResponse.price * i.count);
         }
       });
     });
-
-    this.cartService.getItemsPrice(items).subscribe(r => {
-      this.allPrice = r;
-      this.allItems = num;
-    });
+    this.allItems = num;
+    // this.cartService.getItemsPrice(items).subscribe(r => {
+    //   this.allPrice = r;
+    //   this.allItems = num;
+    // });
   }
 
   changeAllChecked($event: any): void {
@@ -126,9 +126,8 @@ export class CartComponent implements OnInit {
       const index = p.items.indexOf(item, 0);
       if (index > -1) {
         const count = +item.count + 1;
-        this.cartService.updateGoodsCartItemCount(item.id, count).subscribe(r => {
+        this.cartService.updateGoodsCartItemCount(item.id, count).subscribe((r) => {
           p.items[index].count = r.count;
-          p.items[index].price = r.price;
           this.getCartPrice();
         });
       }
@@ -143,7 +142,6 @@ export class CartComponent implements OnInit {
         const count = +item.count - 1;
         this.cartService.updateGoodsCartItemCount(item.id, count).subscribe(r => {
           p.items[index].count = r.count;
-          p.items[index].price = r.price;
           this.getCartPrice();
         });
       }
@@ -161,7 +159,6 @@ export class CartComponent implements OnInit {
       if (index > -1) {
         this.cartService.updateGoodsCartItemCount(item.id, newCount).subscribe(r => {
           p.items[index].count = r.count;
-          p.items[index].price = r.price;
           $event.target.value = r.count;
           this.getCartPrice();
         });

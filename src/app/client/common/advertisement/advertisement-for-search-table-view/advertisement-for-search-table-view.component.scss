@@ -1,0 +1,104 @@
+.advertisement-container {
+  width: 100%;
+  //margin: 5px;
+  height: 100%;
+
+  border-radius: 5px;
+
+  //border: 1px solid black;
+
+  background-color: #ffffff;
+
+  transition: all .1s;
+
+  &:hover {
+    box-shadow: 0 0 4px 1px #ded8d8;
+  }
+}
+
+.image-container {
+  height: 65%;
+  width: 100%;
+}
+
+.main-image {
+  border-radius: 5px 5px 0 0;
+  height: 100%;
+  width: 100%;
+
+  object-fit: cover;
+}
+
+.info-container {
+  height: 35%;
+  padding: 5px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.advertisement-title-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+
+
+  a {
+    text-decoration: none;
+    font-size: inherit;
+
+    font-weight: 300;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.price-container {
+  margin-top: 5px;
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.rating-sold-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  font-size: 13px;
+  //margin-top: 10px;
+  color: #5b5858;
+  //flex-grow: 2;
+  height: 20px;
+}
+
+.rating-text {
+  font-size: inherit;
+  color: inherit;
+  margin-right: 15px;
+}
+
+.sold-text {
+  color: inherit;
+  font-size: inherit;
+}
+
+.advertisement-seller {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 2;
+  //height: 30%;
+  display: flex;
+  align-items: flex-end;
+
+  //margin-top: 20px;
+
+  a {
+    color: #857e7e;
+    font-weight: 300;
+    font-size: inherit;
+  }
+}

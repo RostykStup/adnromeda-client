@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {GoodsAdvertisementRequest} from '../../../../entity/advertisement/goodsAdvertisement/goods-advertisement-request';
-import {RetailGoodsAdvertisementRequest} from '../../../../entity/advertisement/goodsAdvertisement/retailGoodsAdvertisement/retail-goods-advertisement-request';
 import {AdvertisementService} from '../../../../service/advertisement/advertisement.service';
 import {Validator} from '../../../../common/validator';
 import {CategoryService} from '../../../../service/category/category.service';
@@ -9,15 +8,16 @@ import {SubcategoryService} from '../../../../service/category/subcategory.servi
 import {SubcategoryResponse} from '../../../../entity/category/subcategory-response';
 import {CurrencyResponse} from '../../../../entity/country/currency-response';
 import {CurrencyService} from '../../../../service/country/currency.service';
-import {WholesalePriceRequest} from '../../../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-price-request';
-import {WholesalePriceUnitRequest} from '../../../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-price-unit-request';
 import {PropertyRequest} from '../../../../entity/advertisement/goodsAdvertisement/property-request';
 import {DeliveryTypeResponse} from '../../../../entity/country/delivery-type-response';
 import {DeliveryService} from '../../../../service/country/delivery.service';
-import {WholesaleGoodsAdvertisementRequest} from '../../../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-goods-advertisement-request';
 import {InfoDialogComponent} from '../../dialogs/info-dialog/info-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import {ParameterRequest} from '../../../../entity/advertisement/goodsAdvertisement/parameter/parameter-request';
+import {ParameterValueRequest} from '../../../../entity/advertisement/goodsAdvertisement/parameter/parameter-value-request';
+import {ConfirmDialogComponent} from '../../dialogs/confirm-dialog/confirm-dialog.component';
+import {ParametersValuesPriceCountRequest} from '../../../../entity/advertisement/goodsAdvertisement/parameter/parameters-values-price-count-request';
 
 export class Image {
   src = '';
@@ -40,25 +40,23 @@ export class CreateAdvertisementComponent implements OnInit {
               private router: Router) {
   }
 
-  isNumber = true;
-  digit = true;
-
   advertisement = new GoodsAdvertisementRequest();
   categories = Array<CategoryResponse>();
   subcategories = Array<SubcategoryResponse>();
   currencies = Array<CurrencyResponse>();
-  wholesalePrice = new WholesalePriceRequest();
   deliveryTypes = Array<DeliveryTypeResponse>();
   categoryId = 0;
   subcategoryId = 0;
+
+  parameters = new Array<ParameterRequest>();
+
+  paramsValuesCountPrices = new Array<ParametersValuesPriceCountRequest>();
+  noParamsValuesCountPrice = new ParametersValuesPriceCountRequest();
 
   images = Array<Image>();
 
   icon = 'https://img.icons8.com/material-outlined/24/ff0000/box-important--v1.png';
   questionIcon = 'https://img.icons8.com/material-outlined/24/000000/help.png';
-
-  priceType = 0;
-  retailPrice = '';
 
   transitionPrice: any;
   transitionCurrencyCode: any;
@@ -66,38 +64,20 @@ export class CreateAdvertisementComponent implements OnInit {
 
   validationTitle = true;
   validationSubcategory = true;
-  validationPrice = true;
-  validationEmptyPrice = true;
   validateProperties = true;
-  validateCount = true;
-  cantAddPriceAlert = true;
-
 
   ngOnInit(): void {
     this.categoryService.getAll().subscribe((r) => {
       this.categories = r;
     });
-    this.currencyService.getAll().subscribe((r) => {
-      this.currencies = r;
-      this.advertisement.currencyId = this.currencies[0].id;
-      this.reloadCurrency();
-    });
     this.deliveryTypeService.getDeliveriesByAccountCountry().subscribe((r) => {
       this.deliveryTypes = r;
     });
-    this.wholesalePrice.priceUnits.push(new WholesalePriceUnitRequest());
     this.advertisement.properties.push(new PropertyRequest());
 
     for (let i = 0; i < 5; i++) {
       this.images.push(new Image());
     }
-  }
-
-  validateNumber(n: any): void {
-    // this.validationPrice = true;
-    this.isNumber = Validator.validateNumberForPrice(n);
-    this.digit = Validator.validatePriceForTwoDigits(n);
-    this.transitionPrice = Number(n).toFixed(2);
   }
 
   loadSubcategories(): void {
@@ -106,113 +86,20 @@ export class CreateAdvertisementComponent implements OnInit {
     });
   }
 
-  changePriceType(n: number): void {
-    this.priceType = n;
-  }
-
-  reloadCurrency(): void {
-    this.currencies.forEach((c) => {
-      if (c.id == this.advertisement.currencyId) {
-        this.transitionCurrencyCode = c.code;
-      }
-    });
-  }
-
-  addNewWholesalePrice(): void {
-    const p = this.wholesalePrice.priceUnits[this.wholesalePrice.priceUnits.length - 1];
-    if (p.max !== '' && p.min !== '') {
-      const price = new WholesalePriceUnitRequest();
-      price.min = p.max + 1;
-      this.wholesalePrice.priceUnits.push(price);
-      this.cantAddPriceAlert = true;
-    } else {
-      this.cantAddPriceAlert = false;
-    }
-  }
-
-  removeWholesalePrice(price: WholesalePriceUnitRequest): void {
-    if (this.wholesalePrice.priceUnits.length === 1) {
-      return;
-    }
-    const index = this.wholesalePrice.priceUnits.indexOf(price, 0);
-    if (index > -1) {
-      this.wholesalePrice.priceUnits.splice(index, 1);
-    }
-
-    this.wholesalePrice.priceUnits.forEach((p) => {
-      // this.validatePrice(p);
-      this.validateUnitPrice(p);
-      this.validateUnitSidesAndValidWithOther(p);
-    });
-  }
-
-  validatePrice(price: WholesalePriceUnitRequest): boolean {
-    return Validator.validateNumberForPrice(price);
-  }
-
-  validateUnitPrice(price: WholesalePriceUnitRequest): void {
-    this.validationPrice = true;
-    const index = this.wholesalePrice.priceUnits.indexOf(price, 0);
-    if (index > -1) {
-      // console.log(Validator.validateNumberForPrice(price.price));
-      this.wholesalePrice.priceUnits[index].isValidPrice = Validator.validateNumberForPrice(price.price);
-      this.wholesalePrice.priceUnits[index].isDigit = Validator.validatePriceForTwoDigits(price.price);
-    }
-  }
-
-  validateUnitSidesAndValidWithOther(price: WholesalePriceUnitRequest): void {
-    const index = this.wholesalePrice.priceUnits.indexOf(price, 0);
-    this.validationPrice = true;
-    if (index > -1) {
-      if (price.max !== '') {
-        if ((+index === +(this.wholesalePrice.priceUnits.length - 1))) {
-          if (price.max === null) {
-            this.wholesalePrice.priceUnits[index].isValidSides = true;
-          } else {
-            this.wholesalePrice.priceUnits[index].isValidSides = price.min < price.max;
-          }
-        } else {
-          this.wholesalePrice.priceUnits[index].isValidSides = price.min < price.max;
-          this.wholesalePrice.priceUnits[index + 1].min = price.max + 1;
-          this.validateUnitSidesAndValidWithOther(this.wholesalePrice.priceUnits[index + 1]);
-        }
-      }
-      if (index > 0) {
-        this.wholesalePrice.priceUnits[index].isValidWithOthers =
-          this.wholesalePrice.priceUnits[index].min > this.wholesalePrice.priceUnits[index - 1].max;
-        // console.log(this.wholesalePrice.priceUnits[index].isValidWithOthers);
-      }
-    }
-  }
-
-  getTwoDigitPrice(price: WholesalePriceUnitRequest): string {
-    return Number(price.price).toFixed(2);
-  }
-
-  isValidNextSide(price: WholesalePriceUnitRequest): boolean {
-    const index = this.wholesalePrice.priceUnits.indexOf(price, 0);
-
-    if (+index !== +(this.wholesalePrice.priceUnits.length - 1)) {
-      if (price.max >= this.wholesalePrice.priceUnits[index + 1].min && this.wholesalePrice.priceUnits[index + 1].min !== '') {
-        return false;
-      }
-    }
-    return true;
-  }
-
   handleUpload(event: any): void {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.images.length; i++) {
-        // console.log);
         if (this.images[i].src === '') {
           // @ts-ignore
           this.images[i].src = reader.result.toString();
           break;
         }
       }
+      // tslint:disable-next-line:no-unused-expression
       event.target.files.clean;
       // this.advertisement.images.push(reader.result.toString());
     };
@@ -233,7 +120,7 @@ export class CreateAdvertisementComponent implements OnInit {
   }
 
   uploadImage(): void {
-    const element = <HTMLInputElement> document.getElementById('image-input');
+    const element = document.getElementById('image-input') as HTMLInputElement;
     element.click();
   }
 
@@ -248,12 +135,11 @@ export class CreateAdvertisementComponent implements OnInit {
   createGoodsAdvertisement(): void {
     if (this.validateAll()) {
       // if (true) {
-      let saveAdvertisement;
-      this.advertisement.count = Number(this.advertisement.count);
       this.advertisement.subcategoryId = Number(this.subcategoryId);
 
       if (this.advertisement.properties.length === 1) {
         if (this.advertisement.properties[0].value === '') {
+          // @ts-ignore
           this.advertisement.properties = null;
         }
       }
@@ -273,41 +159,41 @@ export class CreateAdvertisementComponent implements OnInit {
         }
       }
 
+      if (!this.advertisement.hasParameters) {
+        this.advertisement.valuesPriceCounts.push(this.noParamsValuesCountPrice);
+      } else {
+        this.advertisement.parameters = this.parameters;
+        this.paramsValuesCountPrices.forEach((p) => {
+          const jsonObject = {
+            price: p.price,
+            count: p.count,
+            valueParam: {}
+          };
+          p.valueParam.forEach((value, key) => {
+            // @ts-ignore
+            jsonObject.valueParam[key] = value;
+          });
+          this.advertisement.valuesPriceCounts.push(jsonObject);
+        });
+      }
+
+      // console.log((this.advertisement | JSON));
+      console.log(JSON.stringify(this.advertisement));
+
+
       const dataOk = {
         text: 'Товар успішно додано до вашого магазину'
       };
 
-      if (this.priceType === 1) {
-        saveAdvertisement = new RetailGoodsAdvertisementRequest();
-        saveAdvertisement.loadDataFromGoodsAdvertisementRequest(this.advertisement);
-        saveAdvertisement.price.price = Number(this.retailPrice);
+      this.advertisementService.sendGoodsAdvertisementCreateRequest(this.advertisement).subscribe(() => {
+        const dialogRef = this.dialog.open(InfoDialogComponent, {
+          data: dataOk
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          window.open('client/seller/advertisements', '_self');
+        });
+      });
 
-        this.advertisementService.createRetailAdvertisement(saveAdvertisement).subscribe(() => {
-          const dialogRef = this.dialog.open(InfoDialogComponent, {
-            data: dataOk
-          });
-          dialogRef.afterClosed().subscribe(result => {
-            this.router.navigateByUrl('/client/seller/advertisements');
-          });
-        }, error => {
-          alert(error.code);
-        });
-      } else {
-        this.mapWholesalePriceToNumbers();
-        saveAdvertisement = new WholesaleGoodsAdvertisementRequest();
-        saveAdvertisement.loadDataFromGoodsAdvertisementRequest(this.advertisement);
-        saveAdvertisement.price = this.wholesalePrice;
-        this.advertisementService.createWholeSaleAdvertisement(saveAdvertisement).subscribe(() => {
-          const dialogRef = this.dialog.open(InfoDialogComponent, {
-            data: dataOk
-          });
-          dialogRef.afterClosed().subscribe(result => {
-            this.router.navigateByUrl('/client/seller/advertisements');
-          });
-        }, error => {
-          alert(error.code);
-        });
-      }
     } else {
       const dataValid = {
         text: 'Неправильно заповнені поля, перевірте введені дані'
@@ -327,73 +213,153 @@ export class CreateAdvertisementComponent implements OnInit {
     this.validationTitle = Validator.validateSizeMin(this.advertisement.title.trim(), 1);
     this.validationSubcategory = (this.subcategoryId !== 0);
 
-    this.validateCount = this.advertisement.count;
-
-    this.validationPrice = true;
-    this.validationEmptyPrice = true;
-    if (this.priceType === 0) {
-      this.validationPrice = false;
-    } else if (this.priceType === 1) {
-      if (this.retailPrice.trim() == '') {
-        this.validationEmptyPrice = false;
-      } else {
-        this.validationPrice = this.isNumber && this.digit;
-      }
-    } else {
-      this.validationPrice = this.validateWholesalePrice();
-    }
-
     this.trimAllProperties();
     this.validateProperties = true;
     if (this.advertisement.properties.length === 1) {
+      // tslint:disable-next-line:triple-equals
       this.validateProperties = (this.advertisement.properties[0].value == '' && this.advertisement.properties[0].name == '') ||
         (this.advertisement.properties[0].value !== '' && this.advertisement.properties[0].name !== '');
     } else {
       // @ts-ignore
       this.advertisement.properties.forEach((p) => {
+        // tslint:disable-next-line:triple-equals
         if (p.name == '' || p.value == '') {
           this.validateProperties = false;
         }
       });
     }
-    return this.validationTitle && this.validationPrice && this.validationSubcategory && this.validateProperties && this.validateCount;
+    return this.validationTitle && this.validationSubcategory && this.validateProperties && this.validateParameters();
   }
 
-  validateWholesalePrice(): boolean {
-    for (let i = 0; i < this.wholesalePrice.priceUnits.length; i++) {
-      let p = this.wholesalePrice.priceUnits[i];
-      this.validateUnitPrice(p);
-      this.validateUnitSidesAndValidWithOther(p);
-      if (!(p.isValidWithOthers && p.isValidSides && p.isValidPrice && (this.wholesalePrice.priceUnits.length >= 2))) {
-        return false;
-      }
+  validateParameters(): boolean {
+    if (this.advertisement.hasParameters) {
+      // @ts-ignore
+      this.paramsValuesCountPrices.forEach((p) => {
+        p.price = Number(p.price);
+        if (isNaN(p.price)) {
+          return false;
+        }
+      });
+      return true;
+      // return false;
+    } else {
+      this.noParamsValuesCountPrice.price = Number(this.noParamsValuesCountPrice.price);
+      return this.noParamsValuesCountPrice.count >= 0 && Validator.validateNumberForPrice(this.noParamsValuesCountPrice.price);
     }
-    return true;
   }
+
 
   trimAllProperties(): void {
-    // @ts-ignore
-    this.advertisement.properties.forEach((p) => {
-      p.name = p.name.trim();
-      p.value = p.value.trim();
-    });
+    if (this.advertisement.properties !== null) {
+      if (this.advertisement.properties.length > 0) {
+        // @ts-ignore
+        this.advertisement.properties.forEach((p) => {
+          p.name = p.name.trim();
+          p.value = p.value.trim();
+        });
+      }
+    }
   }
 
-  mapWholesalePriceToNumbers(): void {
-    this.wholesalePrice.priceUnits.forEach((p) => {
-      p.min = Number(p.min);
-      p.max = Number(p.max);
-      if (p.max === 0) {
-        p.max = null;
-      } else {
-        p.max = Number(p.max);
+  enterPriceInput($event: any): void {
+    const price = $event.target.value;
+    if (!Validator.validateNumberForPrice(price) || !Validator.validatePriceForTwoDigits(price)) {
+      $event.target.classList.add('incorrect');
+    } else {
+      $event.target.classList.remove('incorrect');
+    }
+  }
+
+  addParameter(): void {
+    const input = document.getElementById('new-param-title-input') as HTMLInputElement;
+    input.value = input.value.trim();
+    if (input.value.length > 1) {
+      const parameter = new ParameterRequest();
+      parameter.title = input.value;
+      this.parameters.push(parameter);
+      input.value = '';
+    }
+
+  }
+
+  addParameterValue(parameter: ParameterRequest): void {
+    const input = document.getElementById('param-' + parameter.title + '-value-input') as HTMLInputElement;
+    input.value = input.value.trim();
+    if (input.value.length > 0) {
+      const value = new ParameterValueRequest();
+      value.title = input.value;
+      this.parameters[this.parameters.indexOf(parameter)].values.push(value);
+      input.value = '';
+      this.recreateNewParamsValuesCountPricesRequest();
+    }
+  }
+
+
+  deleteParameter(parameter: ParameterRequest): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        text: 'Ви впевнені що хочете видалити параметр?'
+      }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.result) {
+        this.parameters.splice(this.parameters.indexOf(parameter), 1);
+        this.recreateNewParamsValuesCountPricesRequest();
       }
     });
   }
 
-  isFirst(price: WholesalePriceUnitRequest): boolean {
-    const index = this.wholesalePrice.priceUnits.indexOf(price, 0);
-    return index === 0;
+  deleteParameterValue(parameter: ParameterRequest, value: ParameterValueRequest): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        text: 'Ви впевнені що хочете видалити варіант параметру?'
+      }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if (data.result) {
+        parameter.values.splice(parameter.values.indexOf(value), 1);
+        this.recreateNewParamsValuesCountPricesRequest();
+      }
+    });
   }
 
+
+  recreateNewParamsValuesCountPricesRequest(): void {
+    if (this.parameters.length === 0) {
+      this.paramsValuesCountPrices = new Array<ParametersValuesPriceCountRequest>();
+      return;
+    }
+    let size = 1;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.parameters.length; i++) {
+      size = size * this.parameters[i].values.length;
+    }
+    this.paramsValuesCountPrices = new Array<ParametersValuesPriceCountRequest>();
+
+    const parameterLength = new Array<number>();
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.parameters.length; i++) {
+      parameterLength[i] = this.getParameterLength(i, size, (i === 0 ? 0 : parameterLength[i - 1]));
+    }
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < size; i++) {
+      const param = new ParametersValuesPriceCountRequest();
+      // tslint:disable-next-line:prefer-for-of
+      for (let j = 0; j < this.parameters.length; j++) {
+        const paramValuesIndex = Math.floor(i / parameterLength[j]) % this.parameters[j].values.length;
+        param.valueParam.set(this.parameters[j].title, this.parameters[j].values[paramValuesIndex].title);
+      }
+      this.paramsValuesCountPrices.push(param);
+    }
+
+  }
+
+  getParameterLength(index: number, size: number, previousLength: number): number {
+    if (index === 0) {
+      return size / this.parameters[index].values.length;
+    } else {
+      return previousLength / this.parameters[index].values.length;
+    }
+  }
 }

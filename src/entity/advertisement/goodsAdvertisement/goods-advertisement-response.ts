@@ -2,6 +2,8 @@ import {AdvertisementResponse} from '../advertisement-response';
 import {PropertyResponse} from './property-response';
 import {SubcategoryResponse} from '../../category/subcategory-response';
 import {CurrencyResponse} from '../../country/currency-response';
+import {ParametersValuesPriceCountResponse} from './parameter/parameters-values-price-count-response';
+import {ParameterResponse} from './parameter/parameter-response';
 
 export class GoodsAdvertisementResponse extends AdvertisementResponse {
 
@@ -15,7 +17,7 @@ export class GoodsAdvertisementResponse extends AdvertisementResponse {
 
   currency = new CurrencyResponse();
 
-  count = 0;
+  totalCount = 0;
 
   seller = '';
 
@@ -24,5 +26,15 @@ export class GoodsAdvertisementResponse extends AdvertisementResponse {
   countryCode = '';
 
   isInFavorites = false;
+
+  parameters = new Array<ParameterResponse>();
+
+  minPrice = 0;
+
+  maxPrice = 0;
+
+  valuesPriceCounts = new Array<ParametersValuesPriceCountResponse>();
+
+  hasParameters = false;
 
 }

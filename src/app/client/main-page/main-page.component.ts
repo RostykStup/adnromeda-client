@@ -37,7 +37,7 @@ export class MainPageComponent implements OnInit {
 
       // @ts-ignore
       this.mainPage.responses.data.forEach((a) => {
-        a.priceWithUserCurrency = this.generatePriceWithUserCurrency(a);
+        // a.priceWithUserCurrency = this.generatePriceWithUserCurrency(a);
       });
     });
   }
@@ -49,25 +49,6 @@ export class MainPageComponent implements OnInit {
   navigateToAdvertisement(id: number): void {
     window.open('client/advertisement-view?id=' + id);
     // this.router.navigateByUrl();
-  }
-
-  generatePriceWithUserCurrency(advertisement: GoodsAdvertisementForSearchResponse): string {
-    let currency = localStorage.getItem('andro_user_currency');
-    if (currency === null || currency === '') {
-      currency = 'USD';
-    }
-    if (advertisement.type === 'goods_wholesale') {
-      return this.currencyService.exchangeCurrencies('USD', currency, advertisement.priceMin).toFixed(2)
-        + ' - '
-        + this.currencyService.exchangeCurrencies('USD', currency, advertisement.priceMax).toFixed(2)
-        + ' '
-        + currency;
-    } else if (advertisement.type === 'goods_retail') {
-      return this.currencyService.exchangeCurrencies('USD', currency, advertisement.price).toFixed(2)
-        + ' '
-        + currency;
-    }
-    return ' - ';
   }
 
 }

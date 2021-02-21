@@ -73,7 +73,6 @@ export class OrderMakingComponent implements OnInit {
         const count = +item.count - 1;
         this.cartService.checkGoodsCartItemCount(item.id, count).subscribe(r => {
           p.items[index].count = r.count;
-          p.items[index].price = r.price;
           this.getOrderPrice();
         });
       }
@@ -81,17 +80,13 @@ export class OrderMakingComponent implements OnInit {
   }
 
   getOrderPrice(): void {
-    const items = new Array<GoodsCartItemForCountingPriceRequest>();
-    let num = 0;
+    // let num = 0;
+    this.allPrice = 0;
     this.positions.forEach(p => {
       p.items.forEach(i => {
-        items.push(new GoodsCartItemForCountingPriceRequest(i));
-        num++;
+        // num++;
+        this.allPrice += (i.priceCountResponse.price * i.count);
       });
-    });
-
-    this.cartService.getItemsPrice(items).subscribe(r => {
-      this.allPrice = r;
     });
   }
 
@@ -99,8 +94,9 @@ export class OrderMakingComponent implements OnInit {
     this.positions.forEach(p => {
       const index = p.items.indexOf(item, 0);
       if (index > -1) {
-        this.advertisementService.getAdvertisementCount(p.items[index].advertisementId).subscribe((r) => {
-          p.items[index].max = r;
+        this.advertisementService
+          .getAdvertisementParameterCount(item.priceCountResponse.id).subscribe((r) => {
+          p.items[index].priceCountResponse.count = r;
         });
       }
     });
@@ -114,7 +110,6 @@ export class OrderMakingComponent implements OnInit {
         const count = +item.count + 1;
         this.cartService.checkGoodsCartItemCount(item.id, count).subscribe(r => {
           p.items[index].count = r.count;
-          p.items[index].price = r.price;
           this.getOrderPrice();
         });
       }
@@ -132,7 +127,6 @@ export class OrderMakingComponent implements OnInit {
       if (index > -1) {
         this.cartService.checkGoodsCartItemCount(item.id, newCount).subscribe(r => {
           p.items[index].count = r.count;
-          p.items[index].price = r.price;
           $event.target.value = r.count;
           this.getOrderPrice();
         });
@@ -186,15 +180,22 @@ export class OrderMakingComponent implements OnInit {
 
   makeOrder(): void {
     const count = this.getItemsCount();
-    console.log(count);
     let items = 0;
     this.positions.forEach((p) => {
       const request = new GoodsOrderRequest();
+
       // @ts-ignore
       request.addressId = this.userAddress.id;
 
       p.items.forEach((i) => {
-        request.items.push(new GoodsOrderItemRequest(i.count, i.advertisementId, i.deliveryType.id, i.description));
+        request.items.push(
+          new GoodsOrderItemRequest(
+            i.count,
+            i.advertisementId,
+            i.deliveryType.id,
+            i.description,
+            i.priceCountResponse.id)
+        );
       });
       this.orderService.createOrder(request).subscribe(() => {
         p.items.forEach((i) => {
@@ -214,11 +215,6 @@ export class OrderMakingComponent implements OnInit {
         });
       });
     });
-
-    // while (items !== count) {
-    //
-    // }
-    // console.log('same');
   }
 
   getItemsCount(): number {

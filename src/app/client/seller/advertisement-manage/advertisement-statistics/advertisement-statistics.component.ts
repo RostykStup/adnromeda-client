@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {AdvertisementService} from '../../../../../service/advertisement/advertisement.service';
 import {DeliveryService} from '../../../../../service/country/delivery.service';
-import {WholesalePriceUnitRequest} from '../../../../../entity/advertisement/goodsAdvertisement/wholesaleGoodsAdvertisement/wholesale-price-unit-request';
 import {GoodsAdvertisementStatisticsResponse} from '../../../../../entity/statistics/advertisement/GoodsAdvertisementStatisticsResponse';
 import {GoodsAdvertisementMonthStatisticsResponse} from '../../../../../entity/statistics/advertisement/goods-advertisement-month-statistics-response';
 
@@ -44,7 +43,7 @@ export class AdvertisementStatisticsComponent implements OnInit {
 
   changeMonthStatistics($event: string): void {
     this.month = $event.substr(0, 2);
-    this.year = $event.substr(3,4);
+    this.year = $event.substr(3, 4);
 
     this.loadMothAdvertisementStatistics();
   }

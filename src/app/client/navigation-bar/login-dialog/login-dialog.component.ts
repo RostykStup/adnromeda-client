@@ -119,36 +119,15 @@ export class LoginDialogComponent {
   }
 
   loginRostClick(): void {
-    const accountRequest = new AccountLoginRequest();
-    accountRequest.password = '12345678';
-    accountRequest.login = 'rostyk.stup@gmail.com';
-    this.accountService.login(accountRequest).subscribe((r) => {
-      this.accountService.writeAuthenticationToLocalStorage(r);
-      this.dialogRef.close();
-      window.location.reload();
-    }, (error) => {
-      if (error.status === 403) {
-        this.validateAuth = false;
-      }
-    });
+    this.accountLoginRequest.login = 'rostyk.stup@gmail.com';
+    this.accountLoginRequest.password = '12345678';
+    this.loginButtonClick();
   }
 
   loginUserClick(): void {
-    const accountRequest = new AccountLoginRequest();
-    accountRequest.password = '12345678';
-    accountRequest.login = 'rostyk.stu@gmail.com';
-    this.accountService.login(accountRequest).subscribe((r) => {
-      this.accountService.writeAuthenticationToLocalStorage(r);
-      if (r.userRole === 'ROLE_USER') {
-        this.loadUserData();
-        console.log('data loaded');
-      }
-      this.dialogRef.close();
-    }, (error) => {
-      if (error.status === 403) {
-        this.validateAuth = false;
-      }
-    });
+    this.accountLoginRequest.login = 'rostyk.stup@gmail.coms';
+    this.accountLoginRequest.password = '12345678';
+    this.loginButtonClick();
   }
 
   loadUserData(): void {

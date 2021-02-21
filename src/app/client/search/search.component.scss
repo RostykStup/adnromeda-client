@@ -5,7 +5,7 @@
   padding-left: 10px;
 }
 
-.result-text{
+.result-text {
   color: #434040;
   font-size: 13px;
 
@@ -17,8 +17,8 @@
   //border: 3px solid black;
   padding: 20px;
   background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 1px #f1eded;
+  border-radius: 4px;
+  //box-shadow: 0 0 10px 1px #f1eded;
   margin: 0 auto;
 
   //height: 1000px;
@@ -111,7 +111,7 @@
   border-right: 1px solid #a29e9e;
 }
 
-.sort-elem.selected{
+.sort-elem.selected {
   background-color: #000000;
   color: #f6f2f2;
 
@@ -127,12 +127,13 @@
   margin: 0 5px;
 }
 
-g.selected{
+g.selected {
   fill: green;
 }
 
 .search-container {
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .enter-price-sides {
@@ -149,7 +150,11 @@ g.selected{
 .table-advertisement-holder {
   //display: table;
   //flex-direction: column;
-  width: 100%;
+  //width: 80%;
+  margin: 0 auto;
+  display: flex;
+  //justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .table-advertisement-row {
@@ -207,7 +212,7 @@ g.selected{
   align-items: center;
 }
 
-.in_favorites{
+.in_favorites {
   background-color: #cdff00;
 }
 
@@ -232,33 +237,35 @@ g.selected{
     text-decoration: none;
     cursor: pointer;
   }
-  a:hover{
+
+  a:hover {
     text-decoration: underline;
   }
 }
 
-.table-advertisement-price-container{
+.table-advertisement-price-container {
   font-weight: 800;
   font-size: 15px;
 }
 
-.table-advertisement-rating-sales-container{
+.table-advertisement-rating-sales-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 25%;
+
   div {
     font-size: 12px;
   }
 }
 
-.table-advertisement-seller-container{
+.table-advertisement-seller-container {
   padding-bottom: 4px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  a{
+  a {
     font-size: 13px;
     color: #857e7e;
 
@@ -267,8 +274,19 @@ g.selected{
 
 }
 
-.pagination-container{
+.pagination-container {
   display: flex;
   justify-content: center;
 }
 
+app-advertisement-for-search-table-view {
+  width: 19%;
+  height: 300px;
+  //margin: 3px;
+
+  margin: 10px 6px;
+}
+
+.row-advertisement-holder{
+  background-color: #fff;
+}

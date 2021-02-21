@@ -6,4 +6,6 @@ export class GoodsAdvertisementSearchRequest {
   image = false;
   rating = false;
   paginationRequest = new PaginationRequest();
+
+  currency = 'USD';
 }

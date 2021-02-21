@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {GlobalConstants} from '../../common/global-constants';
 import {AccountLoginRequest} from '../../entity/account/account-login-request';
@@ -31,6 +31,17 @@ export class CurrencyService {
       this.courseEUR = Number(r[1].sale);
       this.courseRUB = Number(r[2].sale);
     });
+  }
+
+
+  getUserCurrency(): string {
+      let currency = localStorage.getItem('andro_user_currency');
+
+      if (currency === null || currency === '') {
+        currency = 'USD';
+      }
+      return currency;
+
   }
 
   getAll(): Observable<Array<CurrencyResponse>> {

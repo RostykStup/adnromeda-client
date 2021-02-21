@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ClickOutsideModule } from 'ng-click-outside';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
     MatDialogModule,
     ClickOutsideModule
   ],
-  providers: [Document],
+  providers: [Document, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 

@@ -31,7 +31,14 @@
         <div class="order-item-container order-item" *ngFor="let item of order.items">
           <div class="item-main-info-container">
             <div class="item-image-container cell"><img [src]="getImage(item.image, order.sellerId)"></div>
-            <div class="item-title-container cell">{{item.title}}</div>
+            <div class="item-title-container cell">{{item.title}}
+              <div class="item-parameters">
+                <div *ngFor="let paramValue of item.priceCountResponse.values | keyvalue" class="param-block">
+                  <span class="param-name">{{paramValue.key}}</span>: <span
+                  class="param-value">{{paramValue.value}}</span>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="item-price-for-one-container cell">$ {{item.price.toFixed(2)}}</div>
           <div class="item-count-container cell">{{item.count}} шт.</div>

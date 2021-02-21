@@ -26,15 +26,18 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { ImageDialogComponent } from './dialogs/image-dialog/image-dialog.component';
 import { AdvertisementForSearchRowViewComponent } from './common/advertisement/advertisement-for-search-row-view/advertisement-for-search-row-view.component';
 import { AdvertisementForSearchTableViewComponent } from './common/advertisement/advertisement-for-search-table-view/advertisement-for-search-table-view.component';
+import { OrderListViewComponent } from './common/order/order-list-view/order-list-view.component';
+import { OrderItemListViewComponent } from './common/order/order-item-list-view/order-item-list-view.component';
 
 @NgModule({
-  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent, YearMonthPickerComponent, MainPageComponent, ImageDialogComponent, AdvertisementForSearchRowViewComponent, AdvertisementForSearchTableViewComponent],
+  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent, YearMonthPickerComponent, MainPageComponent, ImageDialogComponent, AdvertisementForSearchRowViewComponent, AdvertisementForSearchTableViewComponent, OrderListViewComponent, OrderItemListViewComponent],
     exports: [
         RatingPickerComponent,
         PaginatorComponent,
         RatingViewComponent,
         YearMonthPickerComponent,
-        AdvertisementForSearchRowViewComponent
+        AdvertisementForSearchRowViewComponent,
+        OrderListViewComponent
     ],
   imports: [
     CommonModule,

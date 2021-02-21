@@ -1,4 +1,5 @@
 import {DeliveryTypeResponse} from '../country/delivery-type-response';
+import {ParametersValuesPriceCountResponse} from '../advertisement/goodsAdvertisement/parameter/parameters-values-price-count-response';
 
 export class GoodsCartItemResponse {
 
@@ -6,12 +7,11 @@ export class GoodsCartItemResponse {
   image: string | null = null;
   title = '';
   deliveryType = new DeliveryTypeResponse();
-  price = 0.0;
   count = 0;
   sellerId = 0;
-  advertisementId = 0;
-  max = 0;
+  advertisementId = 0;;
   checked = false;
   description = '';
+  priceCountResponse = new ParametersValuesPriceCountResponse();
 
 }

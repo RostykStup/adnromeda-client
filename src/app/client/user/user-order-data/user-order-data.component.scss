@@ -311,3 +311,26 @@
   color: #ff0000;
   font-weight: 800;
 }
+
+
+.item-parameters {
+  display: flex;
+  margin-top: 5px;
+}
+
+.param-block {
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.param-name {
+  font-size: inherit;
+  color: #867d7d;
+  font-weight: 900;
+}
+
+.param-value {
+  font-size: inherit;
+  color: #bfb6b6;
+  font-weight: 900;
+}

@@ -49,8 +49,8 @@ export class AdvertisementService {
       {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
-  getAdvertisementCount(id: number): Observable<number> {
-    const url = this.advertisementURL + '/count?id=' + id;
+  getAdvertisementParameterCount(paramsId: number): Observable<number> {
+    const url = this.advertisementURL + '/count?paramsId=' + paramsId;
     return this.httpClient.get<number>(url);
   }
 

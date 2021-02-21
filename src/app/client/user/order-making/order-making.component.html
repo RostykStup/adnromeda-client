@@ -41,7 +41,12 @@
                 <div style="font-size: 10px">id: {{item.advertisementId}}</div>
               </div>
               <div class="goods-price">
-                <span>$ {{item.price.toFixed(2)}}</span>
+                <span>$ {{item.priceCountResponse.price.toFixed(2)}}</span>
+              </div>
+              <div class="goods-params">
+                <div *ngFor="let paramValue of item.priceCountResponse.values | keyvalue" class="param-block">
+                  <span class="param-name">{{paramValue.key}}</span>: <span class="param-value">{{paramValue.value}}</span>
+                </div>
               </div>
               <div class="goods-delivery">
                 <span class="delivery-text" (click)="openDeliveriesDialog(item.id, item.advertisementId, item.deliveryType)"><span
@@ -61,7 +66,7 @@
                 </button>
                 <input type="number" class="item-count-input" min="1" [value]="item.count"
                        (keyup)="inputCartItemCount($event, item)">
-                <button [disabled]="item.count === item.max" (click)="clickPlusCountButton(item)" class="count-button">+
+                <button [disabled]="item.count === item.priceCountResponse.count" (click)="clickPlusCountButton(item)" class="count-button">+
                 </button>
               </div>
             </div>

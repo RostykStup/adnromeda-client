@@ -134,12 +134,13 @@
     word-break: break-all;
   }
 
-  margin-bottom: 20px;
+  //margin-bottom: 20px;
 }
 
 .goods-delivery {
   font-size: 12px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .delivery-text {
@@ -210,5 +211,25 @@
 .count-button:disabled{
   color: #998f8f;
   cursor: not-allowed;
+}
+
+.goods-params{
+  display: flex;
+  margin-top: 10px;
+}
+
+.param-block{
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.param-name{
+  font-size: inherit;
+  font-weight: 800;
+}
+
+.param-value{
+  font-size: inherit;
+  color: #857e7e;
 }
 

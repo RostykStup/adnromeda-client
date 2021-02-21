@@ -62,7 +62,8 @@
       <div class="delivery-block" *ngIf="order.orderStatus !== 'WAITING_FOR_SENDING'">
         <div class="delivery-block-title">Примітка від продавця:</div>
         <div class="delivery-block-value">
-          <span *ngIf="order.deliveryDetails.sellerMessage !== null ">''</span>{{order.deliveryDetails.sellerMessage}}<span *ngIf="order.deliveryDetails.sellerMessage !== null ">''</span>
+          <span *ngIf="order.deliveryDetails.sellerMessage !== null ">''</span>{{order.deliveryDetails.sellerMessage}}
+          <span *ngIf="order.deliveryDetails.sellerMessage !== null ">''</span>
           <span *ngIf="order.deliveryDetails.sellerMessage === null ">---</span>
         </div>
       </div>
@@ -79,8 +80,9 @@
       <div class="order-items-list-container">
         <div class="order-item-container">
           <div class="item-check-container" *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'">
-              <input type="checkbox" id="select-all-check" class="andro-checkbox" [(ngModel)]="selectAll" (change)="clickSelectAll()" >
-              <label class="andro-label" for="select-all-check" >Всі</label>
+            <input type="checkbox" id="select-all-check" class="andro-checkbox" [(ngModel)]="selectAll"
+                   (change)="clickSelectAll()">
+            <label class="andro-label" for="select-all-check">Всі</label>
           </div>
           <div class="item-main-info-container">
             <div class="item-title-container title-row">Товар</div>
@@ -93,7 +95,8 @@
           <div class="item-delivery-container  title-row">Доставка</div>
         </div>
         <div class="order-item-container order-item" *ngFor="let item of order.items">
-          <div class="item-check-container list-item-check-container"  *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'">
+          <div class="item-check-container list-item-check-container"
+               *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'">
             <input [(ngModel)]="item.checked" type="checkbox"
                    [id]="'item_' + item.id" class="andro-checkbox"
                    (change)="checkItem()"
@@ -103,12 +106,20 @@
           </div>
           <div class="item-main-info-container">
             <div class="item-image-container cell"><img [src]="getImage(item.image, order.sellerId)"></div>
-            <div class="item-title-container cell">{{item.title}}</div>
+            <div class="item-title-container cell">{{item.title}}
+              <div class="item-parameters">
+                <div *ngFor="let paramValue of item.priceCountResponse.values | keyvalue" class="param-block">
+                  <span class="param-name">{{paramValue.key}}</span>: <span
+                  class="param-value">{{paramValue.value}}</span>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="item-price-for-one-container cell">$ {{item.price.toFixed(2)}}</div>
           <div class="item-count-container cell">{{item.count}} шт.</div>
           <div class="item-price-container cell">$ {{(item.count * item.price).toFixed(2)}}</div>
-          <div class="item-status-container  status-cell ">{{orderService.getUkrOrderItemStatusValue(item.status)}}</div>
+          <div
+            class="item-status-container  status-cell ">{{orderService.getUkrOrderItemStatusValue(item.status)}}</div>
           <div class="item-description-container cell">{{item.description}}</div>
           <div class="item-delivery-container cell">{{item.delivery.title}}</div>
         </div>
@@ -120,9 +131,11 @@
         </div>
       </div>
       <div>
-              <div  *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'" class="delivery-block delivery-button-block">
-                <button class="confirm-button" [disabled]="getCheckedNumber() === 0" (click)="confirmDeliveryButtonClick()">Підтвердити отримання</button>
-              </div>
+        <div *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'" class="delivery-block delivery-button-block">
+          <button class="confirm-button" [disabled]="getCheckedNumber() === 0" (click)="confirmDeliveryButtonClick()">
+            Підтвердити отримання
+          </button>
+        </div>
       </div>
     </div>
   </div>

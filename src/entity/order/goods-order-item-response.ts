@@ -1,4 +1,5 @@
 import {DeliveryTypeResponse} from '../country/delivery-type-response';
+import {ParametersValuesPriceCountResponse} from '../advertisement/goodsAdvertisement/parameter/parameters-values-price-count-response';
 
 export class GoodsOrderItemResponse {
   id = 0;
@@ -11,4 +12,6 @@ export class GoodsOrderItemResponse {
   title = '';
   price = 0;
   checked = false;
+
+  priceCountResponse = new ParametersValuesPriceCountResponse();
 }

@@ -42,20 +42,6 @@ export class UserOrdersComponent implements OnInit {
     });
   }
 
-  getImage(image: string | null, sellerId: number): string {
-    return this.advertisementService.getAdvertisementImagePath(image, sellerId);
-  }
-
-  navigateToOrderData(id: number): void {
-    window.open('/client/user/order-data?orderId=' + id);
-    // this.router.navigateByUrl('/client/seller/order-data?orderId=' + id)
-  }
-
-  navigateToFeedBackMaking(id: number): void {
-    // window.open('/client/user/feedback?orderId=' + id);
-    this.router.navigateByUrl('/client/user/feedback?orderId=' + id);
-  }
-
   loadAllOrders(): void {
     this.orderService.getUserAllOrdersPage(this.pagination).subscribe((r) => {
       this.orders = r.data;
@@ -119,17 +105,17 @@ export class UserOrdersComponent implements OnInit {
     const num = order.items.length;
     // let c = 0;
     // order.items.forEach((i) => {
-      // this.cartService.addItemToCart(i.advertisementId, i.delivery.id).subscribe(() => {
-      //   c++;
-      //   if (c === num) {
-      //     const dialogRef = this.dialog.open(InfoDialogComponent, {
-      //       data: {
-      //         text: 'Товари успішно додано до корзини'
-      //       }
-      //     });
-      //     dialogRef.afterClosed().subscribe();
-      //   }
-      // });
+    // this.cartService.addItemToCart(i.advertisementId, i.delivery.id).subscribe(() => {
+    //   c++;
+    //   if (c === num) {
+    //     const dialogRef = this.dialog.open(InfoDialogComponent, {
+    //       data: {
+    //         text: 'Товари успішно додано до корзини'
+    //       }
+    //     });
+    //     dialogRef.afterClosed().subscribe();
+    //   }
+    // });
     // });
   }
 }

@@ -1,0 +1,104 @@
+.dialog-title {
+  font-weight: 900;
+  font-size: 15px;
+}
+
+//.dialog-body {
+//  width: 50%;
+//}
+
+.dialog-block {
+  margin: 20px 0;
+  //padding-bottom: 10px;
+  //border-bottom: 1px solid #d0c3c3;
+}
+
+.block-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.old-price-text {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.type-select {
+  font-size: 15px;
+  font-weight: 900;
+  border: 2px solid black;
+  padding: 3px;
+  border-radius: 3px;
+  //margin-left: 5px;
+}
+
+.type-option {
+  font-size: 15px;
+  font-weight: 900;
+}
+
+
+.discount-values-text {
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.crosses-price {
+  text-decoration: line-through;
+  margin-right: 6px;
+}
+
+.discount-price {
+  display: flex;
+}
+
+.discount-param-price {
+  font-weight: 900;
+  color: #ae2020;
+}
+
+.date-input-container {
+  margin: 4px 0;
+  font-size: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  input {
+    font-size: inherit;
+    font-weight: 900;
+    border-radius: 3px;
+  }
+}
+
+.andro-checkbox ~ label {
+  font-size: 15px;
+}
+
+.create-btn {
+  border: 3px solid black;
+  border-radius: 4px;
+
+  background-color: #fff;
+  padding: 5px;
+
+  font-size: 15px;
+  font-weight: 900;
+
+  cursor: pointer;
+  transition: all .2s;
+
+  &:hover {
+    background-color: #000000;
+    color: #F6F7F9;
+  }
+}
+
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 0;
+}

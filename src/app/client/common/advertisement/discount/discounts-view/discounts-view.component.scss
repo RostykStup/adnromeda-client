@@ -1,0 +1,76 @@
+.parameter-discounts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e7d4d4;
+
+  padding-bottom: 7px;
+}
+
+.param-name {
+  font-size: 15px;
+  color: #857e7e;
+}
+
+.param-value {
+  font-size: 15px;
+  font-weight: 900;
+  color: #000000;
+}
+
+.discounts-arrow-holder {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+
+.param-discount-container {
+  margin-top: 10px;
+}
+
+.param-discount-container:not(:first-child) {
+  margin-top: 30px;
+}
+
+
+.parameter-discount-row {
+  width: 100%;
+  padding: 5px 0;
+  display: flex;
+}
+
+.discount-values-text {
+  font-size: 17px;
+  font-weight: 300;
+}
+
+.parameter-discount-row:not(:last-child) {
+
+  border-bottom: 1px solid #f3eded;
+}
+
+.title-text {
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.discount-start-date-column {
+  width: 15%;
+}
+
+.discount-end-date-column {
+  width: 15%;
+}
+
+.discount-value-column {
+  width: 25%;
+}
+
+.discount-actions-column {
+  //width: 100%;
+  display: flex;
+  flex-grow: 2;
+  justify-content: flex-end;
+  align-items: center;
+}

@@ -8,20 +8,25 @@
       <div class="navigation-item">
         <input class="manage-mode-radio"
                type="radio" id="adv-update-input"
-               name="manage-mode"
-               [checked]="!isStatistics">
+               name="manage-mode" [checked]="mode === 'updating'">
         <label class="manage-mode-label left-line" for="adv-update-input" (click)="navigateToEditing()">Редагування</label>
+      </div>
+      <div class="vertical-divider"></div>
+      <div class="navigation-item">
+        <input class="manage-mode-radio"
+               type="radio" id="adv-discounts-input"
+               (click)="navigateToDiscounts()"
+               name="manage-mode"  [checked]="mode === 'discounts'">
+        <label class="manage-mode-label" for="adv-discounts-input">Акції та знижки</label>
       </div>
       <div class="vertical-divider"></div>
       <div class="navigation-item">
         <input class="manage-mode-radio"
                type="radio" id="adv-statistics-input"
                (click)="navigateToStatistics()"
-               name="manage-mode"
-               [checked]="isStatistics">
+               name="manage-mode"  [checked]="mode === 'statistics'">
         <label class="manage-mode-label" for="adv-statistics-input">Статистика</label>
       </div>
-
     </div>
   </div>
   <div class="content-block">

@@ -1,0 +1,10 @@
+<div class="choosing-container">
+  <div class="choosing-holder" *ngFor="let parameter of parameters">
+    <label class="parameter-name">{{parameter.title}}: </label>
+    <select class="values-select" (change)="changeValue($event, parameter)">
+      <option class="values-option" [value]="value.title" *ngFor="let value of parameter.values">{{value.title}}</option>
+    </select>
+  </div>
+
+<!--  Ціна : {{chosenParam.price}} Кількість: {{chosenParam.count}}-->
+</div>

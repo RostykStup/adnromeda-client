@@ -1,0 +1,20 @@
+<div class="block add-discount-button-block">
+<!--  <app-parameter-values-price-count-picker *ngIf="advertisement"-->
+<!--                                           [parameters]="advertisement.parameters"-->
+<!--                                           [paramValues]="advertisement.valuesPriceCounts"></app-parameter-values-price-count-picker>-->
+  <button class="btn" (click)="addDiscountOpen()">Додати знижку</button>
+</div>
+
+<div class="block">
+
+  <div class="block-title">
+    <div class="block-title-text">
+      Параметри зі знижками
+    </div>
+    <!--    <button class="btn">Додати знижку для цих параметрів</button>-->
+  </div>
+
+  <div class="params-with-discounts-container">
+    <app-discounts-view *ngFor="let param of paramValuesWithDiscount" [param]="param"></app-discounts-view>
+  </div>
+</div>

@@ -15,10 +15,11 @@ import { SellerProfileComponent } from './seller-profile/seller-profile.componen
 import { SellerNotificationsComponent } from './seller-notifications/seller-notifications.component';
 import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
 import { SellerStatisticsComponent } from './seller-statistics/seller-statistics.component';
+import { AdvertisementDiscountsComponent } from './advertisement-manage/advertisement-discounts/advertisement-discounts.component';
 
 
 @NgModule({
-  declarations: [SellerComponent, SellerOrdersComponent, OrderDataComponent, AdvertisementsListComponent, AdvertisementManageComponent, AdvertisementUpdatingComponent, AdvertisementStatisticsComponent, SellerProfileComponent, SellerNotificationsComponent, SellerSettingsComponent, SellerStatisticsComponent],
+  declarations: [SellerComponent, SellerOrdersComponent, OrderDataComponent, AdvertisementsListComponent, AdvertisementManageComponent, AdvertisementUpdatingComponent, AdvertisementStatisticsComponent, SellerProfileComponent, SellerNotificationsComponent, SellerSettingsComponent, SellerStatisticsComponent, AdvertisementDiscountsComponent],
     imports: [
         CommonModule,
         SellerRoutingModule,

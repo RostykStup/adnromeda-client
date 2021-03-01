@@ -1,0 +1,79 @@
+<div class="dialog-title">
+  Додавання знижки
+</div>
+<div class="dialog-body">
+  <div class="choose-parameter-block dialog-block">
+    <div class="block-title">
+      Параметри для знижки:
+    </div>
+    <app-parameter-values-price-count-picker
+      [parameters]="data.paramArray"
+      [paramValues]="data.paramValues"
+      (event)="changeParamValue($event)"
+    ></app-parameter-values-price-count-picker>
+  </div>
+
+  <div class="dialog-block">
+    <div class="block-title">
+      Оберіть тип знижки:
+    </div>
+    <select class="type-select" (change)="changeType()" [(ngModel)]="discountRequest.discountType">
+      <option [value]="'DISCOUNT_PERCENT'" class="type-option">Знижка у відсотках</option>
+      <option [value]="'DISCOUNT_NEW_PRICE'" class="type-option">Встановити нову ціну</option>
+    </select>
+  </div>
+
+  <div class="dialog-block">
+    <div class="block-title">
+      Знижка:
+    </div>
+    <div class="discount-input-container">
+      <input class="andro-input" type="text" (keyup)="inputDiscountValue($event)">
+    </div>
+    <div class="validation-container">
+      <div class="validation-text" *ngIf="!validationCorrect">Некоректний формат вводу</div>
+      <div class="validation-text" *ngIf="!validationPrice">Потрібно ввести менше за ціну</div>
+      <div class="validation-text" *ngIf="!validationPercents">Потрібно ввести менше 100%</div>
+    </div>
+  </div>
+
+  <div class="dialog-block">
+    <div class="old-price-text" *ngIf="chosenParameter && discountRequest.discountValue != 0">
+      <div class="discount-price">
+        <div class="discount-values-text">
+          Ціна:
+        </div>
+        <div class="discount-values-text crosses-price">{{' $' + chosenParameter.price}}</div>
+        <div class="discount-values-text discount-param-price"
+             *ngIf="discountRequest.discountType === 'DISCOUNT_NEW_PRICE'">
+          {{getPriceWithDiscount(discountRequest, chosenParameter.price)}}
+        </div>
+        <div class="discount-values-text discount-param-price"
+             *ngIf="discountRequest.discountType === 'DISCOUNT_PERCENT'">
+          {{getPriceWithDiscount(discountRequest, chosenParameter.price)}} ( -{{discountRequest.discountValue}}%)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dialog-block">
+    <div class="block-title">
+      Терміни знижки
+    </div>
+    <div class="date-input-container">
+      Початок: <input type="date" (change)="changeStartDate($event)" [min]="today" [(ngModel)]="discountRequest.startDate">
+    </div>
+    <div class="date-input-container">
+      Кінець: <input type="date" [min]="getMinEndDate()" [disabled]="!withEndDate" [(ngModel)]="discountRequest.endDate">
+    </div>
+    <div>
+      <input type="checkbox" class="andro-checkbox" id="end-date-check" (change)="changeWithEndDate($event)" checked>
+      <label for="end-date-check">Необмежений термін</label>
+    </div>
+  </div>
+
+  <div class="dialog-block button-container">
+    <button (click)="createDiscount()" class="create-btn">Створити знижку</button>
+  </div>
+
+</div>

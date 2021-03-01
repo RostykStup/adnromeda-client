@@ -1,0 +1,40 @@
+<div class="param-discount-container">
+  <div class="parameter-discounts-header">
+    <div>
+      <div *ngFor="let paramValue of param.priceCountResponse.values | keyvalue">
+        <span class="param-name">{{paramValue.key + ':'}}</span> <span class="param-value">{{paramValue.value}}</span>
+      </div>
+    </div>
+    <div class="discounts-arrow-holder">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+           width="24" height="24"
+           viewBox="0 0 226 226"
+           style=" fill:#000000;">
+        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+           stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+           font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+          <path d="M0,226v-226h226v226z" fill="none"></path>
+          <g fill="#000000">
+            <path d="M28.25,75.33333v37.66667l84.75,56.5l84.75,-56.5v-37.66667l-84.75,56.5z"></path>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="parameter-discounts-container">
+    <div class="parameter-discount-row">
+      <div class="discount-start-date-column">
+        <div class="discount-values-text title-text">Початок</div>
+      </div>
+      <div class="discount-end-date-column">
+        <div class="discount-values-text title-text">Кінець</div>
+      </div>
+      <div class="discount-value-column ">
+        <div class="discount-values-text title-text">Знижка</div>
+      </div>
+      <div class="discount-actions-column">
+      </div>
+    </div>
+    <app-discount-row-view *ngFor="let discount of param.discounts" [param]="param" [discount]="discount"></app-discount-row-view>
+  </div>
+</div>

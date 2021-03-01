@@ -1,0 +1,37 @@
+.block {
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.add-discount-button-block {
+  //display: flex;
+  //justify-content: flex-end;
+}
+
+.parameter-discounts-container {
+  padding-top: 7px;
+}
+
+.btn {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 5px;
+  margin: 0 5px;
+
+  border-radius: 5px;
+  border: 3px solid black;
+
+  color: #F6F7F9;
+  background-color: #000000;
+  cursor: pointer;
+  transition: all .2s;
+
+  &:hover {
+    background-color: #fff;
+    color: black;
+  }
+}
+
+

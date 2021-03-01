@@ -28,16 +28,22 @@ import { AdvertisementForSearchRowViewComponent } from './common/advertisement/a
 import { AdvertisementForSearchTableViewComponent } from './common/advertisement/advertisement-for-search-table-view/advertisement-for-search-table-view.component';
 import { OrderListViewComponent } from './common/order/order-list-view/order-list-view.component';
 import { OrderItemListViewComponent } from './common/order/order-item-list-view/order-item-list-view.component';
+import { ParameterValuesPriceCountPickerComponent } from './common/advertisement/parameter/parameter-values-price-count-picker/parameter-values-price-count-picker.component';
+import { CreateDiscountDialogComponent } from './dialogs/create-discount-dialog/create-discount-dialog.component';
+import { DiscountRowViewComponent } from './common/advertisement/discount/discount-row-view/discount-row-view.component';
+import { DiscountsViewComponent } from './common/advertisement/discount/discounts-view/discounts-view.component';
 
 @NgModule({
-  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent, YearMonthPickerComponent, MainPageComponent, ImageDialogComponent, AdvertisementForSearchRowViewComponent, AdvertisementForSearchTableViewComponent, OrderListViewComponent, OrderItemListViewComponent],
+  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent, YearMonthPickerComponent, MainPageComponent, ImageDialogComponent, AdvertisementForSearchRowViewComponent, AdvertisementForSearchTableViewComponent, OrderListViewComponent, OrderItemListViewComponent, ParameterValuesPriceCountPickerComponent, CreateDiscountDialogComponent, DiscountRowViewComponent, DiscountsViewComponent],
     exports: [
         RatingPickerComponent,
         PaginatorComponent,
         RatingViewComponent,
         YearMonthPickerComponent,
         AdvertisementForSearchRowViewComponent,
-        OrderListViewComponent
+        OrderListViewComponent,
+        ParameterValuesPriceCountPickerComponent,
+        DiscountsViewComponent
     ],
   imports: [
     CommonModule,

@@ -1,0 +1,29 @@
+<div class="parameter-discount-row">
+  <div class="discount-start-date-column">
+    <div class="discount-values-text">{{discount.startDate}}</div>
+  </div>
+  <div class="discount-end-date-column">
+    <div
+      class="discount-values-text">{{discount.endDate !== '23.05.2027 23:59' ? discount.endDate : 'Без терміну'}}</div>
+  </div>
+  <div class="discount-value-column">
+    <div class="discount-price" *ngIf="discount.discountType === 'DISCOUNT_NEW_PRICE'">
+      <div class="discount-values-text crosses-price">{{'$' + param.priceCountResponse.price}}</div>
+      <div class="discount-values-text discount-param-price">
+        {{getPriceWithDiscount(discount, param.priceCountResponse.price)}}
+      </div>
+    </div>
+    <div class="discount-price" *ngIf="discount.discountType === 'DISCOUNT_PERCENT'">
+      <div class="discount-values-text crosses-price">{{'$' + param.priceCountResponse.price}}</div>
+      <div class="discount-values-text discount-param-price">
+        {{getPriceWithDiscount(discount, param.priceCountResponse.price)}} ( -{{discount.discountValue}}%)
+      </div>
+    </div>
+  </div>
+  <div class="discount-actions-column">
+    <span *ngIf="discount.isCurrent" class="active-discount-text">Активна</span>
+    <button class="btn delete-discount-btn" *ngIf="!discount.isCurrent" (click)="deleteDiscount(discount.id)">Видалити</button>
+    <button class="btn delete-discount-btn" *ngIf="discount.isCurrent" (click)="closeDiscount(discount.id)">Завершити</button>
+    <!--            <button class="btn change-discount-btn" *ngIf="!discount.isCurrent">Змінити</button>-->
+  </div>
+</div>

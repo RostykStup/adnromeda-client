@@ -1,0 +1,100 @@
+.parameter-discount-row {
+  width: 100%;
+  padding: 5px 0;
+  display: flex;
+}
+
+.discount-values-text {
+  font-size: 17px;
+  font-weight: 300;
+}
+
+.parameter-discount-row:not(:last-child) {
+
+  border-bottom: 1px solid #f3eded;
+}
+
+.discount-start-date-column {
+  width: 15%;
+}
+
+.discount-end-date-column {
+  width: 15%;
+}
+
+.discount-value-column {
+  width: 25%;
+}
+
+.discount-param-price {
+  font-weight: 900;
+  color: #ae2020;
+}
+
+.crosses-price {
+  text-decoration: line-through;
+  margin-right: 6px;
+}
+
+.discount-price {
+  display: flex;
+}
+
+.discount-actions-column {
+  //width: 100%;
+  display: flex;
+  flex-grow: 2;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.active-discount-text {
+  padding: 3px 6px;
+  font-size: 13px;
+  font-weight: 800;
+  background-color: #000;
+  color: #F6F7F9;
+  border-radius: 3px;
+}
+
+
+.btn {
+  font-size: 15px;
+  font-weight: 900;
+  padding: 5px;
+  margin: 0 5px;
+
+  border-radius: 5px;
+  border: 3px solid black;
+
+  color: #F6F7F9;
+  background-color: #000000;
+  cursor: pointer;
+  transition: all .2s;
+
+  &:hover {
+    background-color: #fff;
+    color: black;
+  }
+}
+
+.delete-discount-btn {
+  background: none;
+  border: none;
+  color: #000000;
+  transition: none;
+  &:hover {
+    color: #6b6464;
+  }
+  //font-size: ;
+}
+
+.change-discount-btn {
+  background: none;
+  color: black;
+  padding: 3px;
+
+  &:hover {
+    background-color: #eae2e2;
+  }
+}

@@ -26,4 +26,19 @@ export class DateService {
     }
   }
 
+  getDateString(date: Date): string {
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1;
+    const yyyy = date.getFullYear();
+    if (dd < 10) {
+      // @ts-ignore
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      // @ts-ignore
+      mm = '0' + mm;
+    }
+    return yyyy + '-' + mm + '-' + dd;
+  }
+
 }

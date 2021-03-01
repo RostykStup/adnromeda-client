@@ -12,6 +12,7 @@ import {SellerProfileComponent} from './seller-profile/seller-profile.component'
 import {SellerNotificationsComponent} from './seller-notifications/seller-notifications.component';
 import {SellerSettingsComponent} from './seller-settings/seller-settings.component';
 import {SellerStatisticsComponent} from './seller-statistics/seller-statistics.component';
+import {AdvertisementDiscountsComponent} from './advertisement-manage/advertisement-discounts/advertisement-discounts.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,8 @@ const routes: Routes = [
           path: '', redirectTo: 'updating'
         }, {
           path: 'updating', component: AdvertisementUpdatingComponent
+        }, {
+          path: 'discounts', component: AdvertisementDiscountsComponent
         }, {
           path: 'statistics', component: AdvertisementStatisticsComponent
         }]

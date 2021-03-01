@@ -12,16 +12,29 @@ export class AdvertisementManageComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router) {
-    this.isStatistics = window.location.href.includes('statistics');
+    this.mode = this.getManageType();
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.advertisementId = params.advertisementId;
     });
   }
 
   advertisementId = 0;
-  isStatistics = false;
+  mode = '';
+
+  modes = ['updating', 'statistics', 'discounts'];
+
   ngOnInit(): void {
 
+  }
+
+  getManageType(): string {
+    let mode = this.router.url.replace('/client/seller/advertisement-manage/', '');
+    mode = mode.substr(0, mode.indexOf('?'));
+    if (this.modes.indexOf(mode) === -1) {
+      this.navigateToEditing();
+      mode = 'updating';
+    }
+    return mode;
   }
 
   navigateToEditing(): void {
@@ -39,4 +52,14 @@ export class AdvertisementManageComponent implements OnInit {
       // + this.advertisementType
     );
   }
+
+  navigateToDiscounts(): void {
+    this.router.navigateByUrl('/client/seller/advertisement-manage/discounts?advertisementId='
+      + this.advertisementId
+      // + '&advertisementType='
+      // + this.advertisementType
+    );
+  }
+
+
 }

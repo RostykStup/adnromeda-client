@@ -3,9 +3,9 @@ import {AccountService} from '../../../../../service/account/account.service';
 import {GoodsSellerService} from '../../../../../service/account/seller/goods_seller/goods-seller.service';
 import {MatDialog} from '@angular/material/dialog';
 import {getSortHeaderNotContainedWithinSortError} from '@angular/material/sort/sort-errors';
-import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-with-children-response';
+import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-with-children-response';
 import {CreateDiscountDialogComponent} from '../../../dialogs/create-discount-dialog/create-discount-dialog.component';
-import {GoodsSellerAdvertisementCategoryResponse} from '../../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-response';
+import {GoodsSellerAdvertisementCategoryResponse} from '../../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-response';
 
 @Component({
   selector: 'app-seller-category-settings',

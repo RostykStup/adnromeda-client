@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-with-children-response';
-import {GoodsSellerAdvertisementCategoryResponse} from '../../../../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-response';
+import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-with-children-response';
+import {GoodsSellerAdvertisementCategoryResponse} from '../../../../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-response';
 import {CreateDiscountDialogComponent} from '../../../../../dialogs/create-discount-dialog/create-discount-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {CreateGoodsSellerCategoryDialogComponent} from '../../../../../dialogs/create-goods-seller-category-dialog/create-goods-seller-category-dialog.component';

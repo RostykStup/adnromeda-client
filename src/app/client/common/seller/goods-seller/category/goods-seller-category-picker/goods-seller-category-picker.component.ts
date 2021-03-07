@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-with-children-response';
-import {GoodsSellerAdvertisementCategoryResponse} from '../../../../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-response';
+import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-with-children-response';
+import {GoodsSellerAdvertisementCategoryResponse} from '../../../../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-response';
 @Component({
   selector: 'app-goods-seller-category-picker',
   templateUrl: './goods-seller-category-picker.component.html',

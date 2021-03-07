@@ -2,9 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DiscountService} from '../../../../service/advertisement/discount/discount.service';
 import {DateService} from '../../../../service/date/date.service';
-import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-with-children-response';
-import {GoodsSellerAdvertisementCategoryResponse} from '../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-response';
-import {GoodsSellerAdvertisementCategoryRequest} from '../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-request';
+import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-with-children-response';
+import {GoodsSellerAdvertisementCategoryResponse} from '../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-response';
+import {GoodsSellerAdvertisementCategoryRequest} from '../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-request';
 import {GoodsSellerService} from '../../../../service/account/seller/goods_seller/goods-seller.service';
 
 @Component({

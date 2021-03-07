@@ -7,8 +7,8 @@ import {GoodsSellerProfileResponse} from '../../../../entity/account/seller/good
 import {GoodsSellerDataResponse} from '../../../../entity/account/seller/goods_seller/goods-seller-data-response';
 import {GoodsSellerStatisticsResponse} from '../../../../entity/statistics/account/seller/goods-seller-statistics-response';
 import {GoodsSellerMonthStatisticsResponse} from '../../../../entity/statistics/account/seller/goods-seller-month-statistics-response';
-import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-with-children-response';
-import {GoodsSellerAdvertisementCategoryRequest} from '../../../../entity/account/seller/goods_seller/category/goods-seller-advertisement-category-request';
+import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-with-children-response';
+import {GoodsSellerAdvertisementCategoryRequest} from '../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-request';
 
 @Injectable({
   providedIn: 'root'

@@ -13,6 +13,10 @@ import {SellerNotificationsComponent} from './seller-notifications/seller-notifi
 import {SellerSettingsComponent} from './seller-settings/seller-settings.component';
 import {SellerStatisticsComponent} from './seller-statistics/seller-statistics.component';
 import {AdvertisementDiscountsComponent} from './advertisement-manage/advertisement-discounts/advertisement-discounts.component';
+import {SellerMainSettingsComponent} from './seller-settings/seller-main-settings/seller-main-settings.component';
+import {SellerNotificationsSettingsComponent} from './seller-settings/seller-notifications-settings/seller-notifications-settings.component';
+import {SellerPanelSettingsComponent} from './seller-settings/seller-panel-settings/seller-panel-settings.component';
+import {SellerCategorySettingsComponent} from './seller-settings/seller-category-settings/seller-category-settings.component';
 
 const routes: Routes = [
   {
@@ -34,6 +38,17 @@ const routes: Routes = [
       },
       {
         path: 'settings', component: SellerSettingsComponent
+        , children: [{
+          path: 'main', component: SellerMainSettingsComponent
+        }, {
+          path: 'notifications', component: SellerNotificationsSettingsComponent
+        }, {
+          path: 'panel', component: SellerPanelSettingsComponent
+        }, {
+          path: 'category', component: SellerCategorySettingsComponent
+        }, {
+          path: '', redirectTo: 'main'
+        }]
       },
       {
         path: 'statistics', component: SellerStatisticsComponent

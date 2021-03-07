@@ -10,6 +10,28 @@
   margin-bottom: 20px;
 }
 
+.settings-panel-link {
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  height: 100%;
+
+  //margin: 0 15px;
+
+  padding: 10px 15px;
+
+  &:hover {
+    background-color: #e0d9d9;
+    cursor: pointer;
+  }
+}
+
+.settings-panel-link-active {
+  background-color: #e0d9d9;
+}
+
 .main-title {
   font-weight: 900;
   font-size: 17px;

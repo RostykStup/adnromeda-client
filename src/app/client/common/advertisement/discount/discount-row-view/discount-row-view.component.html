@@ -8,13 +8,13 @@
   </div>
   <div class="discount-value-column">
     <div class="discount-price" *ngIf="discount.discountType === 'DISCOUNT_NEW_PRICE'">
-      <div class="discount-values-text crosses-price">{{'$' + param.priceCountResponse.price}}</div>
+      <div class="discount-values-text crosses-price">{{'$' + param.priceCountResponse.price.toFixed(2)}}</div>
       <div class="discount-values-text discount-param-price">
         {{getPriceWithDiscount(discount, param.priceCountResponse.price)}}
       </div>
     </div>
     <div class="discount-price" *ngIf="discount.discountType === 'DISCOUNT_PERCENT'">
-      <div class="discount-values-text crosses-price">{{'$' + param.priceCountResponse.price}}</div>
+      <div class="discount-values-text crosses-price">{{'$' + param.priceCountResponse.price.toFixed(2)}}</div>
       <div class="discount-values-text discount-param-price">
         {{getPriceWithDiscount(discount, param.priceCountResponse.price)}} ( -{{discount.discountValue}}%)
       </div>

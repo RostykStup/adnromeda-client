@@ -1,0 +1,11 @@
+<div class="picker-holder">
+  <select (change)="reloadCategories($event)">
+    <option value="0" selected disabled>Категорія</option>
+    <option value="{{category.category.id}}" *ngFor="let category of categories">{{category.category.title}}</option>
+  </select>
+  <app-goods-seller-category-picker *ngIf="chosenCategory !== null && chosenCategory.category.hasChildren"
+    [hireNumber]="hireNumber + 1"
+    [categories]="chosenCategory.children"
+  (event)="categoryEvent($event)">
+  </app-goods-seller-category-picker>
+</div>

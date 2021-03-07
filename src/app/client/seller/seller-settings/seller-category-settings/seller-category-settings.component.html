@@ -1,0 +1,18 @@
+<div class="">
+  <span class="categories-main-text">Категорії вашого магазину</span>
+</div>
+<div class="settings-block">
+  <app-goods-seller-category-column-view [categories]="categoriesTree"></app-goods-seller-category-column-view>
+</div>
+<div class="">
+  <span class="categories-main-text">Видалення та редагування категорій</span>
+</div>
+<div class="settings-block">
+  <app-goods-seller-category-picker [categories]="categoriesTree"
+                                    (event)="chooseCategoryToEdit($event)"
+  ></app-goods-seller-category-picker>
+  <div *ngIf="chosenCategory !== null">
+    <button class="andro-button edit-btn">Редагувати</button>
+    <button class="andro-button delete-btn">Видалити</button>
+  </div>
+</div>

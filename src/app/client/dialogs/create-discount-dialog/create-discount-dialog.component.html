@@ -43,7 +43,7 @@
         <div class="discount-values-text">
           Ціна:
         </div>
-        <div class="discount-values-text crosses-price">{{' $' + chosenParameter.price}}</div>
+        <div class="discount-values-text crosses-price">{{' $' + chosenParameter.price.toFixed(2)}}</div>
         <div class="discount-values-text discount-param-price"
              *ngIf="discountRequest.discountType === 'DISCOUNT_NEW_PRICE'">
           {{getPriceWithDiscount(discountRequest, chosenParameter.price)}}

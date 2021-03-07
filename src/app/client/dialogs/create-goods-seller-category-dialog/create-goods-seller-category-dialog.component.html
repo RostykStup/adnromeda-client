@@ -1,0 +1,13 @@
+<div class="parent-container" *ngIf="parentCategory.id !== 0">
+  <span class="parent-name-text">Підкатегорія для '{{parentCategory.title}}'</span>
+</div>
+<div class="parent-container" *ngIf="parentCategory.id === 0">
+  <span class="parent-name-text">Назва категорії</span>
+</div>
+
+<div class="category-input-container">
+  <input type="text" class="andro-input" [(ngModel)]="category.title">
+</div>
+<div class="button-holder">
+  <button class="andro-button" (click)="createCategory()">Створити</button>
+</div>

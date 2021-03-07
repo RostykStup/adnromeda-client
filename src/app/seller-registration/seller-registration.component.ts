@@ -35,7 +35,7 @@ export class SellerRegistrationComponent implements OnInit {
 
   sellerCountries = Array<RestCountry>();
 
-  mode = 2;
+  mode = 1;
 
   countryName = '';
   countryImage = '';

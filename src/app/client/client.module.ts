@@ -32,19 +32,24 @@ import { ParameterValuesPriceCountPickerComponent } from './common/advertisement
 import { CreateDiscountDialogComponent } from './dialogs/create-discount-dialog/create-discount-dialog.component';
 import { DiscountRowViewComponent } from './common/advertisement/discount/discount-row-view/discount-row-view.component';
 import { DiscountsViewComponent } from './common/advertisement/discount/discounts-view/discounts-view.component';
+import { GoodsSellerCategoryColumnViewComponent } from './common/seller/goods-seller/category/goods-seller-category-column-view/goods-seller-category-column-view.component';
+import { CreateGoodsSellerCategoryDialogComponent } from './dialogs/create-goods-seller-category-dialog/create-goods-seller-category-dialog.component';
+import { GoodsSellerCategoryPickerComponent } from './common/seller/goods-seller/category/goods-seller-category-picker/goods-seller-category-picker.component';
 
 @NgModule({
-  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent, YearMonthPickerComponent, MainPageComponent, ImageDialogComponent, AdvertisementForSearchRowViewComponent, AdvertisementForSearchTableViewComponent, OrderListViewComponent, OrderItemListViewComponent, ParameterValuesPriceCountPickerComponent, CreateDiscountDialogComponent, DiscountRowViewComponent, DiscountsViewComponent],
-    exports: [
-        RatingPickerComponent,
-        PaginatorComponent,
-        RatingViewComponent,
-        YearMonthPickerComponent,
-        AdvertisementForSearchRowViewComponent,
-        OrderListViewComponent,
-        ParameterValuesPriceCountPickerComponent,
-        DiscountsViewComponent
-    ],
+  declarations: [ClientComponent, NavigationBarComponent, SideNavigationMenuComponent, CreateAdvertisementComponent, LoginDialogComponent, InfoDialogComponent, SearchComponent, ConfirmDialogComponent, ChooseAddressDialogComponent, CreateAddressDialogComponent, CountryPickerComponent, ChooseDeliveryDialogComponent, RatingPickerComponent, PaginatorComponent, AdvertisementViewComponent, ItemAddedToCartDialogComponent, RatingViewComponent, YearMonthPickerComponent, MainPageComponent, ImageDialogComponent, AdvertisementForSearchRowViewComponent, AdvertisementForSearchTableViewComponent, OrderListViewComponent, OrderItemListViewComponent, ParameterValuesPriceCountPickerComponent, CreateDiscountDialogComponent, DiscountRowViewComponent, DiscountsViewComponent, GoodsSellerCategoryColumnViewComponent, CreateGoodsSellerCategoryDialogComponent, GoodsSellerCategoryPickerComponent],
+  exports: [
+    RatingPickerComponent,
+    PaginatorComponent,
+    RatingViewComponent,
+    YearMonthPickerComponent,
+    AdvertisementForSearchRowViewComponent,
+    OrderListViewComponent,
+    ParameterValuesPriceCountPickerComponent,
+    DiscountsViewComponent,
+    GoodsSellerCategoryColumnViewComponent,
+    GoodsSellerCategoryPickerComponent
+  ],
   imports: [
     CommonModule,
     ClientRoutingModule,

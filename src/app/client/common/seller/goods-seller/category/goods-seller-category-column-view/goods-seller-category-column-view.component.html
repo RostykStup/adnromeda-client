@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="categories">
+    <!--    <div *ngIf="hireNumber != 0" class="">Підкатегорії '{{parent.title}}'</div>-->
+    <div class="category-item category-cont" *ngFor="let category of categories">
+      <input type="radio" [name]="'categories-' + hireNumber" [id]="'category' + category.category.id">
+      <label class="category-label" [for]="'category' + category.category.id" (click)="chooseCategory(category)">
+        {{category.category.title}}
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+             width="20" height="20"
+             viewBox="0 0 172 172"
+             style=" fill:#d0c2c2;">
+          <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+             stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+             font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+            <path d="M0,172v-172h172v172z" fill="none"></path>
+            <g fill="#d0c2c2">
+              <path d="M57.33333,21.5l43,64.5l-43,64.5h28.66667l43,-64.5l-43,-64.5z"></path>
+            </g>
+          </g>
+        </svg>
+      </label>
+    </div>
+    <div class="category-item" *ngIf="categories.length === 0">
+      <span class="no-categories-text" *ngIf="hireNumber !== 0">Немає підкатегорій для '{{parent.title}}'</span>
+      <span class="no-categories-text" *ngIf="hireNumber === 0">Немає категорій у вашому магазині</span>
+    </div>
+    <div class="category-item">
+      <button class="add-category-button" (click)="openCreateCategoryDialog()">Додати</button>
+    </div>
+  </div>
+<!--  <div class="vertical-line" *ngIf="chosenCategory !== null"></div>-->
+  <div class="categories" *ngIf="chosenCategory !== null">
+    <app-goods-seller-category-column-view
+      [categories]="chosenCategory.children"
+      [parent]="chosenCategory.category"
+      [hireNumber]="hireNumber+1"></app-goods-seller-category-column-view>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+.picker-holder {
+  display: flex;
+}
+
+select {
+  padding: 5px;
+  font-size: 15px;
+  font-weight: 900;
+  border: 3px solid black;
+
+  border-radius: 3px;
+
+  margin-right: 10px;
+}
+
+option {
+  font-size: 15px;
+  font-weight: 900;
+}

@@ -16,10 +16,14 @@ import { SellerNotificationsComponent } from './seller-notifications/seller-noti
 import { SellerSettingsComponent } from './seller-settings/seller-settings.component';
 import { SellerStatisticsComponent } from './seller-statistics/seller-statistics.component';
 import { AdvertisementDiscountsComponent } from './advertisement-manage/advertisement-discounts/advertisement-discounts.component';
+import { SellerMainSettingsComponent } from './seller-settings/seller-main-settings/seller-main-settings.component';
+import { SellerCategorySettingsComponent } from './seller-settings/seller-category-settings/seller-category-settings.component';
+import { SellerPanelSettingsComponent } from './seller-settings/seller-panel-settings/seller-panel-settings.component';
+import { SellerNotificationsSettingsComponent } from './seller-settings/seller-notifications-settings/seller-notifications-settings.component';
 
 
 @NgModule({
-  declarations: [SellerComponent, SellerOrdersComponent, OrderDataComponent, AdvertisementsListComponent, AdvertisementManageComponent, AdvertisementUpdatingComponent, AdvertisementStatisticsComponent, SellerProfileComponent, SellerNotificationsComponent, SellerSettingsComponent, SellerStatisticsComponent, AdvertisementDiscountsComponent],
+  declarations: [SellerComponent, SellerOrdersComponent, OrderDataComponent, AdvertisementsListComponent, AdvertisementManageComponent, AdvertisementUpdatingComponent, AdvertisementStatisticsComponent, SellerProfileComponent, SellerNotificationsComponent, SellerSettingsComponent, SellerStatisticsComponent, AdvertisementDiscountsComponent, SellerMainSettingsComponent, SellerCategorySettingsComponent, SellerPanelSettingsComponent, SellerNotificationsSettingsComponent],
     imports: [
         CommonModule,
         SellerRoutingModule,

@@ -1,0 +1,64 @@
+.line-container {
+  height: 300px;
+  //background-color: #004bd6;
+  //margin: 5px 0;
+  //padding: 5px;
+  display: flex;
+}
+
+
+.width_25 {
+  width: 25%;
+}
+
+.width_50 {
+  width: 50%;
+}
+
+.width_100 {
+  width: 100%;
+}
+
+app-goods-shop-markup-element {
+  //margin: 5px;
+}
+
+.line-main {
+  margin: 10px 0;
+}
+.edit_body {
+  border: 1px solid black;
+}
+
+.line-overlay-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  //margin: 10px;
+  padding: 5px;
+  background-color: rgba(0,0,0,0.7);
+  //border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.overlay-body {
+  display: flex;
+  justify-content: space-around;
+}
+
+.line-overlay-button {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.line-overlay-button:hover {
+  background-color: #8a7a7a;
+  border-radius: 50%;
+}

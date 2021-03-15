@@ -9,12 +9,13 @@ import {GoodsShopMarkupAdvertisingBannerResponse} from '../../../../entity/accou
 import {GoodsShopMarkupAdvertisementRowResponse} from '../../../../entity/account/seller/goods_seller/markup/elements/goods-shop-markup-advertisement-row-response';
 import {GoodsShopMarkupAdvertisementViewResponse} from '../../../../entity/account/seller/goods_seller/markup/elements/goods-shop-markup-advertisement-view-response';
 import {GoodsShopMarkupResponse} from '../../../../entity/account/seller/goods_seller/markup/goods-shop-markup-response';
+import {GoodsShopMarkupLineRequest} from '../../../../entity/account/seller/goods_seller/markup/goods-shop-markup-line-request';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class GoodsSellerService {
+export class GoodsShopMarkupService {
   constructor(private httpClient: HttpClient) {
   }
 
@@ -46,7 +47,7 @@ export class GoodsSellerService {
   }
 
   getViewByElementId(id: number): Observable<GoodsShopMarkupAdvertisementViewResponse> {
-    const url = this.goodsShopURL + '/row?id=' + id;
+    const url = this.goodsShopURL + '/view?id=' + id;
     return this.httpClient.get<GoodsShopMarkupAdvertisementViewResponse>(url);
   }
 
@@ -55,4 +56,32 @@ export class GoodsSellerService {
     return this.httpClient.get<GoodsShopMarkupResponse>(url);
   }
 
+  createLine(line: GoodsShopMarkupLineRequest): Observable<any> {
+    const url = this.goodsShopURL + '/create-line';
+    return this.httpClient.post(url, line, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  getBannerImagePath(image: string, sellerId: number): string {
+    return GlobalConstants.API_URL + 'image/user_' + sellerId + '/' + image;
+  }
+
+  deleteLine(id: number): Observable<any> {
+    const url = this.goodsShopURL + '/line?id=' + id;
+    return this.httpClient.delete(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  deleteElement(id: number): Observable<any> {
+    const url = this.goodsShopURL + '/make-empty?id=' + id;
+    return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  upLine(id: number): Observable<any> {
+    const url = this.goodsShopURL + '/up?id=' + id;
+    return this.httpClient.put(url, {}, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  downLine(id: number): Observable<any> {
+    const url = this.goodsShopURL + '/down?id=' + id;
+    return this.httpClient.put(url, {}, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
 }

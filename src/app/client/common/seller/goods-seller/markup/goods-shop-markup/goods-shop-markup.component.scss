@@ -1,0 +1,19 @@
+.add-line-container {
+  background-color: #faf7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #e3e3e3;
+  }
+}
+
+.add-line-text {
+  font-size: 40px;
+  font-weight: 900;
+}

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {GoodsShopMarkupService} from '../../../../../service/account/seller/goods_seller/goods-shop-markup.service';
+import {GoodsShopMarkupResponse} from '../../../../../entity/account/seller/goods_seller/markup/goods-shop-markup-response';
 
 @Component({
   selector: 'app-seller-panel-settings',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SellerPanelSettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private goodsShopMarkupService: GoodsShopMarkupService) {
+  }
+
+  markup: GoodsShopMarkupResponse | null = null;
+  sellerId = 0;
 
   ngOnInit(): void {
+    // @ts-ignore
+    this.sellerId = +localStorage.getItem('andro_user_id');
+
+    this.goodsShopMarkupService.getMarkupBySellerId(this.sellerId).subscribe((r) => {
+      this.markup = r;
+    });
   }
+
 
 }

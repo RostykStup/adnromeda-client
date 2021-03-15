@@ -1,0 +1,21 @@
+<div class="row-title-container">
+  <div class="row-title-hold" *ngIf="row.rowType === 'ROW_MOST_ORDERED_ADVERTISEMENTS'">
+    <span class="row-title-text">Хіти продажу</span>
+    <a href="" class="row-title-text link-to-seller-goods">Переглянути більше</a>
+  </div>
+  <div class="row-title-hold" *ngIf="row.rowType === 'ROW_NEW_ADVERTISEMENTS'">
+    <span class="row-title-text">Нові товари</span>
+    <a href="" class="row-title-text link-to-seller-goods">Переглянути більше</a>
+  </div>
+  <div class="row-title-hold" *ngIf="row.rowType === 'ROW_POPULAR_ADVERTISEMENTS'">
+    <span class="row-title-text">Найпопулярніші</span>
+    <a href="" class="row-title-text link-to-seller-goods">Переглянути більше</a>
+
+  </div>
+</div>
+<div class="row-advertisements-container">
+  <app-advertisement-for-search-table-view
+    *ngFor="let advertisement of row.advertisements"
+    [viewType]="'searching'"
+    [goodsAdvertisement]="advertisement"></app-advertisement-for-search-table-view>
+</div>

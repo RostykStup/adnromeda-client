@@ -163,6 +163,12 @@ export class AdvertisementService {
     return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
+  findByIdOrTitleContains(value: string, sellerId: string | null): Observable<Array<GoodsAdvertisementForSearchResponse>> {
+    const url = this.advertisementURL + '/find-by-value?value=' + value
+      + (sellerId !== null ? '&sellerId=' + sellerId : '');
+    return this.httpClient.get<Array<GoodsAdvertisementForSearchResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
 
   getGoodsAdvertisementById(id: number): Observable<GoodsAdvertisementResponse> {
     const url = this.advertisementURL + '?id=' + id;

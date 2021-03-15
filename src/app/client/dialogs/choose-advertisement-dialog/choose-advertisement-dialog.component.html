@@ -1,0 +1,17 @@
+<div class="dialog-title">
+  Виберіть товар
+</div>
+<div class="dialog-body">
+  <div class="search-container">
+    <input type="text" class="andro-input" placeholder="Введіть назву або id товару" [(ngModel)]="value" (change)="changeSearchValue()">
+  </div>
+  <div class="advertisements-container">
+    <div class="advertisement-item" *ngFor="let advertisement of advertisements" (click)="chooseAdvertisement(advertisement)">
+      <div class="overflow-item"></div>
+      <app-advertisement-for-search-row-view
+        [goodsAdvertisement]="advertisement">
+      </app-advertisement-for-search-row-view>
+    </div>
+  </div>
+
+</div>

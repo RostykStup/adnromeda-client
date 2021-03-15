@@ -1,0 +1,52 @@
+.dialog-title {
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.dialog-body {
+  width: 500px;
+}
+
+.type-text {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.button-holder {
+  margin-top: 10px;
+}
+
+.change-adv-cont {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.create-btn {
+  font-size: 15px;
+  font-weight: 900;
+
+  background-color: #000000;
+  color: #F6F7F9;
+
+  transition: all .1s;
+
+  border-radius: 3px;
+  //border-radius: 0;
+
+  border: 5px solid black;
+
+  padding: 5px;
+
+  cursor: pointer;
+}
+
+.create-btn:hover {
+  background-color: #fff;
+  color: black;
+}
+
+.change-btn {
+  background-color: #000000;
+  color: #F6F7F9;
+}

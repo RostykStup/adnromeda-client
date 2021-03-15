@@ -1,0 +1,12 @@
+<div>
+  <app-goods-shop-markup-line
+    *ngFor="let line of markup.lines"
+    [line]="line"
+    (event)="changeLineOrder($event, line)"
+    [max]="markup.lines.length"
+    (delete)="deleteLine(line)"
+    [lineViewType]="markupViewType"></app-goods-shop-markup-line>
+  <div class="add-line-container" (click)="addLineDialogOpen()" *ngIf="markupViewType === 'update'">
+    <div class="add-line-text">+</div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="column-body">
+  <div class="column-fill"
+       [ngStyle]="{
+  'width' : column.percent + '%',
+  'background-color' : columnColor
+  }" *ngIf="column.showable"
+  >
+    <div class="column-value inside-value" *ngIf="column.percent > 90">
+      {{column.value}}
+    </div>
+  </div>
+  <div class="column-value" *ngIf="column.percent <= 90 && column.showable">
+    {{column.value}}
+  </div>
+</div>

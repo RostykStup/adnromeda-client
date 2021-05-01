@@ -14,8 +14,8 @@ import {SellerSettingsComponent} from './seller-settings/seller-settings.compone
 import {SellerStatisticsComponent} from './seller-statistics/seller-statistics.component';
 import {AdvertisementDiscountsComponent} from './advertisement-manage/advertisement-discounts/advertisement-discounts.component';
 import {SellerMainSettingsComponent} from './seller-settings/seller-main-settings/seller-main-settings.component';
+// tslint:disable-next-line:max-line-length
 import {SellerNotificationsSettingsComponent} from './seller-settings/seller-notifications-settings/seller-notifications-settings.component';
-import {SellerPanelSettingsComponent} from './seller-settings/seller-panel-settings/seller-panel-settings.component';
 import {SellerCategorySettingsComponent} from './seller-settings/seller-category-settings/seller-category-settings.component';
 
 const routes: Routes = [
@@ -37,18 +37,17 @@ const routes: Routes = [
         path: 'notifications', component: SellerNotificationsComponent
       },
       {
-        path: 'settings', component: SellerSettingsComponent
-        , children: [{
+        path: 'settings', component: SellerSettingsComponent, children: [
+        {
           path: 'main', component: SellerMainSettingsComponent
         }, {
           path: 'notifications', component: SellerNotificationsSettingsComponent
-        }, {
-          path: 'panel', component: SellerPanelSettingsComponent
-        }, {
+        },  {
           path: 'category', component: SellerCategorySettingsComponent
         }, {
           path: '', redirectTo: 'main'
-        }]
+        }
+        ]
       },
       {
         path: 'statistics', component: SellerStatisticsComponent
@@ -58,7 +57,7 @@ const routes: Routes = [
       },
       {
         path: 'advertisement-manage', component: AdvertisementManageComponent, children: [{
-          path: '', redirectTo: 'updating'
+          path: '', redirectTo: 'statistics'
         }, {
           path: 'updating', component: AdvertisementUpdatingComponent
         }, {

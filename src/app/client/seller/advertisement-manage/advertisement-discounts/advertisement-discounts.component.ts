@@ -27,6 +27,7 @@ export class AdvertisementDiscountsComponent implements OnInit {
       this.advertisementId = params.advertisementId;
       this.discountService.getParametersValuesPriceCountsWithDiscount(this.advertisementId).subscribe((r) => {
         this.paramValuesWithDiscount = r;
+        console.log(r);
         this.advertisementService.getGoodsAdvertisementById(this.advertisementId).subscribe((resp) => {
           this.advertisement = resp;
         });

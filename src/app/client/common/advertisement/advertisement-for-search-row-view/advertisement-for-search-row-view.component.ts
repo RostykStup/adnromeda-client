@@ -30,6 +30,7 @@ export class AdvertisementForSearchRowViewComponent implements OnInit {
   }
 
   navigateToManage(): void {
+    // window.open('/client/seller/advertisement-manage?advertisementId='
     window.open('/client/seller/advertisement-manage?advertisementId='
       + this.goodsAdvertisement.id,
       '_self'

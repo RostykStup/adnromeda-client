@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="title-container">
+    {{
+    getLabelByType()
+    }}
+    <app-year-month-picker *ngIf="type === 'month'"
+                           (datePick)="changedDateMonth($event)"
+                           [startDate]="getDataForYearMonthPicker()"></app-year-month-picker>
+    <app-year-picker *ngIf="type === 'year'"
+                     (yearPick)="changedYear($event)"
+                     [minYear]="getYearByCreationDate()"></app-year-picker>
+  </div>
+  <div class="diagram-container" *ngIf="diagramData">
+    <div class="main-data-container">
+
+      <div class="average-rating-label">
+        {{diagramData.max == 0 ? '--' : diagramData.averageValue}}
+      </div>
+      <div>
+        <app-rating-view
+          [rating]="diagramData.averageValue"
+          [fontSize]="'20px'"></app-rating-view>
+      </div>
+      <div class="feedbacks-sum">
+        Усього
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+             width="15" height="15"
+             viewBox="0 0 172 172"
+             style=" fill:#999898;">
+          <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+             stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+             font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+            <path d="M0,172v-172h172v172z" fill="none"></path>
+            <g fill="#999898">
+              <path
+                d="M86,28.66667c-15.84505,0 -28.66667,12.82162 -28.66667,28.66667c0,15.84506 12.82162,28.66667 28.66667,28.66667c15.84506,0 28.66667,-12.82161 28.66667,-28.66667c0,-15.84505 -12.82161,-28.66667 -28.66667,-28.66667zM64.72396,96.07813c-27.07097,8.20247 -36.05729,30.45833 -36.05729,30.45833v16.79688h114.66667v-16.79687c0,0 -8.98633,-22.25586 -36.05729,-30.45833c-1.48372,10.44206 -10.44206,18.58854 -21.27604,18.58854c-10.83399,0 -19.79232,-8.14649 -21.27604,-18.58854z"></path>
+            </g>
+          </g>
+        </svg>
+        {{diagramData.max}}
+      </div>
+    </div>
+    <app-statistics-rating-horizontal-column-diagram
+      [columnHeight]="columnHeight"
+      [columnsHeight]="'120px'"
+      [columnLabels]="ratingLabels"
+      [columnsWidth]="'300px'"
+      [diagramData]="diagramData"
+      [advertisementId]="advertisementId"
+      [columnColor]="columnColor"
+    >
+    </app-statistics-rating-horizontal-column-diagram>
+  </div>
+</div>
+

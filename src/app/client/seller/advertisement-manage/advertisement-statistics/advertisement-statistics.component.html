@@ -1,59 +1,121 @@
-<div class="block">
-  <div class="statistic-block-title">
-    Товар додано {{statistics.creationDate}}, за цей час
+<!--<div class="block">-->
+<!--  <div class="statistic-block-title">-->
+<!--    Товар додано {{statistics.creationDate}}, за цей час-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Відгуків </div>-->
+<!--    <div class="statistic-element-value">{{statistics.feedbacks}}</div>-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Рейтинг </div>-->
+<!--    <div class="statistic-element-value" *ngIf="statistics.rating === null">-->
+<!--      Немає даних-->
+<!--    </div>-->
+<!--    <div class="statistic-element-value rating-view-element" *ngIf="statistics.rating !== null">-->
+<!--      <app-rating-view [rating]="statistics.rating"></app-rating-view> {{statistics.rating}}-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Замовлень здійснено </div>-->
+<!--    <div class="statistic-element-value">{{statistics.orders}}</div>-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Продано </div>-->
+<!--    <div class="statistic-element-value">{{statistics.sold}} шт.</div>-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Додали до збережених </div>-->
+<!--    <div class="statistic-element-value">{{statistics.likes}} користувач(ів)</div>-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Переглянуто </div>-->
+<!--    <div class="statistic-element-value">{{statistics.views}} раз(ів)</div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="block " *ngIf="creationDate">
+  <div class="block-title">
+    Відгуки
   </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Відгуків </div>
-    <div class="statistic-element-value">{{statistics.feedbacks}}</div>
-  </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Рейтинг </div>
-    <div class="statistic-element-value" *ngIf="statistics.rating === null">
-      Немає даних
+  <div class="feedbacks-diagrams-container">
+    <div class="feedbacks-statistics-container">
+      <app-rating-feedbacks-diagram
+        [advertisementId]="id"
+        [date]="creationDate"
+        [type]="'last'"
+      ></app-rating-feedbacks-diagram>
     </div>
-    <div class="statistic-element-value rating-view-element" *ngIf="statistics.rating !== null">
-      <app-rating-view [rating]="statistics.rating"></app-rating-view> {{statistics.rating}}
+    <div class="feedbacks-statistics-container">
+      <app-rating-feedbacks-diagram
+        [advertisementId]="id"
+        [date]="creationDate"
+        [type]="'month'"
+      ></app-rating-feedbacks-diagram>
     </div>
+    <div class="feedbacks-statistics-container">
+      <app-rating-feedbacks-diagram
+        [advertisementId]="id"
+        [date]="creationDate"
+        [type]="'all'"
+      ></app-rating-feedbacks-diagram>
+    </div>
+    <div class="feedbacks-statistics-container">
+      <app-rating-feedbacks-diagram
+        [advertisementId]="id"
+        [date]="creationDate"
+        [type]="'year'"
+      ></app-rating-feedbacks-diagram>
+    </div>
+
   </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Замовлень здійснено </div>
-    <div class="statistic-element-value">{{statistics.orders}}</div>
-  </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Продано </div>
-    <div class="statistic-element-value">{{statistics.sold}} шт.</div>
-  </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Додали до збережених </div>
-    <div class="statistic-element-value">{{statistics.likes}} користувач(ів)</div>
-  </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Переглянуто </div>
-    <div class="statistic-element-value">{{statistics.views}} раз(ів)</div>
-  </div>
+
 </div>
 
-<div class="block" *ngIf="statistics.creationDate !== ''">
-  <div class="stat-date-container">Статистика за
-    <app-year-month-picker [startDate]="statistics.creationDate" (datePick)="changeMonthStatistics($event)"></app-year-month-picker></div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Відгуків </div>
-    <div class="statistic-element-value">{{monthStatistics.feedbacks}}</div>
+
+<div class="block">
+  <div class="block-title">
+    Кількість замовлень
   </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Замовлень здійснено </div>
-    <div class="statistic-element-value">{{monthStatistics.orders}}</div>
-  </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Продано </div>
-    <div class="statistic-element-value">{{monthStatistics.sold}} шт.</div>
-  </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Додали до збережених </div>
-    <div class="statistic-element-value">{{monthStatistics.inLikeList}} користувач(ів)</div>
-  </div>
-  <div class="statistic-element">
-    <div class="statistic-element-name">Переглянуто </div>
-    <div class="statistic-element-value">{{monthStatistics.views}} раз(ів)</div>
-  </div>
+  <app-year-advertisement-orders-statistic
+    [columnWidth]="'8%'"
+    [advertisementId]="id"
+    [date]="creationDate"
+  ></app-year-advertisement-orders-statistic>
 </div>
+
+<div class="block">
+  <div class="block-title">
+    Перегляди
+  </div>
+  <app-year-advertisement-views-statistics-diagram
+    [columnWidth]="'8%'"
+    [advertisementId]="id"
+    [date]="creationDate"
+    [columnColor]="'#77a9b0'"
+  ></app-year-advertisement-views-statistics-diagram>
+</div>
+
+<!--<div class="block" *ngIf="statistics.creationDate !== ''">-->
+<!--&lt;!&ndash;  <div class="stat-date-container">Статистика за&ndash;&gt;-->
+<!--&lt;!&ndash;    <app-year-month-picker [startDate]="statistics.creationDate" (datePick)="changeMonthStatistics($event)"></app-year-month-picker></div>&ndash;&gt;-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Відгуків </div>-->
+<!--    <div class="statistic-element-value">{{monthStatistics.feedbacks}}</div>-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Замовлень здійснено </div>-->
+<!--    <div class="statistic-element-value">{{monthStatistics.orders}}</div>-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Продано </div>-->
+<!--    <div class="statistic-element-value">{{monthStatistics.sold}} шт.</div>-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Додали до збережених </div>-->
+<!--    <div class="statistic-element-value">{{monthStatistics.inLikeList}} користувач(ів)</div>-->
+<!--  </div>-->
+<!--  <div class="statistic-element">-->
+<!--    <div class="statistic-element-name">Переглянуто </div>-->
+<!--    <div class="statistic-element-value">{{monthStatistics.views}} раз(ів)</div>-->
+<!--  </div>-->
+<!--</div>-->

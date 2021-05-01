@@ -1,0 +1,15 @@
+<div class="year-picker-container" *ngIf="date">
+  Статистика за
+  <app-year-picker [minYear]="getYearByCreationDate()" (yearPick)="pickedNewYear($event)"></app-year-picker>
+</div>
+<div class="diagram-container" *ngIf="diagramData">
+  <app-statistics-column-diagram
+    [columnWidth]="columnWidth"
+    [columnLabels]="monthLabels"
+    [columnsHeight]="'400px'"
+    [diagramData]="diagramData"
+    [advertisementId]="advertisementId"
+    [columnColor]="columnColor"
+  >
+  </app-statistics-column-diagram>
+</div>

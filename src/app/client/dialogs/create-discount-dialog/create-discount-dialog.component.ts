@@ -106,9 +106,7 @@ export class CreateDiscountDialogComponent {
       if (!this.withEndDate) {
         this.discountRequest.endDate = '';
       }
-      console.log(this.discountRequest);
       this.discountService.checkCanCreateDiscount(this.discountRequest).subscribe((r) => {
-        console.log(r);
         if (r.canCreate) {
           this.discountService.createDiscount(this.discountRequest).subscribe(() => {
             window.location.reload();

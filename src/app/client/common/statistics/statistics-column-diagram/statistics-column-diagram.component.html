@@ -1,0 +1,37 @@
+<div class="diagram-body" *ngIf="diagramData">
+  <div class="vertical-holder" [ngStyle]="{
+    'height': columnsHeight
+    }">
+    <div class="vertical-label">{{diagramData.max}}</div>
+    <div class="vertical-label">{{diagramData.average}}</div>
+    <div class="vertical-label">{{diagramData.min}}</div>
+  </div>
+  <div class="columns-labels-holder">
+    <div class="diagram-columns" [ngStyle]="{
+    'height': columnsHeight
+    }">
+      <app-statistic-column
+        *ngFor="let col of diagramData.columns"
+        [column]="col"
+        [ngStyle]="{
+    'width': columnWidth
+    }"
+        [columnColor]="columnColor"
+      ></app-statistic-column>
+    </div>
+    <div class="column-labels-container">
+      <div class="column-label" [ngStyle]="{
+    'width': columnWidth
+    }"
+           *ngFor="let index of [].constructor(columnLabels.length); let i = index"
+      [ngClass]="{
+      black_text: diagramData.columns[i].showable
+      }"
+      >{{columnLabels[i]}}</div>
+    </div>
+  </div>
+
+</div>
+
+<!--; let item of [].constructor(columnLabels.length); let i = index-->
+<!--black_text: i <= currentMonth-->

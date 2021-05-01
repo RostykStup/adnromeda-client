@@ -26,6 +26,24 @@ export class DateService {
     }
   }
 
+  getShortUkrMonthNameByNumber(num: number): string {
+    switch (num) {
+      case 0: return 'Січ';
+      case 1: return 'Лют';
+      case 2: return 'Бер';
+      case 3: return 'Кві';
+      case 4: return 'Тра';
+      case 5: return 'Чер';
+      case 6: return 'Лип';
+      case 7: return 'Сер';
+      case 8: return 'Вер';
+      case 9: return 'Жов';
+      case 10: return 'Лис';
+      case 11: return 'Гру';
+      default: return '---';
+    }
+  }
+
   getDateString(date: Date): string {
     let dd = date.getDate();
     let mm = date.getMonth() + 1;

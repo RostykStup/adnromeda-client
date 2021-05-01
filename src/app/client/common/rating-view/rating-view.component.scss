@@ -10,7 +10,7 @@
 }
 
 .full:before {
-  margin-right: 4px;
+  //margin-right: 2px;
   font-size: inherit;
   content: "\f005";
   color: #ddd;
@@ -25,4 +25,17 @@
 .rating-stars {
   display: flex;
   align-items: center;
+}
+
+.stars-holder {
+  display: inline-block;
+  position: relative;
+}
+
+.overflow-stars {
+  background-color: #fff;
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 0;
 }

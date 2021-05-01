@@ -4,7 +4,5 @@ export class GoodsSellerProfileResponse {
   id = 0;
   name = '';
   avatar = '';
-  taxpayerNumber = '';
 
-  statistics = new GoodsSellerStatisticsResponse();
 }

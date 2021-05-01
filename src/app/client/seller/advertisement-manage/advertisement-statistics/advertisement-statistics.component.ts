@@ -4,47 +4,40 @@ import {AdvertisementService} from '../../../../../service/advertisement/adverti
 import {DeliveryService} from '../../../../../service/country/delivery.service';
 import {GoodsAdvertisementStatisticsResponse} from '../../../../../entity/statistics/advertisement/GoodsAdvertisementStatisticsResponse';
 import {GoodsAdvertisementMonthStatisticsResponse} from '../../../../../entity/statistics/advertisement/goods-advertisement-month-statistics-response';
+import {GoodsAdvertisementResponse} from '../../../../../entity/advertisement/goodsAdvertisement/goods-advertisement-response';
+import {StatisticsService} from '../../../../../service/statistics/statistics.service';
 
 @Component({
   selector: 'app-advertisement-statistics',
   templateUrl: './advertisement-statistics.component.html',
   styleUrls: ['./advertisement-statistics.component.scss']
 })
-export class AdvertisementStatisticsComponent implements OnInit {
+export class AdvertisementStatisticsComponent implements OnInit  {
 
   constructor(private activatedRoute: ActivatedRoute,
               private advertisementService: AdvertisementService,
+              private statisticsService: StatisticsService,
               private deliveryService: DeliveryService) {
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       this.id = params.advertisementId;
-      this.advertisementService.getAdvertisementStatistics(this.id).subscribe((r) => {
-        this.statistics = r;
-        console.log(this.statistics);
-        this.loadMothAdvertisementStatistics();
+      this.advertisementService.getGoodsAdvertisementById(this.id).subscribe((r) => {
+        this.creationDate = r.creationDate;
       });
+      // this.advertisementService.getAdvertisementStatistics(this.id).subscribe((r) => {
+      //   this.statistics = r;
+      // });
     });
   }
 
   id = 0;
   month = new Date().getMonth().toString();
   year = new Date().getFullYear().toString();
+  creationDate = '';
 
-  statistics = new GoodsAdvertisementStatisticsResponse();
+  // statistics = new GoodsAdvertisementStatisticsResponse();
+  advertisement = new GoodsAdvertisementResponse();
   monthStatistics = new GoodsAdvertisementMonthStatisticsResponse();
 
   ngOnInit(): void {
-  }
-
-  loadMothAdvertisementStatistics(): void {
-    this.advertisementService.getAdvertisementMonthStatistics(this.id, this.month, this.year).subscribe((r) => {
-      this.monthStatistics = r;
-    });
-  }
-
-  changeMonthStatistics($event: string): void {
-    this.month = $event.substr(0, 2);
-    this.year = $event.substr(3, 4);
-
-    this.loadMothAdvertisementStatistics();
   }
 }

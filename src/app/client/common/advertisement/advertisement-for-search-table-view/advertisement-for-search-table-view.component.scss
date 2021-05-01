@@ -1,5 +1,5 @@
 * {
-  color: #F6F7F9;
+  //color: #F6F7F9;
 }
 
 .advertisement-container {
@@ -7,16 +7,19 @@
   //margin: 5px;
   height: 100%;
 
-  border-radius: 3px;
+  //border-radius: 3px;
 
   //border: 1px solid black;
 
-  //background-color: #ffffff;
+  background-color: #ffffff;
   //background-color: #000000;
-  background-color: #001441ab;
+  //background-color: #001441ab;
   //background-color: #039893;
 
   transition: all .1s;
+
+  border: 1px solid #6d6666;
+
 
   &:hover {
     //box-shadow: 0 0 4px 1px #ded8d8;
@@ -111,8 +114,9 @@
   //margin-top: 20px;
 
   a {
-    //color: #857e7e;
-    font-weight: 300;
+    color: #1921c1;
+    font-weight: 500;
     font-size: inherit;
+    text-decoration: none;
   }
 }

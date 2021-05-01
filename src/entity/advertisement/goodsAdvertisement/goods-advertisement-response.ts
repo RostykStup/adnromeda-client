@@ -37,4 +37,6 @@ export class GoodsAdvertisementResponse extends AdvertisementResponse {
 
   hasParameters = false;
 
+  creationDate = '';
+
 }

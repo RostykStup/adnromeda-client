@@ -16,4 +16,7 @@ export class RatingViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getStarsOverflowWidth(): number {
+    return 100 - (this.rating * 100 / 5);
+  }
 }

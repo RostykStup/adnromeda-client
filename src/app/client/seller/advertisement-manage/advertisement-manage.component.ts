@@ -31,9 +31,12 @@ export class AdvertisementManageComponent implements OnInit {
     let mode = this.router.url.replace('/client/seller/advertisement-manage/', '');
     mode = mode.substr(0, mode.indexOf('?'));
     if (this.modes.indexOf(mode) === -1) {
-      this.navigateToEditing();
-      mode = 'updating';
+      // this.navigateToEditing();
+      this.navigateToStatistics();
+      // mode = 'updating';
+      mode = 'statistics';
     }
+    // mode = 'statistics';
     return mode;
   }
 

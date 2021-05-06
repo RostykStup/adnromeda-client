@@ -11,4 +11,13 @@ export class GlobalConstants {
       'Authorization': 'Bearer ' + localStorage.getItem('andro_user_token')
     };
   }
+
+  public static getUserRole(): any {
+    const role = localStorage.getItem('andro_user_role');
+    if (role == null || role === '') {
+      return 'ROLE_GUEST';
+    } else {
+      return role;
+    }
+  }
 }

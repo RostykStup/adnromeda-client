@@ -1,0 +1,65 @@
+<div class="panel-block" *ngIf="profile">
+  <div class="panel-title">Зображення</div>
+  <div class="panel-subtitle">Зображення магазину - значок який відображається біля назви магазину користувачам Andromeda</div>
+  <div class="panel-content-container">
+    <div class="panel-content-container-element panel-image-container">
+      <div class="image-wrapper">
+        <img *ngIf="profile.avatar != null || changingAvatar" [src]="imageToShow">
+        <span *ngIf="profile.avatar == null && !changingAvatar">{{profile.name[0]}}</span>
+      </div>
+    </div>
+    <div class="panel-content-container-element panel-subtitle panel-text">
+      Радимо використати квадратне зображення адже у подальшому буде відображатися лише вміст відцентрований у кружечку
+      <div class="panel-buttons">
+        <input id="image-input" #avatar type="file" accept="image/*" (change)="handleUpload($event)" style="display: none">
+        <button class="andromeda-no-bg-button" (click)="clickChangeAvatar()" *ngIf="changingAvatar">ЗБЕРЕГТИ</button>
+        <button class="andromeda-no-bg-button" (click)="avatar.click();"  *ngIf="!changingAvatar">ЗМІНИТИ</button>
+        <button class="andromeda-no-bg-button delete-image-btn" (click)="clickDeleteAvatar()" *ngIf="profile.avatar != null && !changingAvatar">ВИЛУЧИТИ</button>
+        <button class="andromeda-no-bg-button delete-image-btn" (click)="clickCancelAvatar()" *ngIf="changingAvatar">СКАСУВАТИ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="panel-block top-margin" *ngIf="profile">
+  <div class="panel-title">Банер</div>
+  <div class="panel-subtitle">Банер - зображення що розиашоване вгорі сторінки магазину</div>
+  <div class="panel-content-container">
+    <div class="panel-content-container-element panel-banner-container">
+      <div class="banner-image-wrapper" *ngIf="profile.banner != null || changingBanner" >
+        <img [src]="bannerToShow">
+      </div>
+      <div class="little-shop-container">
+        <div class="little-shop-row">
+          <div class="little-shop-element"></div>
+          <div class="little-shop-element"></div>
+          <div class="little-shop-element"></div>
+        </div>
+        <div class="little-shop-row">
+          <div class="little-shop-element"></div>
+        </div>
+        <div class="little-shop-row">
+          <div class="little-shop-element"></div>
+          <div class="little-shop-element"></div>
+          <div class="little-shop-element"></div>
+        </div>
+        <div class="little-shop-row">
+          <div class="little-shop-element"></div>
+          <div class="little-shop-element"></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-content-container-element panel-subtitle panel-text">
+      Якщо банер не буде додано до магазину, кнопки меню будуть розташовані вгорі сторінки.
+      Якщо додано - кнопки будуть розташовані під банером
+      <div class="panel-buttons">
+        <input id="banner-input" #banner type="file" accept="image/*" (change)="handleBannerUpload($event)" style="display: none">
+        <button class="andromeda-no-bg-button" (click)="clickChangeBanner()" *ngIf="changingBanner">ЗБЕРЕГТИ</button>
+        <button class="andromeda-no-bg-button" (click)="banner.click();"  *ngIf="!changingBanner">ЗМІНИТИ</button>
+        <button class="andromeda-no-bg-button delete-image-btn" (click)="clickDeleteBanner()" *ngIf="profile.banner != null && !changingBanner">ВИЛУЧИТИ</button>
+        <button class="andromeda-no-bg-button delete-image-btn" (click)="clickCancelBanner()" *ngIf="changingBanner">СКАСУВАТИ</button>
+      </div>
+    </div>
+  </div>
+</div>

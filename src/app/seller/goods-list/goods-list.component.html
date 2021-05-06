@@ -1,0 +1,21 @@
+<div class="seller-module-component-title
+seller-module-component-block
+seller-module-component-bottom-border
+seller-module-bottom-padding
+">
+  Список товарів
+</div>
+<div class="">
+  <app-seller-goods-list-view-title (changePagination)="changePagination($event)"></app-seller-goods-list-view-title>
+</div>
+<div *ngIf="advertisements.length > 0">
+  <app-seller-goods-list-view *ngFor="let adv of advertisements" [advertisement]="adv"></app-seller-goods-list-view>
+</div>
+<div class="seller-module-component-block
+     seller-module-component-bottom-border seller-module-component-margin-bottom"
+     *ngIf="advertisements.length > 0">
+  <app-arrow-paginator
+    [pagination]="pagination"
+    [totalPages]="totalPages"
+    [totalElements]="totalElements" (pageChange)="changePagination($event)"></app-arrow-paginator>
+</div>

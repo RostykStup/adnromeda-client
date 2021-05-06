@@ -1,0 +1,36 @@
+input[type=radio] {
+  display: none;
+}
+
+.seller-module-component-radio-container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.order-type-label {
+  font-size: 15px;
+  font-weight: 400;
+  color: #4e4e4e;
+  margin-right: 15px;
+  cursor: pointer;
+  padding: 5px 15px;
+  border: 1px solid #e3e3e3;
+  border-radius: 15px;
+  transition: all .2s;
+}
+
+input[type=radio]:checked + .order-type-label  {
+  background-color: #e3e3e3;
+  color: black;
+}
+
+.no-orders-text {
+  padding-top: 20px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  color: #a2a2a2;
+  font-weight: 400;
+}

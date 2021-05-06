@@ -3,6 +3,8 @@ import {GoodsSellerStatisticsResponse} from '../../../statistics/account/seller/
 export class GoodsSellerProfileResponse {
   id = 0;
   name = '';
-  avatar = '';
+  avatar: string | null = null;
+  banner: string | null = null;
+  description = '';
 
 }

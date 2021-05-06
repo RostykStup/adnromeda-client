@@ -11,6 +11,8 @@ import {ConfirmGoodsOrderDeliveryRequest} from '../../entity/order/confirm-goods
 import {UserGoodsOrderDataResponse} from '../../entity/order/user-goods-order-data-response';
 import Global = WebAssembly.Global;
 import {SellerGoodsOrderDataResponse} from '../../entity/order/seller-goods-order-data-response';
+import {PaginationResponse} from '../../entity/pagination-response';
+import {NavigationService} from '../../common/navigation.service';
 
 
 @Injectable({
@@ -34,6 +36,12 @@ export class OrderService {
       + '&page=' + request.page
       + '&size=' + request.size;
     return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  getSellerOrdersPageByStatuses(pagination: PaginationRequest, statuses: Array<string>): Observable<PaginationResponse<GoodsOrderResponse>> {
+    const url = this.orderURL + '/seller?' + NavigationService.convertPaginationRequestToParamsQuery(pagination)
+      + (statuses.length > 0 ? '&status=' + statuses.join('&status=') : '');
+    return this.httpClient.get<PaginationResponse<GoodsOrderResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
   getUserWaitingShipmentOrdersPage(request: PaginationRequest): Observable<any> {

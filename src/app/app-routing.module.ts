@@ -1,27 +1,27 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'client', pathMatch: 'full'
+    path: '', redirectTo: 'u', pathMatch: 'full'
   },
   {
-    path: 'seller-registration',
-    loadChildren: () => {
-      return import('./seller-registration/seller-registration.module').then(m => m.SellerRegistrationModule);
+    path: 'u', loadChildren: () => {
+      return import('./user/user.module').then(m => m.UserModule);
     }
   },
   {
-    path: 'client',
-    loadChildren: () => {
-      return import('./client/client.module').then(m => m.ClientModule);
+    path: 's', loadChildren: () => {
+      return import('./seller/seller.module').then(m => m.SellerModule);
     }
-  },
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
 

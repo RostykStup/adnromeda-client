@@ -1,0 +1,310 @@
+<app-seller-top-panel (changeLeftPanel)="changeLeftPanel()"></app-seller-top-panel>
+<div class="seller-module-body">
+  <div class="seller-module-left-panel">
+    <div class="seller-left-panel-container left-panel-animate "
+         [ngClass]="{panel_animate_open: opened,
+                 panel_animate_close: !opened}">
+      <div class="seller-left-panel-header"  [ngClass]="{
+          panel_header_open: opened,
+          panel_header_closed: !opened
+      }">
+        <div class="seller-left-panel-image-container">
+          <div class="seller-left-panel-image-wrapper left-panel-animate" *ngIf="goodsSellerProfile" [ngClass]="{
+          panel_avatar_open: opened,
+          panel_avatar_closed: !opened
+          }">
+            <img *ngIf="goodsSellerProfile.avatar != null" [src]="getAvatarImage()">
+            {{goodsSellerProfile.avatar == null ? goodsSellerProfile.name[0] : ''}}
+          </div>
+        </div>
+        <div class="seller-left-panel-name-container" *ngIf="goodsSellerProfile">
+          <span class="seller-left-panel-shop-title">Ваш магазин</span>
+          <span class="seller-left-panel-shop-name">{{goodsSellerProfile.name}}</span>
+
+        </div>
+      </div>
+      <div class="seller-left-panel-content">
+        <div class="seller-left-panel-block">
+          <a [routerLink]="'profile'" class="seller-left-panel-link pointer" [routerLinkActive]="'active-link'">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="24" height="24"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#5f5f5f">
+                    <path
+                      d="M35.83333,21.5c-3.7513,0 -7.58659,1.31576 -10.30208,4.03125c-2.71549,2.71549 -4.03125,6.55078 -4.03125,10.30208v100.33333c0,3.75131 1.31576,7.58659 4.03125,10.30208c2.71549,2.71549 6.55078,4.03125 10.30208,4.03125h100.33333c3.75131,0 7.58659,-1.31576 10.30208,-4.03125c2.71549,-2.71549 4.03125,-6.55078 4.03125,-10.30208v-100.33333c0,-3.7513 -1.31576,-7.58659 -4.03125,-10.30208c-2.71549,-2.71549 -6.55078,-4.03125 -10.30208,-4.03125zM35.83333,35.83333h100.33333v100.33333h-100.33333zM57.33333,50.16667c-4.31119,0 -7.16667,2.85547 -7.16667,7.16667v14.33333c0,4.3112 2.85547,7.16667 7.16667,7.16667h14.33333c4.3112,0 7.16667,-2.85547 7.16667,-7.16667v-14.33333c0,-4.31119 -2.85547,-7.16667 -7.16667,-7.16667zM100.33333,50.16667c-4.31119,0 -7.16667,2.85547 -7.16667,7.16667v14.33333c0,4.3112 2.85547,7.16667 7.16667,7.16667h14.33333c4.3112,0 7.16667,-2.85547 7.16667,-7.16667v-14.33333c0,-4.31119 -2.85547,-7.16667 -7.16667,-7.16667zM57.33333,93.16667c-4.31119,0 -7.16667,2.85547 -7.16667,7.16667v14.33333c0,4.3112 2.85547,7.16667 7.16667,7.16667h14.33333c4.3112,0 7.16667,-2.85547 7.16667,-7.16667v-14.33333c0,-4.31119 -2.85547,-7.16667 -7.16667,-7.16667zM100.33333,93.16667c-4.31119,0 -7.16667,2.85547 -7.16667,7.16667v14.33333c0,4.3112 2.85547,7.16667 7.16667,7.16667h14.33333c4.3112,0 7.16667,-2.85547 7.16667,-7.16667v-14.33333c0,-4.31119 -2.85547,-7.16667 -7.16667,-7.16667z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Магазин</span>
+          </a>
+        </div>
+        <div class="seller-left-panel-block">
+          <a [routerLink]="'statistics'" class="seller-left-panel-link pointer " [routerLinkActive]="'active-link'">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="24" height="24"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#5f5f5f">
+                    <path
+                      d="M28.66667,28.66667c-7.91917,0 -14.33333,6.41417 -14.33333,14.33333v71.66667c0,7.91917 6.41417,14.33333 14.33333,14.33333h-28.66667v14.33333h172v-14.33333h-28.66667c7.91917,0 14.33333,-6.41417 14.33333,-14.33333v-71.70866c0,-7.912 -6.41417,-14.29134 -14.33333,-14.29134zM28.66667,43h114.66667l0.014,71.66667h-114.68066zM100.33333,57.33333v43h14.33333v-43zM78.83333,71.66667v28.66667h14.33333v-28.66667zM57.33333,86v14.33333h14.33333v-14.33333z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Аналітика</span>
+          </a>
+        </div>
+        <div class="seller-left-panel-block">
+          <a [routerLink]="'notifications'" class="seller-left-panel-link pointer " [routerLinkActive]="'active-link'">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="24" height="24"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#5f5f5f">
+                    <path
+                      d="M86,14.33333c-5.934,0 -10.75,4.816 -10.75,10.75v4.98307c-18.54017,4.78017 -32.25,21.56943 -32.25,41.60026v43l-14.33333,14.33333v7.16667h114.66667v-7.16667l-14.33333,-14.33333v-43c0,-20.03083 -13.70983,-36.8061 -32.25,-41.58626v-4.99707c0,-5.934 -4.816,-10.75 -10.75,-10.75zM71.66667,143.33333c0,7.91917 6.42133,14.33333 14.33333,14.33333c7.912,0 14.33333,-6.42133 14.33333,-14.33333z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Сповіщення</span>
+          </a>
+        </div>
+        <div class="seller-left-panel-block">
+          <a [routerLink]="'create-goods'" class="seller-left-panel-link pointer " [routerLinkActive]="'active-link'">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="24" height="24"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none"
+                   font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#5F5F5F">
+                    <path
+                      d="M35.83333,21.5c-7.90483,0 -14.33333,6.4285 -14.33333,14.33333v100.33333c0,7.90483 6.4285,14.33333 14.33333,14.33333h40.04655c-2.69467,-6.6435 -4.21322,-13.889 -4.21322,-21.5c0,-13.5665 4.73549,-26.015 12.61166,-35.83333h-5.44499v-14.33333h22.43782c8.22017,-4.558 17.66684,-7.16667 27.72884,-7.16667c7.611,0 14.8565,1.51855 21.5,4.21322v-40.04655c0,-7.90483 -6.4285,-14.33333 -14.33333,-14.33333zM50.16667,50.16667h14.33333v14.33333h-14.33333zM78.83333,50.16667h43v14.33333h-43zM50.16667,78.83333h14.33333v14.33333h-14.33333zM129,86c-23.65,0 -43,19.35 -43,43c0,23.65 19.35,43 43,43c23.65,0 43,-19.35 43,-43c0,-23.65 -19.35,-43 -43,-43zM50.16667,107.5h14.33333v14.33333h-14.33333zM121.83333,107.5h14.33333v14.33333h14.33333v14.33333h-14.33333v14.33333h-14.33333v-14.33333h-14.33333v-14.33333h14.33333z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Додати товар</span>
+          </a>
+        </div>
+        <div class="seller-left-panel-block">
+          <a [routerLink]="'goods'" class="seller-left-panel-link pointer " [routerLinkActive]="'active-link'">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="24" height="24"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#5f5f5f">
+                    <path
+                      d="M141.99317,45.70183l-55.99317,-24.8755l-55.986,24.88267c-5.17433,2.29333 -8.514,7.439 -8.514,13.10067v91.69033h129v-91.69033c0,-5.66167 -3.33967,-10.80733 -8.50683,-13.10783zM121.83333,136.16667h-28.66667v-28.66667h28.66667zM100.33333,93.16667h-28.66667v-28.66667h28.66667zM78.83333,107.5v28.66667h-28.66667v-28.66667z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Мої товари</span>
+          </a>
+        </div>
+        <div class="seller-left-panel-block">
+          <a [routerLink]="'orders'"  class="seller-left-panel-link pointer " [routerLinkActive]="'active-link'">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="24" height="24"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#5f5f5f">
+                    <path
+                      d="M28.66667,28.66667c-7.91917,0 -14.33333,6.41417 -14.33333,14.33333v71.66667c0,7.90483 6.4285,14.33333 14.33333,14.33333h-28.66667v14.33333h71.66667v-28.66667h-43v-71.66667h121.83333c0,-7.91917 -6.41417,-14.33333 -14.33333,-14.33333zM121.83333,57.33333c-7.83362,0 -14.33333,6.49972 -14.33333,14.33333v14.33333h-21.5v57.33333c0,7.90483 6.4285,14.33333 14.33333,14.33333h57.33333c7.90483,0 14.33333,-6.4285 14.33333,-14.33333v-57.33333h-21.5v-14.33333c0,-7.83362 -6.49972,-14.33333 -14.33333,-14.33333zM121.83333,71.66667h14.33333v14.33333h-14.33333z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Замовлення</span>
+          </a>
+        </div>
+        <div class="seller-left-panel-block">
+          <a [routerLink]="'feedbacks'" class="seller-left-panel-link pointer " [routerLinkActive]="'active-link'">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="24" height="24"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#5f5f5f">
+                    <path
+                      d="M136.16667,21.5h-100.33333c-7.91917,0 -14.33333,6.41417 -14.33333,14.33333v100.33333c0,7.91917 6.41417,14.33333 14.33333,14.33333h100.33333c7.91917,0 14.33333,-6.41417 14.33333,-14.33333v-100.33333c0,-7.91917 -6.41417,-14.33333 -14.33333,-14.33333zM116.315,129l-30.315,-18.275l-30.315,18.275l8.02667,-34.47167l-26.73167,-23.14833l35.26,-3.01l13.76,-32.53667l13.76,32.465l35.26,3.01l-26.73167,23.14833z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Відгуки</span>
+          </a>
+        </div>
+        <div class="seller-left-panel-block">
+          <a [routerLink]="'partners'" class="seller-left-panel-link pointer " [routerLinkActive]="'active-link'">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="24" height="24"
+                   viewBox="0 0 226 226"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,226v-226h226v226z" fill="none"></path>
+                  <g fill="#5f5f5f">
+                    <path
+                      d="M178.91667,18.83333l-28.25,18.83333l28.25,18.83333zM28.25,28.25v131.83333h56.5v-18.83333v-18.83333v-18.83333v-18.83333v-18.83333v-18.83333h37.66667v-18.83333zM47.08333,47.08333h18.83333v18.83333h-18.83333zM103.58333,65.91667v131.83333h94.16667v-131.83333zM47.08333,84.75h18.83333v18.83333h-18.83333zM122.41667,84.75h18.83333v18.83333h-18.83333zM160.08333,84.75h18.83333v18.83333h-18.83333zM47.08333,122.41667h18.83333v18.83333h-18.83333zM122.41667,122.41667h18.83333v18.83333h-18.83333zM160.08333,122.41667h18.83333v18.83333h-18.83333zM122.41667,160.08333h18.83333v18.83333h-18.83333zM160.08333,160.08333h18.83333v18.83333h-18.83333zM47.08333,169.5v37.66667l28.25,-18.83333z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Торгові партнери</span>
+          </a>
+        </div>
+      </div>
+      <div class="seller-left-panel-footer">
+        <div class="seller-left-panel-block">
+          <a [href]="" class="seller-left-panel-link pointer ">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="26" height="26"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#606060">
+                    <path
+                      d="M115.12858,14.33333c-0.9245,0 -1.69816,0.69237 -1.80566,1.6097l-0.83985,7.25065c-3.46867,1.20381 -6.60348,3.03491 -9.32226,5.389l-6.71875,-2.89746c-0.84567,-0.3655 -1.82291,-0.04681 -2.28157,0.75586l-6.71875,11.61784c-0.46583,0.7955 -0.24826,1.81373 0.48991,2.36556l5.79492,4.2972c-0.33986,1.76498 -0.5599,3.58087 -0.5599,5.44499c0,1.86411 0.22003,3.68001 0.5599,5.44499l-5.79492,4.2972c-0.73817,0.54467 -0.94857,1.56289 -0.48991,2.36556l6.71875,11.61784c0.45867,0.80267 1.43591,1.13536 2.28157,0.76986l6.71875,-2.91146c2.71878,2.35409 5.85359,4.18518 9.32226,5.389l0.83985,7.25065c0.1075,0.91733 0.88116,1.6097 1.80566,1.6097h13.40951c0.9245,0 1.69816,-0.69236 1.80566,-1.6097l0.83985,-7.25065c3.47214,-1.20502 6.61565,-3.03154 9.33626,-5.389l6.70475,2.88346c0.84567,0.36551 1.82291,0.04681 2.28157,-0.75585l6.71875,-11.61784c0.46583,-0.7955 0.24826,-1.81373 -0.48991,-2.36556l-5.78093,-4.2972c0.33801,-1.76035 0.5459,-3.5721 0.5459,-5.43099c0,-1.86411 -0.22003,-3.68001 -0.5599,-5.44499l5.79492,-4.2972c0.73817,-0.54467 0.94857,-1.56289 0.48991,-2.36556l-6.71875,-11.61784c-0.45867,-0.80267 -1.43591,-1.13536 -2.28157,-0.76986l-6.71875,2.91146c-2.71878,-2.35409 -5.85359,-4.18519 -9.32226,-5.389l-0.83985,-7.25065c-0.1075,-0.91733 -0.88116,-1.6097 -1.80566,-1.6097zM121.83333,37.625c6.923,0 12.54167,5.61867 12.54167,12.54167c0,6.93017 -5.61867,12.54167 -12.54167,12.54167c-6.923,0 -12.54167,-5.6115 -12.54167,-12.54167c0,-6.923 5.61867,-12.54167 12.54167,-12.54167zM50.62858,64.5c-0.9245,0 -1.69816,0.69237 -1.80566,1.6097l-1.24577,10.65202c-5.78539,1.6459 -11.0079,4.59693 -15.20117,8.67838l-9.74219,-4.19922c-0.84567,-0.36551 -1.82291,-0.04681 -2.28157,0.75585l-6.71875,11.61784c-0.46583,0.7955 -0.24826,1.81373 0.48991,2.36556l8.5804,6.35482c-0.71074,2.81483 -1.20378,5.71307 -1.20378,8.74837c0,3.03531 0.49303,5.93354 1.20378,8.74837l-8.5804,6.36882c-0.73817,0.54467 -0.94858,1.56289 -0.48991,2.36556l6.71875,11.61784c0.45867,0.80267 1.43591,1.12136 2.28157,0.75586l9.74219,-4.21322c4.19327,4.08145 9.41578,7.03248 15.20117,8.67838l1.24577,10.65202c0.1075,0.91733 0.88116,1.6097 1.80566,1.6097h13.40951c0.9245,0 1.69816,-0.69236 1.80566,-1.6097l1.24577,-10.65202c5.78539,-1.6459 11.0079,-4.59693 15.20117,-8.67838l9.74219,4.19922c0.84567,0.3655 1.82291,0.04681 2.28157,-0.75585l6.71875,-11.61784c0.46583,-0.7955 0.24826,-1.81373 -0.48991,-2.36556l-8.58041,-6.35482c0.71075,-2.81483 1.20378,-5.71307 1.20378,-8.74837c0,-3.03531 -0.49303,-5.93354 -1.20378,-8.74837l8.58041,-6.36882c0.73817,-0.54467 0.94857,-1.56289 0.48991,-2.36556l-6.71875,-11.61784c-0.45867,-0.80267 -1.43591,-1.12136 -2.28157,-0.75586l-9.74219,4.21322c-4.19327,-4.08145 -9.41578,-7.03248 -15.20117,-8.67838l-1.24577,-10.65202c-0.1075,-0.91733 -0.88116,-1.6097 -1.80566,-1.6097zM57.33333,96.75c7.91917,0 14.33333,6.41417 14.33333,14.33333c0,7.91917 -6.41417,14.33333 -14.33333,14.33333c-7.91917,0 -14.33333,-6.41417 -14.33333,-14.33333c0,-7.91917 6.41417,-14.33333 14.33333,-14.33333z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Налаштування</span>
+          </a>
+        </div>
+        <div class="seller-left-panel-block">
+          <a [href]="" class="seller-left-panel-link pointer">
+            <div class="svg-container">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                   width="26" height="26"
+                   min-width="26"
+                   viewBox="0 0 172 172"
+                   style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                   font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                   style="mix-blend-mode: normal">
+                  <path d="M0,172v-172h172v172z" fill="none"></path>
+                  <g fill="#606060">
+                    <path
+                      d="M28.66667,14.33333c-7.91917,0 -14.33333,6.41417 -14.33333,14.33333v43c0,7.91917 6.41417,14.33333 14.33333,14.33333h71.66667c7.91917,0 14.33333,-6.41417 14.33333,-14.33333v-43c0,-7.91917 -6.41417,-14.33333 -14.33333,-14.33333zM59.83887,28.66667h9.30827l24.01953,38.00293v4.99707h-14.33333l-4.00326,-7.16667h-20.67415l-3.98926,7.16667h-14.33333v-4.98307zM64.486,48.13704l-5.80892,9.19629h11.63184zM127.68424,86c-2.95983,8.33483 -10.83891,14.33333 -20.18424,14.33333c7.90483,0 14.33333,6.4285 14.33333,14.33333v18.53256l5.06706,5.06706l-10.13411,10.13411l-5.06706,-5.06706h-18.53256c-7.90483,0 -14.33333,-6.4285 -14.33333,-14.33333v-14.33333c0,-7.90483 6.4285,-14.33333 14.33333,-14.33333h-43v43c0,7.91917 6.41417,14.33333 14.33333,14.33333h71.66667c7.91917,0 14.33333,-6.41417 14.33333,-14.33333v-43c0,-7.91917 -6.41417,-14.33333 -14.33333,-14.33333zM93.16667,114.66667v14.33333h14.33333v-14.33333z"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <span class="seller-left-panel-link-text"
+                  [ngClass]="{
+                  panel_link_text_open: opened,
+                  panel_link_text_closed: !opened
+                  }"
+            >Довідка</span>
+          </a>
+        </div>
+        <!--        <div class="seller-left-panel-footer-label">-->
+        <!--          ©2021 Andromeda <br>-->
+        <!--          Created by Rostyslav Stupnytskiy-->
+        <!--        </div>-->
+      </div>
+    </div>
+  </div>
+  <div class="seller-module-content" id="seller-module-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

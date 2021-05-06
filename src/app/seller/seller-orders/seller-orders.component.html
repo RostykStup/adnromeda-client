@@ -1,0 +1,88 @@
+<div class="seller-module-component-title
+seller-module-component-block
+seller-module-component-bottom-border
+seller-module-bottom-padding">
+  Замовлення
+</div>
+<div class="seller-module-component-radio-container seller-module-component-block seller-module-component-bottom-border">
+  <input type="radio" id="all-orders-radio" name="order-types"
+         [checked]="ordersStatus == null">
+  <label for="all-orders-radio" class="order-type-label" (click)="changeOrdersType(null)">Усі</label>
+
+  <input type="radio" id="wait-for-confirm-orders-radio" name="order-types"
+         [checked]="ordersStatus == 'WAITING_FOR_CONFIRMATION'">
+  <label for="wait-for-confirm-orders-radio"  class="order-type-label" (click)="changeOrdersType('WAITING_FOR_CONFIRMATION')">Очікують на розгляд</label>
+
+  <input type="radio" id="wait-for-payment-verify-orders-radio" name="order-types"
+         [checked]="ordersStatus == 'WAITING_FOR_PAYMENT_VERIFY'">
+  <label for="wait-for-payment-verify-orders-radio"  class="order-type-label" (click)="changeOrdersType('WAITING_FOR_PAYMENT_VERIFY')">Очікують підтвердження оплати</label>
+
+  <input type="radio" id="wait-for-send-orders-radio" name="order-types"
+         [checked]="ordersStatus == 'WAITING_FOR_SENDING'">
+  <label for="wait-for-send-orders-radio"  class="order-type-label" (click)="changeOrdersType('WAITING_FOR_SENDING')">Очікують відправлення</label>
+
+  <input type="radio" id="wait-for-delivery-orders-radio" name="order-types"
+         [checked]="ordersStatus == 'WAITING_FOR_DELIVERY'">
+  <label for="wait-for-delivery-orders-radio"  class="order-type-label" (click)="changeOrdersType('WAITING_FOR_DELIVERY')">Очікують доставки</label>
+
+  <input type="radio" id="wait-for-feedback-orders-radio" name="order-types"
+         [checked]="ordersStatus == 'CLOSED'">
+  <label for="wait-for-feedback-orders-radio"  class="order-type-label" (click)="changeOrdersType('CLOSED')">Завершені</label>
+</div>
+<div *ngIf="orders.length > 0">
+  <app-seller-order-list-view-title (changePagination)="changeDirection($event)"></app-seller-order-list-view-title>
+
+  <app-seller-order-list-view *ngFor="let order of orders" [goodsOrder]="order"></app-seller-order-list-view>
+</div>
+<div class="seller-module-component-block no-orders-text" *ngIf="orders.length == 0">
+  У вас замовлень за вказаними параметрами
+</div>
+<div class="seller-module-component-block
+     seller-module-component-bottom-border seller-module-component-margin-bottom"
+     *ngIf="orders.length > 0">
+  <app-arrow-paginator
+    [pagination]="pagination"
+    [totalPages]="totalPages"
+    [totalElements]="totalElements" (pageChange)="changePagination($event)"></app-arrow-paginator>
+</div>
+
+<!--<div class="container">-->
+<!--  <div class="menu-container">-->
+<!--    <div class="menu-item">-->
+<!--      <input type="radio" id="all-items-choose" name="items-type" checked>-->
+<!--      <label (click)="changeListMode(0)" for="all-items-choose">Усі ({{sellerGoodsOrderData.allItems}})</label>-->
+<!--      &lt;!&ndash;      <span class="menu-title" (click)="loadAllOrders()"></span>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="menu-item">-->
+<!--      <input type="radio" id="new-items-choose" name="items-type">-->
+<!--      <label (click)="changeListMode(4)" for="new-items-choose">Нові-->
+<!--        ({{sellerGoodsOrderData.newItems}})</label>-->
+<!--      &lt;!&ndash;      <span class="menu-title"></span>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="menu-item">-->
+<!--      <input type="radio" id="shipment-items-choose" name="items-type">-->
+<!--      <label (click)="changeListMode(1)" for="shipment-items-choose">Очікують відправлення-->
+<!--        ({{sellerGoodsOrderData.waitingForSending}})</label>-->
+<!--      &lt;!&ndash;      <span class="menu-title"></span>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="menu-item">-->
+<!--      <input type="radio" id="delivery-items-choose" name="items-type">-->
+<!--      <label (click)="changeListMode(2)" for="delivery-items-choose">Відправлені-->
+<!--        ({{sellerGoodsOrderData.waitingForDelivery}})</label>-->
+<!--      &lt;!&ndash;      <span class="menu-title"></span>&ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="menu-item">-->
+<!--      <input type="radio" id="closed-items-choose" name="items-type">-->
+<!--      <label (click)="changeListMode(3)" for="closed-items-choose">Завершені ({{sellerGoodsOrderData.closedOrders}})</label>-->
+<!--      &lt;!&ndash;      <span class="menu-title"></span>&ndash;&gt;-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="orders-container">-->
+<!--      <app-order-list-view *ngFor="let order of orders" [order]="order" [viewMode]="'seller'"></app-order-list-view>-->
+<!--      <div class="paginator-container">-->
+<!--    <div class="paginator-container">-->
+<!--      <app-paginator [pagination]="pagination" [totalPages]="totalPages" (pageChange)="loadNewPage($event)"></app-paginator>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</div>-->

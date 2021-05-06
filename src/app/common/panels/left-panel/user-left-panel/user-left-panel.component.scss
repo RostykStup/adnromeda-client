@@ -1,0 +1,214 @@
+$close-open-animation-duration: 120ms;
+$left-panel-width: 300px;
+
+.left-panel-animate-open {
+  animation: open $close-open-animation-duration;
+  -webkit-animation: open $close-open-animation-duration;
+  -moz-animation: open $close-open-animation-duration;
+  -o-animation: open $close-open-animation-duration;
+}
+
+.left-panel-animate-close {
+  animation: close $close-open-animation-duration - 20ms;
+  -webkit-animation: close $close-open-animation-duration - 20ms;
+  -moz-animation: close $close-open-animation-duration - 20ms;
+  -o-animation: close $close-open-animation-duration - 20ms;
+
+}
+
+.left-panel-bg-open {
+  animation: open-bg $close-open-animation-duration;
+  -webkit-animation: open-bg $close-open-animation-duration;
+  -moz-animation: open-bg $close-open-animation-duration;
+  -o-animation: open-bg $close-open-animation-duration;
+}
+
+.left-panel-bg-close {
+  animation: close-bg $close-open-animation-duration;
+  -webkit-animation: close-bg $close-open-animation-duration;
+  -moz-animation: close-bg $close-open-animation-duration;
+  -o-animation: close-bg $close-open-animation-duration;
+}
+
+.left-panel-animate-close {
+  animation: close $close-open-animation-duration;
+  -webkit-animation: close $close-open-animation-duration;
+  -moz-animation: close $close-open-animation-duration;
+  -o-animation: close $close-open-animation-duration;
+
+}
+
+.left-panel-animate {
+  animation-direction: alternate;
+  animation-timing-function: linear;
+  -webkit-animation-direction: alternate;
+  -moz-animation-direction: alternate;
+  -o-animation-direction: alternate;
+}
+
+.left-panel-container {
+  width: $left-panel-width;
+}
+
+
+@keyframes open {
+  0% {
+    margin-left: -$left-panel-width;
+  }
+  100% {
+    margin-left: 0;
+  }
+}
+
+@keyframes close {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -$left-panel-width;
+  }
+}
+
+@keyframes open-bg {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes close-bg {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+//.user-left-panel-full-page-bg {
+//  display: flex;
+//}
+
+.user-left-panel-empty-filler {
+  height: 100%;
+  width: 100%;
+}
+
+.left-panel-andromeda-title {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 700;
+
+  svg {
+    margin-right: 2px;
+  }
+}
+
+.user-left-panel-main-block {
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
+}
+
+.top-block {
+  justify-content: space-between;
+  padding-right: 30px;
+  height: 56px;
+  border-bottom: 1px solid #e0dcdc;
+}
+
+.user-left-panel-divider-block {
+  width: 100%;
+  border-bottom: 1px solid #e0dcdc;
+  margin: 10px 0;
+}
+
+.user-left-panel-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  //height: 30px;
+  width: 100%;
+  padding: 10px 20px;
+
+  svg {
+    margin-right: 20px;
+  }
+
+  font-size: 15px;
+  font-weight: 400;
+
+  &:hover {
+    background-color: #faf7f7;
+    color: #414141;
+  }
+}
+
+#user-left-panel-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-left-panel-panels-container {
+  flex-grow: 2;
+  overflow-y: auto;
+  padding-top: 15px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c8c5c5;
+  border-radius: 0;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b5b2b2;
+}
+
+.user-panel-bottom-fixed-panels {
+  border-top: 1px solid #e0dcdc;
+  //position: absolute;
+  //bottom: 0;
+  //left: 0;
+  width: 100%;
+  padding-bottom: 10px;
+  //height: 25%;
+}
+
+.user-left-panel-footer-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #857e7e;
+  font-size: 13px;
+  font-weight: 300;
+  padding: 20px;
+  width: 100%;
+}
+
+.favorite-shops-label {
+  padding: 5px 20px 10px;
+  font-size: 15px;
+  font-weight: 400;
+}
+.text-fill {
+  padding: 5px 20px 10px;
+  font-size: 15px;
+  color: #353434;
+}
+

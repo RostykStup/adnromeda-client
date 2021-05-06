@@ -7,6 +7,19 @@
   border: 1px solid #454545;
 }
 
+.andromeda-input {
+  font-size: 15px;
+  padding: 5px;
+  border: 1px solid #bcbbbb;
+  outline: none;
+  border-radius: 3px;
+  color: #373737;
+}
+
+.andromeda-input:focus {
+  border: 1px solid #606060;
+}
+
 .andro-label{
   font-size: 13px;
   font-weight: 500;

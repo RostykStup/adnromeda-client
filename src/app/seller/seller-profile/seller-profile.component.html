@@ -1,0 +1,20 @@
+<div class="seller-module-component-title seller-module-component-block seller-module-bottom-padding">
+  Налаштування магазину
+</div>
+<div class="seller-module-component-panels-container one-child seller-module-component-bottom-border seller-module-component-block">
+  <div class="seller-module-component-panels-links-container">
+<!--    <a [routerLink]="'section'" class="seller-module-component-panel-link"-->
+<!--       [routerLinkActive]="'seller-module-component-panel-link-active'"-->
+<!--    >Макет</a>-->
+    <a [routerLink]="'design'" class="seller-module-component-panel-link"
+       [routerLinkActive]="'seller-module-component-panel-link-active'"
+    >Оформлення</a>
+    <a [routerLink]="'details'" class="seller-module-component-panel-link"
+       [routerLinkActive]="'seller-module-component-panel-link-active'"
+    >Основна інформація</a>
+  </div>
+</div>
+<div class="seller-module-component-block seller-module-panels">
+  <router-outlet></router-outlet>
+</div>
+

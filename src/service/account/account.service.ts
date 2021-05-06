@@ -5,6 +5,7 @@ import {GlobalConstants} from '../../common/global-constants';
 import {AccountLoginRequest} from '../../entity/account/account-login-request';
 import {AuthenticationResponse} from '../../entity/account/authentication-response';
 import {AccountDataRequest} from '../../entity/account/account-data-request';
+import {ImageRequest} from '../../entity/account/image-request';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,6 @@ export class AccountService {
 
   writeAuthenticationToLocalStorage(authentication: AuthenticationResponse): void {
     localStorage.setItem('andro_user_token', authentication.token);
-    // localStorage.setItem('andro_user_name', authentication.username);
     localStorage.setItem('andro_user_role', authentication.userRole);
     localStorage.setItem('andro_user_id', authentication.id.toString());
   }
@@ -61,5 +61,10 @@ export class AccountService {
   login(accountLoginRequest: AccountLoginRequest): Observable<AuthenticationResponse> {
     const url = this.accountURL + '/login';
     return this.httpClient.post<AuthenticationResponse>(url, accountLoginRequest);
+  }
+
+  changeAvatar(request: ImageRequest): Observable<any> {
+    const url = this.accountURL + '/avatar';
+    return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 }

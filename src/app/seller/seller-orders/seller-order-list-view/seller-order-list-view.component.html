@@ -1,0 +1,18 @@
+<div class="seller-component-list-view-container seller-module-component-block seller-module-component-bottom-border" *ngIf="goodsOrder">
+  <div class="seller-component-list-view-container-element seller-order-list-view-container-id-element">
+    #{{("00000000" + goodsOrder.id).slice(-9)}}
+    <a href="" class="seller-component-list-view-element-link">Детальніше</a>
+  </div>
+  <div class="seller-component-list-view-container-element seller-order-list-view-container-date-element">
+    {{goodsOrder.creationDate}}
+  </div>
+  <div class="seller-component-list-view-container-element seller-order-list-view-container-status-element">
+    {{getUkrOrderStatus()}}
+  </div>
+  <div class="seller-component-list-view-container-element seller-order-list-view-container-count-element">
+    {{goodsOrder.items.length}} шт.
+  </div>
+  <div class="seller-component-list-view-container-element seller-order-list-view-container-price-element">
+    {{'$ ' + goodsOrder.price}}
+  </div>
+</div>

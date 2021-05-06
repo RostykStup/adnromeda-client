@@ -1,0 +1,36 @@
+.top-panel-container {
+  box-shadow: 0 0 6px 1px #ddd7d7;
+}
+
+.andromeda-logo {
+  margin-right: 10px;
+}
+
+.top-panel-search-container {
+  flex-grow: 2;
+}
+
+.seller-top-panel-link {
+  display: flex;
+  align-items: center;
+  height: 40%;
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 2px;
+  border: 1px solid #d4d1d1;
+  color: #5F5F5F;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 400;
+  transition: .2s;
+
+  svg {
+    margin-right: 10px;
+  }
+
+  //&:hover {
+  //  background-color: #000000;
+  //  color: #F6F7F9;
+  //}
+}
+

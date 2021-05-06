@@ -1,0 +1,305 @@
+<div class="seller-module-component-title
+seller-module-component-block
+seller-module-component-bottom-border
+seller-module-bottom-padding
+">
+  Створення товару
+</div>
+
+<!--<div class="container">-->
+<!--  <div class="main-title">-->
+<!--    Додати товар до магазину-->
+<!--  </div>-->
+
+<!--  <div class="creation-block">-->
+<!--    &lt;!&ndash;    <input type="text">&ndash;&gt;-->
+<!--    <span class="block-title">-->
+<!--      Введіть заголовок*-->
+<!--    </span>-->
+<!--    <div class="block-content">-->
+<!--      <div class="block-element">-->
+<!--        <input type="text" class="andro-input title-input"-->
+<!--               [(ngModel)]="advertisement.title"-->
+<!--               (keyup)="validationTitle = true"-->
+<!--               placeholder="Заголовок">-->
+<!--        <div class="warning-container" *ngIf="!validationTitle">-->
+<!--          <img [src]="icon"/>-->
+<!--          <span class="validation-text">Це поле не може бути пустим</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+
+<!--  <div class="creation-block">-->
+<!--    <span class="block-title">-->
+<!--      Оберіть категорію*-->
+<!--    </span>-->
+<!--    <div class="block-content">-->
+<!--      <div class="block-element">-->
+<!--        <select class="andro-select" (change)="loadSubcategories()" [(ngModel)]="categoryId">-->
+<!--          <option value="0" disabled selected>Категорія</option>-->
+<!--          <option value="{{category.id}}" *ngFor="let category of categories">{{category.title}}</option>-->
+<!--        </select>-->
+<!--        <select class="andro-select" [(ngModel)]="subcategoryId">-->
+<!--          <option value="0" disabled selected> Підкатегорія</option>-->
+<!--          <option value="{{subcategory.id}}" *ngFor="let subcategory of subcategories">{{subcategory.title}}</option>-->
+<!--        </select>-->
+<!--        <div class="warning-container" *ngIf="!validationSubcategory">-->
+<!--          <img [src]="icon"/>-->
+<!--          <span class="validation-text">Потрібно обрати підкатегорію</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="creation-block">-->
+<!--    <span class="block-title">-->
+<!--      Ціна, кількість та парметри-->
+<!--    </span>-->
+<!--    <div class="checkbox-container">-->
+<!--      <input type="checkbox" id="adv-has-params" class="andro-checkbox" [(ngModel)]="advertisement.hasParameters">-->
+<!--      <label class="andro-label" for="adv-has-params">Даний товар має параметри для вибору</label>-->
+<!--    </div>-->
+<!--    <div class="no-params-price-count-container" [ngClass]="{visible_params_container: !advertisement.hasParameters}">-->
+<!--      <label class="andro-label">Штук у наявності</label>-->
+<!--      <input type="number" min="0" class="andro-input" placeholder="Штук у наявності" [(ngModel)]="noParamsValuesCountPrice.count">-->
+<!--      <div class="price-input-container">-->
+<!--        <label class="andro-label">Ціна за одиницю $ (мінімальна $0.01)</label>-->
+<!--        <input type="text" class="andro-input price-input" [(ngModel)]="noParamsValuesCountPrice.price" placeholder="Ціна $" (keyup)="enterPriceInput($event)">-->
+<!--        <div class="warning-container">-->
+<!--          <img [src]="icon"/>-->
+<!--          <span class="validation-text">Формат ціни : 1.00</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="advertisement-with-params-container"-->
+<!--         [ngClass]="{visible_params_container: advertisement.hasParameters}">-->
+<!--      <div class="add-params-text">Додайте параметри та їх варіанти до товару</div>-->
+<!--      <div class="add-param-container">-->
+<!--        <input type="text" class="andro-input" placeholder="Назва параметру" id="new-param-title-input">-->
+<!--        <button class="add-param-button" (click)="addParameter()">Додати</button>-->
+<!--      </div>-->
+<!--      <div class="params-container">-->
+<!--        <div class="param-container" *ngFor="let parameter of parameters">-->
+<!--          <div class="parameter-title">-->
+<!--            <span class="parameter-title-text">{{parameter.title}}</span>-->
+<!--            <button class="delete-param-button" (click)="deleteParameter(parameter)">-->
+<!--              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"-->
+<!--                   width="20" height="20"-->
+<!--                   viewBox="0 0 226 226"-->
+<!--                   style=" fill:#000000;">-->
+<!--                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"-->
+<!--                   stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"-->
+<!--                   font-family="none" font-weight="none" font-size="none" text-anchor="none"-->
+<!--                   style="mix-blend-mode: normal">-->
+<!--                  <path d="M0,226v-226h226v226z" fill="none"></path>-->
+<!--                  <g fill="#ffffff">-->
+<!--                    <path-->
+<!--                      d="M53.74121,40.42546l-13.31575,13.31575l59.25879,59.25879l-59.25879,59.25879l13.31575,13.31575l59.25879,-59.25879l59.25879,59.25879l13.31575,-13.31575l-59.25879,-59.25879l59.25879,-59.25879l-13.31575,-13.31575l-59.25879,59.25879z"></path>-->
+<!--                  </g>-->
+<!--                </g>-->
+<!--              </svg>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--          <div class="parameter-values-container">-->
+<!--            <div class="parameter-value" *ngFor="let value of parameter.values">-->
+<!--              <span class="parameter-value-title">{{value.title}}</span>-->
+<!--              <button class="delete-param-button" (click)="deleteParameterValue(parameter, value)">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"-->
+<!--                     width="15" height="15"-->
+<!--                     viewBox="0 0 226 226"-->
+<!--                     style=" fill:#000000;">-->
+<!--                  <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"-->
+<!--                     stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"-->
+<!--                     font-family="none" font-weight="none" font-size="none" text-anchor="none"-->
+<!--                     style="mix-blend-mode: normal">-->
+<!--                    <path d="M0,226v-226h226v226z" fill="none"></path>-->
+<!--                    <g fill="#ffffff">-->
+<!--                      <path-->
+<!--                        d="M53.74121,40.42546l-13.31575,13.31575l59.25879,59.25879l-59.25879,59.25879l13.31575,13.31575l59.25879,-59.25879l59.25879,59.25879l13.31575,-13.31575l-59.25879,-59.25879l59.25879,-59.25879l-13.31575,-13.31575l-59.25879,59.25879z"></path>-->
+<!--                    </g>-->
+<!--                  </g>-->
+<!--                </svg>-->
+<!--              </button>-->
+<!--            </div>-->
+<!--            <div class="add-parameter-value-container">-->
+<!--              <input type="text" [id]="'param-' + parameter.title + '-value-input'" class="andro-input add-param-value-input" placeholder="Варіант параметру">-->
+<!--              <button class="add-param-button add-param-value-button" (click)="addParameterValue(parameter)">Додати</button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="params-title" *ngIf="paramsValuesCountPrices.length > 0">-->
+<!--        Введіть кількості та ціни для усіх комбінацій параметрів-->
+<!--      </div>-->
+<!--      <div class="params-values-count-prices" *ngIf="paramsValuesCountPrices.length > 0">-->
+<!--        <table>-->
+<!--          <tr>-->
+<!--            <td class="param-value-count-price-dot main-dot" *ngFor="let param of parameters">{{param.title}}</td>-->
+<!--            <td class="param-value-count-price-dot main-dot" >Наявність шт.</td>-->
+<!--            <td class="param-value-count-price-dot main-dot">Ціна $</td>-->
+<!--          </tr>-->
+<!--          <tr class="param-value-count-price-row"  *ngFor="let paramValCountPrice of paramsValuesCountPrices">-->
+<!--            <td class="param-value-count-price-dot" *ngFor="let param of parameters">-->
+<!--              {{paramValCountPrice.valueParam.get(param.title)}}-->
+<!--            </td>-->
+<!--            <td><input type="number" class="andro-input table-input" min="0" placeholder="Кількість" [(ngModel)]="paramValCountPrice.count"></td>-->
+<!--            <td><input type="text"  class="andro-input table-input" placeholder="Ціна $" [(ngModel)]="paramValCountPrice.price"></td>-->
+<!--&lt;!&ndash;            <td *ngFor="let valueParam of paramValCountPrice.valueParam | keyvalue">{{valueParam.value}}</td>&ndash;&gt;-->
+<!--          </tr>-->
+<!--        </table>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="creation-block">-->
+<!--    <span class="block-title">-->
+<!--      Опишіть свій товар-->
+<!--    </span>-->
+<!--    <div class="block-content">-->
+<!--      <textarea class="description-area" cols="70" rows="20" [(ngModel)]="advertisement.description"></textarea>-->
+<!--    </div>-->
+<!--    <div class="block-content top-space ">-->
+<!--      <div class="block-flex">-->
+<!--        <span class="block-title ">Додайте характеристики товару</span>-->
+<!--        <div class="question-body">-->
+<!--          <img [src]="questionIcon" class="question-icon">-->
+<!--          <div class="question-container">-->
+<!--            <div class="question-content property-question-content">-->
+<!--              Приклад:-->
+<!--              <table>-->
+<!--                <tr>-->
+<!--                  <td>Колір</td>-->
+<!--                  <td>: білий</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>Потужність</td>-->
+<!--                  <td>: 25 W</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>Розмір</td>-->
+<!--                  <td>: XXL</td>-->
+<!--                </tr>-->
+<!--              </table>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="warning-container" *ngIf="!validateProperties">-->
+<!--          <img [src]="icon"/>-->
+<!--          <span class="validation-text">Деякі характеристики містять пусті поля</span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="property-title-holder">-->
+<!--        <div class="property-block property-title">Назва</div>-->
+<!--        <div class="property-block property-title">Значення</div>-->
+<!--      </div>-->
+<!--      <div class="properties-container">-->
+<!--        <div *ngFor="let property of advertisement.properties" class="property-holder">-->
+<!--          <div class="property-block">-->
+<!--            <input type="text" (keyup)="validateProperties = true" class="andro-input property-input"-->
+<!--                   [(ngModel)]="property.name">-->
+<!--          </div>-->
+<!--          <div class="property-block">-->
+<!--            <input type="text" (keyup)="validateProperties = true" class="andro-input property-input"-->
+<!--                   [(ngModel)]="property.value">-->
+<!--          </div>-->
+<!--          <div class="remove-property-holder" [ngClass]="{visible_button: advertisement.properties.length > 1}">-->
+<!--            <img (click)="removeProperty(property)"-->
+<!--                 src="https://img.icons8.com/material-outlined/24/000000/minus-sign.png"/>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="add-price-button">-->
+<!--        <button (click)="addNewProperty()" class="add-property-button">+</button>-->
+<!--        &lt;!&ndash;        <img (click)="addNewProperty()" src="https://img.icons8.com/material/24/000000/plus-2-math&#45;&#45;v1.png"/>&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash;  <div class="creation-block">&ndash;&gt;-->
+<!--  &lt;!&ndash;    <span class="block-title">&ndash;&gt;-->
+<!--  &lt;!&ndash;      Введіть кількість доступних одиниць товару*&ndash;&gt;-->
+<!--  &lt;!&ndash;    </span>&ndash;&gt;-->
+<!--  &lt;!&ndash;    <div class="block-content">&ndash;&gt;-->
+<!--  &lt;!&ndash;      <div class="block-element">&ndash;&gt;-->
+<!--  &lt;!&ndash;        <input type="number" class="andro-input" [(ngModel)]="advertisement.count"&ndash;&gt;-->
+<!--  &lt;!&ndash;               (keyup)="validateNumber(advertisement.count); validateCount = true" placeholder="Кількість"&ndash;&gt;-->
+<!--  &lt;!&ndash;               min="1" value="1">&ndash;&gt;-->
+<!--  &lt;!&ndash;        <div class="warning-container" *ngIf="!validateCount">&ndash;&gt;-->
+<!--  &lt;!&ndash;          <img [src]="icon">&ndash;&gt;-->
+<!--  &lt;!&ndash;          <span class="validation-text">Це поле не може бути пустим чи рівним нулю</span>&ndash;&gt;-->
+<!--  &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;&ndash;&gt;-->
+<!--  &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;    </div>&ndash;&gt;-->
+<!--  &lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--  <div class="creation-block">-->
+<!--    <span class="block-title">-->
+<!--     Оберіть способи доставки-->
+<!--    </span>-->
+<!--    <div class="block-content">-->
+<!--      <div class="deliveries-container">-->
+
+
+<!--        <span class="validation-text green">Способи доставки, які доступні у вашій країні</span>-->
+<!--        <div class="deliveries-block">-->
+<!--          <div class="checkbox-container">-->
+<!--            <input type="checkbox" id="default-delivery" class="andro-checkbox" checked disabled>-->
+<!--            <label class="andro-label" for="default-delivery">За домовленістю-->
+<!--              <div class="question-body">-->
+<!--                <img [src]="questionIcon" class="question-icon">-->
+<!--                <div class="question-container">-->
+<!--                  <div class="question-content delivery-question-content">-->
+<!--                    Замість вибору методу відправлення користувач буде зв'язаний з вами для обговорення деталей-->
+<!--                    доставки.-->
+
+<!--                    <p>Дану опцію неможливо відключити</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </label>-->
+<!--          </div>-->
+<!--          <div class="checkbox-container" *ngFor="let delivery of deliveryTypes">-->
+<!--            <input type="checkbox" [id]="delivery.title" class="andro-checkbox" [(ngModel)]="delivery.checked">-->
+<!--            <label class="andro-label" [for]="delivery.title">{{delivery.title}}</label>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="checkbox-container">-->
+<!--          <input type="checkbox" id="only-seller-delivery" class="andro-checkbox"-->
+<!--                 [(ngModel)]="advertisement.onlySellerCountry">-->
+<!--          <label class="andro-label" for="only-seller-delivery">Доставка лише у межах моєї країни</label>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="creation-block">-->
+<!--     <span class="block-title">-->
+<!--     Завантажте фото для товару-->
+<!--    </span>-->
+<!--    <div class="block-element no-flex">-->
+<!--      <span class="validation-text green">Перше зображення буде головним </span>-->
+<!--      <div class="images-container">-->
+<!--        <input id="image-input" type="file" accept="image/*" (change)="handleUpload($event)">-->
+<!--        <div *ngFor="let image of images" class="img-cont">-->
+<!--          <img class="adv-img" src="{{image.src === '' ? defaultImage : image.src }}" (click)="uploadImage()">-->
+<!--          <div class="overlay" *ngIf="image.src !== ''">-->
+<!--            <img (click)="deleteImage(image)"-->
+<!--                 class="delete-img-button" src="https://img.icons8.com/material-outlined/24/ffffff/trash&#45;&#45;v1.png"/>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="creation-block button-block">-->
+<!--    <button class="andro-button creation-button" (click)="createGoodsAdvertisement()">Додати товар</button>-->
+<!--  </div>-->
+
+<!--</div>-->

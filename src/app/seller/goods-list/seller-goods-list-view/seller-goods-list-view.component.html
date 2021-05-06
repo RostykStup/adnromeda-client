@@ -1,0 +1,28 @@
+<div class="seller-component-list-view-container seller-module-component-block seller-module-component-bottom-border" *ngIf="advertisement">
+
+  <div class="seller-component-list-view-container-element image-title">
+    <div class="image-wrapper">
+      <img [src]="getImage()" alt="">
+    </div>
+    <div class="advertisement-title-text three-dots-text padding-text">
+      {{advertisement.title}}
+    </div>
+
+  </div>
+  <div class="seller-component-list-view-container-element advertisement-id padding-text">
+    #{{("00000000" + advertisement.id).slice(-9)}}
+  </div>
+  <div class="seller-component-list-view-container-element sold padding-text">
+    {{advertisement.sold}}
+  </div>
+  <div class="seller-component-list-view-container-element rating padding-text">
+    {{advertisement.rating != null ? advertisement.rating : '--'}}
+  </div>
+  <div class="seller-component-list-view-container-element creation padding-text">
+    {{advertisement.date}}
+  </div>
+  <div class="seller-component-list-view-container-element creation padding-text">
+    <a href="" class="seller-component-list-view-element-link">КЕРУВАННЯ</a>
+  </div>
+
+</div>

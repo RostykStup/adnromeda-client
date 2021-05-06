@@ -1,0 +1,93 @@
+<div class="paginator-container" *ngIf="pagination && totalElements && totalPages">
+  <div class="pagination-size-select-container">
+    Рядків на сторінці:
+    <select name="" id="" (change)="changePageSize($event)" >
+      <option [value]="size" *ngFor="let size of sizes" [selected]="size == pagination.size">{{size}}</option>
+    </select>
+  </div>
+
+  <div class="paginator-text-container">
+    {{getPagesCountLabel()}}
+  </div>
+  <div class="icons-container">
+    <svg (click)="navigateToPage(0)" class=" paginator-button" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         width="40" height="40" viewBox="0 0 172 172" style=" fill:#888888;"
+         [ngClass]="{
+         pointer: pagination.page != 0
+         }">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <path
+          d="M86,124.7c-21.37342,0 -38.7,-17.32658 -38.7,-38.7v0c0,-21.37342 17.32658,-38.7 38.7,-38.7v0c21.37342,0 38.7,17.32658 38.7,38.7v0c0,21.37342 -17.32658,38.7 -38.7,38.7z"
+          fill="#888888"></path>
+        <g fill="#ffffff">
+          <path
+            d="M126.13333,34.4h-80.26667c-6.32387,0 -11.46667,5.1428 -11.46667,11.46667v80.26667c0,6.32387 5.1428,11.46667 11.46667,11.46667h80.26667c6.32387,0 11.46667,-5.1428 11.46667,-11.46667v-80.26667c0,-6.32387 -5.1428,-11.46667 -11.46667,-11.46667zM108.93333,108.93333l-34.4,-19.6596v19.6596h-11.46667v-45.86667h11.46667v19.6596l34.4,-19.6596z"></path>
+        </g>
+      </g>
+    </svg>
+    <svg (click)="navigateToPage(pagination.page - 1)" class=" paginator-button" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         [ngClass]="{
+         pointer: pagination.page != 0
+         }"
+         width="40" height="40"
+         viewBox="0 0 172 172"
+         style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <path
+          d="M86,124.7c-21.37342,0 -38.7,-17.32658 -38.7,-38.7v0c0,-21.37342 17.32658,-38.7 38.7,-38.7v0c21.37342,0 38.7,17.32658 38.7,38.7v0c0,21.37342 -17.32658,38.7 -38.7,38.7z"
+          fill="#888888"></path>
+        <g fill="#ffffff">
+          <path
+            d="M34.4,45.86667v80.26667c0,6.32387 5.1428,11.46667 11.46667,11.46667h80.26667c6.32387,0 11.46667,-5.1428 11.46667,-11.46667v-80.26667c0,-6.32387 -5.1428,-11.46667 -11.46667,-11.46667h-80.26667c-6.32387,0 -11.46667,5.1428 -11.46667,11.46667zM103.2,60.2v51.6l-40.13333,-25.8z"></path>
+        </g>
+      </g>
+    </svg>
+    <svg (click)="navigateToPage(pagination.page + 1)" class=" paginator-button" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         [ngClass]="{
+         pointer: pagination.page != totalPages - 1
+         }"
+         width="40" height="40"
+         viewBox="0 0 172 172"
+         style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <path
+          d="M86,124.7c-21.37342,0 -38.7,-17.32658 -38.7,-38.7v0c0,-21.37342 17.32658,-38.7 38.7,-38.7v0c21.37342,0 38.7,17.32658 38.7,38.7v0c0,21.37342 -17.32658,38.7 -38.7,38.7z"
+          fill="#888888"></path>
+        <g fill="#ffffff">
+          <path
+            d="M126.13333,34.4h-80.26667c-6.32387,0 -11.46667,5.1428 -11.46667,11.46667v80.26667c0,6.32387 5.1428,11.46667 11.46667,11.46667h80.26667c6.32387,0 11.46667,-5.1428 11.46667,-11.46667v-80.26667c0,-6.32387 -5.1428,-11.46667 -11.46667,-11.46667zM108.93333,86l-40.13333,25.8v-51.6z"></path>
+        </g>
+      </g>
+    </svg>
+    <svg (click)="navigateToPage(totalPages - 1)" class=" paginator-button" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         [ngClass]="{
+         pointer: pagination.page != totalPages - 1
+         }"
+         width="40" height="40"
+         viewBox="0 0 172 172"
+         style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <path
+          d="M86,124.7c-21.37342,0 -38.7,-17.32658 -38.7,-38.7v0c0,-21.37342 17.32658,-38.7 38.7,-38.7v0c21.37342,0 38.7,17.32658 38.7,38.7v0c0,21.37342 -17.32658,38.7 -38.7,38.7z"
+          fill="#888888"></path>
+        <g fill="#ffffff">
+          <path
+            d="M34.4,45.86667v80.26667c0,6.32387 5.1428,11.46667 11.46667,11.46667h80.26667c6.32387,0 11.46667,-5.1428 11.46667,-11.46667v-80.26667c0,-6.32387 -5.1428,-11.46667 -11.46667,-11.46667h-80.26667c-6.32387,0 -11.46667,5.1428 -11.46667,11.46667zM63.06667,63.06667l34.4,19.6596v-19.6596h11.46667v45.86667h-11.46667v-19.6596l-34.4,19.6596z"></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
+

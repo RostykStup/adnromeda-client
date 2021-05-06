@@ -1,0 +1,92 @@
+$top-panel-height: 56px;
+$seller-top-panel-height: 65px;
+
+.top-panel-container {
+  //background-color: rgba(255,255,255,0.95);
+  background-color: rgba(255, 255, 255, 1);
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: $top-panel-height;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 25px;
+}
+
+.top-panel-background {
+  height: $top-panel-height;
+  width: 100%;
+}
+
+.seller-module-body {
+  padding-top: $seller-top-panel-height;
+}
+
+
+.seller-top-panel-background {
+  height: $seller-top-panel-height;
+}
+
+.seller-top-panel-container {
+  height: $seller-top-panel-height;
+}
+.top-panel-andromeda-title {
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  font-size: 30px;
+  text-decoration: none;
+  color: #242424;
+}
+
+.top-panel-element {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+
+.top-panel-avatar-image{
+  border: 3px solid black;
+  border-radius: 50%;
+  margin-right: 7px;
+  padding: 3px;
+}
+
+
+.top-panel-user-buttons-container{
+  height: 100%;
+  justify-content: flex-end;
+  width: 30%;
+  margin-right: 10px;
+}
+
+.top-panel-profile-button-container{
+  height: 50px;
+  padding: 10px;
+  border-radius: 3px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+}
+
+.top-panel-profile-button-container:hover{
+  background-color: #f8f5f5;
+}
+
+
+.top-panel-search-container{
+  height: 36px;
+}
+
+.back{
+  height: $top-panel-height;
+}
+
+.margin-r-30px {
+  margin-right: 30px;
+}

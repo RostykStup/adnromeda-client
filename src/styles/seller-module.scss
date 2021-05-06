@@ -1,0 +1,125 @@
+.seller-module-component-block {
+  width: 100%;
+  padding-left: 32px;
+}
+
+.seller-module-component-bottom-border {
+  //border-spacing: 1;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.seller-module-component-margin-bottom {
+  margin-bottom: 15px;
+}
+
+.seller-module-component-title {
+  font-weight: 500;
+  font-size: 25px;
+  padding-top: 23px;
+}
+
+.seller-module-bottom-padding {
+  padding-bottom: 23px;
+}
+
+.seller-module-component-panels-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.seller-module-component-panels-links-container {
+  display: flex;
+  margin-bottom: -1px;
+}
+
+.seller-module-component-panel-link {
+  text-decoration: none;
+  font-size: 15px;
+  color: #4e4e4e;
+  font-weight: 500;
+  margin-right: 40px;
+  height: 30px;
+}
+
+.seller-module-panels {
+  padding-top: 25px;
+}
+
+.seller-module-component-panel-link-active {
+  color: black;
+  border-bottom: 3px solid black;
+}
+
+.one-child {
+  justify-content: flex-start;
+}
+
+.seller-module-component-radio-container {
+  //pa
+}
+
+.seller-order-list-view-container-id-element {
+  width: 30%;
+}
+.seller-order-list-view-container-date-element {
+  width: 20%;
+}
+.seller-order-list-view-container-status-element {
+  width: 20%;
+
+}
+.seller-order-list-view-container-count-element {
+  width: 20%;
+}
+.seller-order-list-view-container-price-element {
+  width: 20%;
+}
+
+.seller-component-list-view-container {
+  width: 100%;
+  display: flex;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.seller-component-list-view-container-element {
+  font-size: 14px;
+  font-weight: 400;
+  color: #3e3e3e;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.seller-component-list-title-container-element {
+  font-size: 12px;
+  font-weight: 400;
+  color: #6b6969;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.seller-component-list-view-element-link {
+  font-size: inherit;
+  font-weight: 600;
+  color: #857e7e;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.chosen_direction {
+  color: #000000;
+  font-weight: 500;
+}
+
+.seller-component-list-title-change-direction-element {
+  &:hover {
+    color: #000000;
+    font-weight: 500;
+  }
+}
+
+.seller-component-list-title-direction-icons-container {
+  display: flex;
+  margin-left: 5px;
+  height: 10px;
+}

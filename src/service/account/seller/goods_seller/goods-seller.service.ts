@@ -9,6 +9,8 @@ import {GoodsSellerStatisticsResponse} from '../../../../entity/statistics/accou
 import {GoodsSellerMonthStatisticsResponse} from '../../../../entity/statistics/account/seller/goods-seller-month-statistics-response';
 import {GoodsSellerAdvertisementCategoryWithChildrenResponse} from '../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-with-children-response';
 import {GoodsSellerAdvertisementCategoryRequest} from '../../../../entity/account/seller/goods_seller/category/elements/goods-seller-advertisement-category-request';
+import {ImageRequest} from '../../../../entity/account/image-request';
+import {GoodsSellerMainDataRequest} from '../../../../entity/account/seller/goods_seller/goods-seller-main-data-request';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +26,14 @@ export class GoodsSellerService {
     return this.httpClient.put<any>(url, goodsSelleDataRequest, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
-  getGoodsSellerProfile(): Observable<GoodsSellerProfileResponse> {
-    return this.httpClient.get<GoodsSellerProfileResponse>(this.goodsSellerURL, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  updateGoodsSellerMainData(request: GoodsSellerMainDataRequest): Observable<any> {
+    const url = this.goodsSellerURL + '/main-data';
+    return this.httpClient.put<any>(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  getGoodsSellerProfileData(): Observable<GoodsSellerProfileResponse> {
+    const url = this.goodsSellerURL + '/profile-data';
+    return this.httpClient.get<GoodsSellerProfileResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 
   getGoodsSellerStatistics(): Observable<GoodsSellerStatisticsResponse> {
@@ -57,5 +65,10 @@ export class GoodsSellerService {
   createGoodsSellerCategory(category: GoodsSellerAdvertisementCategoryRequest): Observable<any> {
     const url = this.goodsSellerURL + '/create-category';
     return this.httpClient.post(url, category, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+  }
+
+  changeGoodsSellerBanner(request: ImageRequest): Observable<any> {
+    const url = this.goodsSellerURL + '/banner';
+    return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
   }
 }

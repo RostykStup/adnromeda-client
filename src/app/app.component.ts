@@ -11,9 +11,7 @@ import {CurrencyService} from '../service/country/currency.service';
 })
 export class AppComponent {
 
-  constructor(private countryService: CountryService, private currencyService: CurrencyService) {
-    // console.log('first loaded app');
-    this.currencyService.loadExchange();
-  }
 
+  // @ts-ignore
+  test: string;
 }

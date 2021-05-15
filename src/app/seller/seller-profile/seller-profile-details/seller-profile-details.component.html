@@ -1,4 +1,4 @@
-<div class="name-container container">
+<div class="name-container container" *ngIf="profile">
   <div class="container-title">Назва та опис магазину</div>
   <div class="shop-name" *ngIf="!update">{{request.shopName}}</div>
   <div class="shop-name name-input-container" *ngIf="update">
@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div class="description-container container">
+<div class="description-container container" *ngIf="profile">
   <div class="container-text description-area"  *ngIf="!update">{{request.description}}
     {{profile.description == null ? 'Ви ще не написали опис для вашого магазину' : ''}}
   </div>

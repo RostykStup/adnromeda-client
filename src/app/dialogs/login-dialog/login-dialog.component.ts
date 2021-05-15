@@ -7,6 +7,7 @@ import {AuthenticationResponse} from '../../../entity/account/authentication-res
 import {UserService} from '../../../service/account/user/user.service';
 import {CountryService} from '../../../service/country/country.service';
 import {NavigationService} from '../../../common/navigation.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-dialog',
@@ -20,6 +21,8 @@ export class LoginDialogComponent {
     private accountService: AccountService,
     private userService: UserService,
     private countryService: CountryService,
+    private navigationService: NavigationService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
@@ -56,14 +59,13 @@ export class LoginDialogComponent {
   }
 
   loginButtonClick(): void {
-    if (this.validateLogin()) {
-      this.accountService.login(this.accountLoginRequest).subscribe((r) => {
-        this.accountService.writeAuthenticationToLocalStorage(r);
-        if (r.userRole === 'ROLE_USER') {
-          window.open(NavigationService.getUserUrl(), '_self');
-        } else if (r.userRole === 'ROLE_SELLER') {
-          window.open(NavigationService.getSellerUrl(), '_self');
-        }
+    if (this.validateLogin() && !this.accountService.isAccountLogged(this.accountLoginRequest.login)) {
+      this.accountService.loginRequest(this.accountLoginRequest).subscribe((r) => {
+        const authNum = this.accountService.writeAuthenticationToCookies(r);
+        this.accountService.writeLoginPasswordDataToCookies(this.accountLoginRequest.login, this.accountLoginRequest.password, authNum);
+        this.router.navigateByUrl(this.navigationService.createUrlWithAuthParameter(authNum)).then(() => {
+          window.location.reload();
+        });
         this.dialogRef.close();
       }, (error) => {
         if (error.status === 403) {
@@ -76,7 +78,7 @@ export class LoginDialogComponent {
   accountRegistrationButtonClick(): void {
     if (this.validateData()) {
       this.accountService.registerUser(this.accountLoginRequest).subscribe((r) => {
-        this.accountService.writeAuthenticationToLocalStorage(r);
+        this.accountService.writeAuthenticationToCookies(r);
         this.dialogRef.close();
       }, (error) => {
         if (error.status === 403) {

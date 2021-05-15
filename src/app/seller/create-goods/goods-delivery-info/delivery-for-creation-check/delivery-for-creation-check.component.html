@@ -1,0 +1,72 @@
+<div class="delivery-creation-container">
+  <div class="checkbox-column">
+    <app-andromeda-checkbox
+      #check
+      (changeState)="changeDeliveryCheckedStatement($event)"
+
+    ></app-andromeda-checkbox>
+  </div>
+  <div class="delivery-name-column delivery-column pointer" (click)="check.changeStatement()">
+    {{delivery.title}}
+  </div>
+  <div class="delivery-boolean-column delivery-column">
+    <svg *ngIf="delivery.isInternational" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         width="20" height="20"
+         viewBox="0 0 172 172"
+         style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <g fill="#5f5f5f">
+          <path
+            d="M145.43294,37.93294l-80.93294,80.93295l-30.76628,-30.76628l-10.13411,10.13411l40.90039,40.90039l91.06706,-91.06705z"></path>
+        </g>
+      </g>
+    </svg>
+    <svg *ngIf="!delivery.isInternational" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         width="20" height="20"
+         viewBox="0 0 172 172"
+         style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <g fill="#5f5f5f">
+          <path
+            d="M40.90039,30.76628l-10.13411,10.13411l45.09961,45.09961l-45.09961,45.09961l10.13411,10.13411l45.09961,-45.09961l45.09961,45.09961l10.13411,-10.13411l-45.09961,-45.09961l45.09961,-45.09961l-10.13411,-10.13411l-45.09961,45.09961z"></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="delivery-boolean-column delivery-column">
+    <svg *ngIf="delivery.cashOnDelivery" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         width="20" height="20"
+         viewBox="0 0 172 172"
+         style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <g fill="#5f5f5f">
+          <path
+            d="M145.43294,37.93294l-80.93294,80.93295l-30.76628,-30.76628l-10.13411,10.13411l40.90039,40.90039l91.06706,-91.06705z"></path>
+        </g>
+      </g>
+    </svg>
+    <svg *ngIf="!delivery.cashOnDelivery" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         width="20" height="20"
+         viewBox="0 0 172 172"
+         style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <g fill="#5f5f5f">
+          <path
+            d="M40.90039,30.76628l-10.13411,10.13411l45.09961,45.09961l-45.09961,45.09961l10.13411,10.13411l45.09961,-45.09961l45.09961,45.09961l10.13411,-10.13411l-45.09961,-45.09961l45.09961,-45.09961l-10.13411,-10.13411l-45.09961,45.09961z"></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>

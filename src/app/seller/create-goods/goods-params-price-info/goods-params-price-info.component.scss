@@ -1,0 +1,32 @@
+.block-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #160101;
+  padding-top: 20px;
+}
+
+.creation-field-container {
+  width: 100%;
+  padding-right: 50px;
+}
+
+.creation-field-container-title {
+  padding-top: 5px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #9f9999;
+  margin-bottom: 5px;
+}
+.next-button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.validate-string {
+  margin-right: 30px;
+  font-size: 12px;
+  color: #d93636;
+}

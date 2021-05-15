@@ -35,14 +35,11 @@ export class AddressesManageComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateAddressDialogComponent, {
       width: '55%',
       panelClass: 'create-address-dialog'
-      // height: '500px'
     });
 
     dialogRef.afterClosed().subscribe((newAddress) => {
       if (newAddress !== undefined) {
         this.addresses.push(newAddress);
-        // this.data.address = newAddress;
-        // this.dialogRef.close(this.data);
       }
     });
   }
@@ -58,7 +55,6 @@ export class AddressesManageComponent implements OnInit {
       width: '55%',
       data: {address},
       panelClass: 'create-address-dialog'
-      // height: '500px'
     });
 
     dialogRef.afterClosed().subscribe((newAddress) => {

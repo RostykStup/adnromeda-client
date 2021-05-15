@@ -1,0 +1,14 @@
+<div class="parameters-wrapper">
+  <div class="params-list">
+    <app-goods-parameters-element
+    *ngFor="let parameter of parameters; index as i"
+    (changeParameter)="changeParameter($event, i)"
+    (deleteParameter)="deleteParameter(i)"
+    [parameter]="parameter"
+    >
+    </app-goods-parameters-element>
+  </div>
+  <div>
+    <button class="andromeda-no-bg-button" [disabled]="!canAddParameter" (click)="addParameter()">+ ДОДАТИ ПАРАМЕТР</button>
+  </div>
+</div>

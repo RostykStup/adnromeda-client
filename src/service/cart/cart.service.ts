@@ -7,23 +7,24 @@ import {GoodsCartItemForCountingPriceRequest} from '../../entity/cart/goods-cart
 import {ChangeGoodsCartItemCountResponse} from '../../entity/cart/change-goods-cart-item-count-response';
 import {CartSellerPositionResponse} from '../../entity/cart/cart-seller-position-response';
 import {GoodsCartItemResponse} from '../../entity/cart/goods-cart-item-response';
+import {NavigationService} from '../../common/navigation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private navigationService: NavigationService) {
   }
 
   cartURL = GlobalConstants.API_URL + 'cart';
 
   addItemToCart(advertisementId: number, deliveryTypeId: number, paramsValuesId: number): Observable<any> {
     const url = this.cartURL + '?id=' + advertisementId + '&deliveryId=' + deliveryTypeId + '&paramsValuesId=' + paramsValuesId;
-    return this.httpClient.post(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.post(url, null, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getUserCart(): Observable<CartResponse> {
-    return this.httpClient.get<CartResponse>(this.cartURL, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<CartResponse>(this.cartURL, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getItemsPrice(items: Array<GoodsCartItemForCountingPriceRequest>): Observable<number> {
@@ -33,17 +34,17 @@ export class CartService {
 
   updateGoodsCartItemCount(cartItemId: number, count: number): Observable<ChangeGoodsCartItemCountResponse> {
     const url = this.cartURL + '?count=' + count + '&id=' + cartItemId;
-    return this.httpClient.put<ChangeGoodsCartItemCountResponse>(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.put<ChangeGoodsCartItemCountResponse>(url, null, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   checkGoodsCartItemCount(cartItemId: number, count: number): Observable<ChangeGoodsCartItemCountResponse> {
     const url = this.cartURL + '/check?count=' + count + '&id=' + cartItemId;
-    return this.httpClient.put<ChangeGoodsCartItemCountResponse>(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.put<ChangeGoodsCartItemCountResponse>(url, null, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   deleteItemFromCart(id: number): Observable<any> {
     const url = this.cartURL + '?id=' + id;
-    return this.httpClient.delete(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.delete(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getItemsForOrder(ids: Array<number>): Observable<Array<CartSellerPositionResponse>> {
@@ -51,15 +52,11 @@ export class CartService {
     ids.forEach(id => {
       url = url + '&id=' + id;
     });
-    return this.httpClient.get<Array<CartSellerPositionResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<Array<CartSellerPositionResponse>>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
-  getNewItemForOrder(advertisementId: number, deliveryId: number, count: number | null): Observable<CartSellerPositionResponse> {
-    const url = this.cartURL + '/form-position?advertisementId='
-      + advertisementId
-      + '&deliveryId='
-      + deliveryId
-      + (count !== null ? '&count=' + count : '');
-    return this.httpClient.get<CartSellerPositionResponse>(url);
+  exchangeSellerPositionCurrency(currency: string, ids: Array<number>): Observable<CartSellerPositionResponse> {
+    const url = this.cartURL + '/exchange?currency=' + currency + '&ids=' + ids.join('&ids=');
+    return this.httpClient.get<CartSellerPositionResponse>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 }

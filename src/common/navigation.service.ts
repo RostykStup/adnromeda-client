@@ -2,14 +2,18 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PaginationRequest} from '../entity/pagination-request';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AccountService} from '../service/account/account.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute) {
+  constructor(private httpClient: HttpClient,
+              private route: ActivatedRoute,
+              private router: Router,
+              private accountService: AccountService) {
   }
 
   private static userUrlPrefix = '/u/';
@@ -92,6 +96,79 @@ export class NavigationService {
     pagination.page = +(this.route.snapshot.queryParamMap.get('page') != null ? this.route.snapshot.queryParamMap.get('page') : 0);
     pagination.field = this.route.snapshot.queryParamMap.get('field');
     return pagination;
+  }
+
+  public getAuthNumFromCurrentRoute(): number {
+    if (this.route.snapshot.queryParamMap.get('auth') !== null) {
+      return Number(this.route.snapshot.queryParamMap.get('auth'));
+    } else {
+      return this.accountService.getAuthNumForEmptyParam();
+    }
+  }
+
+  public getAuthQueryFromRoute(): string {
+    if (this.route.snapshot.queryParamMap.get('auth') !== null) {
+      return 'auth=' + this.route.snapshot.queryParamMap.get('auth');
+    } else {
+      return '';
+    }
+  }
+
+  public getAuthQueryByAccountNum(authNum: number): string {
+    return 'auth=' + authNum;
+  }
+
+  public createUrlWithAuthParameter(authNum: number): string {
+    let url = this.getUrlWithoutParams();
+    this.route.queryParams.forEach((p) => {
+      const params = this.getArrayOfQueryParamNames();
+      if (params.indexOf('auth') == -1) {
+        params.push('auth');
+      }
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < params.length; i++) {
+        if (params[i] === 'auth') {
+          url = url + (i === 0 ? '?' : '&') + params[i] + '=' + authNum;
+        } else {
+          url = url + (i === 0 ? '?' : '&') + params[i] + '=' + p[params[i]];
+        }
+      }
+
+    });
+    return url;
+  }
+
+  public addAuthParamToUrl(authNum: number): string {
+    const url = this.router.url;
+    if (url.indexOf('?') !== -1) {
+      return url + '&' + this.getAuthQueryByAccountNum(authNum);
+    } else {
+      return url + '?' + this.getAuthQueryByAccountNum(authNum);
+    }
+  }
+
+  public getUrlWithoutParams(): string {
+    return this.router.url.split('?')[0];
+  }
+
+  public getArrayOfQueryParamNames(): Array<string> {
+    const keys = new Array<string>();
+    this.route.queryParams.subscribe((params) => {
+      const paramsObject = {...params.keys, ...params};
+      const paramKeys = Object.keys(paramsObject);
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < paramKeys.length; i++) {
+        keys.push(paramKeys[i]);
+      }
+    });
+    return keys;
+  }
+
+  public getCurrentRequestAuthorizationHeader(): any {
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.accountService.getAccountMainDataByAuthNum(this.getAuthNumFromCurrentRoute()).token
+    };
   }
 
 

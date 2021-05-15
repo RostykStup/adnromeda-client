@@ -1,0 +1,6 @@
+<div class="input-container" [ngClass]="{invalid: !priceValidation}" *ngIf="currencyPrice">
+  <div class="input-title">Ціна {{currencyPrice.currencyCode}}</div>
+  <input type="text" class="andromeda-input param-name-input"
+         (keyup)="changePriceInput($event)"
+         placeholder="Введіть ціну">
+</div>

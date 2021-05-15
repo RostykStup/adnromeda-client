@@ -13,6 +13,8 @@ import {ViewHistoryComponent} from './view-history/view-history.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {SettingsPageComponent} from './settings-page/settings-page.component';
 import {MainPageComponent} from './main-page/main-page.component';
+import {SearchComponent} from './search/search.component';
+import {AdvertisementViewComponent} from './advertisement-view/advertisement-view.component';
 
 const routes: Routes = [
   {
@@ -52,6 +54,12 @@ const routes: Routes = [
       },
       {
         path: 'settings', component: SettingsPageComponent
+      },
+      {
+        path: 'search', component: SearchComponent
+      },
+      {
+        path: 'goods-view', component: AdvertisementViewComponent
       }
     ]
   }

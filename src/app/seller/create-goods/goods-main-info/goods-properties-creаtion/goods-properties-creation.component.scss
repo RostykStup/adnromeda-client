@@ -1,0 +1,39 @@
+.property-component-wrapper {
+  width: 100%;
+  padding-top: 10px;
+}
+
+.properties-row-title {
+  display: flex;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.properties-list {
+  width: 100%;
+}
+
+.property-column {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9b9b9b;
+}
+
+.property-title-column {
+  width: 40%;
+}
+
+.property-value-column {
+  width: 60%;
+}
+
+.andromeda-no-bg-button {
+  font-size: 13px;
+}
+
+.andromeda-no-bg-button:disabled {
+  color: #a59f9f;
+  cursor: default;
+}

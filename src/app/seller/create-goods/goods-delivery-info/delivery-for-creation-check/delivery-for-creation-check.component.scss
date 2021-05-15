@@ -1,0 +1,28 @@
+.delivery-creation-container {
+  width: 100%;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0dede;
+}
+
+.delivery-column {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.delivery-name-column {
+  color: #5f5f5f;
+  font-size: 14px;
+  font-weight: 500;
+  width: 200px;
+}
+
+.delivery-boolean-column {
+  width: 20%;
+}
+
+.checkbox-column {
+  width: 5%;
+}

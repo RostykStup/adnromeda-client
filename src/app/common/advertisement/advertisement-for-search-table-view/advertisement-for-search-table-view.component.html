@@ -1,20 +1,42 @@
-<div class="advertisement-container">
+<div class="advertisement-container" [ngStyle]="{
+'width': width,
+'height': height
+}">
   <div class="image-container">
-    <a [href]="'client/advertisement-view?id=' + goodsAdvertisement.id"  target="_blank">
+    <a [href]="getAdvertisementViewUrl()" target="_blank">
       <img class="main-image" [src]="getAdvertisementImage()">
     </a>
   </div>
   <div class="info-container">
     <div class="advertisement-title-container">
-      <a [href]="'client/advertisement-view?id=' + goodsAdvertisement.id" target="_blank">
+      <a [href]="getAdvertisementViewUrl()" target="_blank">
         {{goodsAdvertisement.title}}
       </a>
     </div>
-    <div class="price-container" *ngIf="goodsAdvertisement.minPrice !== goodsAdvertisement.maxPrice">
-      {{goodsAdvertisement.minPrice.toFixed(2)}} - {{goodsAdvertisement.maxPrice.toFixed(2)}} {{goodsAdvertisement.currencyCode}}
+    <div class="price-container" *ngIf="!goodsAdvertisement.hasDiscount">
+      <div class="price-main-label"
+        *ngIf="goodsAdvertisement.minPrice !== goodsAdvertisement.maxPrice">{{goodsAdvertisement.minPrice.toFixed(2)}}
+        - {{goodsAdvertisement.maxPrice.toFixed(2)}} {{goodsAdvertisement.currencyCode}}
+      </div>
+      <div class="price-main-label"
+        *ngIf="goodsAdvertisement.minPrice === goodsAdvertisement.maxPrice">{{goodsAdvertisement.minPrice.toFixed(2)}} {{goodsAdvertisement.currencyCode}}
+      </div>
     </div>
-    <div class="price-container" *ngIf="goodsAdvertisement.minPrice === goodsAdvertisement.maxPrice">
-      {{goodsAdvertisement.minPrice.toFixed(2)}} {{goodsAdvertisement.currencyCode}}
+    <div class="price-container" *ngIf="goodsAdvertisement.hasDiscount">
+      <div class="price-crossed-label"
+           *ngIf="goodsAdvertisement.minPrice !== goodsAdvertisement.maxPrice">{{goodsAdvertisement.minPrice.toFixed(2)}}
+        - {{goodsAdvertisement.maxPrice.toFixed(2)}} {{goodsAdvertisement.currencyCode}}
+      </div>
+      <div class="price-crossed-label"
+           *ngIf="goodsAdvertisement.minPrice === goodsAdvertisement.maxPrice">{{goodsAdvertisement.minPrice.toFixed(2)}} {{goodsAdvertisement.currencyCode}}
+      </div>
+      <div class="price-main-label"
+           *ngIf="goodsAdvertisement.minPriceWithDiscount !== goodsAdvertisement.maxPriceWithDiscount">{{goodsAdvertisement.minPriceWithDiscount.toFixed(2)}}
+        - {{goodsAdvertisement.maxPriceWithDiscount.toFixed(2)}} {{goodsAdvertisement.currencyCode}}
+      </div>
+      <div class="price-main-label"
+           *ngIf="goodsAdvertisement.minPriceWithDiscount === goodsAdvertisement.maxPriceWithDiscount">{{goodsAdvertisement.minPriceWithDiscount.toFixed(2)}} {{goodsAdvertisement.currencyCode}}
+      </div>
     </div>
     <div class="rating-sold-container">
       <div class="rating-text" *ngIf="goodsAdvertisement.rating !== null">

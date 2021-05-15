@@ -1,0 +1,52 @@
+<div class="item-container">
+  <div class="unavailable-item-block" *ngIf="!isAvailable"></div>
+  <div class="checkbox-container">
+    <app-andromeda-checkbox (changeState)="changeCheck($event)"></app-andromeda-checkbox>
+  </div>
+  <div class="item-image-container">
+    <div class="image-wrapper">
+      <img [src]="getImage()" alt="">
+    </div>
+  </div>
+  <div class="item-main-container">
+    <div class="item-name-container">
+      <a href="">{{item.title}}</a>
+    </div>
+    <div class="item-parameters-container">
+      <div *ngFor="let paramValue of item.priceCountResponse.values | keyvalue" class="param-block">
+        <span class="param-name">{{paramValue.key}}</span>: <span class="param-value">{{paramValue.value}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="item-price-container">
+    {{item.priceCountResponse.priceWithDiscount.toFixed(2)}} {{currency.code}}
+    <svg *ngIf="item.priceCountResponse.exchanged" class="pointer" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         width="15" height="15"
+         viewBox="0 0 172 172"
+         style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <g fill="#5f5f5f">
+          <path
+            d="M86,14.33333c-19.72683,0 -37.66516,8.05045 -50.64258,21.02409l-13.85742,-13.85742v35.83333h35.83333l-11.85579,-11.85579c10.3797,-10.38976 24.68605,-16.81087 40.52246,-16.81087c31.67292,0 57.33333,25.66042 57.33333,57.33333h14.33333c0,-39.44908 -32.21759,-71.66667 -71.66667,-71.66667zM83.94239,40.13053v10.2321c-2.4295,0.30817 -16.02702,2.87674 -16.02702,19.28841c0,23.94383 24.78939,16.84939 24.78939,32.82389c0,7.998 -5.17534,8.18848 -6.22884,8.18848c-0.96033,0 -7.26465,0.51085 -7.26465,-11.72981h-13.54948c0,20.726 15.03679,22.38161 17.27279,22.68977v9.53223h7.18066v-9.53223c2.42233,-0.301 16.125,-2.56242 16.125,-19.24642c0,-22.96917 -24.78223,-18.57308 -24.78939,-32.66992c0,-8.07683 4.44267,-8.32845 5.403,-8.32845c1.75583,0 5.9349,1.55405 5.9349,11.39388h13.54948c0,-18.82683 -12.87268,-21.7627 -15.17318,-22.19987v-10.44206zM14.33333,86c0,39.44908 32.21758,71.66667 71.66667,71.66667c19.72683,0 37.66515,-8.05045 50.64258,-21.02409l13.85742,13.85742v-35.83333h-35.83333l11.8558,11.8558c-10.3797,10.38976 -24.68605,16.81087 -40.52246,16.81087c-31.67292,0 -57.33333,-25.66041 -57.33333,-57.33333z"></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <div class="item-count-container">
+    <div class="item-count-element">
+      <button class="item-count-button" [disabled]="item.count <= 1" (click)="minusButtonClick()">–</button>
+    </div>
+    <div class="item-count-element">
+      <input type="number" class="count-input" (keyup)="countInputKeyUp($event)" [(ngModel)]="item.count">
+    </div>
+    <div class="item-count-element">
+      <button class="item-count-button" [disabled]="item.count == item.priceCountResponse.count"
+              (click)="plusButtonClick()">+
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="property-component-wrapper">
+  <div class="properties-list">
+    <app-goods-properties-element
+      *ngFor="let prop of properties; index as i" [property]="prop"
+      (changeProperty)="propertyValidation($event, i)"
+      (deleteProperty)="deleteProperty(i)"
+    ></app-goods-properties-element>
+  </div>
+  <div>
+    <button class="andromeda-no-bg-button" [disabled]="!canAddProperty" (click)="addProperty()">+ ДОДАТИ ХАРАКАТЕРИСТИКУ</button>
+  </div>
+</div>
+

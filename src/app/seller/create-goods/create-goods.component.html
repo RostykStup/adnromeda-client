@@ -5,8 +5,20 @@ seller-module-bottom-padding
 ">
   Створення товару
 </div>
-<div>
+<div class="seller-module-component-block creation-components-container">
   <div *ngIf="step == 0">
-    <app-goods-main-info></app-goods-main-info>
+    <app-goods-main-info [advertisement]="advertisement" (goNextStep)="endStep($event)"></app-goods-main-info>
+  </div>
+  <div *ngIf="step == 1">
+    <app-goods-params-price-info (goNextStep)="endStep($event)" [advertisement]="advertisement"></app-goods-params-price-info>
+  </div>
+  <div *ngIf="step == 2">
+    <app-goods-delivery-info (goNextStep)="endStep($event)" [advertisement]="advertisement"></app-goods-delivery-info>
+  </div>
+  <div *ngIf="step == 3">
+    <app-goods-images-creation (goNextStep)="createAdvertisement($event)" [advertisement]="advertisement"></app-goods-images-creation>
+  </div>
+  <div *ngIf="step == 4">
+    Дякуємо, ваш товар успішно додано
   </div>
 </div>

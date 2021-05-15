@@ -4,6 +4,7 @@ export class DeliveryTypeResponse {
   isInternational: boolean;
   countryCode: string;
   checked = true;
+  cashOnDelivery = false;
 
   constructor() {
     this.id = -1;

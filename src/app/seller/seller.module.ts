@@ -35,6 +35,18 @@ import { SellerGoodsListViewTitleComponent } from './goods-list/seller-goods-lis
 import { SellerGoodsListViewComponent } from './goods-list/seller-goods-list-view/seller-goods-list-view.component';
 import { CreateGoodsComponent } from './create-goods/create-goods.component';
 import { GoodsMainInfoComponent } from './create-goods/goods-main-info/goods-main-info.component';
+import { GoodsPropertiesCreationComponent } from './create-goods/goods-main-info/goods-properties-creаtion/goods-properties-creation.component';
+import { GoodsPropertiesElementComponent } from './create-goods/goods-main-info/goods-properties-element/goods-properties-element.component';
+import { GoodsParamsPriceInfoComponent } from './create-goods/goods-params-price-info/goods-params-price-info.component';
+import { GoodsParametersCreationComponent } from './create-goods/goods-params-price-info/goods-parameters-creation/goods-parameters-creation.component';
+import { GoodsParametersElementComponent } from './create-goods/goods-params-price-info/goods-parameters-element/goods-parameters-element.component';
+import { GoodsParamValuesPriceCountListComponent } from './create-goods/goods-params-price-info/goods-param-values-price-count-list/goods-param-values-price-count-list.component';
+import { GoodsParamValuesPriceCountElementComponent } from './create-goods/goods-params-price-info/goods-param-values-price-count-element/goods-param-values-price-count-element.component';
+import { GoodsDeliveryInfoComponent } from './create-goods/goods-delivery-info/goods-delivery-info.component';
+import { DeliveryForCreationCheckComponent } from './create-goods/goods-delivery-info/delivery-for-creation-check/delivery-for-creation-check.component';
+import { GoodsImagesCreationComponent } from './create-goods/goods-images-creation/goods-images-creation.component';
+import { GoodsCurrenciesChooseComponent } from './create-goods/goods-params-price-info/goods-currencies-choose/goods-currencies-choose.component';
+import { GoodsCurrencyPriceInputComponent } from './create-goods/goods-params-price-info/goods-currency-price-input/goods-currency-price-input.component';
 
 
 @NgModule({
@@ -66,7 +78,19 @@ import { GoodsMainInfoComponent } from './create-goods/goods-main-info/goods-mai
     SellerGoodsListViewTitleComponent,
     SellerGoodsListViewComponent,
     CreateGoodsComponent,
-    GoodsMainInfoComponent
+    GoodsMainInfoComponent,
+    GoodsPropertiesCreationComponent,
+    GoodsPropertiesElementComponent,
+    GoodsParamsPriceInfoComponent,
+    GoodsParametersCreationComponent,
+    GoodsParametersElementComponent,
+    GoodsParamValuesPriceCountListComponent,
+    GoodsParamValuesPriceCountElementComponent,
+    GoodsDeliveryInfoComponent,
+    DeliveryForCreationCheckComponent,
+    GoodsImagesCreationComponent,
+    GoodsCurrenciesChooseComponent,
+    GoodsCurrencyPriceInputComponent
   ],
   imports: [
     CommonModule,

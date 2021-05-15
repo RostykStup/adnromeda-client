@@ -2,13 +2,6 @@ input[type=radio] {
   display: none;
 }
 
-.seller-module-component-radio-container {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  display: flex;
-  align-items: center;
-}
-
 .order-type-label {
   font-size: 15px;
   font-weight: 400;
@@ -25,6 +18,15 @@ input[type=radio]:checked + .order-type-label  {
   background-color: #e3e3e3;
   color: black;
 }
+
+
+.seller-module-component-radio-container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
 
 .no-orders-text {
   padding-top: 20px;

@@ -6,11 +6,11 @@ export class GoodsCartItemResponse {
   id = 0;
   image: string | null = null;
   title = '';
-  deliveryType = new DeliveryTypeResponse();
+  deliveryName = '';
+  deliveryId = 0;
   count = 0;
   sellerId = 0;
-  advertisementId = 0;;
-  checked = false;
+  advertisementId = 0;
   description = '';
   priceCountResponse = new ParametersValuesPriceCountResponse();
 

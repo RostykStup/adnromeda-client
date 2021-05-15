@@ -7,6 +7,7 @@
 @import "styles/top-panel";
 @import "styles/left-panel";
 @import "styles/seller-module";
+@import "styles/user-module";
 
 * {
   padding: 0;
@@ -75,6 +76,9 @@ body {
 
 .create-address-dialog .mat-dialog-container {
   overflow: visible;
+}
+.account-control-dialog .mat-dialog-container {
+  padding: 0;
 }
 
 .image-dialog .mat-dialog-container {

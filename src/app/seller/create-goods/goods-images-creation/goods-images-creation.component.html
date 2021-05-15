@@ -1,0 +1,48 @@
+<div class="block-title">
+  5. Зображення для товару
+</div>
+<div class="creation-field-container">
+  <div class="creation-field-container-title">
+    Додайте зображення до свого товару щоби покупець міг роздивитись товар перед покупкою
+  </div>
+</div>
+<div class="block-title">
+  Головне зображення
+</div>
+<div class="creation-field-container">
+  <div class="creation-field-container-title">
+    Головне зображення буде відображатись під час пошуку та у корзині
+  </div>
+  <div class="main-image-wrapper pointer" (click)="mainImageInput.click()">
+    <input id="image-input" #mainImageInput type="file" accept="image/*" (change)="handleMainUpload($event)"
+           style="display: none">
+    <img [src]="mainImage" *ngIf="mainImage != null">
+    {{mainImage == null ? '+' : ''}}
+  </div>
+</div>
+<div class="block-title">
+  Додати зображення
+</div>
+<div class="creation-field-container">
+  <div class="creation-field-container-title">
+    Ці зображення покупці бачитимуть під час перегляду сторінки товару. Можна додати 8 зображень
+  </div>
+  <div class="images-container">
+    <app-added-image-container
+      [size]="'200px'"
+      [imageSrc]="image"
+      (clickDeleteBtnClick)="deleteImage(i)"
+      *ngFor="let image of images; index as i"></app-added-image-container>
+  </div>
+
+  <div class="add-images-button-container">
+    <input  #imageInput type="file" accept="image/*" (change)="handleUpload($event)"
+           style="display: none">
+    <button class="andromeda-no-bg-button"
+            [disabled]="images.length >= 8 || mainImage == null"
+            (click)="imageInput.click()">+ ДОДАТИ ЗОБРАЖЕННЯ</button>
+  </div>
+</div>
+<div class="creation-field-container next-button-container">
+  <button class="andromeda-with-bg-button" (click)="clickNextStep()">Завершити</button>
+</div>

@@ -1,0 +1,24 @@
+input[type=radio] {
+  display: none;
+}
+
+.delivery-type-label {
+  font-size: 15px;
+  font-weight: 400;
+  color: #4e4e4e;
+  //color: #4e4e4e;
+  margin-right: 15px;
+  cursor: pointer;
+  padding: 5px 15px;
+  border: 1px solid #e3e3e3;
+  border-radius: 15px;
+  transition: all .2s;
+}
+
+input[type=radio]:checked + .delivery-type-label  {
+  //background-color: #000000;
+  //background-color: #e3e3e3;
+  background-color: #f1f1f1;
+  color: black;
+  //color: #ffffff;
+}

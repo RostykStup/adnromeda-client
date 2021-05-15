@@ -13,13 +13,14 @@ import {GoodsAdvertisementFeedbackRequest} from '../../entity/feedback/goods-adv
 import {PaginationResponse} from '../../entity/pagination-response';
 import {GoodsAdvertisementFeedbackResponse} from '../../entity/feedback/goods-advertisement-feedback-response';
 import {NotificationResponse} from '../../entity/notification/notification-response';
+import {NavigationService} from '../../common/navigation.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private navigationService: NavigationService) {
   }
 
   notificationURL = GlobalConstants.API_URL + 'notification';
@@ -28,7 +29,7 @@ export class NotificationService {
     let params = new HttpParams();
     params = params.append('page', request.page.toString());
     params = params.append('size', request.size.toString());
-    return this.httpClient.get(this.notificationURL, {headers: GlobalConstants.getRequestAuthorizationHeader(), params});
+    return this.httpClient.get(this.notificationURL, {headers: this.navigationService.getCurrentRequestAuthorizationHeader(), params});
   }
 
   getNotificationPageForAccountByDate(request: PaginationRequest): Observable<any> {
@@ -36,21 +37,21 @@ export class NotificationService {
     let params = new HttpParams();
     params = params.append('page', request.page.toString());
     params = params.append('size', request.size.toString());
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader(), params});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader(), params});
   }
 
   getNotificationsCount(): Observable<number> {
     const url = this.notificationURL + '/count';
-    return this.httpClient.get<number>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<number>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getLastNotification(): Observable<NotificationResponse> {
     const url = this.notificationURL + '/last';
-    return this.httpClient.get<NotificationResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<NotificationResponse>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   makeNotificationRead(id: number): Observable<any> {
     const url = this.notificationURL + '/read?id=' + id;
-    return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.put(url, null, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 }

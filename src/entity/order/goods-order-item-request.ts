@@ -1,16 +1,16 @@
 export class GoodsOrderItemRequest {
+  // @ts-ignore
   count: number;
+  // @ts-ignore
   advertisement: number;
+  // @ts-ignore
   paramsValuesId: number;
-  delivery: number;
+  // @ts-ignore
   description: string;
+  // @ts-ignore
+  price: number;
 
+  // @ts-ignore
+  cartItemId: number;
 
-  constructor(count: number, advertisement: number, delivery: number, description: string, paramsValuesId: number) {
-    this.count = count;
-    this.advertisement = advertisement;
-    this.paramsValuesId = paramsValuesId;
-    this.delivery = delivery;
-    this.description = description;
-  }
 }

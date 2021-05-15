@@ -12,25 +12,26 @@ import {GoodsSellerFeedbackRequest} from '../../entity/feedback/goods-seller-fee
 import {GoodsAdvertisementFeedbackRequest} from '../../entity/feedback/goods-advertisement-feedback-request';
 import {PaginationResponse} from '../../entity/pagination-response';
 import {GoodsAdvertisementFeedbackResponse} from '../../entity/feedback/goods-advertisement-feedback-response';
+import {NavigationService} from '../../common/navigation.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService {
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private navigationService: NavigationService) {
   }
 
   feedbackURL = GlobalConstants.API_URL + 'feedback';
 
   createGoodsSellerFeedback(request: GoodsSellerFeedbackRequest): Observable<any> {
     const url = this.feedbackURL + '/goods-seller';
-    return this.httpClient.post(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.post(url, request, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   createGoodsAdvertisementFeedback(request: GoodsAdvertisementFeedbackRequest): Observable<any> {
     const url = this.feedbackURL + '/goods-advertisement';
-    return this.httpClient.post(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.post(url, request, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getFeedbacksPageForAdvertisement(id: number, request: PaginationRequest): Observable<PaginationResponse<GoodsAdvertisementFeedbackResponse>> {

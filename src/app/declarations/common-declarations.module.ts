@@ -42,6 +42,15 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { SellerLeftPanelComponent } from '../common/panels/left-panel/seller-left-panel/seller-left-panel.component';
 import { ArrowPaginatorComponent} from '../common/paginator/arrow-paginator/arrow-paginator.component';
 import {MatOptionModule} from '@angular/material/core';
+import {AndromedaCheckboxComponent} from '../common/components/andromeda-checkbox/andromeda-checkbox.component';
+import { AddedImageContainerComponent } from '../common/images/added-image-container/added-image-container.component';
+import { TopPanelSearchInputComponent } from '../common/panels/top-panel-search-input/top-panel-search-input.component';
+import { SellerPositionComponent } from '../common/cart-order/seller-position/seller-position.component';
+import { CartItemComponent } from '../common/cart-order/seller-position/cart-item/cart-item.component';
+import { DeliveryPickerComponent } from '../common/delivery/delivery-picker/delivery-picker.component';
+import { AddressViewComponent } from '../common/address/address-view/address-view.component';
+import {RouterModule} from '@angular/router';
+import { AccountsControlDialogComponent } from '../dialogs/accounts-control-dialog/accounts-control-dialog.component';
 
 @NgModule({
   declarations: [
@@ -83,32 +92,46 @@ import {MatOptionModule} from '@angular/material/core';
     AdminTopPanelComponent,
     UserLeftPanelComponent,
     SellerLeftPanelComponent,
-    ArrowPaginatorComponent
+    ArrowPaginatorComponent,
+    AndromedaCheckboxComponent,
+    AddedImageContainerComponent,
+    TopPanelSearchInputComponent,
+    SellerPositionComponent,
+    CartItemComponent,
+    DeliveryPickerComponent,
+    AddressViewComponent,
+    AccountsControlDialogComponent
   ],
-  exports: [
-    GoodsSellerCategoryColumnViewComponent,
-    GoodsSellerCategoryPickerComponent,
-    DiscountsViewComponent,
-    RatingViewComponent,
-    PaginatorComponent,
-    YearAdvertisementViewsStatisticsDiagramComponent,
-    YearAdvertisementOrdersStatisticDiagramComponent,
-    RatingFeedbacksDiagramComponent,
-    AdvertisementForSearchRowViewComponent,
-    OrderListViewComponent,
-    RatingPickerComponent,
-    UserTopPanelComponent,
-    SellerTopPanelComponent,
-    UserLeftPanelComponent,
-    SellerLeftPanelComponent,
-    ArrowPaginatorComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ClickOutsideModule,
-    MatOptionModule
-  ]
+    exports: [
+        GoodsSellerCategoryColumnViewComponent,
+        GoodsSellerCategoryPickerComponent,
+        DiscountsViewComponent,
+        RatingViewComponent,
+        PaginatorComponent,
+        YearAdvertisementViewsStatisticsDiagramComponent,
+        YearAdvertisementOrdersStatisticDiagramComponent,
+        RatingFeedbacksDiagramComponent,
+        AdvertisementForSearchRowViewComponent,
+        OrderListViewComponent,
+        RatingPickerComponent,
+        UserTopPanelComponent,
+        SellerTopPanelComponent,
+        UserLeftPanelComponent,
+        SellerLeftPanelComponent,
+        ArrowPaginatorComponent,
+        AndromedaCheckboxComponent,
+        AddedImageContainerComponent,
+        AdvertisementForSearchTableViewComponent,
+        SellerPositionComponent,
+        AddressViewComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ClickOutsideModule,
+        MatOptionModule,
+        RouterModule
+    ]
 })
 export class CommonDeclarationsModule {
 }

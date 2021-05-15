@@ -7,24 +7,25 @@ import {UserSettingsRequest} from '../../../entity/account/user/user-settings-re
 import {UserAdvertisementViewsResponse} from '../../../entity/statistics/advertisement-view/user-advertisement-views-response';
 import {PaginationRequest} from '../../../entity/pagination-request';
 import {UserDataRequest} from '../../../entity/account/user/user-data-request';
+import {NavigationService} from '../../../common/navigation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private navigationService: NavigationService) {
   }
 
   userURL = GlobalConstants.API_URL + 'user';
 
   loadUserData(): Observable<UserDataResponse> {
     const url = this.userURL + '/data';
-    return this.httpClient.get<UserDataResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<UserDataResponse>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   changeUserSettings(request: UserSettingsRequest): Observable<any> {
     const url = this.userURL + '/settings';
-    return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.put(url, request, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   // http://localhost:8080/user/views?page=0&size=30
@@ -42,18 +43,21 @@ export class UserService {
       params = params.append('dateTo', dateTo);
     }
 
-    return this.httpClient.get<UserAdvertisementViewsResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader(), params});
+    return this.httpClient.get<UserAdvertisementViewsResponse>(url, {
+      headers: this.navigationService.getCurrentRequestAuthorizationHeader(),
+      params
+    });
   }
 
 
   changeUserData(request: UserDataRequest): Observable<any> {
     const url = this.userURL + '/change-data';
-    return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.put(url, request, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   deleteUserAvatar(): Observable<any> {
     const url = this.userURL + '/delete-avatar';
-    return this.httpClient.delete(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.delete(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
 }

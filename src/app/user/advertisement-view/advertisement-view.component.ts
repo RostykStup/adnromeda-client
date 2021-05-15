@@ -82,20 +82,12 @@ export class AdvertisementViewComponent implements OnInit {
       this.advertisementService.setAdvertisementView(params.id).subscribe();
       this.advertisementService.getGoodsAdvertisementById(params.id).subscribe((r) => {
         this.advertisement = r;
-        // console.log(this.advertisement.valuesPriceCounts);
         this.viewImage = this.advertisement.mainImage;
         this.chosenCount = this.advertisement.totalCount;
-        this.advertisementService.getAdvertisementStatistics(this.advertisement.id).subscribe((s) => {
-          this.statics = s;
-        });
-
-        this.deliverySetup();
         this.imagesForCarousel.push(this.advertisement.mainImage);
         this.advertisement.images.forEach((i) => {
           this.imagesForCarousel.push(i);
         });
-
-        this.reloadFeedbacks();
 
         if (!this.advertisement.hasParameters) {
           this.isParamsChosen = true;
@@ -160,88 +152,10 @@ export class AdvertisementViewComponent implements OnInit {
     }
   }
 
-  openDeliveriesDialog(): void {
-    const dialogRef = this.dialog.open(ChooseDeliveryDialogComponent, {
-      data: {
-        delivery: this.currentDelivery,
-        advertisementId: this.advertisement.id,
-        userCountry: this.userCountry,
-        sellerCountry: this.advertisement.countryCode
-      },
-      // width: '40%',
-    });
-    dialogRef.afterClosed().subscribe((data) => {
-      if (data !== undefined) {
-        this.currentDelivery = data.delivery;
-        // this.changeItemAddress(itemId, data.delivery);
-      }
-    });
-  }
-
-  changeAddViewMode(num: 1 | 2): void {
-    this.addInfoMode = num;
-  }
-
-  reloadFeedbacks(): void {
-    this.feedbackService.getFeedbacksPageForAdvertisement(this.advertisement.id, this.feedbackPagination).subscribe((r) => {
-      this.feedbacks = r;
-      this.feedbacksList = r.data;
-    });
-  }
-
-  changeFeedbacksPage($event: PaginationRequest): void {
-    this.feedbackPagination = $event;
-    this.reloadFeedbacks();
-  }
-
-  getUserFlag(countryCode: string): string {
-    return this.countryService.getRestCountryByCountryCode(countryCode).flag;
-  }
-
-  getFeedbackImage(userId: number, name: string): string {
-    return this.feedbackService.getFeedbackImage(userId, name);
-  }
-
-  deliverySetup(): void {
-    this.deliveryService.getDeliveriesByAdvertisementId(this.advertisement.id).subscribe((deliveries) => {
-      this.deliveries.push(this.deliveryService.generateDefaultDeliveryType());
-      deliveries.forEach((d) => {
-        this.deliveries.push(d);
-      });
-
-      this.countryService.defineUserCountry().subscribe((country) => {
-        this.userCountry = country;
-        if (this.deliveries.length === 1) {
-          this.currentDelivery = this.currentDelivery = this.deliveries[0];
-          return;
-        }
-        if (this.userCountry.alpha2Code === this.advertisement.countryCode) {
-          this.currentDelivery = this.deliveries[1];
-        } else {
-          // tslint:disable-next-line:prefer-for-of
-          for (const del of this.deliveries) {
-            if (del.isInternational) {
-              this.currentDelivery = del;
-              break;
-            }
-          }
-        }
-      });
-    });
-  }
-
-  buyButtonClick(): void {
-
-  }
-
-  addToLikesButtonClick(): void {
-    // console.log(this.advertisement.valuesPriceCounts);
-    // console.log(this.advertisement.parameters);
-  }
-
   addToCartButtonClick(): void {
     if (this.accountService.isLogged()) {
-      this.cartService.addItemToCart(this.advertisement.id, this.currentDelivery.id, this.chosenParametersValuesPriceCount.id).subscribe(() => {
+      // this.cartService.addItemToCart(this.advertisement.id, this.currentDelivery.id, this.chosenParametersValuesPriceCount.id).subscribe(() => {
+      this.cartService.addItemToCart(this.advertisement.id, 1, this.chosenParametersValuesPriceCount.id).subscribe(() => {
         const dialogRef = this.dialog.open(ItemAddedToCartDialogComponent, {});
         dialogRef.afterClosed().subscribe(() => {
         });
@@ -255,17 +169,6 @@ export class AdvertisementViewComponent implements OnInit {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       width: '400px',
       data: null
-    });
-    dialogRef.afterClosed().subscribe();
-  }
-
-  openImageDialog(image: string): void {
-    const dialogRef = this.dialog.open(ImageDialogComponent, {
-      // width: '60%',
-      maxWidth: '60%',
-      // maxHeight: '60%',
-      data: image,
-      panelClass: 'image-dialog'
     });
     dialogRef.afterClosed().subscribe();
   }

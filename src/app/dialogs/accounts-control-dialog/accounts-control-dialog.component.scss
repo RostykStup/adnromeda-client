@@ -1,0 +1,145 @@
+.account-dialog-container {
+  width: 340px;
+}
+
+.account-dialog-padding {
+  padding: 20px;
+}
+
+.current-account-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  border-bottom: 1px solid #e5e4e4;
+}
+
+.current-account-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  height: 100px;
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.no-image-letter {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6988e5;
+  color: #eeeaea;
+  font-size: 65px;
+  user-select: none;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.current-account-username {
+  font-size: 18px;
+  font-weight: 500;
+  color: #535252;
+  width: 80%;
+  text-align: center;
+  margin-bottom: 5px;
+  //overflow: hidden;
+  //text-overflow: ellipsis;
+  //white-space: nowrap;
+}
+
+.current-account-role {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: #949393;
+}
+
+.account-line {
+  display: flex;
+  padding: 10px 20px;
+}
+
+.account-line:hover {
+  background-color: #f1efef;
+}
+
+.add-account-line {
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #918f8f;
+  border-bottom: 1px solid #e5e4e4;
+}
+
+.account-image-wrapper {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.add-icon-container {
+  border-radius: 0;
+}
+
+.no-image-account-letter {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #6988e5;
+  color: #eeeaea;
+  font-size: 23px;
+  user-select: none;
+}
+
+.account-data {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.account-username {
+  font-size: 14px;
+  font-weight: 500;
+  color: #3c3b3b;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.account-role {
+  font-size: 11px;
+  font-weight: 400;
+  color: #535151;
+}
+
+.logout-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.andromeda-border-button {
+  border: 1px solid #949393;
+  color: #949393;
+  font-weight: 400;
+}

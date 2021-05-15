@@ -1,0 +1,60 @@
+.block-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #160101;
+  padding-top: 20px;
+}
+
+.creation-field-container {
+  width: 1000px;
+}
+
+.creation-field-container-title {
+  padding-top: 5px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #9f9999;
+  margin-bottom: 5px;
+}
+.next-button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.validate-string {
+  margin-right: 30px;
+  font-size: 12px;
+  color: #d93636;
+}
+
+
+.delivery-column {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #8d8a8a;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.delivery-name-column {
+  width: 200px;
+}
+
+.delivery-boolean-column {
+  width: 20%;
+}
+
+.checkbox-column {
+  width: 5%;
+}
+.deliveries-title-row {
+  width: 100%;
+  display: flex;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e0dede;
+}

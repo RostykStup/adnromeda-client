@@ -17,11 +17,11 @@ export class UserProfileComponent implements OnInit {
   user = new UserDataResponse();
 
   ngOnInit(): void {
-    this.loadUser();
+    // this.loadUser();
 
-    if (!this.accountService.isLogged()) {
-      window.open('/client', '_self');
-    }
+    // if (!this.accountService.isLogged()) {
+    //   window.open('/client', '_self');
+    // }
   }
 
   getAvatar(): string {
@@ -35,7 +35,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   logoutButtonClick(): void {
-    this.accountService.logOut();
-    window.open('/client', '_self');
+    // this.accountService.logOut();
+    // window.open('/client', '_self');
   }
 }

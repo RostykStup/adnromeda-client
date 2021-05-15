@@ -1,0 +1,34 @@
+<div class="position-container">
+  <div class="position-title-container bottom-border-container">
+    <app-andromeda-checkbox (changeState)="changeSelectAll($event)"></app-andromeda-checkbox>
+    <div class="position-title-seller">
+      <a href="">{{position.sellerName}}</a>
+    </div>
+    <div class="position-title-currency-picker">
+      Валюта:
+      <select class="currency-select" (change)="changeCurrencySelect($event)">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="UAH">UAH</option>
+        <option value="RUR">RUR</option>
+      </select>
+    </div>
+  </div>
+  <div *ngFor="let item of position.items" class="bottom-border-container">
+    <app-cart-item
+      (changeCheckState)="changeItemCheck($event)"
+      (changeInfoForSum)="recountSum()"
+      [currency]="position.currencyResponse"
+      [item]="item"
+      [sellerId]="position.sellerId"></app-cart-item>
+  </div>
+  <div class="sum-container">
+    <div class="sum-label">
+      <span *ngIf="sum != null">
+        До оплати: {{sum.toFixed(2)}} {{position.currencyResponse.code}}
+      </span>
+    </div>
+    <button class="andromeda-with-bg-button" (click)="moveToMakeOrder()" [disabled]="sum == null">Купити</button>
+  </div>
+
+</div>

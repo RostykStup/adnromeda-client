@@ -1,0 +1,38 @@
+<div class="block-title">
+  4. Доставка товару
+</div>
+<div class="creation-field-container seller-module-bottom-padding">
+  <div class="creation-field-container-title">Виберіть поштові служби з тих що доступні у вашій країні</div>
+  <div class="deliveries-title-row">
+    <div class="checkbox-column">
+      <app-andromeda-checkbox
+        #selectAllCheck
+        [statement]="selectAllStatement"
+        (changeState)="changeSelectAll($event)"></app-andromeda-checkbox>
+    </div>
+    <div class="delivery-name-column delivery-column">
+      Поштова служба
+    </div>
+    <div class="delivery-boolean-column delivery-column">
+      Міжнародна
+    </div>
+    <div class="delivery-boolean-column delivery-column">
+      Накладений платіж
+    </div>
+  </div>
+  <app-delivery-for-creation-check
+    (changeState)="changeDeliveryState($event)"
+    [delivery]="delivery"
+    *ngFor="let delivery of deliveries"></app-delivery-for-creation-check>
+</div>
+<div class="creation-field-container ">
+  <div class="creation-field-container-title">Наша платформа є міжнародною, але ви можете обмежити доставку цього товару лише у межах
+    своєї країни
+  </div>
+  <app-andromeda-checkbox
+    [text]="'Цей товар магазин продає лише в межах своєї країни'"
+    (changeState)="changeOnlySellerDeliveryCountry($event)"></app-andromeda-checkbox>
+</div>
+<div class="creation-field-container next-button-container">
+  <button class="andromeda-with-bg-button" (click)="clickNextStep()">Далі</button>
+</div>

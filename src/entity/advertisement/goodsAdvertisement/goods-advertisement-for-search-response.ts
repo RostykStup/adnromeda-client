@@ -9,10 +9,13 @@ export class GoodsAdvertisementForSearchResponse {
   sold: number | null = null;
   minPrice = 0;
   maxPrice = 0;
-
+  minPriceWithDiscount = 0;
+  maxPriceWithDiscount = 0;
   isInFavorites = false;
 
   currencyCode = 'USD';
+
+  hasDiscount = false;
 
   date = '';
   rating: number | null = null;

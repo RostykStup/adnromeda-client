@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NavigationService} from '../../../../../common/navigation.service';
+import {AccountsControlDialogComponent} from '../../../../dialogs/accounts-control-dialog/accounts-control-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-seller-top-panel',
@@ -10,7 +12,7 @@ export class SellerTopPanelComponent implements OnInit {
 
   @Output() changeLeftPanel: EventEmitter<any> = new EventEmitter();
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -22,5 +24,15 @@ export class SellerTopPanelComponent implements OnInit {
 
   getSellerUrl(): string {
     return NavigationService.getSellerUrl();
+  }
+
+  openAccountDialog(): void {
+    const dialogRef = this.dialog.open(AccountsControlDialogComponent, {
+      data: null,
+      panelClass: 'account-control-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }

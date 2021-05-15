@@ -1,7 +1,27 @@
-<div>
-  <input type="text" [(ngModel)]="advertisement.title" class="andromeda-input">
+<div class="block-title">
+  1. Назва та опис
 </div>
-<div>
-  <textarea name="" id="" cols="30" rows="10"></textarea>
-  <input type="text" [(ngModel)]="advertisement.title" class="andromeda-input">
+<div class="creation-field-container">
+  <div class="creation-field-container-title">Дайте назву товару (обов'язково)</div>
+  <input class="andromeda-input title-input creation-field" type="text" [(ngModel)]="advertisement.title" placeholder="Введіть назву товару">
+</div>
+<div class="creation-field-container">
+  <div class="creation-field-container-title">Додайте детальний опис, щоби покупцеві було легше визначитися з покупкою
+  </div>
+  <textarea class="andromeda-input description-area creation-field" [(ngModel)]="advertisement.description" placeholder="Введіть опис"></textarea>
+</div>
+<div class="block-title">
+  2. Характеристики товару
+</div>
+<div class="creation-field-container">
+  <div class="creation-field-container-title">Характеристики товару допоможуть покупцеві чітко зрозуміти що саме ви
+    продаєте
+  </div>
+  <div>
+    <app-goods-properties-cretion></app-goods-properties-cretion>
+  </div>
+</div>
+<div class="creation-field-container next-button-container">
+  <div class="validate-string">{{validateString}}</div>
+  <button class="andromeda-with-bg-button" (click)="clickNextStep()">Далі</button>
 </div>

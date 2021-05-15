@@ -1,0 +1,18 @@
+.user-module-block {
+  width: 80%;
+}
+
+.advertisements-block {
+  background: none;
+  display: flex;
+  justify-content: center;
+  //justify-content: center;
+}
+.advertisements-holder {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+app-advertisement-for-search-table-view {
+  margin: 5px;
+}

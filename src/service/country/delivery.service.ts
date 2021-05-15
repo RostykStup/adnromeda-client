@@ -6,12 +6,13 @@ import {AccountLoginRequest} from '../../entity/account/account-login-request';
 import {AuthenticationResponse} from '../../entity/account/authentication-response';
 import {RestCountry} from '../../entity/country/rest-country';
 import {DeliveryTypeResponse} from '../../entity/country/delivery-type-response';
+import {NavigationService} from '../../common/navigation.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeliveryService {
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private navigationService: NavigationService) {
   }
 
   deliveryUrl = GlobalConstants.API_URL + 'delivery';
@@ -23,19 +24,24 @@ export class DeliveryService {
 
   getDeliveriesByAccountCountry(): Observable<Array<DeliveryTypeResponse>> {
     const url = this.deliveryUrl + '/account';
-    return this.httpClient.get<Array<DeliveryTypeResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<Array<DeliveryTypeResponse>>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getDeliveriesByAdvertisementId(id: number): Observable<Array<DeliveryTypeResponse>> {
     const url = this.deliveryUrl + '/advertisement?id=' + id;
-    return this.httpClient.get<Array<DeliveryTypeResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<Array<DeliveryTypeResponse>>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
+  }
+
+  getDeliveriesBySellerId(id: number): Observable<Array<DeliveryTypeResponse>> {
+    const url = this.deliveryUrl + '/seller?id=' + id;
+    return this.httpClient.get<Array<DeliveryTypeResponse>>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
 
-  generateDefaultDeliveryType(): DeliveryTypeResponse {
+  getDefaultDeliveryType(): DeliveryTypeResponse {
     const delivery = new DeliveryTypeResponse();
-    delivery.title = 'За домовленістю';
-    delivery.id = 0;
+    delivery.title = 'default';
+    delivery.id = 1;
     return delivery;
   }
 

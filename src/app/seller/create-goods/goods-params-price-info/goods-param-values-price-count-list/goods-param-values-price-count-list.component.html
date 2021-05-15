@@ -1,0 +1,23 @@
+<div class="params-price-count-wrapper">
+  <div class="title-row" *ngIf="hasParams">
+    <div class="title-element" *ngFor="let parameter of parameters">{{parameter.title}}</div>
+<!--    <div class="title-element">Ціна $</div>-->
+<!--    <div class="title-element">Кількість шт.</div>-->
+  </div>
+  <div class="row" >
+    <app-goods-param-values-price-count-element
+      [parameters]="parameters"
+      *ngFor="let p of paramValuesPriceCount; index as i"
+      (changeParamPriceCount)="changeParamPriceCount($event, i)"
+      [paramValuePriceCount]="p"
+      [default]="!hasParams"
+      [currencies]="currencies"
+    ></app-goods-param-values-price-count-element>
+  </div>
+<!--  <div class="row"  *ngIf="">-->
+<!--    <app-goods-param-values-price-count-element-->
+<!--      [paramValuePriceCount]="paramValuesPriceCount[0]"-->
+<!--      (changeParamPriceCount)="changeParamPriceCount($event, 0)"-->
+<!--      ></app-goods-param-values-price-count-element>-->
+<!--  </div>-->
+</div>

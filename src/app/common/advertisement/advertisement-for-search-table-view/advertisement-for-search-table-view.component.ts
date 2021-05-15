@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GoodsAdvertisementForSearchResponse} from '../../../../entity/advertisement/goodsAdvertisement/goods-advertisement-for-search-response';
 import {AdvertisementService} from '../../../../service/advertisement/advertisement.service';
+import {NavigationService} from '../../../../common/navigation.service';
+import {AccountService} from '../../../../service/account/account.service';
 
 @Component({
   selector: 'app-advertisement-for-search-table-view',
@@ -12,8 +14,12 @@ export class AdvertisementForSearchTableViewComponent implements OnInit {
   // @ts-ignore
   @Input() goodsAdvertisement: GoodsAdvertisementForSearchResponse;
   @Input() viewType: 'own' | 'seller-view' | 'searching' = 'searching';
+  @Input() width = '220px';
+  @Input() height = '320px';
 
-  constructor(private advertisementService: AdvertisementService) {
+  constructor(private advertisementService: AdvertisementService,
+              private accountService: AccountService,
+              private navigationService: NavigationService) {
 
   }
 
@@ -21,18 +27,14 @@ export class AdvertisementForSearchTableViewComponent implements OnInit {
   }
 
   getAdvertisementImage(): string {
-    // console.log(this.goodsAdvertisement.image);
-    // console.log(this.advertisementService.getAdvertisementImagePath(this.goodsAdvertisement.image, this.goodsAdvertisement.sellerId));
     return this.advertisementService.getAdvertisementImagePath(this.goodsAdvertisement.image, this.goodsAdvertisement.sellerId);
   }
 
-  navigateToManage(): void {
-    window.open('/client/seller/advertisement-manage?advertisementId='
-      + this.goodsAdvertisement.id,
-      '_self'
-      // + '&advertisementType='
-      // + type
-    );
+  getAdvertisementViewUrl(): string {
+    return NavigationService.getUserUrl()
+      + 'goods-view?id='
+      + this.goodsAdvertisement.id
+      + ('&' + this.navigationService.getAuthQueryFromRoute());
   }
 
 }

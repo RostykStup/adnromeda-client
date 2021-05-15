@@ -1,0 +1,49 @@
+<div class="parameter-container">
+  <div class="parameter-name-container">
+    <div class="input-title">Назва параметру (обов'язково)</div>
+    <input type="text" class="andromeda-input param-name-input" [(ngModel)]="parameter.title"
+           (keyup)="emitParameterChange()"
+           placeholder="Введіть назву параметру">
+  </div>
+  <div class="parameter-name-container parameter-values-container">
+    <div class="input-title">Варіанти параметру (мінімум 2)</div>
+    <div class="param-values-container">
+      <div class="param-value-element" *ngFor="let value of parameter.values; index as i">
+        {{value.title}}
+        <svg class="pointer" (click)="clickDeleteValue(i)" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+             width="12" height="12"
+             viewBox="0 0 172 172"
+             style=" fill:#aeadad;">
+          <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+             stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+             font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+            <path d="M0,172v-172h172v172z" fill="none"></path>
+            <g fill="#aeadad">
+              <path
+                d="M40.90039,30.76628l-10.13411,10.13411l45.09961,45.09961l-45.09961,45.09961l10.13411,10.13411l45.09961,-45.09961l45.09961,45.09961l10.13411,-10.13411l-45.09961,-45.09961l45.09961,-45.09961l-10.13411,-10.13411l-45.09961,45.09961z"></path>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <input type="text" class="andromeda-input param-name-input param-value-input"
+             (change)="paramValueInputChange($event)"
+             placeholder="Введіть варіант параметру та натисніть Enter">
+    </div>
+  </div>
+  <div class="delete-column">
+    <svg (click)="clickDeleteParameter()" class="pointer" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         width="24" height="24"
+         viewBox="0 0 172 172"
+         style=" fill:#000000;">
+      <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+         stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+         font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <g fill="#5f5f5f">
+          <path
+            d="M71.66667,14.33333l-7.16667,7.16667h-35.83333v14.33333h21.5h71.66667h21.5v-14.33333h-35.83333l-7.16667,-7.16667zM35.83333,50.16667v93.16667c0,7.88333 6.45,14.33333 14.33333,14.33333h71.66667c7.88333,0 14.33333,-6.45 14.33333,-14.33333v-93.16667z"></path>
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>

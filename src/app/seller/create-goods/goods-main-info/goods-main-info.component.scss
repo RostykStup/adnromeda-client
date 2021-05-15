@@ -1,0 +1,51 @@
+.description-area {
+  resize: none;
+  color: #343333;
+  font-size: 13px;
+  height: 200px;
+}
+
+.creation-field {
+  width: 100%;
+  padding: 10px;
+}
+
+.creation-field-container {
+  width: 1000px;
+  //padding-top: 20px;
+}
+
+.creation-field-container-title {
+  padding-top: 5px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #9f9999;
+  margin-bottom: 5px;
+}
+
+.title-input {
+  font-weight: 400;
+  border-radius: 0;
+  color: #1f1e1e;
+}
+
+.block-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #160101;
+  padding-top: 20px;
+}
+
+.next-button-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.validate-string {
+  margin-right: 30px;
+  font-size: 12px;
+  color: #d93636;
+}

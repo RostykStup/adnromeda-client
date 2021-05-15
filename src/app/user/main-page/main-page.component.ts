@@ -28,15 +28,15 @@ export class MainPageComponent implements OnInit {
     const pagination = new PaginationRequest();
     pagination.size = 10;
     pagination.page = 0;
-    this.advertisementService.getMainPageAdvertisements(pagination).subscribe((r) => {
-      this.mainPage = r;
-      this.categoryService.getAll().subscribe((res) => {
-        this.categories = res;
-      });
-      // @ts-ignore
-      this.mainPage.responses.data.forEach((a) => {
-      });
-    });
+    // this.advertisementService.getMainPageAdvertisements(pagination).subscribe((r) => {
+    //   this.mainPage = r;
+    //   this.categoryService.getAll().subscribe((res) => {
+    //     this.categories = res;
+    //   });
+    //   @ts-ignore
+      // this.mainPage.responses.data.forEach((a) => {
+      // });
+    // });
   }
 
   getAdvertisementImage(imageName: string | null, sellerId: number): string {

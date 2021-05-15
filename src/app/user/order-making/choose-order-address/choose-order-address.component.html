@@ -1,0 +1,9 @@
+<div class="chooser-container" *ngIf="address">
+  <div class="chosen-address-container">
+    <app-address-view [address]="address"></app-address-view>
+  </div>
+  <div class="address-actions">
+    <button class="andromeda-no-bg-button">+ Додати нову адресу</button>
+    <button class="andromeda-no-bg-button">Обрати адресу</button>
+  </div>
+</div>

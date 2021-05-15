@@ -18,7 +18,7 @@
   </div>
 
   <div class="top-panel-element top-panel-logo-container">
-    <a href="" class="andromeda-font top-panel-andromeda-title">
+    <a [routerLink]="''" class="andromeda-font top-panel-andromeda-title">
       <svg class="andromeda-logo" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
            width="30" height="30"
            viewBox="0 0 226 226"
@@ -38,12 +38,7 @@
   </div>
 
   <div class="top-panel-element top-panel-search-container">
-    <div class="search-input-container">
-      <input type="text" class="search-input" placeholder="Пошук" (change)="makeSearch()" [(ngModel)]="value">
-    </div>
-    <div class="search-input-icon-container" (click)="makeSearch()">
-      <img src="https://img.icons8.com/material/24/ffffff/search--v1.png"/>
-    </div>
+    <app-top-panel-search-input (valueSearch)="searchValue($event)"></app-top-panel-search-input>
   </div>
 
   <div class="top-panel-element top-panel-user-buttons-container">
@@ -80,7 +75,7 @@
       </svg>
     </div>
     <div class="user-top-panel-avatar-container pointer" (click)="clickAccountButton()">
-      <svg class="" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+      <svg  class="" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
            width="35" height="35"
            viewBox="0 0 226 226"
            style=" fill:#000000;">
@@ -98,7 +93,6 @@
         </g>
       </svg>
     </div>
-
 <!--    <img class="top-panel-avatar-image pointer" src="https://img.icons8.com/metro/30/000000/alien.png"/>-->
   </div>
 

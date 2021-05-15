@@ -18,7 +18,7 @@
 
   transition: all .1s;
 
-  border: 1px solid #6d6666;
+  //border: 1px solid #6d6666;
 
 
   &:hover {
@@ -65,18 +65,34 @@
     text-decoration: none;
     font-size: inherit;
 
-    font-weight: 300;
+    font-weight: 500;
+    color: #817f7f;
+    //transition: color .02s;
 
     &:hover {
-      text-decoration: underline;
+      color: #1f1e1e;
+
+      //text-decoration: underline;
     }
   }
 }
 
 .price-container {
   margin-top: 5px;
+}
+
+.price-main-label {
   font-weight: 900;
   font-size: 16px;
+  color: #e90d0d;
+}
+
+.price-crossed-label {
+  font-weight: 500;
+  font-size: 12px;
+  text-decoration: line-through;
+  color: #857e7e;
+  //text-decoration: ;
 }
 
 .rating-sold-container {
@@ -114,9 +130,17 @@
   //margin-top: 20px;
 
   a {
-    color: #1921c1;
-    font-weight: 500;
+    color: #757575;
+    font-weight: 400;
     font-size: inherit;
     text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      color: #3c3939;
+    }
+
   }
 }

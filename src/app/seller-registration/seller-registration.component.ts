@@ -64,7 +64,7 @@ export class SellerRegistrationComponent implements OnInit {
   accountCreateButtonClick(): void {
     if (this.validateAll()) {
       this.accountService.registerGoodsSeller(this.accountLoginRequest).subscribe((r) => {
-        this.accountService.writeAuthenticationToLocalStorage(r);
+        this.accountService.writeAuthenticationToCookies(r);
         this.mode = 2;
       }, (error) => {
         if (error.status === 403) {

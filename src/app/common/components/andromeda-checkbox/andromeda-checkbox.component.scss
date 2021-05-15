@@ -1,0 +1,26 @@
+.checkbox-container {
+  height: 20px;
+  width: 20px;
+  padding: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #414141;
+  border-radius: 2px;
+  margin-right: 5px;
+}
+
+.checked {
+  border: 2px solid #222222;
+  background-color: #222222;
+}
+
+.andromeda-checkbox-container {
+  display: flex;
+  color: #626060;
+  font-weight: 500;
+  font-size: 14px;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}

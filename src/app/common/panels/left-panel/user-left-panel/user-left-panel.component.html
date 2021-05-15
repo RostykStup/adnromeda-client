@@ -21,7 +21,7 @@
           </g>
         </svg>
       </div>
-      <a href="" class="left-panel-andromeda-title andromeda-font">
+      <a [routerLink]="''" (click)="closeLeftPanel()" class="left-panel-andromeda-title andromeda-font">
         <svg class="andromeda-logo" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              width="28" height="28"
              viewBox="0 0 226 226"
@@ -42,7 +42,7 @@
     </div>
     <div class="user-left-panel-panels-container">
       <div class="user-left-panel-block">
-        <a [href]="getProfileUrl()" class="user-left-panel-link">
+        <a [routerLink]="getProfileUrl()" (click)="closeLeftPanel()" class="user-left-panel-link">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="24" height="24"
                viewBox="0 0 172 172"
@@ -62,7 +62,7 @@
         </a>
       </div>
       <div class="user-left-panel-block">
-        <a [href]="getNotificationUrl()" class="user-left-panel-link">
+        <a [routerLink]="getNotificationUrl()" (click)="closeLeftPanel()" class="user-left-panel-link">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="24" height="24"
                viewBox="0 0 172 172"
@@ -82,7 +82,7 @@
         </a>
       </div>
       <div class="user-left-panel-block">
-        <a [href]="getAddressUrl()" class="user-left-panel-link">
+        <a [routerLink]="getAddressUrl()" (click)="closeLeftPanel()" class="user-left-panel-link">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="24" height="24"
                viewBox="0 0 172 172"
@@ -104,7 +104,7 @@
       <div class="user-left-panel-divider-block"></div>
 
       <div class="user-left-panel-block">
-        <a [href]="getViewedUrl()" class="user-left-panel-link">
+        <a [routerLink]="getViewedUrl()" (click)="closeLeftPanel()" class="user-left-panel-link">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="24" height="24"
                viewBox="0 0 172 172"
@@ -126,7 +126,7 @@
 
 
       <div class="user-left-panel-block">
-        <a [href]="getSavedUrl()" class="user-left-panel-link">
+        <a [routerLink]="getSavedUrl()" (click)="closeLeftPanel()" class="user-left-panel-link">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="24" height="24"
                viewBox="0 0 172 172"
@@ -145,7 +145,7 @@
         </a>
       </div>
       <div class="user-left-panel-block">
-        <a [href]="getCartUrl()" class="user-left-panel-link">
+        <a [routerLink]="getCartUrl()" (click)="closeLeftPanel()" class="user-left-panel-link">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="24" height="24"
                viewBox="0 0 172 172"
@@ -164,7 +164,7 @@
         </a>
       </div>
       <div class="user-left-panel-block">
-        <a [href]="getOrdersUrl()" class="user-left-panel-link">
+        <a [routerLink]="getOrdersUrl()" (click)="closeLeftPanel()" class="user-left-panel-link">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="24" height="24"
                viewBox="0 0 172 172"
@@ -192,7 +192,7 @@
 
     <div class="user-panel-bottom-fixed-panels">
       <div class="user-left-panel-block">
-        <a [href]="getUserSettingsUrl()" class="user-left-panel-link">
+        <a [routerLink]="getUserSettingsUrl()" (click)="closeLeftPanel()" class="user-left-panel-link">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="24" height="24"
                viewBox="0 0 172 172"
@@ -211,7 +211,7 @@
         </a>
       </div>
       <div class="user-left-panel-block">
-        <a [href]="getFAQUrl()" class="user-left-panel-link">
+        <a [routerLink]="getFAQUrl()" (click)="closeLeftPanel()" class="user-left-panel-link">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                width="24" height="24"
                viewBox="0 0 172 172"

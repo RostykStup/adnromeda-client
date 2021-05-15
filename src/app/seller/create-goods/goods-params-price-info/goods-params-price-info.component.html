@@ -1,0 +1,42 @@
+<div class="block-title">
+  3. Параметри для вибору
+</div>
+<div class="creation-field-container">
+  <div class="creation-field-container-title">Якщо ваш товар має декілька варіацій для вибору, ви можете налаштувати ці параметри і встановити ціну та доступну кількість для кожного варіанту</div>
+  <div>
+    <app-goods-parameters-creation (recreatePrices)="parametersChanged($event); priceCount.reloadElements()"></app-goods-parameters-creation>
+  </div>
+</div>
+<div class="block-title">
+  4. Ціна та кількість
+</div>
+<div class="creation-field-container">
+<!--  <div class="creation-field-container-title">-->
+<!--    Введіть ціну($) та доступну кількість товару-->
+<!--    {{-->
+<!--    advertisement.hasParameters ? ' для кожного варіанту параметрів' : ''-->
+<!--    }}-->
+<!--  </div>-->
+  <div class="creation-field-container-title">
+    Крім ціни у USD ви можете вказати і ціни у інших валютах доступних на Andromeda, дана операція не є обов'язково, але це дозволить вам встановити ціну для міжнародного та українського ринку, не прив'язуючи її до курсу валют
+  </div>
+  <div class="creation-field-container-title">
+     Також уведіть ту кількість товару, яку ви можете продати. Після здійснення замовлення система автоматично зменшить кількість товару доступного на Andromeda. Змінити кількість можна буде у будь який момент
+  </div>
+  <div class="">
+    <app-goods-currencies-choose
+      (removeCurrency)="removeCurrency($event)"
+      (addCurrency)="addCurrency($event)"></app-goods-currencies-choose>
+  </div>
+  <div>
+    <app-goods-param-values-price-count-list
+      [currencies]="currencies"
+      [hasParams]="advertisement.hasParameters"
+      [parameters]="advertisement.parameters"
+      #priceCount></app-goods-param-values-price-count-list>
+  </div>
+</div>
+<div class="creation-field-container next-button-container">
+  <div class="validate-string">{{validateString}}</div>
+  <button class="andromeda-with-bg-button" (click)="clickNextStep()">Далі</button>
+</div>

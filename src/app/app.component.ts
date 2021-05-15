@@ -11,7 +11,4 @@ import {CurrencyService} from '../service/country/currency.service';
 })
 export class AppComponent {
 
-
-  // @ts-ignore
-  test: string;
 }

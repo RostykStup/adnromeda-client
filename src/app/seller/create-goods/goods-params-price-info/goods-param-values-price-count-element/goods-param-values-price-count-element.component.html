@@ -1,0 +1,39 @@
+<!--<div class="param-value-price-count-row" *ngIf="paramValuePriceCount && parameters && !default">-->
+<div class="param-value-price-count-row" *ngIf="paramValuePriceCount && currencies">
+  <div class="element value-element" *ngFor="let parameter of parameters">
+    {{paramValuePriceCount.valueParam.get(parameter.title)}}
+  </div>
+  <div class="element input-element" *ngFor="let currency of currencies; index as i">
+    <app-goods-currency-price-input
+      [currency]="currency"
+      (changePrice)="changeCurrencyPrice($event, i)"
+    ></app-goods-currency-price-input>
+  </div>
+  <div class="element input-element count-element">
+    <div class="input-container"  [ngClass]="{invalid: !countValidation}">
+            <div class="input-title">Кількість шт.</div>
+      <input type="text" class="andromeda-input param-name-input"
+             (keyup)="changeCountInput($event)"
+             placeholder="Введіть к-ть">
+    </div>
+  </div>
+</div>
+
+<!--<div class="param-value-price-count-row" *ngIf="paramValuePriceCount && default">-->
+<!--  <div class="element input-element">-->
+<!--    <div class="input-container" [ngClass]="{invalid: !priceValidation}">-->
+<!--            <div class="input-title">Ціна USD</div>-->
+<!--      <input type="text" class="andromeda-input param-name-input"-->
+<!--             (keyup)="changePriceInput($event)"-->
+<!--             placeholder="Введіть ціну" [value]="paramValuePriceCount.price">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="element input-element">-->
+<!--    <div class="input-container"  [ngClass]="{invalid: !countValidation}">-->
+<!--            <div class="input-title">Кількість шт.</div>-->
+<!--      <input type="text" class="andromeda-input param-name-input"-->
+<!--             (keyup)="changeCountInput($event)"-->
+<!--             placeholder="Введіть кількість" [value]="paramValuePriceCount.count">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

@@ -26,15 +26,15 @@ export class NotificationPageComponent implements OnInit {
     this.pagination.page = 0;
     this.pagination.size = 10;
 
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
-      if (params.page !== undefined && params.page > 0) {
-        this.pagination.page = +params.page - 1;
-      } else {
-        window.open(NavigationService.getUserNotificationsUrl() + '?page=1', '_self');
-        // window.open('client/user/notifications?page=1', '_self');
-      }
-      this.reloadNotifications();
-    });
+    // this.activatedRoute.queryParams.subscribe((params: Params) => {
+    //   if (params.page !== undefined && params.page > 0) {
+    //     this.pagination.page = +params.page - 1;
+    //   } else {
+    //     window.open(NavigationService.getUserNotificationsUrl() + '?page=1', '_self');
+    //     window.open('client/user/notifications?page=1', '_self');
+      // }
+      // this.reloadNotifications();
+    // });
   }
 
   navigateToNewPage(): void {

@@ -1,0 +1,23 @@
+<div class="position-container">
+  <div class="position-title-container bottom-border-container">
+    <div class="position-title-seller">
+      <a href="">{{position.sellerName}}</a>
+    </div>
+  </div>
+  <div *ngFor="let item of position.items" class="bottom-border-container">
+    <app-choose-order-item-view
+      (changeInfoForSum)="recountSum()"
+      [currency]="position.currencyResponse"
+      [item]="item"
+      [sellerId]="position.sellerId"></app-choose-order-item-view>
+  </div>
+  <div class="sum-container">
+    <div class="sum-label">
+      <span *ngIf="sum != null">
+        До оплати: {{sum.toFixed(2)}} {{position.currencyResponse.code}}
+      </span>
+    </div>
+  </div>
+
+</div>
+

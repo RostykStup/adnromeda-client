@@ -19,14 +19,14 @@ import {NavigationService} from '../../common/navigation.service';
   providedIn: 'root'
 })
 export class OrderService {
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private navigationService: NavigationService) {
   }
 
   orderURL = GlobalConstants.API_URL + 'goods-order';
 
   createOrder(request: GoodsOrderRequest): Observable<any> {
 
-    return this.httpClient.post(this.orderURL, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.post(this.orderURL, request, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getSellerWaitingShipmentOrdersPage(request: PaginationRequest): Observable<any> {
@@ -35,13 +35,13 @@ export class OrderService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getSellerOrdersPageByStatuses(pagination: PaginationRequest, statuses: Array<string>): Observable<PaginationResponse<GoodsOrderResponse>> {
     const url = this.orderURL + '/seller?' + NavigationService.convertPaginationRequestToParamsQuery(pagination)
       + (statuses.length > 0 ? '&status=' + statuses.join('&status=') : '');
-    return this.httpClient.get<PaginationResponse<GoodsOrderResponse>>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<PaginationResponse<GoodsOrderResponse>>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getUserWaitingShipmentOrdersPage(request: PaginationRequest): Observable<any> {
@@ -50,7 +50,7 @@ export class OrderService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getUserWaitingDeliveryOrdersPage(request: PaginationRequest): Observable<any> {
@@ -59,7 +59,7 @@ export class OrderService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getSellerWaitingDeliveryOrdersPage(request: PaginationRequest): Observable<any> {
@@ -68,7 +68,7 @@ export class OrderService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getUserClosedOrdersPage(request: PaginationRequest): Observable<any> {
@@ -77,7 +77,7 @@ export class OrderService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getSellerClosedOrdersPage(request: PaginationRequest): Observable<any> {
@@ -86,7 +86,7 @@ export class OrderService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getSellerNewOrdersPage(request: PaginationRequest): Observable<any> {
@@ -95,7 +95,7 @@ export class OrderService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getSellerAllOrdersPage(request: PaginationRequest): Observable<any> {
@@ -104,12 +104,12 @@ export class OrderService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   confirmGoodsOrderDelivery(request: ConfirmGoodsOrderDeliveryRequest): Observable<any> {
     const url = this.orderURL + '/confirm';
-    return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.put(url, request, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getUserAllOrdersPage(request: PaginationRequest): Observable<any> {
@@ -118,37 +118,37 @@ export class OrderService {
       + '&field=' + request.field
       + '&page=' + request.page
       + '&size=' + request.size;
-    return this.httpClient.get(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getUserGoodsOrderData(): Observable<UserGoodsOrderDataResponse> {
     const url = this.orderURL + '/user/data';
-    return this.httpClient.get<UserGoodsOrderDataResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<UserGoodsOrderDataResponse>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getSellerGoodsOrderData(): Observable<SellerGoodsOrderDataResponse> {
     const url = this.orderURL + '/seller/data';
-    return this.httpClient.get<SellerGoodsOrderDataResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<SellerGoodsOrderDataResponse>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   confirmGoodsOrderSending(request: GoodsOrderDeliveryDetailsForShipmentRequest): Observable<any> {
     const url = this.orderURL + '/shipment';
-    return this.httpClient.put(url, request, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.put(url, request, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   confirmGoodsOrderView(id: number): Observable<any> {
     const url = this.orderURL + '/view?id=' + id;
-    return this.httpClient.put(url, null, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.put(url, null, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getGoodsOrderByIdAndSeller(id: number): Observable<GoodsOrderResponse> {
     const url = this.orderURL + '/seller/order?id=' + id;
-    return this.httpClient.get<GoodsOrderResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<GoodsOrderResponse>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
   getGoodsOrderByIdAndUser(id: number): Observable<GoodsOrderResponse> {
     const url = this.orderURL + '/user/order?id=' + id;
-    return this.httpClient.get<GoodsOrderResponse>(url, {headers: GlobalConstants.getRequestAuthorizationHeader()});
+    return this.httpClient.get<GoodsOrderResponse>(url, {headers: this.navigationService.getCurrentRequestAuthorizationHeader()});
   }
 
 

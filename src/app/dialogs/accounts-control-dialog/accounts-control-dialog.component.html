@@ -1,0 +1,50 @@
+<div class="account-dialog-container " *ngIf="currentAccount">
+  <div class="current-account-container account-dialog-padding">
+    <div class="current-account-image-wrapper">
+      <img class="image" [src]="getAvatarImage(currentAccount.avatar, currentAccount.id)"
+           *ngIf="currentAccount.avatar != null">
+      <div class="no-image-letter" *ngIf="currentAccount.avatar == null">
+        {{currentAccount.username[0]}}
+      </div>
+    </div>
+    <div class="current-account-username">{{currentAccount.username}}</div>
+    <div class="current-account-role">{{getRoleUkrLabel(currentAccount.userRole)}}</div>
+  </div>
+  <div *ngFor="let account of accounts">
+    <div class="account-line pointer" *ngIf="account.id != currentAccount.id" (click)="changeAccount(account)">
+      <div class="account-image-wrapper">
+        <img class="image" [src]="getAvatarImage(account.avatar, account.id)" *ngIf="account.avatar != null">
+        <div class="no-image-account-letter" *ngIf="account.avatar == null">
+          {{account.username[0]}}
+        </div>
+      </div>
+      <div class="account-data">
+        <div class="account-username">{{account.username}}</div>
+        <div class="account-role">{{getRoleUkrLabel(account.userRole)}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="account-line pointer add-account-line" (click)="openLoginDialog()">
+    <div class="account-image-wrapper add-icon-container">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+           width="30" height="30"
+           viewBox="0 0 172 172"
+           style=" fill:#000000;">
+        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+           stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+           font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+          <path d="M0,172v-172h172v172z" fill="none"></path>
+          <g fill="#5f5f5f">
+            <path
+              d="M86,21.5c-15.83216,0 -28.66667,12.8345 -28.66667,28.66667c0,15.83216 12.8345,28.66667 28.66667,28.66667c15.83216,0 28.66667,-12.8345 28.66667,-28.66667c0,-15.83216 -12.8345,-28.66667 -28.66667,-28.66667zM129,86c-23.65,0 -43,19.35 -43,43c0,23.65 19.35,43 43,43c23.65,0 43,-19.35 43,-43c0,-23.65 -19.35,-43 -43,-43zM79.19726,100.66927c-22.64667,1.87767 -57.69726,12.5354 -57.69726,31.91406v17.91667h54.37989c-2.69467,-6.6435 -4.21322,-13.889 -4.21322,-21.5c0,-10.32 2.7576,-19.96723 7.5306,-28.33073zM121.83333,107.5h14.33333v14.33333h14.33333v14.33333h-14.33333v14.33333h-14.33333v-14.33333h-14.33333v-14.33333h14.33333z"></path>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    Додати інший аккаунт
+  </div>
+  <div class="logout-container account-dialog-padding">
+    <button class="andromeda-border-button" (click)="clickLogout()">Вийти з цього аккаунту</button>
+  </div>
+</div>

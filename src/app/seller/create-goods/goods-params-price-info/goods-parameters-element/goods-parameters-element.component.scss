@@ -1,0 +1,87 @@
+.parameter-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.parameter-name-container {
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 3px;
+  border: 1px solid #d0d0d0;
+  padding: 10px;
+  width: 300px;
+}
+
+.parameter-name-container:focus-within {
+  border: 1px solid #3e3e3e;
+
+  .input-title {
+    color: #3e3e3e;
+  }
+}
+
+.parameter-values-container {
+  width: 100%;
+  min-height: 100%;
+  margin-left: 15px;
+}
+
+.input-title {
+  font-size: 10px;
+  color: #857e7e;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.param-name-input {
+  width: 100%;
+  padding: 0;
+  font-size: 14px;
+  color: #414141;
+  border: none;
+}
+
+.param-value-input::placeholder {
+  font-size: 11px;
+}
+
+.param-values-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.param-value-element {
+  font-size: 13px;
+  font-weight: 400;
+
+  color: #1c1b1b;
+
+  padding: 4px 8px;
+  border-radius: 10px;
+  border: 1px solid #857e7e;
+  display: flex;
+  align-items: center;
+
+  margin: 5px 5px 10px 0;
+
+  svg {
+    margin-left: 4px;
+  }
+}
+
+.parameter-container:hover > .delete-column > svg {
+  display: block;
+}
+
+.delete-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 15px;
+  width: 8%;
+
+  svg {
+    display: none;
+  }
+}
+

@@ -5,6 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {NotificationService} from '../../../../../service/notification/notification.service';
 import {LoginDialogComponent} from '../../../../dialogs/login-dialog/login-dialog.component';
 import {PaginationRequest} from '../../../../../entity/pagination-request';
+import {NavigationService} from '../../../../../common/navigation.service';
+import {AccountsControlDialogComponent} from '../../../../dialogs/accounts-control-dialog/accounts-control-dialog.component';
 
 @Component({
   selector: 'app-user-top-panel',
@@ -19,6 +21,7 @@ export class UserTopPanelComponent implements OnInit {
               private router: Router,
               public dialog: MatDialog,
               private activatedRoute: ActivatedRoute,
+              private navigationService: NavigationService,
               private notificationService: NotificationService) {
   }
 
@@ -33,7 +36,6 @@ export class UserTopPanelComponent implements OnInit {
   value = '';
 
   ngOnInit(): void {
-    this.makeNewNotificationsCountRequest();
     this.isLogged = this.accountService.isLogged();
     this.userRole = localStorage.getItem('andro_user_role');
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -45,48 +47,24 @@ export class UserTopPanelComponent implements OnInit {
     });
   }
 
-
-  logOut(): void {
-    this.accountService.logOut();
-    this.isLogged = this.accountService.isLogged();
-    this.router.navigateByUrl('/').then(r => {
-      window.location.reload();
-    });
-  }
-
-  makeNewNotificationsCountRequest(): void {
-    if (this.accountService.isLogged()) {
-      this.notificationService.getNotificationsCount().subscribe((r) => {
-        if (r > 99) {
-          this.newNotificationsCount = '99+';
-        } else if (r === 0) {
-          this.newNotificationsCount = '';
-        } else {
-          this.newNotificationsCount = r.toString();
-        }
-      });
-    }
-  }
-
   openLoginDialog(): void {
     const dialogRef = this.dialog.open(LoginDialogComponent, {
       width: '400px',
       data: null
     });
 
-    dialogRef.afterClosed().subscribe(result => { // дії пілся закриття вікна
-      // this.reloadTable();
-      this.isLogged = this.accountService.isLogged();
-      this.userRole = localStorage.getItem('andro_user_role');
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 
-  makeSearch(): void {
-    this.value = this.value.trim();
-    // if (this.value.length > 0) {
-    window.open('client/search?value=' + this.value + '&page=1', '_self');
-    // }
-    // this.router.navigateByUrl();
+  openAccountDialog(): void {
+    const dialogRef = this.dialog.open(AccountsControlDialogComponent, {
+      data: null,
+      panelClass: 'account-control-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
   openLeftPanelClick(): void {
@@ -95,9 +73,13 @@ export class UserTopPanelComponent implements OnInit {
 
   clickAccountButton(): void {
     if (this.accountService.isLogged()) {
-
+      this.openAccountDialog();
     } else {
       this.openLoginDialog();
     }
+  }
+
+  searchValue($event: string): void {
+    this.router.navigateByUrl('u/search?value=' + $event + '&page=0');
   }
 }

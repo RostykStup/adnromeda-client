@@ -1,9 +1,10 @@
 import {GoodsCartItemResponse} from './goods-cart-item-response';
+import {CurrencyResponse} from '../country/currency-response';
 
 export class CartSellerPositionResponse{
   items = new Array<GoodsCartItemResponse>();
   sellerId = 0;
   sellerName = '';
-  sellerCheck = false;
   sellerCountry = '';
+  currencyResponse = new CurrencyResponse();
 }

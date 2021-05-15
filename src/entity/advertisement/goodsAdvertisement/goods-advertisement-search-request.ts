@@ -5,7 +5,7 @@ export class GoodsAdvertisementSearchRequest {
   fromCountryCode: string | null = null;
   image = false;
   rating = false;
-  paginationRequest = new PaginationRequest();
+  pagination = new PaginationRequest();
 
   currency = 'USD';
 }

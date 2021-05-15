@@ -2,6 +2,7 @@ import {AdvertisementRequest} from '../advertisement-request';
 import {PropertyRequest} from './property-request';
 import {ParameterRequest} from './parameter/parameter-request';
 import {ParametersValuesPriceCountRequest} from './parameter/parameters-values-price-count-request';
+import {ParametersValuesCurrencyPriceRequest} from './parameter/parameters-values-currency-price-request';
 
 export class GoodsAdvertisementRequest extends AdvertisementRequest {
 
@@ -14,7 +15,7 @@ export class GoodsAdvertisementRequest extends AdvertisementRequest {
   // valuesPriceCounts = new Array<ParametersValuesPriceCountRequest>();
   valuesPriceCounts = new Array<{
     valueParam: any,
-    price: any,
+    prices: Array<ParametersValuesCurrencyPriceRequest>,
     count: any
   }>();
 
@@ -22,7 +23,7 @@ export class GoodsAdvertisementRequest extends AdvertisementRequest {
 
   images = Array<string>();
 
-  properties = new Array<PropertyRequest>();
+  properties: Array<PropertyRequest> | null = new Array<PropertyRequest>();
 
   deliveryTypes: Array<number> | any = [];
 

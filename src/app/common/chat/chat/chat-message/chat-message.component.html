@@ -1,0 +1,11 @@
+<div class="message-container" [ngClass]="{
+left: accountId != message.senderId,
+right: accountId == message.senderId
+}">
+  <div class="message-data">
+    <span class="message-text">{{message.text}}</span>
+    <span class="message-time">{{message.time}}</span>
+    <span class="message-read"></span>
+  </div>
+</div>
+

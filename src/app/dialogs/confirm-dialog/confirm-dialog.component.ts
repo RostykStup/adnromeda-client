@@ -16,7 +16,7 @@ export class ConfirmDialogComponent {
 
   close(res: boolean): void {
     this.data.result = res;
-    this.dialogRef.close(this.data);
+    this.dialogRef.close(res);
   }
 
 }

@@ -20,11 +20,14 @@ export class SellerProfileComponent implements OnInit {
   }
 
   profile = new GoodsSellerProfileResponse();
+  // @ts-ignore
+  authNum: number;
 
   ngOnInit(): void {
     this.titleService.setTitle('Профіль магазину - Workshop')
     this.goodsSellerService.getGoodsSellerProfileData().subscribe((r) => {
       this.profile = r;
+      this.authNum = this.accountService.getAuthNumFromCurrentRoute();
     });
   }
 

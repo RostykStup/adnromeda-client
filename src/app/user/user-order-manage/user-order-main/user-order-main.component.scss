@@ -1,0 +1,33 @@
+.user-order-main-container {
+  padding: 15px 25px;
+  background-color: #fff;
+  border-radius: 3px;
+  width: 70%;
+  margin-bottom: 15px;
+}
+
+.user-order-main-title {
+  font-size: 15px;
+  color: #302f2f;
+  font-weight: 500;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eeeaea;
+}
+
+.no-border {
+  border: none;
+}
+
+.user-order-main-subtext {
+  color: #888585;
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.sum-text {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 15px;
+  padding-top: 10px;
+  font-size: 15px;
+}

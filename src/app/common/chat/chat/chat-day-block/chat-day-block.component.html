@@ -1,0 +1,4 @@
+<div class="day-block-container">
+  <div class="date-text">{{block.date}}</div>
+  <app-chat-message *ngFor="let message of block.messages" [message]="message"></app-chat-message>
+</div>

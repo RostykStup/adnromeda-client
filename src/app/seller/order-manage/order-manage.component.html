@@ -1,0 +1,22 @@
+<div class="seller-module-component-title seller-module-component-block seller-module-bottom-padding">
+  Керування замовленням
+</div>
+<div class="seller-module-component-panels-container one-child seller-module-component-bottom-border seller-module-component-block">
+  <div class="seller-module-component-panels-links-container" *ngIf="goodsOrder">
+    <a [routerLink]="'confirmation'" class="seller-module-component-panel-link"
+       [routerLinkActive]="'seller-module-component-panel-link-active'"
+       *ngIf="goodsOrder.orderStatus === 'WAITING_FOR_SELLER_CONFIRMATION'"
+    >Підтвердження замовлення</a>
+    <a [routerLink]="'main'" [queryParams]="{order: goodsOrder.id}" class="seller-module-component-panel-link"
+       [routerLinkActive]="'seller-module-component-panel-link-active'"
+       *ngIf="goodsOrder.orderStatus !== 'WAITING_FOR_SELLER_CONFIRMATION'"
+    >Основна інформація</a>
+    <a [routerLink]="'chat'"  [queryParams]="{order: goodsOrder.id}" class="seller-module-component-panel-link"
+       [routerLinkActive]="'seller-module-component-panel-link-active'"
+    >Чат із покупцем</a>
+
+  </div>
+</div>
+<div class="seller-module-component-block seller-module-panels seller-module-bottom-padding">
+  <router-outlet></router-outlet>
+</div>

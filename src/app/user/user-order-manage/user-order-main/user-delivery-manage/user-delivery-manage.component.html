@@ -1,0 +1,21 @@
+<div class="delivery-manage-container" *ngIf="order">
+  <div class="delivery-manage-text" *ngIf="order.orderStatus === 'WAITING_FOR_SELLER_CONFIRMATION'">
+    Очікуйте підтвердження продавця. Після підтвердження служба доставки може змінитись
+  </div>
+  <div class="delivery-manage-text"  *ngIf="order.orderStatus === 'WAITING_FOR_USER_PAYMENT'">
+    Продавець очікує на оплату товару
+  </div>
+  <div class="delivery-manage-text"  *ngIf="order.orderStatus === 'WAITING_FOR_PAYMENT_VERIFY'">
+    Очікуйте на підтвердження оплати
+  </div>
+  <div class="delivery-manage-text"  *ngIf="order.orderStatus === 'WAITING_FOR_SENDING'">
+    Очікуйте на відправлення товару
+  </div>
+  <div class="delivery-manage-text"  *ngIf="order.orderStatus === 'WAITING_FOR_DELIVERY'">
+    Очікуйте на доставку товару, код відстеження {{order.deliveryDetails.trackingNumber}}
+    <button class="andromeda-border-button" (click)="confirmDelivery()">Підтвердити отримання</button>
+  </div>
+  <div class="delivery-manage-text"  *ngIf="order.orderStatus === 'WAITING_FOR_FEEDBACK' || order.orderStatus === 'CLOSED'">
+    Ви підтвердили доствку замовлення
+  </div>
+</div>

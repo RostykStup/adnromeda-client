@@ -1,7 +1,9 @@
 <app-user-top-panel  (openLeftPanel)="left_panel.open()"></app-user-top-panel>
 <app-user-left-panel #left_panel></app-user-left-panel>
-<div class="user-children-component">
+<div id="user-module-body" class="user-children-component">
+  <div class="user-module-content">
   <router-outlet></router-outlet>
+  </div>
 </div>
 
 

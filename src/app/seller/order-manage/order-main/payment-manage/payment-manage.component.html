@@ -1,0 +1,17 @@
+<div class="payment-manage-container">
+  <div class="payment-text" *ngIf="order.paymentDetails.payment == 'CASH_ON_DELIVERY'">
+    Оплата здійснюється накладеним платежем
+  </div>
+  <div  class="payment-text" *ngIf="order.paymentDetails.payment == 'PREPAYMENT'">
+    <div class="payment-text" *ngIf="order.orderStatus == 'WAITING_FOR_USER_PAYMENT'">
+      Очікується оплата від покупця
+    </div>
+    <div class="payment-text" *ngIf="order.orderStatus == 'WAITING_FOR_PAYMENT_VERIFY'">
+      Покупець вказав що оплатив товар
+      <button class="andromeda-border-button" (click)="clickConfirmButton()">Я отримав оплату</button>
+    </div>
+    <div class="payment-text" *ngIf="order.orderStatus != 'WAITING_FOR_USER_PAYMENT' && order.orderStatus != 'WAITING_FOR_PAYMENT_VERIFY'">
+      Ви підтвердили оплату товару
+    </div>
+  </div>
+</div>

@@ -1,36 +1,47 @@
-<div class="container">
-  <div class="menu-container">
-    <div class="menu-item">
-      <input type="radio" id="all-items-choose" name="items-type" checked>
-      <label (click)="changeListMode(0)" for="all-items-choose">Усі ({{userGoodsOrderData.allItems}})</label>
-      <!--      <span class="menu-title" (click)="loadAllOrders()"></span>-->
+<div class="user-order-block">
+  <div class="order-block-container">
+    <div class="order-top-container">
+      <div class="order-links-container">
+        <input type="radio" id="all-orders-radio" name="order-types"
+               [checked]="ordersStatus == null">
+        <label for="all-orders-radio" class="order-type-label" (click)="changeOrdersType(null)">Усі</label>
+
+        <input type="radio" id="wait-for-confirm-orders-radio" name="order-types"
+               [checked]="ordersStatus == 'WAITING_FOR_SELLER_CONFIRMATION'">
+        <label for="wait-for-confirm-orders-radio"  class="order-type-label" (click)="changeOrdersType('WAITING_FOR_SELLER_CONFIRMATION')">Очікують на розгляд</label>
+
+        <input type="radio" id="wait-for-payment-verify-orders-radio" name="order-types"
+               [checked]="ordersStatus == 'WAITING_FOR_USER_PAYMENT'">
+        <label for="wait-for-payment-verify-orders-radio"  class="order-type-label" (click)="changeOrdersType('WAITING_FOR_USER_PAYMENT')">Очікують оплати</label>
+
+        <input type="radio" id="wait-for-send-orders-radio" name="order-types"
+               [checked]="ordersStatus == 'WAITING_FOR_SENDING'">
+        <label for="wait-for-send-orders-radio"  class="order-type-label" (click)="changeOrdersType('WAITING_FOR_SENDING')">Очікують відправлення</label>
+
+        <input type="radio" id="wait-for-delivery-orders-radio" name="order-types"
+               [checked]="ordersStatus == 'WAITING_FOR_DELIVERY'">
+        <label for="wait-for-delivery-orders-radio"  class="order-type-label" (click)="changeOrdersType('WAITING_FOR_DELIVERY')">Очікують доставки</label>
+
+        <input type="radio" id="wait-for-feedback-orders-radio" name="order-types"
+               [checked]="ordersStatus == 'CLOSED'">
+        <label for="wait-for-feedback-orders-radio"  class="order-type-label" (click)="changeOrdersType('CLOSED')">Завершені</label>
+      </div>
+      <div class="order-list-title-container">
+        <app-user-order-list-view-title (changePagination)="changeDirection($event)"></app-user-order-list-view-title>
+      </div>
     </div>
-    <div class="menu-item">
-      <input type="radio" id="shipment-items-choose" name="items-type">
-      <label (click)="changeListMode(1)" for="shipment-items-choose">Очікують відправлення
-        ({{userGoodsOrderData.waitingForSending}})</label>
-      <!--      <span class="menu-title"></span>-->
+    <div class="order-list-container">
+      <app-user-order-list-view *ngFor="let order of orders" [goodsOrder]="order"></app-user-order-list-view>
+      <div class="no-orders-text" *ngIf="orders.length == 0">
+        У вас замовлень за вказаними параметрами
+      </div>
     </div>
-    <div class="menu-item">
-      <input type="radio" id="delivery-items-choose" name="items-type">
-      <label (click)="changeListMode(2)" for="delivery-items-choose">Відправлені
-        ({{userGoodsOrderData.waitingForDelivery}})</label>
-      <!--      <span class="menu-title"></span>-->
-    </div>
-    <div class="menu-item">
-      <input type="radio" id="closed-items-choose" name="items-type">
-      <label (click)="changeListMode(3)" for="closed-items-choose">
-        Завершені ({{userGoodsOrderData.closedOrders}})
-      </label>
-      <!--      <span class="menu-title"></span>-->
-    </div>
-  </div>
-  <div class="orders-container">
-    <app-order-list-view *ngFor="let order of orders" [order]="order"></app-order-list-view>
-    <div class="paginator-container">
-      <app-paginator [pagination]="pagination" [totalPages]="totalPages"
-                     (pageChange)="loadNewPage($event)"></app-paginator>
+    <div class="order-paginator-container" >
+      <app-arrow-paginator
+        *ngIf="orders.length > 0"
+        [pagination]="pagination"
+        [totalPages]="totalPages"
+        [totalElements]="totalElements" (pageChange)="changePagination($event)"></app-arrow-paginator>
     </div>
   </div>
 </div>
-

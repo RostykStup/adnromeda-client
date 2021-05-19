@@ -1,0 +1,27 @@
+.order-item-container {
+  display: flex;
+  border-bottom: 1px solid #eeeaea;
+  padding-bottom: 4px;
+  padding-right: 10px;
+}
+.title-text {
+  color: #ababab;
+  font-weight: 400;
+  font-size: 12px;
+}
+.item-image-column {
+  width: 10%;
+}
+
+.item-name-param-column {
+  width: 50%;
+}
+.item-count-column {
+  width: 20%;
+}
+
+.item-price-column {
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}

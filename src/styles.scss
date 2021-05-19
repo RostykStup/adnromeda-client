@@ -27,8 +27,10 @@ body, html {
 }
 
 body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #f8f8f8;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 /* width */
@@ -93,8 +95,8 @@ $footerHeight: 200px;
 
 .index-content-holder {
   min-height: 100%;
-  padding-bottom: $footerHeight + 200px;
-  margin-bottom: -$footerHeight;
+  //padding-bottom: $footerHeight + 200px;
+  //margin-bottom: -$footerHeight;
 }
 
 .footer {
@@ -115,14 +117,7 @@ $footerHeight: 200px;
   font-weight: 300;
 }
 
-html, body {
-  height: 100%;
-}
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
 
 .icons-link{
   font-size: 11px;

@@ -1,0 +1,23 @@
+<div class="payment-container">
+  <div class="payment-text" *ngIf="order.orderStatus === 'WAITING_FOR_SELLER_CONFIRMATION'">
+    Очікуйте підтвердження продавця. Після підтвердження спосіб оплати може змінитись
+  </div>
+  <div class="payment-text" *ngIf="order.paymentDetails.payment === 'AGREEMENT'">
+    Обговоріть спосіб полати з продавцем у чаті та заплатіть у зручний вам спосіб
+  </div>
+  <div class="payment-text" *ngIf="order.paymentDetails.payment === 'CASH_ON_DELIVERY'">
+    Оплата товару буде здійснюватись у відділенні пошти
+  </div>
+  <div class="payment-text" *ngIf="order.paymentDetails.payment === 'PREPAYMENT' && order.orderStatus !== 'WAITING_FOR_SELLER_CONFIRMATION'">
+    <div class="payment-text" *ngIf="order.orderStatus === 'WAITING_FOR_USER_PAYMENT'">
+      Продавець очікує оплату: {{order.price}} {{order.paymentDetails.currency.code}}
+      <button class="andromeda-border-button" (click)="clickConfirmPayment()">Підтвердити оплату товару</button>
+    </div>
+    <div class="payment-text" *ngIf="order.orderStatus === 'WAITING_FOR_PAYMENT_VERIFY'">
+      Очікуйте поки продавець підтвердить оплату
+    </div>
+    <div class="payment-text" *ngIf="order.orderStatus !== 'WAITING_FOR_PAYMENT_VERIFY' && order.orderStatus !== 'WAITING_FOR_USER_PAYMENT'">
+      Оплату підтверджено
+    </div>
+  </div>
+</div>

@@ -6,12 +6,9 @@ export class GoodsOrderItemResponse {
   count = 0;
   status = '';
   advertisementId = 0;
-  description = 0;
-  delivery = new DeliveryTypeResponse();
   image = '';
   title = '';
   price = 0;
-  checked = false;
 
   priceCountResponse = new ParametersValuesPriceCountResponse();
 }

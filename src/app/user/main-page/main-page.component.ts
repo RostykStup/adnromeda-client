@@ -7,6 +7,7 @@ import {CategoryService} from '../../../service/category/category.service';
 import {GoodsAdvertisementForSearchResponse}
   from '../../../entity/advertisement/goodsAdvertisement/goods-advertisement-for-search-response';
 import {CurrencyService} from '../../../service/country/currency.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main-page',
@@ -17,7 +18,8 @@ export class MainPageComponent implements OnInit {
 
   constructor(private advertisementService: AdvertisementService,
               private categoryService: CategoryService,
-              private currencyService: CurrencyService) {
+              private currencyService: CurrencyService,
+              private titleService: Title) {
   }
 
 
@@ -25,6 +27,7 @@ export class MainPageComponent implements OnInit {
   categories = new Array<CategoryResponse>();
 
   ngOnInit(): void {
+    this.titleService.setTitle('Andromeda');
     const pagination = new PaginationRequest();
     pagination.size = 10;
     pagination.page = 0;

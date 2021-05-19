@@ -33,68 +33,22 @@ import {templateJitUrl} from '@angular/compiler';
 export class AdvertisementViewComponent implements OnInit {
 
   constructor(private advertisementService: AdvertisementService,
-              private activatedRoute: ActivatedRoute,
+              private route: ActivatedRoute,
               private router: Router,
-              private currencyService: CurrencyService,
-              public countryService: CountryService,
-              private deliveryService: DeliveryService,
               public dialog: MatDialog,
-              private feedbackService: FeedbackService,
               private cartService: CartService,
               private accountService: AccountService) {
 
   }
 
-  advertisement = new GoodsAdvertisementResponse();
   // @ts-ignore
-  statics: GoodsAdvertisementStatisticsResponse;
+  advertisement: GoodsAdvertisementResponse;
 
-  userCurrency = '';
-  deliveries = new Array<DeliveryTypeResponse>();
-  currentDelivery = new DeliveryTypeResponse();
-  userCountry = new RestCountry();
-
-  isParamsChosen = false;
-  chosenPrice = 0;
-  chosenCount = 0;
-  chosenParametersValuesPriceCount = new ParametersValuesPriceCountResponse();
-  chosenParamsValuesMap = new Map<string, string>();
-
-  feedbackPagination = new PaginationRequest();
-
-  feedbacks = new PaginationResponse<GoodsAdvertisementFeedbackResponse>();
-  feedbacksList = new Array<GoodsAdvertisementFeedbackResponse>();
-
-  pickerCount = 1;
-
-  viewImage = '';
-  imagesForCarousel = new Array<string>();
-
-  addInfoMode: 1 | 2 = 1;
 
   ngOnInit(): void {
-    this.feedbackPagination.page = 0;
-    this.feedbackPagination.size = 10;
-    this.feedbackPagination.field = 'id';
-    this.feedbackPagination.direction = 'DESC';
-
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.advertisementService.setAdvertisementView(params.id).subscribe();
-      this.advertisementService.getGoodsAdvertisementById(params.id).subscribe((r) => {
-        this.advertisement = r;
-        this.viewImage = this.advertisement.mainImage;
-        this.chosenCount = this.advertisement.totalCount;
-        this.imagesForCarousel.push(this.advertisement.mainImage);
-        this.advertisement.images.forEach((i) => {
-          this.imagesForCarousel.push(i);
-        });
-
-        if (!this.advertisement.hasParameters) {
-          this.isParamsChosen = true;
-          this.chosenPrice = this.advertisement.valuesPriceCounts[0].price;
-          this.chosenParametersValuesPriceCount = this.advertisement.valuesPriceCounts[0];
-        }
-      });
+    // @ts-ignore
+    this.advertisementService.getGoodsAdvertisementById(this.route.snapshot.queryParamMap.get('id')).subscribe((r) => {
+      this.advertisement = r;
     });
   }
 
@@ -102,101 +56,4 @@ export class AdvertisementViewComponent implements OnInit {
     return this.advertisementService.getAdvertisementImagePath(imageName, this.advertisement.sellerId);
   }
 
-  changeViewImage(image: any): void {
-    this.viewImage = image;
-  }
-
-  clickPreviousImage(): void {
-    let index = this.imagesForCarousel.indexOf(this.viewImage);
-    if (index === 0) {
-      index = this.imagesForCarousel.length - 1;
-    } else {
-      index--;
-    }
-    this.viewImage = this.imagesForCarousel[index];
-  }
-
-  clickNextImage(): void {
-    let index = this.imagesForCarousel.indexOf(this.viewImage);
-    if (index === this.imagesForCarousel.length - 1) {
-      index = 0;
-    } else {
-      index++;
-    }
-    this.viewImage = this.imagesForCarousel[index];
-  }
-
-  inputItemCount($event: any): void {
-    let newCount = +$event.target.value;
-    if (newCount === 0) {
-      newCount = 1;
-    } else if (newCount > this.chosenCount) {
-      newCount = this.chosenCount;
-    }
-    this.pickerCount = newCount;
-  }
-
-  clickPlusCountButton(): void {
-    if (this.pickerCount >= this.chosenCount) {
-      this.pickerCount = this.chosenCount;
-    } else {
-      this.pickerCount++;
-    }
-  }
-
-  clickMinusCountButton(): void {
-    if (this.pickerCount <= 1) {
-      this.pickerCount = 1;
-    } else {
-      this.pickerCount--;
-    }
-  }
-
-  addToCartButtonClick(): void {
-    if (this.accountService.isLogged()) {
-      // this.cartService.addItemToCart(this.advertisement.id, this.currentDelivery.id, this.chosenParametersValuesPriceCount.id).subscribe(() => {
-      this.cartService.addItemToCart(this.advertisement.id, 1, this.chosenParametersValuesPriceCount.id).subscribe(() => {
-        const dialogRef = this.dialog.open(ItemAddedToCartDialogComponent, {});
-        dialogRef.afterClosed().subscribe(() => {
-        });
-      });
-    } else {
-      this.openLoginDialog();
-    }
-  }
-
-  openLoginDialog(): void {
-    const dialogRef = this.dialog.open(LoginDialogComponent, {
-      width: '400px',
-      data: null
-    });
-    dialogRef.afterClosed().subscribe();
-  }
-
-  choseParamValue(parameter: ParameterResponse, value: ParameterValueResponse): void {
-    const parameterIndex = this.advertisement.parameters.indexOf(parameter);
-    this.advertisement.parameters[parameterIndex].chosenValue = value.title;
-    this.chosenParamsValuesMap.set(parameter.title, value.title);
-
-    if (this.chosenParamsValuesMap.size === this.advertisement.parameters.length) {
-      this.isParamsChosen = true;
-      this.advertisement.valuesPriceCounts.forEach((p) => {
-        let equalsAudit = true;
-        this.chosenParamsValuesMap.forEach((pValue, param) => {
-          // @ts-ignore
-          if (p.values[param] !== pValue) {
-            equalsAudit = false;
-          }
-        });
-        if (equalsAudit) {
-          this.chosenPrice = p.price;
-          this.chosenCount = p.count;
-          this.chosenParametersValuesPriceCount = p;
-          if (this.pickerCount > this.chosenCount) {
-            this.pickerCount = this.chosenCount;
-          }
-        }
-      });
-    }
-  }
 }

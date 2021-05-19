@@ -68,13 +68,6 @@ export class AccountService {
     return -1;
   }
 
-  writeLoginPasswordDataToCookies(login: string, password: string, authNum: number | null): void {
-    if (authNum == null) {
-      authNum = this.getAuthNumForEmptyParam();
-    }
-    this.cookiesService.set('andromeda-login-' + authNum, login, {expires: 22});
-    this.cookiesService.set('andromeda-password-' + authNum, password, {expires: 22});
-  }
 
   isAccountLogged(login: string): boolean {
     for (let i = 0; i < this.accountsCount; i++) {
@@ -85,15 +78,22 @@ export class AccountService {
     return false;
   }
 
+  writeLoginPasswordDataToCookies(login: string, password: string, authNum: number | null): void {
+    if (authNum == null) {
+      authNum = this.getAuthNumForEmptyParam();
+    }
+    this.cookiesService.set('andromeda-login-' + authNum, login, {expires: 365, path: '/'});
+    this.cookiesService.set('andromeda-password-' + authNum, password, {expires: 365, path: '/'});
+  }
 
   writeAuthenticationToCookies(authentication: AuthenticationResponse): number {
     const authNum = this.getAuthNumForLogin();
     if (authNum !== -1) {
-      this.cookiesService.set('andromeda-token-' + authNum, authentication.token, {expires: 22});
-      this.cookiesService.set('andromeda-role-' + authNum, authentication.userRole, {expires: 22});
-      this.cookiesService.set('andromeda-id-' + authNum, authentication.id.toString(), {expires: 22});
-      this.cookiesService.set('andromeda-username-' + authNum, authentication.username, {expires: 22});
-      this.cookiesService.set('andromeda-avatar-' + authNum, authentication.avatar, {expires: 22});
+      this.cookiesService.set('andromeda-token-' + authNum, authentication.token, {expires: 365, path: '/'});
+      this.cookiesService.set('andromeda-role-' + authNum, authentication.userRole, {expires: 365, path: '/'});
+      this.cookiesService.set('andromeda-id-' + authNum, authentication.id.toString(), {expires: 365, path: '/'});
+      this.cookiesService.set('andromeda-username-' + authNum, authentication.username, {expires: 365, path: '/'});
+      this.cookiesService.set('andromeda-avatar-' + authNum, authentication.avatar, {expires: 365, path: '/'});
     }
     return authNum;
   }
@@ -116,14 +116,13 @@ export class AccountService {
     if (authNum == null) {
       authNum = this.getAuthNumForEmptyParam();
     }
-    console.log('delete logout' + authNum);
-    this.cookiesService.delete('andromeda-token-' + authNum);
-    this.cookiesService.delete('andromeda-role-' + authNum);
-    this.cookiesService.delete('andromeda-id-' + authNum);
-    this.cookiesService.delete('andromeda-username-' + authNum);
-    this.cookiesService.delete('andromeda-avatar-' + authNum);
-    this.cookiesService.delete('andromeda-login-' + authNum);
-    this.cookiesService.delete('andromeda-password-' + authNum);
+    this.cookiesService.delete('andromeda-token-' + authNum, '/');
+    this.cookiesService.delete('andromeda-role-' + authNum, '/');
+    this.cookiesService.delete('andromeda-id-' + authNum, '/');
+    this.cookiesService.delete('andromeda-username-' + authNum, '/');
+    this.cookiesService.delete('andromeda-avatar-' + authNum, '/');
+    this.cookiesService.delete('andromeda-login-' + authNum, '/');
+    this.cookiesService.delete('andromeda-password-' + authNum, '/');
   }
 
   registerGoodsSeller(accountLoginRequest: AccountLoginRequest): Observable<AuthenticationResponse> {

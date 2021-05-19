@@ -6,10 +6,10 @@
 <!--    <a [routerLink]="'section'" class="seller-module-component-panel-link"-->
 <!--       [routerLinkActive]="'seller-module-component-panel-link-active'"-->
 <!--    >Макет</a>-->
-    <a [routerLink]="'design'" class="seller-module-component-panel-link"
+    <a [routerLink]="'design'" [queryParams]="{auth: authNum}" class="seller-module-component-panel-link"
        [routerLinkActive]="'seller-module-component-panel-link-active'"
     >Оформлення</a>
-    <a [routerLink]="'details'" class="seller-module-component-panel-link"
+    <a [routerLink]="'details'" [queryParams]="{auth: authNum}" class="seller-module-component-panel-link"
        [routerLinkActive]="'seller-module-component-panel-link-active'"
     >Основна інформація</a>
   </div>

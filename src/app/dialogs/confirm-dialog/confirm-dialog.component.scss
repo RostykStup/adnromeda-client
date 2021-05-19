@@ -1,45 +1,20 @@
-.logo{
-  font-size: 20px;
+.text-container {
+  max-width: 500px;
+  text-align: center;
 }
-
-.logo-container{
-  justify-content: flex-start;
-  display: flex;
-}
-
-
 .button-holder {
   display: flex;
-  justify-content: space-between;
-}
-
-.dialog-button {
-  font-size: 12px;
-  //height: 40px;
-  background: #000000;
-  border: 3px black solid;
-  border-radius: 5px;
-  padding: 5px 15px;
-  //width: 150px;
-  color: #f6f2f2;
-  transition: all .2s;
-  font-weight: 500;
-  cursor: pointer;
+  justify-content: center;
   margin-top: 20px;
 }
 
-.cancel-button{
-  background: #f6f2f2;
-  color: #000000;
-  border: none;
-}
-
-.dialog-button:hover {
-  background: #f6f2f2;
-  color: #000000;
-}
 
 .dialog-text {
-  font-weight: 400;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #1c1b1b;
+}
+
+button {
+  margin-right: 15px;
 }

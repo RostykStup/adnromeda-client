@@ -8,8 +8,6 @@ import {ParameterValuesPriceCountPickerComponent} from '../common/advertisement/
 import {CountryPickerComponent} from '../common/country-picker/country-picker.component';
 import {YearPickerComponent} from '../common/date-pickers/year-picker/year-picker.component';
 import {YearMonthPickerComponent} from '../common/date-pickers/year-month-picker/year-month-picker.component';
-import {OrderItemListViewComponent} from '../common/order/order-item-list-view/order-item-list-view.component';
-import {OrderListViewComponent} from '../common/order/order-list-view/order-list-view.component';
 import {PaginatorComponent} from '../common/paginator/paginator.component';
 import {RatingPickerComponent} from '../common/rating-picker/rating-picker.component';
 import {RatingViewComponent} from '../common/rating-view/rating-view.component';
@@ -51,9 +49,28 @@ import { DeliveryPickerComponent } from '../common/delivery/delivery-picker/deli
 import { AddressViewComponent } from '../common/address/address-view/address-view.component';
 import {RouterModule} from '@angular/router';
 import { AccountsControlDialogComponent } from '../dialogs/accounts-control-dialog/accounts-control-dialog.component';
+import {ChooseOrderDeliveryComponent} from '../common/order-making/choose-order-delivery/choose-order-delivery.component';
+import {ChooseOrderAddressComponent} from '../common/order-making/choose-order-address/choose-order-address.component';
+import {ChooseOrderPaymentComponent} from '../common/order-making/choose-order-payment/choose-order-payment.component';
+import {ChooseOrderItemsListComponent} from '../common/order-making/choose-order-items-list/choose-order-items-list.component';
+import {ChooseOrderItemViewComponent} from '../common/order-making/choose-order-item-view/choose-order-item-view.component';
+import { DeliveryDetailsViewComponent } from '../common/address/delivery-details-view/delivery-details-view.component';
+import {OrderItemListViewComponent} from '../common/cart-order/order/order-item-list-view/order-item-list-view.component';
+import { OrderItemListTitleComponent } from '../common/cart-order/order/order-item-list-title/order-item-list-title.component';
+import { OrderChangesComponent } from '../common/cart-order/order/order-changes/order-changes.component';
+import { ChatComponent } from '../common/chat/chat/chat.component';
+import { ChatBodyComponent } from '../common/chat/chat/chat-body/chat-body.component';
+import { ChatMessageComponent } from '../common/chat/chat/chat-message/chat-message.component';
+import { ChatMessageSenderComponent } from '../common/chat/chat/chat-message-sender/chat-message-sender.component';
+import { ChatDayBlockComponent } from '../common/chat/chat/chat-day-block/chat-day-block.component';
 
 @NgModule({
   declarations: [
+    ChooseOrderDeliveryComponent,
+    ChooseOrderAddressComponent,
+    ChooseOrderPaymentComponent,
+    ChooseOrderItemsListComponent,
+    ChooseOrderItemViewComponent,
     AdvertisementForSearchRowViewComponent,
     AdvertisementForSearchTableViewComponent,
     DiscountsViewComponent,
@@ -62,8 +79,6 @@ import { AccountsControlDialogComponent } from '../dialogs/accounts-control-dial
     CountryPickerComponent,
     YearPickerComponent,
     YearMonthPickerComponent,
-    OrderItemListViewComponent,
-    OrderListViewComponent,
     PaginatorComponent,
     RatingPickerComponent,
     RatingViewComponent,
@@ -100,7 +115,16 @@ import { AccountsControlDialogComponent } from '../dialogs/accounts-control-dial
     CartItemComponent,
     DeliveryPickerComponent,
     AddressViewComponent,
-    AccountsControlDialogComponent
+    AccountsControlDialogComponent,
+    DeliveryDetailsViewComponent,
+    OrderItemListViewComponent,
+    OrderItemListTitleComponent,
+    OrderChangesComponent,
+    ChatComponent,
+    ChatBodyComponent,
+    ChatMessageComponent,
+    ChatMessageSenderComponent,
+    ChatDayBlockComponent
   ],
     exports: [
         GoodsSellerCategoryColumnViewComponent,
@@ -112,7 +136,6 @@ import { AccountsControlDialogComponent } from '../dialogs/accounts-control-dial
         YearAdvertisementOrdersStatisticDiagramComponent,
         RatingFeedbacksDiagramComponent,
         AdvertisementForSearchRowViewComponent,
-        OrderListViewComponent,
         RatingPickerComponent,
         UserTopPanelComponent,
         SellerTopPanelComponent,
@@ -123,7 +146,16 @@ import { AccountsControlDialogComponent } from '../dialogs/accounts-control-dial
         AddedImageContainerComponent,
         AdvertisementForSearchTableViewComponent,
         SellerPositionComponent,
-        AddressViewComponent
+        AddressViewComponent,
+        ChooseOrderDeliveryComponent,
+        ChooseOrderPaymentComponent,
+        ChooseOrderItemsListComponent,
+        ChooseOrderAddressComponent,
+        DeliveryDetailsViewComponent,
+        OrderItemListViewComponent,
+        OrderItemListTitleComponent,
+        OrderChangesComponent,
+        ChatComponent
     ],
     imports: [
         CommonModule,

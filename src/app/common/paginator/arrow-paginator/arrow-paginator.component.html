@@ -1,6 +1,6 @@
 <div class="paginator-container" *ngIf="pagination && totalElements && totalPages">
   <div class="pagination-size-select-container">
-    Рядків на сторінці:
+    Елементів на сторінці:
     <select name="" id="" (change)="changePageSize($event)" >
       <option [value]="size" *ngFor="let size of sizes" [selected]="size == pagination.size">{{size}}</option>
     </select>

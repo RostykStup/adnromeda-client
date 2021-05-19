@@ -11,24 +11,12 @@
   </div>
   <div class="address-main-info">
     <div class="address-info-item">
-      <div class="address-info-name">Вулиця</div>
-      <div class="address-info-value">{{address.street}}</div>
+      <div class="address-info-name">Вулиця, будинок</div>
+      <div class="address-info-value">{{address.street}}, {{address.house}}</div>
     </div>
     <div class="address-info-item">
-      <div class="address-info-name">Будинок</div>
-      <div class="address-info-value">{{address.house}}</div>
-    </div>
-    <div class="address-info-item">
-      <div class="address-info-name">Місто</div>
-      <div class="address-info-value">{{address.city}}</div>
-    </div>
-    <div class="address-info-item">
-      <div class="address-info-name">Область</div>
-      <div class="address-info-value">{{address.region}}</div>
-    </div>
-    <div class="address-info-item">
-      <div class="address-info-name">Країна</div>
-      <div class="address-info-value" *ngIf="address">{{address.country.englishName}}</div>
+      <div class="address-info-name">Місто, область, країна</div>
+      <div class="address-info-value">{{address.city}}, {{address.region}}, {{address.country.englishName}}</div>
     </div>
   </div>
 </div>

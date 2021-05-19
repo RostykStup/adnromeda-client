@@ -1,0 +1,25 @@
+<div class="order-item-container" *ngIf="item && order">
+  <div class="item-image-column">
+    <div class="image-wrapper">
+      <img [src]="getItemImage()" alt="">
+    </div>
+  </div>
+  <div class="item-name-param-column">
+    <div class="item-title">
+      <a href="">{{item.title}}</a>
+    </div>
+    <div class="item-params">
+      <div *ngFor="let paramValue of item.priceCountResponse.values | keyvalue" class="param-block">
+        <span class="param-name">{{paramValue.key}}</span>: <span class="param-value">{{paramValue.value}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="item-count-column">
+    {{item.count}} шт. × {{item.price.toFixed(2)}}
+    {{order.paymentDetails.currency.code}}
+  </div>
+  <div class="item-price-column">
+    {{(item.count * item.price).toFixed(2)}} {{order.paymentDetails.currency.code}}
+  </div>
+</div>
+

@@ -7,7 +7,7 @@ import {PaginationRequest} from '../../entity/pagination-request';
 import {GoodsOrderResponse} from '../../entity/order/goods-order-response';
 import {GoodsOrderDeliveryDetailsResponse} from '../../entity/order/goods-order-delivery-details-response';
 import {GoodsOrderDeliveryDetailsForShipmentRequest} from '../../entity/order/goods-order-delivery-details-for-shipment-request';
-import {ConfirmGoodsOrderDeliveryRequest} from '../../entity/order/confirm-goods-order-delivery-request';
+import {ConfirmGoodsOrderDeliveryRequest} from '../../entity/order/confirm/confirm-goods-order-delivery-request';
 import {GoodsSellerFeedbackRequest} from '../../entity/feedback/goods-seller-feedback-request';
 import {GoodsAdvertisementFeedbackRequest} from '../../entity/feedback/goods-advertisement-feedback-request';
 import {PaginationResponse} from '../../entity/pagination-response';

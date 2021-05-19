@@ -1,0 +1,35 @@
+.order-confirmation-block {
+  width: 75%;
+  padding: 20px 0;
+}
+
+.title-block {
+  padding: 0;
+}
+
+.main-title {
+  font-size: 14px;
+  color: #797777;
+
+}
+
+.order-confirmation-block-title {
+  font-size: 15px;
+  color: #414141;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  border-bottom: 1px solid #eeeaea;
+}
+
+.order-confirmation-block-subtext {
+  font-size: 12px;
+  color: #a2a1a1;
+  margin-top: 3px;
+}
+
+.confirm-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}

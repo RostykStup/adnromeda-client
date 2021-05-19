@@ -1,0 +1,15 @@
+<div class="deliveries-container">
+  <input type="radio" name="choose-order-delivery"
+         [checked]="chosenDelivery.id === 1"
+         id="default-delivery">
+
+  <label for="default-delivery" class="delivery-type-label"
+         (click)="emitDeliveryChange(deliveryService.getDefaultDeliveryType())">За домовленісю з продавцем</label>
+
+  <span *ngFor="let delivery of deliveries">
+      <input type="radio" name="choose-order-delivery" [checked]="chosenDelivery.id === delivery.id"
+             [id]="'delivery-' + delivery.id">
+      <label class="delivery-type-label" [for]="'delivery-' + delivery.id" (click)="emitDeliveryChange(delivery)">{{delivery.title}}</label>
+  </span>
+
+</div>

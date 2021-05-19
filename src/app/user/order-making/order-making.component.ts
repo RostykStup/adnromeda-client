@@ -7,13 +7,13 @@ import {AdvertisementService} from '../../../service/advertisement/advertisement
 import {MatDialog} from '@angular/material/dialog';
 import {DeliveryTypeResponse} from '../../../entity/country/delivery-type-response';
 import {OrderService} from '../../../service/order/order.service';
-import {ChooseOrderPaymentComponent} from './choose-order-payment/choose-order-payment.component';
+import {ChooseOrderPaymentComponent} from '../../common/order-making/choose-order-payment/choose-order-payment.component';
 import {CookieService} from 'ngx-cookie-service';
 import {DeliveryService} from '../../../service/country/delivery.service';
-import {ChooseOrderItemsListComponent} from './choose-order-items-list/choose-order-items-list.component';
+import {ChooseOrderItemsListComponent} from '../../common/order-making/choose-order-items-list/choose-order-items-list.component';
 import {GoodsOrderRequest} from '../../../entity/order/goods-order-request';
-import {ChooseOrderAddressComponent} from './choose-order-address/choose-order-address.component';
-import {ChooseOrderDeliveryComponent} from './choose-order-delivery/choose-order-delivery.component';
+import {ChooseOrderAddressComponent} from '../../common/order-making/choose-order-address/choose-order-address.component';
+import {ChooseOrderDeliveryComponent} from '../../common/order-making/choose-order-delivery/choose-order-delivery.component';
 
 @Component({
   selector: 'app-order-making',

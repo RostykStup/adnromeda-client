@@ -14,6 +14,11 @@ $seller-top-panel-height: 65px;
   align-items: center;
   justify-content: space-between;
   padding-left: 25px;
+  box-shadow: 0 0 6px 1px #ddd7d7;
+}
+
+.user-children-component {
+  margin-top: $top-panel-height;
 }
 
 .top-panel-background {

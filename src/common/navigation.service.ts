@@ -165,6 +165,7 @@ export class NavigationService {
   }
 
   public getCurrentRequestAuthorizationHeader(): any {
+    console.log(this.getAuthNumFromCurrentRoute());
     return {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.accountService.getAccountMainDataByAuthNum(this.getAuthNumFromCurrentRoute()).token

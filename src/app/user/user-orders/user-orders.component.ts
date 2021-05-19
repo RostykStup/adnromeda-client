@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 import {OrderService} from '../../../service/order/order.service';
 import {AdvertisementService} from '../../../service/advertisement/advertisement.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NavigationService} from '../../../common/navigation.service';
 import {GoodsOrderResponse} from '../../../entity/order/goods-order-response';
 import {PaginationRequest} from '../../../entity/pagination-request';
-import {UserGoodsOrderDataResponse} from '../../../entity/order/user-goods-order-data-response';
-import {CartService} from '../../../service/cart/cart.service';
-import {MatDialog} from '@angular/material/dialog';
-import {ConfirmDialogComponent} from '../../dialogs/confirm-dialog/confirm-dialog.component';
-import {InfoDialogComponent} from '../../dialogs/info-dialog/info-dialog.component';
+import {SellerGoodsOrderDataResponse} from '../../../entity/order/seller-goods-order-data-response';
+
 
 @Component({
   selector: 'app-user-orders',
@@ -17,105 +16,75 @@ import {InfoDialogComponent} from '../../dialogs/info-dialog/info-dialog.compone
 })
 export class UserOrdersComponent implements OnInit {
 
-  constructor(public orderService: OrderService,
+  constructor(private titleService: Title,
+              public orderService: OrderService,
               private advertisementService: AdvertisementService,
+              private route: ActivatedRoute,
               private router: Router,
-              private dialog: MatDialog,
-              private cartService: CartService) {
+              private navigationService: NavigationService) {
   }
 
   orders = new Array<GoodsOrderResponse>();
   pagination = new PaginationRequest();
-  listMode = 0;
   totalPages = 0;
-  userGoodsOrderData = new UserGoodsOrderDataResponse();
+  totalElements = 0;
+  sellerGoodsOrderData = new SellerGoodsOrderDataResponse();
+
+  ordersStatus: string | null = null;
 
   ngOnInit(): void {
-    this.pagination.page = 0;
-    this.pagination.field = 'creationDate';
-    this.pagination.direction = 'DESC';
-    this.pagination.size = 10;
-    this.loadAllOrders();
-
-    this.orderService.getUserGoodsOrderData().subscribe((r) => {
-      this.userGoodsOrderData = r;
-    });
-  }
-
-  loadAllOrders(): void {
-    this.orderService.getUserAllOrdersPage(this.pagination).subscribe((r) => {
-      this.orders = r.data;
-      this.totalPages = r.totalPages;
-    });
-  }
-
-  loadWaitingForDeliveryOrders(): void {
-    this.orderService.getUserWaitingDeliveryOrdersPage(this.pagination).subscribe((r) => {
-      this.orders = r.data;
-      this.totalPages = r.totalPages;
-    });
-  }
-
-  loadWaitingForShipmentOrders(): void {
-    this.orderService.getUserWaitingShipmentOrdersPage(this.pagination).subscribe((r) => {
-      this.orders = r.data;
-      this.totalPages = r.totalPages;
-    });
-  }
-
-  loadClosedOrders(): void {
-    this.orderService.getUserClosedOrdersPage(this.pagination).subscribe((r) => {
-      this.orders = r.data;
-      this.totalPages = r.totalPages;
-    });
-  }
-
-  changeListMode(mode: number): void {
-    this.listMode = mode;
-    this.pagination.page = 0;
-    this.pagination.size = 10;
-    this.loadCurrentPageAndList(this.listMode);
-  }
-
-  loadCurrentPageAndList(mode: number): void {
-    switch (mode) {
-      case 0 :
-        this.loadAllOrders();
-        break;
-      case 1:
-        this.loadWaitingForShipmentOrders();
-        break;
-      case 2:
-        this.loadWaitingForDeliveryOrders();
-        break;
-      case 3:
-        this.loadClosedOrders();
-        break;
-      default:
-        this.loadAllOrders();
+    this.titleService.setTitle('Замовлення - Andromeda Workshop');
+    this.pagination = this.navigationService.getPaginationFromCurrentRoute();
+    this.ordersStatus = this.route.snapshot.queryParamMap.get('status');
+    if (this.route.snapshot.queryParamMap.get('page') == null) {
+      this.pagination.page = 0;
+      this.pagination.field = 'creationDate';
+      this.pagination.size = 15;
+      this.pagination.direction = 'DESC';
+      this.navigateNew();
+    } else {
+      this.loadOrders();
     }
+
   }
 
-  loadNewPage($event: PaginationRequest): void {
-    this.pagination = $event;
-    this.loadCurrentPageAndList(this.listMode);
+  loadOrders(): void {
+    this.ordersStatus = this.route.snapshot.queryParamMap.get('status');
+    const statuses = new Array<string>();
+    if (this.ordersStatus != null) {
+      statuses.push(this.ordersStatus);
+    }
+    this.orderService.getUserOrdersPageByStatuses(this.pagination, statuses).subscribe((r) => {
+      this.orders = r.data;
+      this.totalPages = r.totalPages;
+      this.totalElements = r.totalElements;
+    });
   }
 
-  addOrderToCart(order: GoodsOrderResponse): void {
-    const num = order.items.length;
-    // let c = 0;
-    // order.items.forEach((i) => {
-    // this.cartService.addItemToCart(i.advertisementId, i.delivery.id).subscribe(() => {
-    //   c++;
-    //   if (c === num) {
-    //     const dialogRef = this.dialog.open(InfoDialogComponent, {
-    //       data: {
-    //         text: 'Товари успішно додано до корзини'
-    //       }
-    //     });
-    //     dialogRef.afterClosed().subscribe();
-    //   }
-    // });
-    // });
+
+  changeOrdersType(type: string | null): void {
+    this.ordersStatus = type;
+    this.navigateNew();
   }
+
+  navigateNew(): void {
+    this.router.navigateByUrl(
+      NavigationService.getUserOrdersUrl() + '?'
+      + NavigationService.convertPaginationRequestToParamsQuery(this.pagination)
+      + (this.ordersStatus == null ? '' : '&status=' + this.ordersStatus)
+    ).then(() => {
+      this.loadOrders();
+    });
+  }
+
+  changeDirection(pagination: PaginationRequest): void {
+    this.pagination = pagination;
+    this.navigateNew();
+  }
+
+  changePagination(pagination: PaginationRequest): void {
+    this.pagination = pagination;
+    this.navigateNew();
+  }
+
 }

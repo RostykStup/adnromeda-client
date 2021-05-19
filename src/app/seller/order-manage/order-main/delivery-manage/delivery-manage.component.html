@@ -1,0 +1,22 @@
+<div class="delivery-manage-container">
+  <div class="delivery-manage-block" *ngIf="order.orderStatus == 'WAITING_FOR_SENDING'">
+    Покупець чекає поки ви віправите замовлення
+    <div class="input-container"
+         [ngClass]="{invalid: false}">
+      <div class="input-title">Номер відстеження</div>
+      <input type="text" class="andromeda-input param-name-input"
+             [(ngModel)]="shipmentRequest.trackingNumber"
+             placeholder="Введіть номер відстеження">
+    </div>
+    <button class="andromeda-border-button" (click)="sendConfirmSending()" [disabled]="shipmentRequest.trackingNumber.length < 10">Підтвердити відправлення</button>
+  </div>
+  <div class="delivery-manage-block"  *ngIf="order.deliveryDetails.trackingNumber !== null">
+    Відправлено з трекінговим номером : <span class="tracking-number">{{order.deliveryDetails.trackingNumber}}</span>
+  </div>
+  <div class="delivery-manage-block"  *ngIf="order.orderStatus === 'WAITING_FOR_FEEDBACK' || order.orderStatus === 'CLOSED'">
+    Покупець підтвердив отримання товару
+  </div>
+  <div class="delivery-manage-block" *ngIf="order.orderStatus != 'WAITING_FOR_SENDING' && order.deliveryDetails.trackingNumber === null">
+    На даний час дані про доставку відсутні
+  </div>
+</div>

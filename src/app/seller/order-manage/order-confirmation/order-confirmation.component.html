@@ -1,0 +1,56 @@
+<div class="order-confirmation-block title-block" >
+  <div class="main-title">
+    Ви можете внести зміни в замовлення. Вони будуть відображені покупцеві та він вирішить чи погоджуватись на нові умови
+  </div>
+</div>
+<div class="order-confirmation-block">
+  <div class="order-confirmation-block-title">
+    Доставка
+    <div class="order-confirmation-block-subtext" *ngIf="goodsOrder">
+      Користувач вибрав доставку {{goodsOrder.deliveryDetails.delivery.title}}
+    </div>
+  </div>
+
+  <app-choose-order-delivery *ngIf="goodsOrder"
+    [sellerId]="goodsOrder.sellerId" (changeDelivery)="changeDelivery($event)"></app-choose-order-delivery>
+</div>
+<div class="order-confirmation-block" >
+  <div class="order-confirmation-block-title">
+    Оплата
+    <div class="order-confirmation-block-subtext" *ngIf="goodsOrder">
+      Користувач вибрав спосіб оплати '{{getPaymentLabel()}}' у валюті {{goodsOrder.paymentDetails.currency.code}}
+    </div>
+  </div>
+  <app-choose-order-payment (changeCurrency)="changeCurrency($event)"></app-choose-order-payment>
+</div>
+<div class="order-confirmation-block" >
+  <div class="order-confirmation-block-title">
+    Дані для доставки
+    <div class="order-confirmation-block-subtext">
+      Якщо у вас виникли питання радимо узгодити їх з покупцем у чаті
+    </div>
+  </div>
+  <div style="padding-left: 10px">
+    <app-address-view></app-address-view>
+  </div>
+</div>
+
+<div class="order-confirmation-block" >
+  <div class="order-confirmation-block-title">
+    Склад замолення
+    <div class="order-confirmation-block-subtext">
+      Ви можете змінити кінцеву ціну замовлення
+    </div>
+  </div>
+  <div *ngIf="goodsOrder" style="padding-left: 10px">
+    <app-order-item-list-title></app-order-item-list-title>
+    <app-order-item-list-view
+      *ngFor="let item of goodsOrder.items"
+      [item]="item"
+      [order]="goodsOrder"></app-order-item-list-view>
+  </div>
+  <app-sum-enter-row *ngIf="goodsOrder" [order]="goodsOrder"></app-sum-enter-row>
+  <div class="confirm-button-container">
+    <button class="andromeda-border-button" (click)="confirmOrder()">Підтвердити замовлення</button>
+  </div>
+</div>

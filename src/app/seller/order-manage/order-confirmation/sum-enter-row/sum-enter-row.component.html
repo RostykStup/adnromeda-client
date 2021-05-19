@@ -1,0 +1,11 @@
+<div class="row-container">
+  <div class="input-container"
+       [ngClass]="{invalid: !priceValid}">
+    <div class="input-title">Сума {{order.paymentDetails.currency.code}}</div>
+    <input type="text" class="andromeda-input param-name-input"
+           [(ngModel)]="sum"
+           (keyup)="changePriceInput($event)"
+           placeholder="Введіть ціну">
+  </div>
+
+</div>

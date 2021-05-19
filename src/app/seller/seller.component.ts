@@ -40,8 +40,10 @@ export class SellerComponent implements OnInit {
       });
       this.router.events.forEach((e) => {
         if (e instanceof NavigationStart) {
-          // @ts-ignore
-          document.getElementById('seller-module-content').scrollTop = 0;
+          if (document.getElementById('seller-module-content') != null) {
+            // @ts-ignore
+            document.getElementById('seller-module-content').scrollTop = 0;
+          }
         }
         if (e instanceof NavigationEnd) {
           this.controlAuthProcedure();

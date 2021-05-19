@@ -1,61 +1,101 @@
-.container {
-  width: 75%;
-  margin: 0 auto;
-
-}
-
-.menu-container {
-  width: 100%;
-  background-color: #fff;
+.user-order-block {
   display: flex;
-  padding: 15px;
-}
-
-.menu-item {
-  margin: 0 20px;
-
-  input {
-    display: none;
-  }
-
-  input:checked + label {
-    color: #746ef6;
-  }
-
-  label {
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-
-    &:hover {
-      color: #746ef6;
-    }
-  }
-}
-
-.menu-title {
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-
-  &:hover {
-    color: #746ef6;
-  }
-}
-
-
-.orders-container {
-  background-color: #fff;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
   width: 100%;
-  margin-top: 15px;
-  padding: 20px;
-  min-height: 100px;
 }
 
-.paginator-container{
+.order-block-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.order-top-container {
+  height: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #fff;
+}
+
+.order-links-container {
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eeeaea;
+}
+
+.order-list-title-container {
+  padding-right: 10px;
+}
+
+.order-list-container {
+  height: 100%;
+  margin-top: 100px;
+  padding-top: 10px;
+  margin-bottom: 50px;
+  overflow-y: scroll;
+  background-color: #fff;
+}
+
+.order-paginator-container {
+  border-top: 1px solid #d9d6d6;
+  height: 50px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.order-type-label {
+  font-size: 15px;
+  font-weight: 400;
+  color: #4e4e4e;
+  margin-right: 15px;
+  cursor: pointer;
+  padding: 5px 15px;
+  border: 1px solid #e3e3e3;
+  border-radius: 15px;
+  transition: all .2s;
+}
+
+input[type=radio]:checked + .order-type-label {
+  background-color: #e3e3e3;
+  color: black;
+}
+
+
+.seller-module-component-radio-container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+
+.no-orders-text {
+  padding-top: 20px;
+  font-size: 15px;
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #e2dcdc;
+  color: #a2a2a2;
+  font-weight: 400;
 }
+

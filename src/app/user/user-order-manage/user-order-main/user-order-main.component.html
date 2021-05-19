@@ -1,0 +1,64 @@
+
+<div class="user-order-main-container" *ngIf="goodsOrder && goodsOrder.changes.length > 0">
+  <div class="user-order-main-title">
+    Зміни у замовленні
+    <div class="user-order-main-subtext">
+      При підтвердженні продавець може змінити деякі умови
+    </div>
+  </div>
+  <div *ngIf="goodsOrder">
+    <app-order-changes [goodsOrder]="goodsOrder"></app-order-changes>
+  </div>
+</div>
+
+<div class="user-order-main-container" *ngIf="goodsOrder">
+  <div class="user-order-main-title">
+    Доставка
+    <div class="user-order-main-subtext">
+      Поштова служба для цього замовлення {{goodsOrder.deliveryDetails.delivery.title}}
+    </div>
+  </div>
+  <div>
+    <app-user-delivery-manage [order]="goodsOrder"></app-user-delivery-manage>
+  </div>
+</div>
+<div class="user-order-main-container" *ngIf="goodsOrder">
+  <div class="user-order-main-title">
+    Оплата
+    <div class="user-order-main-subtext">
+      Вибраний спосіб оплати «{{getUrkPaymentName()}}»
+    </div>
+  </div>
+  <div>
+    <app-user-payment-manage [order]="goodsOrder"></app-user-payment-manage>
+  </div>
+</div>
+<div class="user-order-main-container" *ngIf="goodsOrder">
+  <div class="user-order-main-title">
+    Ваші дані
+  </div>
+  <div>
+    <app-address-view></app-address-view>
+  </div>
+</div>
+
+<div class="user-order-main-container">
+  <div class="user-order-main-title no-border">
+    Склад замовлення
+    <div class="user-order-main-subtext">
+      Товари, які належать до цього замовлення
+    </div>
+  </div>
+  <div *ngIf="goodsOrder">
+    <app-order-item-list-title></app-order-item-list-title>
+    <app-order-item-list-view
+      *ngFor="let item of goodsOrder.items"
+      [item]="item"
+      [order]="goodsOrder"></app-order-item-list-view>
+  </div>
+  <div class="user-order-main-subtext sum-text" *ngIf="goodsOrder">
+    Сума:
+    {{goodsOrder.price.toFixed(2)}} {{goodsOrder.paymentDetails.currency.code}}
+  </div>
+</div>
+

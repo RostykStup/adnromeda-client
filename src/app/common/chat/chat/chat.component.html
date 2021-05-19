@@ -1,0 +1,11 @@
+<div class="chat-container">
+  <div class="chat-header-container"*ngIf="chat">
+    Чат із: {{chat.username}}
+  </div>
+  <div class="chat-body-container">
+    <app-chat-body [chat]="chat" *ngIf="chat"></app-chat-body>
+  </div>
+  <div class="chat-message-sender-container">
+    <app-chat-message-sender [chat]="chat"></app-chat-message-sender>
+  </div>
+</div>

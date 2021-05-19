@@ -1,0 +1,48 @@
+.order-block {
+  width: 75%;
+  padding: 20px 0;
+}
+
+.title-block {
+  padding: 0;
+}
+
+.main-title {
+  font-size: 14px;
+  color: #797777;
+
+}
+
+.order-status-text {
+  font-size: inherit;
+  color: #4a4949;
+  font-weight: 500;
+}
+
+.order-block-title {
+  font-size: 15px;
+  color: #414141;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eeeaea;
+}
+
+.order-block-subtext {
+  font-size: 12px;
+  color: #a2a1a1;
+  margin-top: 3px;
+}
+
+.no-border {
+  border: none;
+}
+
+.order-sum-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #857e7e;
+  font-size: 15px;
+  margin-top: 10px;
+  padding-right: 10px;
+}

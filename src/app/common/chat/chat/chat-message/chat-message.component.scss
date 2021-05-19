@@ -1,0 +1,36 @@
+.message-container {
+  width: 100%;
+  display: flex;
+  padding: 2px 5px;
+}
+
+.left {
+  justify-content: flex-start;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.message-data {
+  padding: 7px 12px 6px 12px;
+  border-radius: 10px;
+  background-color: #373535;
+  font-size: 14px;
+  max-width: 50%;
+}
+.message-text {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #eeeaea;
+  //word-wrap: break-word;
+  white-space: pre-wrap
+}
+
+.message-time {
+  margin-left: 8px;
+  font-size: 8px;
+  color: #eeeaea;
+
+}

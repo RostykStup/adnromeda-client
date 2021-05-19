@@ -6,7 +6,6 @@ import {UserComponent} from './user.component';
 import {CartComponent} from './cart/cart.component';
 import {OrderMakingComponent} from './order-making/order-making.component';
 import {UserOrdersComponent} from './user-orders/user-orders.component';
-import {UserOrderDataComponent} from './user-order-data/user-order-data.component';
 import {OrderFeedbackComponent} from './order-feedback/order-feedback.component';
 import {AddressesManageComponent} from './addresses-manage/addresses-manage.component';
 import {NotificationPageComponent} from './notification-page/notification-page.component';
@@ -20,16 +19,18 @@ import {CommonDeclarationsModule} from '../declarations/common-declarations.modu
 import {MainPageComponent} from './main-page/main-page.component';
 import {SearchComponent} from './search/search.component';
 import {AdvertisementViewComponent} from './advertisement-view/advertisement-view.component';
-import { ChooseOrderAddressComponent } from './order-making/choose-order-address/choose-order-address.component';
-import { ChooseOrderDeliveryComponent } from './order-making/choose-order-delivery/choose-order-delivery.component';
-import { ChooseOrderPaymentComponent } from './order-making/choose-order-payment/choose-order-payment.component';
-import { ChooseOrderItemsListComponent } from './order-making/choose-order-items-list/choose-order-items-list.component';
-import { ChooseOrderItemViewComponent } from './order-making/choose-order-item-view/choose-order-item-view.component';
-
+import { UserOrderListViewComponent } from './user-orders/user-order-list-view/user-order-list-view.component';
+import { UserOrderListViewTitleComponent } from './user-orders/user-order-list-view-title/user-order-list-view-title.component';
+import { UserOrderManageComponent } from './user-order-manage/user-order-manage.component';
+import { UserOrderMainComponent } from './user-order-manage/user-order-main/user-order-main.component';
+import { UserDeliveryManageComponent } from './user-order-manage/user-order-main/user-delivery-manage/user-delivery-manage.component';
+import { UserPaymentManageComponent } from './user-order-manage/user-order-main/user-payment-manage/user-payment-manage.component';
+import { UserOrderChatComponent } from './user-order-manage/order-chat/user-order-chat.component';
+import { AdvertisementMainDataComponent } from './advertisement-view/advertisement-main-data/advertisement-main-data.component';
 
 @NgModule({
   declarations: [UserComponent, CartComponent, OrderMakingComponent,
-    UserOrdersComponent, UserOrderDataComponent, OrderFeedbackComponent,
+    UserOrdersComponent, OrderFeedbackComponent,
     AddressesManageComponent,
     NotificationPageComponent,
     FavoriteAdvertisementsComponent,
@@ -39,11 +40,16 @@ import { ChooseOrderItemViewComponent } from './order-making/choose-order-item-v
     MainPageComponent,
     SearchComponent,
     AdvertisementViewComponent,
-    ChooseOrderAddressComponent,
-    ChooseOrderDeliveryComponent,
-    ChooseOrderPaymentComponent,
-    ChooseOrderItemsListComponent,
-    ChooseOrderItemViewComponent
+    UserOrderListViewComponent,
+    UserOrderListViewTitleComponent,
+    UserOrderManageComponent,
+    UserOrderMainComponent,
+    UserDeliveryManageComponent,
+    UserPaymentManageComponent,
+    UserOrderChatComponent,
+    AdvertisementMainDataComponent
+  ],
+  exports: [
   ],
   imports: [
     CommonModule,

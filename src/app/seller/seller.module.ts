@@ -5,7 +5,6 @@ import {FormsModule} from '@angular/forms';
 import {SellerRoutingModule} from './seller-routing.module';
 import {SellerComponent} from './seller.component';
 import {SellerOrdersComponent} from './seller-orders/seller-orders.component';
-import {OrderDataComponent} from './order-data/order-data.component';
 import {AdvertisementsListComponent} from './advertisements-list/advertisements-list.component';
 import {AdvertisementManageComponent} from './advertisement-manage/advertisement-manage.component';
 import {AdvertisementUpdatingComponent} from './advertisement-manage/advertisement-updating/advertisement-updating.component';
@@ -47,13 +46,18 @@ import { DeliveryForCreationCheckComponent } from './create-goods/goods-delivery
 import { GoodsImagesCreationComponent } from './create-goods/goods-images-creation/goods-images-creation.component';
 import { GoodsCurrenciesChooseComponent } from './create-goods/goods-params-price-info/goods-currencies-choose/goods-currencies-choose.component';
 import { GoodsCurrencyPriceInputComponent } from './create-goods/goods-params-price-info/goods-currency-price-input/goods-currency-price-input.component';
-
+import { OrderManageComponent } from './order-manage/order-manage.component';
+import { OrderMainComponent } from './order-manage/order-main/order-main.component';
+import { OrderConfirmationComponent } from './order-manage/order-confirmation/order-confirmation.component';
+import { SumEnterRowComponent } from './order-manage/order-confirmation/sum-enter-row/sum-enter-row.component';
+import { PaymentManageComponent } from './order-manage/order-main/payment-manage/payment-manage.component';
+import { DeliveryManageComponent } from './order-manage/order-main/delivery-manage/delivery-manage.component';
+import { OrderCharComponent } from './order-manage/order-char/order-char.component';
 
 @NgModule({
   declarations: [
     SellerComponent,
     SellerOrdersComponent,
-    OrderDataComponent,
     AdvertisementsListComponent,
     AdvertisementManageComponent,
     AdvertisementUpdatingComponent,
@@ -90,7 +94,14 @@ import { GoodsCurrencyPriceInputComponent } from './create-goods/goods-params-pr
     DeliveryForCreationCheckComponent,
     GoodsImagesCreationComponent,
     GoodsCurrenciesChooseComponent,
-    GoodsCurrencyPriceInputComponent
+    GoodsCurrencyPriceInputComponent,
+    OrderManageComponent,
+    OrderMainComponent,
+    OrderConfirmationComponent,
+    SumEnterRowComponent,
+    PaymentManageComponent,
+    DeliveryManageComponent,
+    OrderCharComponent
   ],
   imports: [
     CommonModule,

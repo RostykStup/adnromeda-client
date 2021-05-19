@@ -26,7 +26,6 @@ export class AccountsControlDialogComponent {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < numbers.length; i++) {
       this.accounts.push(accountService.getAccountMainDataByAuthNum(numbers[i]));
-      console.log(this.accounts[i]);
     }
     this.currentAccount = accountService.getAccountMainDataByAuthNum(navigationService.getAuthNumFromCurrentRoute());
   }
@@ -53,7 +52,7 @@ export class AccountsControlDialogComponent {
   clickLogout(): void {
     this.accountService.logOut(this.currentAccount.authNum);
     this.dialogRef.close();
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('u');
   }
 
 

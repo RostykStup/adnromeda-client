@@ -1,0 +1,51 @@
+<div class="order-block title-block">
+  <div class="main-title">
+    Тут ви керуєте даними про відправку вашого замовлення.
+    <span class="order-status-text">Статус : {{getOrderStatus()}}</span>
+  </div>
+</div>
+
+<div class="order-block">
+  <div class="order-block-title">
+    Дані про оплату
+  </div>
+  <app-payment-manage [order]="goodsOrder" *ngIf="goodsOrder"></app-payment-manage>
+</div>
+
+<div class="order-block">
+  <div class="order-block-title">
+    Дані про доставку
+    <div class="order-block-subtext">
+      Служба підтверджена вами : {{goodsOrder.deliveryDetails.delivery.title}}
+    </div>
+  </div>
+  <app-delivery-manage [order]="goodsOrder" *ngIf="goodsOrder"></app-delivery-manage>
+</div>
+
+<div class="order-block">
+  <div class="order-block-title">
+    Дані покупця
+  </div>
+  <app-address-view></app-address-view>
+</div>
+
+
+<div class="order-block">
+  <div class="order-block-title no-border">
+    Склад замовлення
+    <div class="order-block-subtext">
+      Товари, які належать до цього замовлення
+    </div>
+  </div>
+  <div *ngIf="goodsOrder">
+    <app-order-item-list-title></app-order-item-list-title>
+    <app-order-item-list-view
+      *ngFor="let item of goodsOrder.items"
+      [item]="item"
+      [order]="goodsOrder"></app-order-item-list-view>
+  </div>
+  <div class="order-sum-row">
+    Сума підтверджена вами :
+    {{goodsOrder.price.toFixed(2)}} {{goodsOrder.paymentDetails.currency.code}}
+  </div>
+</div>

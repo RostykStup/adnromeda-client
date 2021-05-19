@@ -21,17 +21,20 @@ export class UserComponent implements OnInit {
   // @ts-ignore
   currentUrl: string;
 
+  routerSubscribe = this.router.events.subscribe((e) => {
+    if (e instanceof NavigationEnd) {
+      this.controlAuthProcedure();
+      this.currentUrl = e.url;
+      if (document.getElementById('user-module-body') != null) {
+        // @ts-ignore
+        document.getElementById('user-module-body').scrollTop = 0;
+      }
+    }
+  });
+
   ngOnInit(): void {
     this.currentUrl = this.router.url;
-    if (this.controlNavigation() !== 'ROLE_SELLER') {
-      this.controlAuthProcedure();
-      this.router.events.forEach((e) => {
-        if (e instanceof NavigationEnd) {
-          this.controlAuthProcedure();
-          this.currentUrl = e.url;
-        }
-      });
-    }
+    this.controlAuthProcedure();
 
   }
 
@@ -45,6 +48,11 @@ export class UserComponent implements OnInit {
         this.authNum = this.navigationService.getAuthNumFromCurrentRoute();
         if (!this.accountService.isLoggedByAuthNum(this.authNum)) {
           this.router.navigateByUrl(this.navigationService.createUrlWithAuthParameter(this.accountService.getAuthNumForEmptyParam()));
+        }
+        if (this.accountService.getAccountMainDataByAuthNum(this.authNum).userRole === 'ROLE_SELLER') {
+          // console.log('this is seller');
+          this.routerSubscribe.unsubscribe();
+          this.router.navigateByUrl('s?' + this.navigationService.getAuthQueryByAccountNum(this.authNum));
         }
       } else {
         if (this.authNum === null) {
